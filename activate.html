@@ -3,42 +3,197 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Daftar Program SDC — Syahlan bin Jasmi</title>
+  <title>Aktifkan Website Perniagaan Anda — Shahlan SDC</title>
+  <meta name="description" content="Isi borang aktivasi website perniagaan anda. Pakej lengkap RM500 termasuk domain, hosting, dashboard admin dan lebih."/>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    .activate-wrap { max-width: 760px; margin: 0 auto; padding: 100px 20px 60px; }
+
+    .activate-header { text-align: center; margin-bottom: 40px; }
+    .activate-header .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 99px; background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); font-size: .8rem; font-weight: 700; color: var(--gold); letter-spacing: .05em; text-transform: uppercase; margin-bottom: 20px; }
+    .activate-header h1 { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.15; margin-bottom: 12px; }
+    .activate-header p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 520px; margin: 0 auto; }
+
+    /* Price summary */
+    .price-summary { display: flex; align-items: center; justify-content: center; gap: 16px; background: linear-gradient(135deg, rgba(76,29,149,.2), rgba(6,182,212,.1)); border: 1px solid rgba(139,92,246,.3); border-radius: var(--r-lg); padding: 20px 28px; margin-bottom: 36px; flex-wrap: wrap; text-align: center; }
+    .price-summary .big { font-family: var(--font-head); font-size: 2.6rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .price-summary .old { font-size: .9rem; color: var(--muted); text-decoration: line-through; }
+    .price-summary .save { background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.25); border-radius: 99px; padding: 3px 10px; font-size: .75rem; font-weight: 700; color: #fca5a5; }
+    .price-summary .includes { font-size: .82rem; color: var(--muted); text-align: left; }
+    .price-summary .includes li { margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+
+    /* Form card */
+    .form-card-new { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 40px; backdrop-filter: blur(12px); }
+
+    .section-divider { font-family: var(--font-head); font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--p6); margin: 28px 0 18px; display: flex; align-items: center; gap: 12px; }
+    .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
+
+    .org-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .org-type-card { border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 14px 12px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; }
+    .org-type-card:hover { border-color: var(--p5); background: var(--glass-hover); }
+    .org-type-card.selected { border-color: var(--p5); background: rgba(139,92,246,.12); }
+    .org-type-card input { display: none; }
+    .org-type-card .icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .org-type-card .label { font-size: .8rem; font-weight: 600; }
+
+    .lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .lang-card { border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 12px 8px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; }
+    .lang-card:hover { border-color: var(--p5); background: var(--glass-hover); }
+    .lang-card.selected { border-color: var(--cyan); background: rgba(6,182,212,.1); }
+    .lang-card input { display: none; }
+    .lang-card .flag { font-size: 1.4rem; margin-bottom: 4px; }
+    .lang-card .lname { font-size: .78rem; font-weight: 600; }
+
+    /* Success */
+    .success-card { text-align: center; padding: 40px 20px; }
+    .success-icon { font-size: 4rem; margin-bottom: 16px; }
+    .success-card h2 { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
+    .success-card p { color: var(--muted); line-height: 1.7; max-width: 420px; margin: 0 auto 28px; }
+    .success-ref { font-family: monospace; font-size: .9rem; background: rgba(139,92,246,.1); border: 1px solid rgba(139,92,246,.25); border-radius: var(--r-sm); padding: 8px 16px; display: inline-block; margin-bottom: 28px; color: var(--p6); }
+
+    @media (max-width: 640px) {
+      .org-type-grid { grid-template-columns: repeat(2, 1fr); }
+      .lang-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-card-new { padding: 24px 18px; }
+      .price-summary { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
+
 <div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
 <div class="grid-dots"></div>
 
 <nav class="nav">
   <div class="nav-logo">
-    <span class="bolt">⚡</span>
-    <a href="index.html">Syahlan <span style="color:var(--p6)">SDC</span></a>
+    <span class="bolt">◆</span>
+    <a href="index.html">Shahlan <span style="color:var(--p6)">SDC</span></a>
   </div>
   <ul class="nav-links">
     <li><a href="index.html">← Kembali</a></li>
   </ul>
+  <a href="https://wa.me/60187874797" class="nav-cta" target="_blank">💬 Hubungi Shahlan</a>
 </nav>
 
-<div class="form-wrapper">
-  <div class="form-card" id="form-view">
-    <div class="form-header">
-      <div style="font-size:2.5rem;margin-bottom:12px">⚡</div>
-      <h1>Daftar Program <span class="grad-text-purple">SDC</span></h1>
-      <p>Isi borang di bawah. Syahlan akan menghubungi anda tidak lama lagi.</p>
-    </div>
+<div class="activate-wrap">
 
-    <form id="reg-form" novalidate>
+  <div class="activate-header">
+    <div class="badge">✦ Digital Presence Initiative · 100 Perniagaan Pertama</div>
+    <h1>Aktifkan <span class="grad-text">Website</span><br/>Perniagaan Anda</h1>
+    <p>Isi borang di bawah. Shahlan akan menghubungi anda dalam masa 24 jam untuk mengesahkan tempahan dan meneruskan proses pembinaan website anda.</p>
+  </div>
+
+  <!-- Price Summary -->
+  <div class="price-summary">
+    <div>
+      <div class="big">RM500</div>
+      <div class="old">Biasa RM1,380</div>
+      <div class="save" style="margin-top:4px">Jimat 64%</div>
+    </div>
+    <div style="width:1px;height:60px;background:var(--glass-border)"></div>
+    <ul class="includes">
+      <li><span style="color:var(--cyan)">✓</span> Website Profesional + Mobile Responsive</li>
+      <li><span style="color:var(--cyan)">✓</span> Domain & Hosting 1 Tahun</li>
+      <li><span style="color:var(--cyan)">✓</span> Dashboard Admin + Galeri + Promosi</li>
+      <li><span style="color:var(--cyan)">✓</span> WhatsApp, Google Map, SSL, SEO Asas</li>
+    </ul>
+  </div>
+
+  <!-- Form -->
+  <div class="form-card-new" id="form-view">
+
+    <form id="activate-form" novalidate>
+
+      <div class="section-divider">Maklumat Perniagaan</div>
+
       <div class="form-grid">
         <div class="form-group">
-          <label class="form-label" for="businessName">Nama Perniagaan *</label>
-          <input class="form-input" id="businessName" type="text" placeholder="contoh: Kedai Runcit ABC" required/>
+          <label class="form-label" for="bizName">Nama Perniagaan / Organisasi *</label>
+          <input class="form-input" id="bizName" type="text" placeholder="cth: Syarikat ABC Sdn Bhd" required/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="ownerName">Nama Pemilik *</label>
+          <label class="form-label" for="ownerName">Nama Pemilik / PIC *</label>
           <input class="form-input" id="ownerName" type="text" placeholder="Nama penuh anda" required/>
         </div>
       </div>
+
+      <div class="form-group" style="margin-top:16px">
+        <label class="form-label">Jenis Organisasi *</label>
+        <div class="org-type-grid">
+          <label class="org-type-card" onclick="selectOrgType(this)">
+            <input type="radio" name="orgType" value="SME"/>
+            <div class="icon">🏪</div>
+            <div class="label">PKS / SME</div>
+          </label>
+          <label class="org-type-card" onclick="selectOrgType(this)">
+            <input type="radio" name="orgType" value="Koperasi"/>
+            <div class="icon">🤝</div>
+            <div class="label">Koperasi</div>
+          </label>
+          <label class="org-type-card" onclick="selectOrgType(this)">
+            <input type="radio" name="orgType" value="NGO"/>
+            <div class="icon">🌱</div>
+            <div class="label">NGO</div>
+          </label>
+          <label class="org-type-card" onclick="selectOrgType(this)">
+            <input type="radio" name="orgType" value="Konsultan"/>
+            <div class="icon">💼</div>
+            <div class="label">Konsultan</div>
+          </label>
+          <label class="org-type-card" onclick="selectOrgType(this)">
+            <input type="radio" name="orgType" value="Komuniti"/>
+            <div class="icon">🏘️</div>
+            <div class="label">Komuniti</div>
+          </label>
+          <label class="org-type-card" onclick="selectOrgType(this)">
+            <input type="radio" name="orgType" value="Lain-lain"/>
+            <div class="icon">✦</div>
+            <div class="label">Lain-lain</div>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-grid" style="margin-top:16px">
+        <div class="form-group">
+          <label class="form-label" for="industry">Industri / Kategori</label>
+          <select class="form-select" id="industry">
+            <option value="" disabled selected>-- Pilih kategori --</option>
+            <option>Makanan &amp; Minuman (F&amp;B)</option>
+            <option>Perniagaan Runcit</option>
+            <option>Perkhidmatan Profesional</option>
+            <option>Teknologi &amp; IT</option>
+            <option>Kecantikan &amp; Wellness</option>
+            <option>Pendidikan &amp; Latihan</option>
+            <option>Pertanian &amp; Agro</option>
+            <option>Automotif</option>
+            <option>Pembinaan &amp; Hartanah</option>
+            <option>Kesihatan</option>
+            <option>Lain-lain</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="district">Daerah / Kawasan *</label>
+          <select class="form-select" id="district" required>
+            <option value="" disabled selected>-- Pilih daerah --</option>
+            <option>Kuching</option>
+            <option>Sibu</option>
+            <option>Miri</option>
+            <option>Bintulu</option>
+            <option>Sri Aman</option>
+            <option>Sarikei</option>
+            <option>Kapit</option>
+            <option>Mukah</option>
+            <option>Limbang</option>
+            <option>Betong</option>
+            <option>Saratok</option>
+            <option>Kabong</option>
+            <option>Spaoh</option>
+            <option>Lain-lain</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-divider">Maklumat Hubungan</div>
 
       <div class="form-grid">
         <div class="form-group">
@@ -46,151 +201,150 @@
           <input class="form-input" id="email" type="email" placeholder="email@contoh.com" required/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="mobile">No. Telefon *</label>
+          <label class="form-label" for="mobile">No. WhatsApp *</label>
           <input class="form-input" id="mobile" type="tel" placeholder="012-345 6789" required/>
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label" for="district">Daerah / Kawasan *</label>
-        <select class="form-select" id="district" required>
-          <option value="" disabled selected>-- Pilih daerah anda --</option>
-          <optgroup label="Kawasan Utama (Kabong & Spaoh)">
-            <option value="Kabong">Kabong</option>
-            <option value="Spaoh">Spaoh</option>
-          </optgroup>
-          <optgroup label="Kawasan Lain Sarawak">
-            <option value="Kuching">Kuching</option>
-            <option value="Sibu">Sibu</option>
-            <option value="Miri">Miri</option>
-            <option value="Bintulu">Bintulu</option>
-            <option value="Sri Aman">Sri Aman</option>
-            <option value="Sarikei">Sarikei</option>
-            <option value="Kapit">Kapit</option>
-            <option value="Mukah">Mukah</option>
-            <option value="Limbang">Limbang</option>
-            <option value="Betong">Betong</option>
-            <option value="Saratok">Saratok</option>
-            <option value="Lain-lain">Lain-lain</option>
-          </optgroup>
-        </select>
+      <div class="form-group" style="margin-top:16px">
+        <label class="form-label" for="existing">Link Media Sosial / Website Sedia Ada (jika ada)</label>
+        <input class="form-input" id="existing" type="url" placeholder="https://facebook.com/perniagaananda atau website lama"/>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Jenis Perniagaan</label>
-        <select class="form-select" id="bizType">
-          <option value="" disabled selected>-- Pilih kategori --</option>
-          <option value="Runcit">Perniagaan Runcit</option>
-          <option value="F&B">Makanan & Minuman (F&B)</option>
-          <option value="Perkhidmatan">Perkhidmatan</option>
-          <option value="Teknologi">Teknologi & IT</option>
-          <option value="Pertanian">Pertanian & Agro</option>
-          <option value="Fesyen">Fesyen & Tekstil</option>
-          <option value="Automotif">Automotif</option>
-          <option value="Kesihatan">Kesihatan & Wellness</option>
-          <option value="Pendidikan">Pendidikan & Latihan</option>
-          <option value="Pembinaan">Pembinaan & Hartanah</option>
-          <option value="Lain-lain">Lain-lain</option>
-        </select>
-      </div>
+      <div class="section-divider">Bahasa Website</div>
 
       <div class="form-group">
-        <label class="form-label">Pakej Program *</label>
-        <div class="pkg-grid">
-          <label class="pkg-card" id="pkg-basic">
-            <input type="radio" name="package" value="60" style="display:none"/>
-            <div class="pkg-name">🌱 Asas Digital</div>
-            <div class="pkg-desc">Bermula dengan asas — media sosial, WhatsApp Business, Google Maps</div>
-            <div class="pkg-score">Skor Lead: 60</div>
+        <label class="form-label">Pilih bahasa untuk website anda (boleh lebih dari satu)</label>
+        <div class="lang-grid">
+          <label class="lang-card" onclick="toggleLang(this)">
+            <input type="checkbox" name="lang" value="BM" checked/>
+            <div class="flag">🇲🇾</div>
+            <div class="lname">Bahasa Melayu</div>
           </label>
-          <label class="pkg-card" id="pkg-pro">
-            <input type="radio" name="package" value="80" style="display:none"/>
-            <div class="pkg-name">🚀 Pro Digital</div>
-            <div class="pkg-desc">Website + marketplace + sistem tempahan & pembayaran online</div>
-            <div class="pkg-score">Skor Lead: 80</div>
+          <label class="lang-card selected" onclick="toggleLang(this)">
+            <input type="checkbox" name="lang" value="EN"/>
+            <div class="flag">🇬🇧</div>
+            <div class="lname">English</div>
           </label>
-          <label class="pkg-card" id="pkg-premium">
-            <input type="radio" name="package" value="90" style="display:none"/>
-            <div class="pkg-name">⚡ Premium</div>
-            <div class="pkg-desc">Penyelesaian lengkap termasuk automasi, CRM & e-dagang</div>
-            <div class="pkg-score">Skor Lead: 90</div>
+          <label class="lang-card" onclick="toggleLang(this)">
+            <input type="checkbox" name="lang" value="ZH"/>
+            <div class="flag">🇨🇳</div>
+            <div class="lname">中文</div>
           </label>
-          <label class="pkg-card" id="pkg-enterprise">
-            <input type="radio" name="package" value="95" style="display:none"/>
-            <div class="pkg-name">🏆 Enterprise</div>
-            <div class="pkg-desc">Transformasi menyeluruh — reka bentuk semula operasi digital anda</div>
-            <div class="pkg-score">Skor Lead: 95</div>
+          <label class="lang-card" onclick="toggleLang(this)">
+            <input type="checkbox" name="lang" value="IB"/>
+            <div class="flag">🦅</div>
+            <div class="lname">Iban</div>
           </label>
         </div>
       </div>
 
-      <div id="form-msg"></div>
+      <div class="section-divider">Maklumat Tambahan</div>
 
-      <button type="submit" class="btn btn-primary btn-full" id="submit-btn" style="margin-top:8px">
-        ⚡ Hantar Pendaftaran
-      </button>
+      <div class="form-group">
+        <label class="form-label" for="bizDesc">Terangkan perniagaan / organisasi anda secara ringkas</label>
+        <textarea class="form-input" id="bizDesc" rows="3" placeholder="Apa yang anda jual / tawarkan? Siapa pelanggan anda? Apa yang membuatkan anda unik?" style="resize:vertical"></textarea>
+      </div>
+
+      <div id="form-msg" style="margin-top:16px"></div>
+
+      <div style="margin-top:24px">
+        <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+          ✦ Hantar Permohonan Aktivasi
+        </button>
+        <p style="text-align:center;margin-top:12px;font-size:.8rem;color:var(--muted)">
+          Dengan menghantar borang ini, anda bersetuju untuk dihubungi oleh Shahlan berkaitan pakej website anda. Tiada komitmen sehingga anda mengesahkan tempahan.
+        </p>
+      </div>
     </form>
+  </div>
 
-    <!-- Success state -->
-    <div id="success-view" style="display:none;text-align:center;padding:20px 0">
-      <div style="font-size:3.5rem;margin-bottom:16px">🎉</div>
-      <h2 style="font-family:var(--font-head);font-size:1.6rem;font-weight:800;margin-bottom:10px">
-        Pendaftaran Berjaya!
-      </h2>
-      <p style="color:var(--muted);margin-bottom:24px;line-height:1.7">
-        Terima kasih! Syahlan atau pasukan SDC akan menghubungi anda dalam masa <strong style="color:var(--p7)">24–48 jam</strong>.
-        Selamat datang ke perjalanan digital anda! ⚡
-      </p>
+  <!-- Success State -->
+  <div class="form-card-new success-card" id="success-view" style="display:none">
+    <div class="success-icon">🎉</div>
+    <h2>Permohonan Berjaya Dihantar!</h2>
+    <div class="success-ref" id="ref-num">REF: —</div>
+    <p>
+      Terima kasih! Shahlan akan menghubungi anda melalui WhatsApp dalam masa <strong style="color:var(--p7)">24 jam</strong> untuk mengesahkan tempahan dan membincangkan keperluan website anda.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
       <a href="index.html" class="btn btn-secondary">← Kembali ke Laman Utama</a>
+      <a href="https://wa.me/60187874797" target="_blank" class="btn btn-primary">💬 WhatsApp Shahlan Sekarang</a>
     </div>
   </div>
+
 </div>
 
-<script type="module">
-  // Package selection
-  document.querySelectorAll('.pkg-card').forEach(card => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
-      card.querySelector('input[type=radio]').checked = true;
-    });
-  });
+<footer style="margin-top:0">
+  <div class="container">
+    <div class="footer-logo">◆ Shahlan <span style="color:var(--p6)">SDC</span></div>
+    <p>Sarawak Digital Champion 2026 Candidate · Website Activation Package RM500</p>
+  </div>
+</footer>
 
-  const form = document.getElementById('reg-form');
-  const btn  = document.getElementById('submit-btn');
-  const msg  = document.getElementById('form-msg');
+<script>
+  function selectOrgType(card) {
+    document.querySelectorAll('.org-type-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    card.querySelector('input').checked = true;
+  }
+
+  function toggleLang(card) {
+    card.classList.toggle('selected');
+    card.querySelector('input').checked = card.classList.contains('selected');
+  }
+
+  // Init BM as selected
+  document.querySelector('.lang-card:first-child').classList.add('selected');
+
+  const form   = document.getElementById('activate-form');
+  const btn    = document.getElementById('submit-btn');
+  const msgEl  = document.getElementById('form-msg');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const bizName  = document.getElementById('businessName').value.trim();
+
+    const bizName  = document.getElementById('bizName').value.trim();
     const owner    = document.getElementById('ownerName').value.trim();
     const email    = document.getElementById('email').value.trim();
     const mobile   = document.getElementById('mobile').value.trim();
     const district = document.getElementById('district').value;
-    const bizType  = document.getElementById('bizType').value;
-    const pkgRadio = document.querySelector('input[name=package]:checked');
+    const orgRadio = document.querySelector('input[name=orgType]:checked');
 
     if (!bizName || !owner || !email || !mobile || !district) {
-      msg.className = 'form-msg error';
-      msg.textContent = '⚠️ Sila lengkapkan semua medan yang bertanda *.';
+      msgEl.className = 'form-msg error';
+      msgEl.textContent = '⚠️ Sila lengkapkan semua medan yang bertanda *.';
       return;
     }
-    if (!pkgRadio) {
-      msg.className = 'form-msg error';
-      msg.textContent = '⚠️ Sila pilih pakej program.';
+    if (!orgRadio) {
+      msgEl.className = 'form-msg error';
+      msgEl.textContent = '⚠️ Sila pilih jenis organisasi anda.';
       return;
     }
 
     btn.classList.add('btn-loading');
     btn.textContent = '';
-    msg.textContent = '';
+    msgEl.textContent = '';
 
-    const id = `SDC-${Date.now()}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;
+    const langs    = [...document.querySelectorAll('input[name=lang]:checked')].map(i => i.value);
+    const id       = `WEB-${Date.now()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+
     const data = {
-      id, businessName: bizName, ownerName: owner,
-      email, mobile, district, bizType,
-      leadScore: Number(pkgRadio.value),
-      status: 'New', paid: false,
+      id,
+      businessName: bizName,
+      ownerName: owner,
+      email,
+      mobile,
+      district,
+      orgType: orgRadio.value,
+      industry: document.getElementById('industry').value,
+      existing: document.getElementById('existing').value.trim(),
+      bizDesc: document.getElementById('bizDesc').value.trim(),
+      languages: langs,
+      status: 'New Lead',
+      paid: false,
+      package: 'RM500 Website Activation',
+      leadScore: 70,
       createdAt: new Date().toISOString(),
     };
 
@@ -202,13 +356,14 @@
       });
       if (!r.ok) throw new Error(await r.text());
 
-      document.getElementById('reg-form').style.display = 'none';
+      document.getElementById('ref-num').textContent = 'REF: ' + id;
+      document.getElementById('form-view').style.display = 'none';
       document.getElementById('success-view').style.display = 'block';
     } catch (err) {
-      msg.className = 'form-msg error';
-      msg.textContent = '❌ Ralat: ' + err.message + '. Sila cuba lagi.';
+      msgEl.className = 'form-msg error';
+      msgEl.textContent = '❌ Ralat: ' + err.message + '. Sila cuba lagi atau hubungi Shahlan terus.';
       btn.classList.remove('btn-loading');
-      btn.textContent = '⚡ Hantar Pendaftaran';
+      btn.textContent = '✦ Hantar Permohonan Aktivasi';
     }
   });
 </script>
