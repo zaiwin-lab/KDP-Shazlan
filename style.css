@@ -540,9 +540,6 @@ button, input, select, textarea { font-family: inherit; }
 
 /* ── Footer ─────────────────────────────────────────────── */
 footer {
-  border-top: 1px solid var(--glass-border);
-  padding: 48px 0 32px;
-  text-align: center;
   position: relative; z-index: 1;
 }
 footer .footer-logo {
@@ -550,6 +547,12 @@ footer .footer-logo {
   margin-bottom: 12px;
 }
 footer p { font-size: .82rem; color: var(--muted2); }
+@media (max-width: 768px) {
+  footer .container > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
 
 /* ── Form styles ────────────────────────────────────────── */
 .form-wrapper {
