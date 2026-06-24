@@ -7,14 +7,16 @@
   <meta name="description" content="Isi borang aktivasi website perniagaan anda. Pakej lengkap RM500 termasuk domain, hosting, dashboard admin dan lebih."/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .activate-wrap { max-width: 760px; margin: 0 auto; padding: 100px 20px 60px; }
+    .lang-toggle { display: flex; gap: 2px; background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: 8px; padding: 3px; }
+    .lang-btn { background: transparent; border: none; color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .04em; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: all .18s; line-height: 1; }
+    .lang-btn.active { background: rgba(139,92,246,.25); color: var(--white); border: 1px solid rgba(139,92,246,.4); }
 
+    .activate-wrap { max-width: 760px; margin: 0 auto; padding: 100px 20px 60px; }
     .activate-header { text-align: center; margin-bottom: 40px; }
     .activate-header .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 99px; background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); font-size: .8rem; font-weight: 700; color: var(--gold); letter-spacing: .05em; text-transform: uppercase; margin-bottom: 20px; }
     .activate-header h1 { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.15; margin-bottom: 12px; }
     .activate-header p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 520px; margin: 0 auto; }
 
-    /* Price summary */
     .price-summary { display: flex; align-items: center; justify-content: center; gap: 16px; background: linear-gradient(135deg, rgba(76,29,149,.2), rgba(6,182,212,.1)); border: 1px solid rgba(139,92,246,.3); border-radius: var(--r-lg); padding: 20px 28px; margin-bottom: 36px; flex-wrap: wrap; text-align: center; }
     .price-summary .big { font-family: var(--font-head); font-size: 2.6rem; font-weight: 900; color: var(--gold); line-height: 1; }
     .price-summary .old { font-size: .9rem; color: var(--muted); text-decoration: line-through; }
@@ -22,9 +24,7 @@
     .price-summary .includes { font-size: .82rem; color: var(--muted); text-align: left; }
     .price-summary .includes li { margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
 
-    /* Form card */
     .form-card-new { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 40px; backdrop-filter: blur(12px); }
-
     .section-divider { font-family: var(--font-head); font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--p6); margin: 28px 0 18px; display: flex; align-items: center; gap: 12px; }
     .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
 
@@ -44,7 +44,6 @@
     .lang-card .flag { font-size: 1.4rem; margin-bottom: 4px; }
     .lang-card .lname { font-size: .78rem; font-weight: 600; }
 
-    /* Success */
     .success-card { text-align: center; padding: 40px 20px; }
     .success-icon { font-size: 4rem; margin-bottom: 16px; }
     .success-card h2 { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
@@ -70,17 +69,23 @@
     <a href="index.html">Shahlan <span style="color:var(--p6)">SDC</span></a>
   </div>
   <ul class="nav-links">
-    <li><a href="index.html">← Kembali</a></li>
+    <li><a href="index.html" data-i18n="nav.back">← Kembali</a></li>
   </ul>
-  <a href="https://wa.me/60187874797" class="nav-cta" target="_blank">💬 Hubungi Shahlan</a>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="BM" onclick="setLang('BM')">BM</button>
+    <button class="lang-btn" data-lang="EN" onclick="setLang('EN')">EN</button>
+    <button class="lang-btn" data-lang="ZH" onclick="setLang('ZH')">中</button>
+    <button class="lang-btn" data-lang="IB" onclick="setLang('IB')">IB</button>
+  </div>
+  <a href="https://wa.me/60187874797" class="nav-cta" target="_blank" data-i18n="nav.contact">💬 Hubungi Shahlan</a>
 </nav>
 
 <div class="activate-wrap">
 
   <div class="activate-header">
-    <div class="badge">✦ Digital Presence Initiative · 100 Perniagaan Pertama</div>
-    <h1>Aktifkan <span class="grad-text">Website</span><br/>Perniagaan Anda</h1>
-    <p>Isi borang di bawah. Shahlan akan menghubungi anda dalam masa 24 jam untuk mengesahkan tempahan dan meneruskan proses pembinaan website anda.</p>
+    <div class="badge" data-i18n="act.badge">✦ Digital Presence Initiative · 100 Perniagaan Pertama</div>
+    <h1 data-i18n-html="act.h1">Aktifkan <span class="grad-text">Website</span><br/>Perniagaan Anda</h1>
+    <p data-i18n="act.sub">Isi borang di bawah. Shahlan akan menghubungi anda dalam masa 24 jam untuk mengesahkan tempahan dan meneruskan proses pembinaan website anda.</p>
   </div>
 
   <!-- Price Summary -->
@@ -88,14 +93,14 @@
     <div>
       <div class="big">RM500</div>
       <div class="old">Biasa RM1,380</div>
-      <div class="save" style="margin-top:4px">Jimat 64%</div>
+      <div class="save" style="margin-top:4px" data-i18n="pay.save">Jimat 64%</div>
     </div>
     <div style="width:1px;height:60px;background:var(--glass-border)"></div>
     <ul class="includes">
-      <li><span style="color:var(--cyan)">✓</span> Website Profesional + Mobile Responsive</li>
-      <li><span style="color:var(--cyan)">✓</span> Domain & Hosting 1 Tahun</li>
-      <li><span style="color:var(--cyan)">✓</span> Dashboard Admin + Galeri + Promosi</li>
-      <li><span style="color:var(--cyan)">✓</span> WhatsApp, Google Map, SSL, SEO Asas</li>
+      <li><span style="color:var(--cyan)">✓</span> <span data-i18n="act.price.inc1">Website Profesional + Mobile Responsive</span></li>
+      <li><span style="color:var(--cyan)">✓</span> <span data-i18n="act.price.inc2">Domain &amp; Hosting 1 Tahun</span></li>
+      <li><span style="color:var(--cyan)">✓</span> <span data-i18n="act.price.inc3">Dashboard Admin + Galeri + Promosi</span></li>
+      <li><span style="color:var(--cyan)">✓</span> <span data-i18n="act.price.inc4">WhatsApp, Google Map, SSL, SEO Asas</span></li>
     </ul>
   </div>
 
@@ -104,58 +109,58 @@
 
     <form id="activate-form" novalidate>
 
-      <div class="section-divider">Maklumat Perniagaan</div>
+      <div class="section-divider" data-i18n="act.sec1">Maklumat Perniagaan</div>
 
       <div class="form-grid">
         <div class="form-group">
-          <label class="form-label" for="bizName">Nama Perniagaan / Organisasi *</label>
-          <input class="form-input" id="bizName" type="text" placeholder="cth: Syarikat ABC Sdn Bhd" required/>
+          <label class="form-label" for="bizName" data-i18n="act.lbl.biz">Nama Perniagaan / Organisasi *</label>
+          <input class="form-input" id="bizName" type="text" data-i18n-ph="act.ph.biz" placeholder="cth: Syarikat ABC Sdn Bhd" required/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="ownerName">Nama Pemilik / PIC *</label>
-          <input class="form-input" id="ownerName" type="text" placeholder="Nama penuh anda" required/>
+          <label class="form-label" for="ownerName" data-i18n="act.lbl.owner">Nama Pemilik / PIC *</label>
+          <input class="form-input" id="ownerName" type="text" data-i18n-ph="act.ph.owner" placeholder="Nama penuh anda" required/>
         </div>
       </div>
 
       <div class="form-group" style="margin-top:16px">
-        <label class="form-label">Jenis Organisasi *</label>
+        <label class="form-label" data-i18n="act.lbl.orgtype">Jenis Organisasi *</label>
         <div class="org-type-grid">
           <label class="org-type-card" onclick="selectOrgType(this)">
             <input type="radio" name="orgType" value="SME"/>
             <div class="icon">🏪</div>
-            <div class="label">PKS / SME</div>
+            <div class="label" data-i18n="act.org.sme">PKS / SME</div>
           </label>
           <label class="org-type-card" onclick="selectOrgType(this)">
             <input type="radio" name="orgType" value="Koperasi"/>
             <div class="icon">🤝</div>
-            <div class="label">Koperasi</div>
+            <div class="label" data-i18n="act.org.kop">Koperasi</div>
           </label>
           <label class="org-type-card" onclick="selectOrgType(this)">
             <input type="radio" name="orgType" value="NGO"/>
             <div class="icon">🌱</div>
-            <div class="label">NGO</div>
+            <div class="label" data-i18n="act.org.ngo">NGO</div>
           </label>
           <label class="org-type-card" onclick="selectOrgType(this)">
             <input type="radio" name="orgType" value="Konsultan"/>
             <div class="icon">💼</div>
-            <div class="label">Konsultan</div>
+            <div class="label" data-i18n="act.org.konsultan">Konsultan</div>
           </label>
           <label class="org-type-card" onclick="selectOrgType(this)">
             <input type="radio" name="orgType" value="Komuniti"/>
             <div class="icon">🏘️</div>
-            <div class="label">Komuniti</div>
+            <div class="label" data-i18n="act.org.komuniti">Komuniti</div>
           </label>
           <label class="org-type-card" onclick="selectOrgType(this)">
             <input type="radio" name="orgType" value="Lain-lain"/>
             <div class="icon">✦</div>
-            <div class="label">Lain-lain</div>
+            <div class="label" data-i18n="act.org.lain">Lain-lain</div>
           </label>
         </div>
       </div>
 
       <div class="form-grid" style="margin-top:16px">
         <div class="form-group">
-          <label class="form-label" for="industry">Industri / Kategori</label>
+          <label class="form-label" for="industry" data-i18n="act.lbl.industry">Industri / Kategori</label>
           <select class="form-select" id="industry">
             <option value="" disabled selected>-- Pilih kategori --</option>
             <option>Makanan &amp; Minuman (F&amp;B)</option>
@@ -172,9 +177,9 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label" for="district">Daerah / Kawasan *</label>
+          <label class="form-label" for="district" data-i18n="act.lbl.district">Daerah / Kawasan *</label>
           <select class="form-select" id="district" required>
-            <option value="" disabled selected>-- Pilih daerah --</option>
+            <option value="" disabled selected data-i18n-ph="act.ph.district">-- Pilih daerah --</option>
             <option>Kuching</option>
             <option>Sibu</option>
             <option>Miri</option>
@@ -193,35 +198,35 @@
         </div>
       </div>
 
-      <div class="section-divider">Maklumat Hubungan</div>
+      <div class="section-divider" data-i18n="act.sec2">Maklumat Hubungan</div>
 
       <div class="form-grid">
         <div class="form-group">
-          <label class="form-label" for="email">Emel *</label>
-          <input class="form-input" id="email" type="email" placeholder="email@contoh.com" required/>
+          <label class="form-label" for="email" data-i18n="act.lbl.email">Emel *</label>
+          <input class="form-input" id="email" type="email" data-i18n-ph="act.ph.email" placeholder="email@contoh.com" required/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="mobile">No. WhatsApp *</label>
-          <input class="form-input" id="mobile" type="tel" placeholder="012-345 6789" required/>
+          <label class="form-label" for="mobile" data-i18n="act.lbl.mobile">No. WhatsApp *</label>
+          <input class="form-input" id="mobile" type="tel" data-i18n-ph="act.ph.mobile" placeholder="012-345 6789" required/>
         </div>
       </div>
 
       <div class="form-group" style="margin-top:16px">
-        <label class="form-label" for="existing">Link Media Sosial / Website Sedia Ada (jika ada)</label>
-        <input class="form-input" id="existing" type="url" placeholder="https://facebook.com/perniagaananda atau website lama"/>
+        <label class="form-label" for="existing" data-i18n="act.lbl.existing">Link Media Sosial / Website Sedia Ada (jika ada)</label>
+        <input class="form-input" id="existing" type="url" data-i18n-ph="act.ph.existing" placeholder="https://facebook.com/perniagaananda atau website lama"/>
       </div>
 
-      <div class="section-divider">Bahasa Website</div>
+      <div class="section-divider" data-i18n="act.sec3">Bahasa Website</div>
 
       <div class="form-group">
-        <label class="form-label">Pilih bahasa untuk website anda (boleh lebih dari satu)</label>
+        <label class="form-label" data-i18n="act.lbl.lang">Pilih bahasa untuk website anda (boleh lebih dari satu)</label>
         <div class="lang-grid">
-          <label class="lang-card" onclick="toggleLang(this)">
+          <label class="lang-card selected" onclick="toggleLang(this)">
             <input type="checkbox" name="lang" value="BM" checked/>
             <div class="flag">🇲🇾</div>
             <div class="lname">Bahasa Melayu</div>
           </label>
-          <label class="lang-card selected" onclick="toggleLang(this)">
+          <label class="lang-card" onclick="toggleLang(this)">
             <input type="checkbox" name="lang" value="EN"/>
             <div class="flag">🇬🇧</div>
             <div class="lname">English</div>
@@ -239,20 +244,20 @@
         </div>
       </div>
 
-      <div class="section-divider">Maklumat Tambahan</div>
+      <div class="section-divider" data-i18n="act.sec4">Maklumat Tambahan</div>
 
       <div class="form-group">
-        <label class="form-label" for="bizDesc">Terangkan perniagaan / organisasi anda secara ringkas</label>
-        <textarea class="form-input" id="bizDesc" rows="3" placeholder="Apa yang anda jual / tawarkan? Siapa pelanggan anda? Apa yang membuatkan anda unik?" style="resize:vertical"></textarea>
+        <label class="form-label" for="bizDesc" data-i18n="act.lbl.desc">Terangkan perniagaan / organisasi anda secara ringkas</label>
+        <textarea class="form-input" id="bizDesc" rows="3" data-i18n-ph="act.ph.desc" placeholder="Apa yang anda jual / tawarkan? Siapa pelanggan anda? Apa yang membuatkan anda unik?" style="resize:vertical"></textarea>
       </div>
 
       <div id="form-msg" style="margin-top:16px"></div>
 
       <div style="margin-top:24px">
-        <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+        <button type="submit" class="btn btn-primary btn-full" id="submit-btn" data-i18n="act.submit">
           ✦ Hantar Permohonan Aktivasi
         </button>
-        <p style="text-align:center;margin-top:12px;font-size:.8rem;color:var(--muted)">
+        <p style="text-align:center;margin-top:12px;font-size:.8rem;color:var(--muted)" data-i18n="act.disclaimer">
           Dengan menghantar borang ini, anda bersetuju untuk dihubungi oleh Shahlan berkaitan pakej website anda. Tiada komitmen sehingga anda mengesahkan tempahan.
         </p>
       </div>
@@ -262,14 +267,14 @@
   <!-- Success State -->
   <div class="form-card-new success-card" id="success-view" style="display:none">
     <div class="success-icon">🎉</div>
-    <h2>Permohonan Berjaya Dihantar!</h2>
+    <h2 data-i18n="act.success.h2">Permohonan Berjaya Dihantar!</h2>
     <div class="success-ref" id="ref-num">REF: —</div>
-    <p>
+    <p data-i18n-html="act.success.sub">
       Terima kasih! Shahlan akan menghubungi anda melalui WhatsApp dalam masa <strong style="color:var(--p7)">24 jam</strong> untuk mengesahkan tempahan dan membincangkan keperluan website anda.
     </p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="index.html" class="btn btn-secondary">← Kembali ke Laman Utama</a>
-      <a href="https://wa.me/60187874797" target="_blank" class="btn btn-primary">💬 WhatsApp Shahlan Sekarang</a>
+      <a href="index.html" class="btn btn-secondary" data-i18n="act.success.back">← Kembali ke Laman Utama</a>
+      <a href="https://wa.me/60187874797" target="_blank" class="btn btn-primary" data-i18n="act.success.wa">💬 WhatsApp Shahlan Sekarang</a>
     </div>
   </div>
 
@@ -278,10 +283,11 @@
 <footer style="margin-top:0">
   <div class="container">
     <div class="footer-logo">◆ Shahlan <span style="color:var(--p6)">SDC</span></div>
-    <p>Sarawak Digital Champion 2026 Candidate · Website Activation Package RM500</p>
+    <p data-i18n="footer.sub">Sarawak Digital Champion 2026 Candidate · Website Activation Package RM500</p>
   </div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
   function selectOrgType(card) {
     document.querySelectorAll('.org-type-card').forEach(c => c.classList.remove('selected'));
@@ -294,12 +300,9 @@
     card.querySelector('input').checked = card.classList.contains('selected');
   }
 
-  // Init BM as selected
-  document.querySelector('.lang-card:first-child').classList.add('selected');
-
-  const form   = document.getElementById('activate-form');
-  const btn    = document.getElementById('submit-btn');
-  const msgEl  = document.getElementById('form-msg');
+  const form  = document.getElementById('activate-form');
+  const btn   = document.getElementById('submit-btn');
+  const msgEl = document.getElementById('form-msg');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -313,12 +316,12 @@
 
     if (!bizName || !owner || !email || !mobile || !district) {
       msgEl.className = 'form-msg error';
-      msgEl.textContent = '⚠️ Sila lengkapkan semua medan yang bertanda *.';
+      msgEl.textContent = '⚠️ ' + t('act.err.required');
       return;
     }
     if (!orgRadio) {
       msgEl.className = 'form-msg error';
-      msgEl.textContent = '⚠️ Sila pilih jenis organisasi anda.';
+      msgEl.textContent = '⚠️ ' + t('act.err.orgtype');
       return;
     }
 
@@ -326,8 +329,8 @@
     btn.textContent = '';
     msgEl.textContent = '';
 
-    const langs    = [...document.querySelectorAll('input[name=lang]:checked')].map(i => i.value);
-    const id       = `WEB-${Date.now()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+    const langs = [...document.querySelectorAll('input[name=lang]:checked')].map(i => i.value);
+    const id    = `WEB-${Date.now()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
 
     const data = {
       id,
@@ -359,13 +362,17 @@
       document.getElementById('ref-num').textContent = 'REF: ' + id;
       document.getElementById('form-view').style.display = 'none';
       document.getElementById('success-view').style.display = 'block';
+      // Re-apply translations to newly visible success view
+      setLang(localStorage.getItem('sdcLang') || 'BM');
     } catch (err) {
       msgEl.className = 'form-msg error';
-      msgEl.textContent = '❌ Ralat: ' + err.message + '. Sila cuba lagi atau hubungi Shahlan terus.';
+      msgEl.textContent = '❌ ' + err.message + '. ' + t('act.err.retry');
       btn.classList.remove('btn-loading');
-      btn.textContent = '✦ Hantar Permohonan Aktivasi';
+      btn.textContent = t('act.submit');
     }
   });
+
+  initLang();
 </script>
 </body>
 </html>

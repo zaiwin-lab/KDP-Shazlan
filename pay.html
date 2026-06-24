@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pembayaran Website Activation — Shahlan SDC</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    .lang-toggle { display: flex; gap: 2px; background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: 8px; padding: 3px; }
+    .lang-btn { background: transparent; border: none; color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .04em; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: all .18s; line-height: 1; }
+    .lang-btn.active { background: rgba(139,92,246,.25); color: var(--white); border: 1px solid rgba(139,92,246,.4); }
+  </style>
 </head>
 <body>
 <div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
@@ -15,6 +20,12 @@
     <span class="bolt">◆</span>
     <a href="index.html">Shahlan <span style="color:var(--p6)">SDC</span></a>
   </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="BM" onclick="setLang('BM')">BM</button>
+    <button class="lang-btn" data-lang="EN" onclick="setLang('EN')">EN</button>
+    <button class="lang-btn" data-lang="ZH" onclick="setLang('ZH')">中</button>
+    <button class="lang-btn" data-lang="IB" onclick="setLang('IB')">IB</button>
+  </div>
 </nav>
 
 <div class="pay-wrapper">
@@ -24,63 +35,63 @@
     <div class="form-card" id="checkout-view">
       <div class="form-header">
         <div style="font-size:2.2rem;margin-bottom:10px">💳</div>
-        <h1 style="font-size:1.6rem">Bayaran <span class="grad-text-purple">Website Activation</span></h1>
-        <p>Semak butiran perniagaan anda dan selesaikan bayaran</p>
+        <h1 style="font-size:1.6rem" data-i18n-html="pay.h1">Bayaran <span class="grad-text-purple">Website Activation</span></h1>
+        <p data-i18n="pay.sub">Semak butiran perniagaan anda dan selesaikan bayaran</p>
 
         <!-- Price highlight -->
         <div style="display:inline-flex;align-items:baseline;gap:10px;background:linear-gradient(135deg,rgba(76,29,149,.2),rgba(6,182,212,.1));border:1px solid rgba(139,92,246,.3);border-radius:14px;padding:14px 24px;margin:16px 0">
           <span style="font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--gold)">RM500</span>
           <span style="font-size:.85rem;color:var(--muted);text-decoration:line-through">RM1,380</span>
-          <span style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:99px;padding:2px 8px;font-size:.72rem;font-weight:700;color:#fca5a5">Jimat 64%</span>
+          <span style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:99px;padding:2px 8px;font-size:.72rem;font-weight:700;color:#fca5a5" data-i18n="pay.save">Jimat 64%</span>
         </div>
       </div>
 
       <!-- Customer info (auto-filled) -->
       <div style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:var(--r-md);padding:16px;margin-bottom:20px">
-        <div style="font-size:.75rem;font-weight:600;color:var(--p7);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Maklumat Pelanggan</div>
+        <div style="font-size:.75rem;font-weight:600;color:var(--p7);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px" data-i18n="pay.cust.title">Maklumat Pelanggan</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:.87rem">
-          <div><span style="color:var(--muted)">Perniagaan:</span> <strong id="disp-biz">—</strong></div>
-          <div><span style="color:var(--muted)">Pemilik:</span> <strong id="disp-name">—</strong></div>
-          <div><span style="color:var(--muted)">Emel:</span> <span id="disp-email" style="color:var(--p7)">Memuatkan…</span></div>
-          <div><span style="color:var(--muted)">Tel:</span> <span id="disp-phone" style="color:var(--p7)">Memuatkan…</span></div>
+          <div><span style="color:var(--muted)" data-i18n="pay.cust.biz">Perniagaan:</span> <strong id="disp-biz">—</strong></div>
+          <div><span style="color:var(--muted)" data-i18n="pay.cust.owner">Pemilik:</span> <strong id="disp-name">—</strong></div>
+          <div><span style="color:var(--muted)" data-i18n="pay.cust.email">Emel:</span> <span id="disp-email" style="color:var(--p7)">Memuatkan…</span></div>
+          <div><span style="color:var(--muted)" data-i18n="pay.cust.phone">Tel:</span> <span id="disp-phone" style="color:var(--p7)">Memuatkan…</span></div>
         </div>
       </div>
 
       <!-- What's included -->
       <div style="background:rgba(6,182,212,.05);border:1px solid rgba(6,182,212,.2);border-radius:var(--r-md);padding:16px;margin-bottom:20px">
-        <div style="font-size:.75rem;font-weight:700;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">✓ Termasuk Dalam Pakej RM500</div>
+        <div style="font-size:.75rem;font-weight:700;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px" data-i18n="pay.included.title">✓ Termasuk Dalam Pakej RM500</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:.82rem;color:var(--muted)">
-          <span>✓ Website Profesional</span><span>✓ Mobile Responsive</span>
-          <span>✓ Domain 1 Tahun</span><span>✓ Hosting 1 Tahun</span>
-          <span>✓ SSL + SEO Asas</span><span>✓ WhatsApp Button</span>
-          <span>✓ Google Map</span><span>✓ Dashboard Admin</span>
-          <span>✓ Galeri Foto</span><span>✓ 4 Bahasa</span>
+          <span data-i18n="pay.inc.1">✓ Website Profesional</span><span data-i18n="pay.inc.2">✓ Mobile Responsive</span>
+          <span data-i18n="pay.inc.3">✓ Domain 1 Tahun</span><span data-i18n="pay.inc.4">✓ Hosting 1 Tahun</span>
+          <span data-i18n="pay.inc.5">✓ SSL + SEO Asas</span><span data-i18n="pay.inc.6">✓ WhatsApp Button</span>
+          <span data-i18n="pay.inc.7">✓ Google Map</span><span data-i18n="pay.inc.8">✓ Dashboard Admin</span>
+          <span data-i18n="pay.inc.9">✓ Galeri Foto</span><span data-i18n="pay.inc.10">✓ 4 Bahasa</span>
         </div>
       </div>
 
       <!-- Add-ons -->
       <div class="form-group">
-        <label class="form-label">Tambahan Opsional</label>
+        <label class="form-label" data-i18n="pay.addons.label">Tambahan Opsional</label>
         <div style="display:flex;flex-direction:column;gap:10px">
           <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
             <input type="checkbox" class="addon" data-price="200" style="accent-color:var(--p5);width:16px;height:16px"/>
             <div>
-              <div style="font-weight:600;font-size:.88rem">📱 Setup Media Sosial <span style="color:var(--p6)">+RM200</span></div>
-              <div style="font-size:.76rem;color:var(--muted)">Optimasi profil FB, IG, Google Business</div>
+              <div style="font-weight:600;font-size:.88rem"><span data-i18n="pay.addon1.name">📱 Setup Media Sosial</span> <span style="color:var(--p6)">+RM200</span></div>
+              <div style="font-size:.76rem;color:var(--muted)" data-i18n="pay.addon1.desc">Optimasi profil FB, IG, Google Business</div>
             </div>
           </label>
           <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
             <input type="checkbox" class="addon" data-price="150" style="accent-color:var(--p5);width:16px;height:16px"/>
             <div>
-              <div style="font-weight:600;font-size:.88rem">✍️ Penulisan Kandungan Tambahan <span style="color:var(--p6)">+RM150</span></div>
-              <div style="font-size:.76rem;color:var(--muted)">Blog awal, biodata lengkap, halaman tambahan</div>
+              <div style="font-weight:600;font-size:.88rem"><span data-i18n="pay.addon2.name">✍️ Penulisan Kandungan Tambahan</span> <span style="color:var(--p6)">+RM150</span></div>
+              <div style="font-size:.76rem;color:var(--muted)" data-i18n="pay.addon2.desc">Blog awal, biodata lengkap, halaman tambahan</div>
             </div>
           </label>
           <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
             <input type="checkbox" class="addon" data-price="100" style="accent-color:var(--p5);width:16px;height:16px"/>
             <div>
-              <div style="font-weight:600;font-size:.88rem">🎓 Sesi Latihan Dashboard <span style="color:var(--p6)">+RM100</span></div>
-              <div style="font-size:.76rem;color:var(--muted)">1 jam sesi 1-on-1 cara guna dashboard anda</div>
+              <div style="font-weight:600;font-size:.88rem"><span data-i18n="pay.addon3.name">🎓 Sesi Latihan Dashboard</span> <span style="color:var(--p6)">+RM100</span></div>
+              <div style="font-size:.76rem;color:var(--muted)" data-i18n="pay.addon3.desc">1 jam sesi 1-on-1 cara guna dashboard anda</div>
             </div>
           </label>
         </div>
@@ -89,22 +100,22 @@
       <!-- Order summary -->
       <div class="order-summary" id="summary">
         <div class="order-row">
-          <span>🌐 Website Activation Package</span>
+          <span data-i18n="pay.order.base">🌐 Website Activation Package</span>
           <span id="pkg-price">RM 500</span>
         </div>
         <div id="addon-rows"></div>
         <div class="order-row total">
-          <span>Jumlah Keseluruhan</span>
+          <span data-i18n="pay.order.total">Jumlah Keseluruhan</span>
           <span class="price" id="total-price">RM 500</span>
         </div>
       </div>
 
       <div id="pay-msg"></div>
 
-      <button class="btn btn-primary btn-full btn-lg" id="pay-btn" onclick="startPayment()">
+      <button class="btn btn-primary btn-full btn-lg" id="pay-btn" onclick="startPayment()" data-i18n="pay.btn">
         ⚡ Bayar Sekarang
       </button>
-      <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:12px">
+      <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:12px" data-i18n="pay.secure">
         🔒 Pembayaran selamat melalui ToyyibPay · FPX / DuitNow
       </p>
     </div>
@@ -113,23 +124,23 @@
     <div class="form-card" id="result-view" style="display:none">
       <div class="result-screen active" id="res-success" style="display:none">
         <div class="result-icon">🎉</div>
-        <h2 style="color:#6ee7b7">Pembayaran Berjaya!</h2>
-        <p>Terima kasih! Rekod anda telah dikemaskini. Pasukan SDC akan menghubungi anda tidak lama lagi.</p>
-        <a href="index.html" class="btn btn-secondary">← Kembali ke Laman Utama</a>
+        <h2 style="color:#6ee7b7" data-i18n="pay.success.h2">Pembayaran Berjaya!</h2>
+        <p data-i18n="pay.success.sub">Terima kasih! Rekod anda telah dikemaskini. Pasukan SDC akan menghubungi anda tidak lama lagi.</p>
+        <a href="index.html" class="btn btn-secondary" data-i18n="pay.back">← Kembali ke Laman Utama</a>
       </div>
       <div class="result-screen active" id="res-pending" style="display:none">
         <div class="result-icon">⏳</div>
-        <h2 style="color:#fcd34d">Pembayaran Dalam Proses</h2>
-        <p>Pembayaran anda sedang diproses. Kami akan maklumkan apabila selesai. Terima kasih atas kesabaran anda.</p>
-        <a href="index.html" class="btn btn-secondary">← Kembali ke Laman Utama</a>
+        <h2 style="color:#fcd34d" data-i18n="pay.pending.h2">Pembayaran Dalam Proses</h2>
+        <p data-i18n="pay.pending.sub">Pembayaran anda sedang diproses. Kami akan maklumkan apabila selesai. Terima kasih atas kesabaran anda.</p>
+        <a href="index.html" class="btn btn-secondary" data-i18n="pay.back">← Kembali ke Laman Utama</a>
       </div>
       <div class="result-screen active" id="res-fail" style="display:none">
         <div class="result-icon">❌</div>
-        <h2 style="color:#f87171">Pembayaran Gagal</h2>
-        <p>Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Shahlan untuk bantuan.</p>
+        <h2 style="color:#f87171" data-i18n="pay.fail.h2">Pembayaran Gagal</h2>
+        <p data-i18n="pay.fail.sub">Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Shahlan untuk bantuan.</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="showCheckout()">Cuba Semula</button>
-          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary">💬 Hubungi Shahlan</a>
+          <button class="btn btn-primary" onclick="showCheckout()" data-i18n="pay.fail.retry">Cuba Semula</button>
+          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary" data-i18n="pay.fail.wa">💬 Hubungi Shahlan</a>
         </div>
       </div>
     </div>
@@ -137,6 +148,7 @@
   </div>
 </div>
 
+<script src="i18n.js"></script>
 <script>
   const BASE_PRICE = 500;
   const params = new URLSearchParams(location.search);
@@ -171,29 +183,27 @@
   }
 
   function updateSummary() {
-    const addons= [...document.querySelectorAll('.addon:checked')].map(c => Number(c.dataset.price));
-    const total = BASE_PRICE + addons.reduce((a,b)=>a+b,0);
+    const addons = [...document.querySelectorAll('.addon:checked')].map(c => Number(c.dataset.price));
+    const total  = BASE_PRICE + addons.reduce((a,b) => a+b, 0);
 
-    document.getElementById('pkg-price').textContent  = `RM ${BASE_PRICE.toLocaleString()}`;
-    document.getElementById('total-price').textContent= `RM ${total.toLocaleString()}`;
+    document.getElementById('pkg-price').textContent   = `RM ${BASE_PRICE.toLocaleString()}`;
+    document.getElementById('total-price').textContent = `RM ${total.toLocaleString()}`;
 
     const addonRows = document.getElementById('addon-rows');
-    addonRows.innerHTML = addons.map((p,i) => {
-      const el = [...document.querySelectorAll('.addon:checked')][i];
-      const label = el.closest('label').querySelector('div > div:first-child').textContent.split('+')[0].trim();
-      return `<div class="order-row"><span>${label}</span><span>+RM ${p.toLocaleString()}</span></div>`;
+    addonRows.innerHTML = [...document.querySelectorAll('.addon:checked')].map(el => {
+      const price = Number(el.dataset.price);
+      const nameEl = el.closest('label').querySelector('[data-i18n^="pay.addon"]');
+      const label = nameEl ? nameEl.textContent.trim() : '';
+      return `<div class="order-row"><span>${label}</span><span>+RM ${price.toLocaleString()}</span></div>`;
     }).join('');
-
-    return { pkg, addons, total };
   }
 
-  document.getElementById('pkg-select').addEventListener('change', updateSummary);
   document.querySelectorAll('.addon').forEach(c => c.addEventListener('change', updateSummary));
   updateSummary();
 
   async function startPayment() {
-    const addons= [...document.querySelectorAll('.addon:checked')].map(c => Number(c.dataset.price));
-    const total = BASE_PRICE + addons.reduce((a,b)=>a+b,0);
+    const addons = [...document.querySelectorAll('.addon:checked')].map(c => Number(c.dataset.price));
+    const total  = BASE_PRICE + addons.reduce((a,b) => a+b, 0);
     const btn = document.getElementById('pay-btn');
     const msg = document.getElementById('pay-msg');
 
@@ -207,19 +217,19 @@
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           amount: total, business: bid, owner: bname, id: recId,
-          addons: [...document.querySelectorAll('.addon:checked')].map(c => ({
-            label: c.closest('label').querySelector('div>div').textContent.split('+')[0].trim(),
-            price: Number(c.dataset.price)
-          }))
+          addons: [...document.querySelectorAll('.addon:checked')].map(c => {
+            const nameEl = c.closest('label').querySelector('[data-i18n^="pay.addon"]');
+            return { label: nameEl ? nameEl.textContent.trim() : '', price: Number(c.dataset.price) };
+          })
         })
       });
       const json = await r.json();
-      if (!json.ok || !json.payUrl) throw new Error(json.error || 'Gagal menjana bil');
+      if (!json.ok || !json.payUrl) throw new Error(json.error || t('pay.err.gen'));
       location.href = json.payUrl;
     } catch (err) {
       msg.innerHTML = `<div class="form-msg error">❌ ${err.message}</div>`;
       btn.classList.remove('btn-loading');
-      btn.textContent = '⚡ Bayar Sekarang';
+      btn.textContent = t('pay.btn');
     }
   }
 
@@ -234,6 +244,8 @@
     document.getElementById('result-view').style.display = 'none';
     document.querySelectorAll('.result-screen').forEach(s => s.style.display = 'none');
   }
+
+  initLang();
 </script>
 </body>
 </html>

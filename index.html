@@ -7,30 +7,21 @@
   <meta name="description" content="Shahlan membantu 100 usahawan, koperasi dan organisasi Sarawak aktifkan website profesional mereka. Pakej lengkap dari RM500 sahaja."/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* ── Top marquee banner ── */
     .top-banner { background: linear-gradient(90deg, var(--p2), var(--p4), var(--cyan), var(--p4), var(--p2)); background-size: 300% 100%; animation: bannerShift 6s linear infinite; padding: 10px 0; }
     @keyframes bannerShift { 0%{background-position:0%} 100%{background-position:300%} }
     .top-banner .marquee-wrap { overflow: hidden; mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent); padding: 0; }
     .top-banner .marquee { display: flex; gap: 48px; animation: marqueeSlide 28s linear infinite; width: max-content; }
     .top-banner .marquee-item { display: flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.9); white-space: nowrap; }
     @keyframes marqueeSlide { to { transform: translateX(-50%); } }
-
-    /* ── Nav overrides ── */
     .nav { top: 0; position: sticky; z-index: 100; }
-
-    /* ── Language toggle ── */
     .lang-toggle { display: flex; gap: 2px; background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: 8px; padding: 3px; }
     .lang-btn { background: transparent; border: none; color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .04em; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: all .18s; line-height: 1; }
     .lang-btn.active { background: rgba(139,92,246,.25); color: var(--white); border: 1px solid rgba(139,92,246,.4); }
-
-    /* ── Hero ── */
     .hero-label { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 99px; background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.3); font-size: .8rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--p7); margin-bottom: 28px; }
     .hero-h1 { font-family: var(--font-head); font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
     .hero-h1 .highlight { color: var(--gold); }
     .hero-sub { color: var(--muted); font-size: 1.05rem; line-height: 1.75; max-width: 520px; margin-bottom: 36px; }
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-
-    /* person card */
     .person-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 32px 28px; text-align: center; position: relative; backdrop-filter: blur(12px); box-shadow: var(--glow-md); min-width: 260px; }
     .person-card::before { content: ''; position: absolute; inset: 0; border-radius: var(--r-xl); background: linear-gradient(135deg, rgba(139,92,246,.1), rgba(6,182,212,.06)); pointer-events: none; }
     .person-avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--p3), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 2.8rem; font-weight: 800; font-family: var(--font-head); color: white; margin: 0 auto 16px; box-shadow: var(--glow-md); }
@@ -40,12 +31,8 @@
     .hero-float { position: absolute; background: var(--glass); border: 1px solid var(--glass-border); backdrop-filter: blur(12px); border-radius: var(--r-md); padding: 10px 16px; }
     .hero-float-tl { top: -18px; left: -24px; display: flex; align-items: center; gap: 8px; font-size: .8rem; }
     .hero-float-br { bottom: -18px; right: -18px; font-size: .78rem; text-align: center; }
-
-    /* ── Section label ── */
     .sec-label { display: inline-flex; align-items: center; gap: 8px; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--p6); margin-bottom: 16px; }
     .sec-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--p5); display: block; }
-
-    /* ── Why website ── */
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .why-before { background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.2); border-radius: var(--r-lg); padding: 28px; }
     .why-after  { background: rgba(6,182,212,.06); border: 1px solid rgba(6,182,212,.2); border-radius: var(--r-lg); padding: 28px; }
@@ -54,30 +41,22 @@
     .why-after  h3 { color: var(--cyan); }
     .why-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .why-list li { font-size: .9rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-
-    /* ── 4 pillars ── */
     .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .pillar-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg); padding: 24px 20px; text-align: center; transition: border-color .25s, transform .25s; }
     .pillar-card:hover { border-color: var(--p5); transform: translateY(-4px); }
     .pillar-icon { font-size: 1.8rem; margin-bottom: 12px; }
     .pillar-title { font-family: var(--font-head); font-weight: 700; margin-bottom: 6px; }
     .pillar-desc { font-size: .82rem; color: var(--muted); line-height: 1.5; }
-
-    /* ── Progress bar ── */
     .progress-wrap { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg); padding: 28px 32px; }
     .progress-track { height: 8px; background: rgba(139,92,246,.12); border-radius: 99px; overflow: hidden; margin: 14px 0 8px; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--p5), var(--cyan)); border-radius: 99px; width: 0%; transition: width 1.5s ease; }
     .progress-label { font-size: .85rem; color: var(--muted); }
-
-    /* ── Pricing ── */
     .price-band { background: linear-gradient(135deg, rgba(76,29,149,.35), rgba(6,182,212,.15)); border: 1px solid rgba(139,92,246,.35); border-radius: var(--r-xl); padding: 48px; position: relative; overflow: hidden; }
     .price-band::before { content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(139,92,246,.2), transparent); top: -100px; right: -100px; }
     .price-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); border-radius: 99px; padding: 5px 14px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
     .price-main { font-family: var(--font-head); font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 900; color: var(--gold); line-height: 1; }
     .price-original { font-size: 1rem; color: var(--muted); text-decoration: line-through; display: inline-block; margin-left: 12px; }
     .price-save { display: inline-block; background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); border-radius: 99px; padding: 3px 10px; font-size: .75rem; font-weight: 700; color: #fca5a5; margin-left: 8px; }
-
-    /* ── Features ── */
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .feature-item { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-md); transition: border-color .2s; }
     .feature-item:hover { border-color: var(--p5); }
@@ -85,8 +64,6 @@
     .feature-text strong { display: block; font-size: .88rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
     .feature-text span { font-size: .78rem; color: var(--muted); }
     .feature-new { display: inline-block; background: linear-gradient(90deg, var(--p4), var(--cyan)); border-radius: 99px; padding: 2px 8px; font-size: .65rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: white; margin-left: 6px; vertical-align: middle; }
-
-    /* ── Portfolio ── */
     .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .portfolio-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg); overflow: hidden; transition: transform .25s, border-color .25s; cursor: pointer; }
     .portfolio-card:hover { transform: translateY(-5px); border-color: var(--p5); }
@@ -94,38 +71,26 @@
     .portfolio-info { padding: 16px; }
     .portfolio-cat { font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--p6); margin-bottom: 4px; }
     .portfolio-name { font-family: var(--font-head); font-weight: 700; font-size: .95rem; }
-
-    /* ── Steps ── */
     .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; }
     .steps-grid::before { content: ''; position: absolute; top: 30px; left: calc(16.66% + 20px); right: calc(16.66% + 20px); height: 1px; background: linear-gradient(90deg, var(--p5), var(--cyan)); opacity: .3; }
     .step-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg); padding: 28px 24px; text-align: center; }
     .step-num-circle { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--p4), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; margin: 0 auto 16px; box-shadow: var(--glow-sm); }
     .step-title { font-family: var(--font-head); font-weight: 700; margin-bottom: 8px; }
     .step-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
-
-    /* ── About ── */
     .about-grid-new { display: grid; grid-template-columns: 1fr 1.6fr; gap: 60px; align-items: center; }
     .about-photo-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 40px 32px; text-align: center; box-shadow: var(--glow-md); }
     .about-avatar-big { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, var(--p3), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 3.2rem; font-weight: 800; font-family: var(--font-head); margin: 0 auto 16px; box-shadow: 0 0 40px rgba(139,92,246,.4); }
     .about-tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
     .tag-pill { padding: 5px 12px; background: rgba(139,92,246,.1); border: 1px solid rgba(139,92,246,.25); border-radius: 99px; font-size: .78rem; color: var(--p7); }
-
-    /* ── Quote ── */
     .quote-support { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
     .big-quote { font-family: var(--font-head); font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 700; line-height: 1.4; color: var(--white); margin-bottom: 16px; }
     .quote-attr { font-size: .85rem; color: var(--muted); }
-
-    /* ── CTA footer ── */
     .cta-dark { background: linear-gradient(135deg, var(--bg2), var(--p1)); border-top: 1px solid var(--glass-border); padding: 80px 0; text-align: center; }
     .cta-dark h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; line-height: 1.2; margin-bottom: 12px; }
     .cta-dark p { color: var(--muted); font-size: 1rem; margin-bottom: 32px; }
-
-    /* ── SDC badge section ── */
     .sdc-badge-section { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 36px 40px; display: flex; align-items: center; gap: 28px; }
     .sdc-icon { font-size: 3rem; }
     .sdc-badge-section p { font-size: .9rem; color: var(--muted); line-height: 1.6; margin-top: 6px; }
-
-    /* ── Responsive ── */
     @media (max-width: 900px) {
       .pillars { grid-template-columns: repeat(2, 1fr); }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
@@ -154,14 +119,14 @@
 <div class="top-banner">
   <div class="marquee-wrap">
     <div class="marquee">
-      <div class="marquee-item">✦ Membantu 100 Kehadiran Digital Baru Di Sarawak</div>
-      <div class="marquee-item">✦ Website Profesional Dari RM500 Sahaja</div>
-      <div class="marquee-item">✦ Domain · Hosting · Dashboard Admin Termasuk</div>
-      <div class="marquee-item">✦ 4 Bahasa: BM · EN · 中文 · Iban</div>
-      <div class="marquee-item">✦ Membantu 100 Kehadiran Digital Baru Di Sarawak</div>
-      <div class="marquee-item">✦ Website Profesional Dari RM500 Sahaja</div>
-      <div class="marquee-item">✦ Domain · Hosting · Dashboard Admin Termasuk</div>
-      <div class="marquee-item">✦ 4 Bahasa: BM · EN · 中文 · Iban</div>
+      <div class="marquee-item">✦ <span data-i18n="banner.1">Membantu 100 Kehadiran Digital Baru Di Sarawak</span></div>
+      <div class="marquee-item">✦ <span data-i18n="banner.2">Website Profesional Dari RM500 Sahaja</span></div>
+      <div class="marquee-item">✦ <span data-i18n="banner.3">Domain · Hosting · Dashboard Admin Termasuk</span></div>
+      <div class="marquee-item">✦ <span data-i18n="banner.4">4 Bahasa: BM · EN · 中文 · Iban</span></div>
+      <div class="marquee-item">✦ <span data-i18n="banner.1">Membantu 100 Kehadiran Digital Baru Di Sarawak</span></div>
+      <div class="marquee-item">✦ <span data-i18n="banner.2">Website Profesional Dari RM500 Sahaja</span></div>
+      <div class="marquee-item">✦ <span data-i18n="banner.3">Domain · Hosting · Dashboard Admin Termasuk</span></div>
+      <div class="marquee-item">✦ <span data-i18n="banner.4">4 Bahasa: BM · EN · 中文 · Iban</span></div>
     </div>
   </div>
 </div>
@@ -180,10 +145,10 @@
     <li><a href="#sokongan" data-i18n="nav.support">Sokongan</a></li>
   </ul>
   <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLang('BM')">BM</button>
-    <button class="lang-btn" onclick="setLang('EN')">EN</button>
-    <button class="lang-btn" onclick="setLang('ZH')">中</button>
-    <button class="lang-btn" onclick="setLang('IB')">IB</button>
+    <button class="lang-btn active" data-lang="BM" onclick="setLang('BM')">BM</button>
+    <button class="lang-btn" data-lang="EN" onclick="setLang('EN')">EN</button>
+    <button class="lang-btn" data-lang="ZH" onclick="setLang('ZH')">中</button>
+    <button class="lang-btn" data-lang="IB" onclick="setLang('IB')">IB</button>
   </div>
   <a href="activate.html" class="nav-cta" data-i18n="nav.cta">Aktifkan Website Saya →</a>
 </nav>
@@ -216,19 +181,19 @@
         <div class="person-card reveal">
           <div class="person-avatar">SH</div>
           <div class="person-name">Shahlan</div>
-          <div class="person-title">Sarawak Digital Champion · 2026 Candidate</div>
-          <div class="person-verified">✦ SDC Verified Candidate</div>
+          <div class="person-title" data-i18n="hero.card.title">Sarawak Digital Champion · 2026 Candidate</div>
+          <div class="person-verified" data-i18n="hero.card.verified">✦ SDC Verified Candidate</div>
         </div>
         <div class="hero-float hero-float-tl">
           <span style="font-size:1.1rem">🏆</span>
           <div>
-            <strong style="display:block;font-size:.8rem">SDC 2026</strong>
-            <span style="font-size:.72rem;color:var(--muted)">Candidate</span>
+            <strong style="display:block;font-size:.8rem" data-i18n="hero.badge.label">SDC 2026</strong>
+            <span style="font-size:.72rem;color:var(--muted)" data-i18n="hero.badge.sub">Candidate</span>
           </div>
         </div>
         <div class="hero-float hero-float-br">
           <strong style="display:block;font-size:.85rem;color:var(--gold)">RM500</strong>
-          <span style="font-size:.72rem;color:var(--muted)">Per Website</span>
+          <span style="font-size:.72rem;color:var(--muted)" data-i18n="hero.price.label">Per Website</span>
         </div>
       </div>
 
@@ -240,34 +205,36 @@
 <section class="section section-pad" id="misi">
   <div class="container">
     <div style="text-align:center;margin-bottom:48px">
-      <div class="sec-label">Kenapa Ini Penting</div>
-      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;line-height:1.2" class="reveal">
+      <div class="sec-label" data-i18n="why.label">Kenapa Ini Penting</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;line-height:1.2" class="reveal"
+          data-i18n-html="why.h2">
         Perniagaan tanpa website<br/><span class="grad-text-purple">adalah perniagaan yang tidak kelihatan.</span>
       </h2>
-      <p style="color:var(--muted);max-width:560px;margin:16px auto 0;line-height:1.7" class="reveal">
+      <p style="color:var(--muted);max-width:560px;margin:16px auto 0;line-height:1.7" class="reveal"
+         data-i18n="why.sub">
         Ramai usahawan bergantung sepenuhnya pada media sosial. Tapi pelanggan hari ini mencari lebih dari itu.
       </p>
     </div>
 
     <div class="why-grid reveal">
       <div class="why-before">
-        <h3>❌ Tanpa Website</h3>
+        <h3 data-i18n="why.before.title">❌ Tanpa Website</h3>
         <ul class="why-list">
-          <li><span>✗</span> Bergantung sepenuhnya pada Facebook / TikTok</li>
-          <li><span>✗</span> Tiada profil syarikat yang profesional</li>
-          <li><span>✗</span> Pelanggan sukar percaya tanpa bukti online</li>
-          <li><span>✗</span> Hilang pelanggan kepada pesaing yang ada website</li>
-          <li><span>✗</span> Tiada kawalan ke atas imej perniagaan anda</li>
+          <li><span>✗</span> <span data-i18n="why.before.1">Bergantung sepenuhnya pada Facebook / TikTok</span></li>
+          <li><span>✗</span> <span data-i18n="why.before.2">Tiada profil syarikat yang profesional</span></li>
+          <li><span>✗</span> <span data-i18n="why.before.3">Pelanggan sukar percaya tanpa bukti online</span></li>
+          <li><span>✗</span> <span data-i18n="why.before.4">Hilang pelanggan kepada pesaing yang ada website</span></li>
+          <li><span>✗</span> <span data-i18n="why.before.5">Tiada kawalan ke atas imej perniagaan anda</span></li>
         </ul>
       </div>
       <div class="why-after">
-        <h3>✓ Dengan Website</h3>
+        <h3 data-i18n="why.after.title">✓ Dengan Website</h3>
         <ul class="why-list">
-          <li><span style="color:var(--cyan)">✓</span> Profil rasmi perniagaan yang professional</li>
-          <li><span style="color:var(--cyan)">✓</span> Ditemui di Google bila pelanggan cari</li>
-          <li><span style="color:var(--cyan)">✓</span> Meningkatkan keyakinan & kredibiliti</li>
-          <li><span style="color:var(--cyan)">✓</span> Boleh kemaskini kandungan bila-bila masa</li>
-          <li><span style="color:var(--cyan)">✓</span> Buka 24 jam, 7 hari seminggu</li>
+          <li><span style="color:var(--cyan)">✓</span> <span data-i18n="why.after.1">Profil rasmi perniagaan yang profesional</span></li>
+          <li><span style="color:var(--cyan)">✓</span> <span data-i18n="why.after.2">Ditemui di Google bila pelanggan cari</span></li>
+          <li><span style="color:var(--cyan)">✓</span> <span data-i18n="why.after.3">Meningkatkan keyakinan &amp; kredibiliti</span></li>
+          <li><span style="color:var(--cyan)">✓</span> <span data-i18n="why.after.4">Boleh kemaskini kandungan bila-bila masa</span></li>
+          <li><span style="color:var(--cyan)">✓</span> <span data-i18n="why.after.5">Buka 24 jam, 7 hari seminggu</span></li>
         </ul>
       </div>
     </div>
@@ -278,11 +245,13 @@
 <section class="section section-pad" style="background:rgba(139,92,246,.03);border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border)">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px">
-      <div class="sec-label">Misi Shahlan</div>
-      <h2 style="font-family:var(--font-head);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;line-height:1.2" class="reveal">
+      <div class="sec-label" data-i18n="mission.label">Misi Shahlan</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;line-height:1.2" class="reveal"
+          data-i18n-html="mission.h2">
         Memperkasa Sarawak.<br/><span class="grad-text">Secara Digital. Bersama-sama.</span>
       </h2>
-      <p style="color:var(--muted);max-width:520px;margin:14px auto 0;line-height:1.7" class="reveal">
+      <p style="color:var(--muted);max-width:520px;margin:14px auto 0;line-height:1.7" class="reveal"
+         data-i18n="mission.sub">
         Satu gerakan untuk membina masa depan digital yang lebih kuat — menginspirasi komuniti, memperkasa usahawan, dan mengaktifkan perniagaan di seluruh Sarawak.
       </p>
     </div>
@@ -290,23 +259,23 @@
     <div class="pillars reveal">
       <div class="pillar-card">
         <div class="pillar-icon">🌱</div>
-        <div class="pillar-title">Inspirasi</div>
-        <div class="pillar-desc">Memotivasi komuniti untuk merangkul peluang digital.</div>
+        <div class="pillar-title" data-i18n="mission.p1.title">Inspirasi</div>
+        <div class="pillar-desc" data-i18n="mission.p1.desc">Memotivasi komuniti untuk merangkul peluang digital.</div>
       </div>
       <div class="pillar-card">
         <div class="pillar-icon">⚡</div>
-        <div class="pillar-title">Perkasa</div>
-        <div class="pillar-desc">Melengkapkan usahawan dengan alatan dan pengetahuan yang betul.</div>
+        <div class="pillar-title" data-i18n="mission.p2.title">Perkasa</div>
+        <div class="pillar-desc" data-i18n="mission.p2.desc">Melengkapkan usahawan dengan alatan dan pengetahuan yang betul.</div>
       </div>
       <div class="pillar-card">
         <div class="pillar-icon">🚀</div>
-        <div class="pillar-title">Aktifkan</div>
-        <div class="pillar-desc">Memacu kehadiran digital yang nyata untuk perniagaan tempatan.</div>
+        <div class="pillar-title" data-i18n="mission.p3.title">Aktifkan</div>
+        <div class="pillar-desc" data-i18n="mission.p3.desc">Memacu kehadiran digital yang nyata untuk perniagaan tempatan.</div>
       </div>
       <div class="pillar-card">
         <div class="pillar-icon">🌍</div>
-        <div class="pillar-title">Impak</div>
-        <div class="pillar-desc">Mengukuhkan ekonomi digital Sarawak, satu perniagaan pada satu masa.</div>
+        <div class="pillar-title" data-i18n="mission.p4.title">Impak</div>
+        <div class="pillar-desc" data-i18n="mission.p4.desc">Mengukuhkan ekonomi digital Sarawak, satu perniagaan pada satu masa.</div>
       </div>
     </div>
 
@@ -314,15 +283,14 @@
     <div class="progress-wrap reveal" style="margin-top:40px">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <div>
-          <span style="font-family:var(--font-head);font-size:1.6rem;font-weight:800;color:var(--p6)" id="progress-count">0</span>
-          <span style="font-size:.9rem;color:var(--muted)"> daripada 100 website telah diaktifkan. Anda boleh jadi seterusnya.</span>
+          <span style="font-family:var(--font-head);font-size:1.6rem;font-weight:800;color:var(--p6)" id="progress-count">0</span><span style="font-size:.9rem;color:var(--muted)" data-i18n="progress.suffix"> daripada 100 website telah diaktifkan. Anda boleh jadi seterusnya.</span>
         </div>
-        <div style="font-size:.8rem;color:var(--muted)">Sasaran: 100 Website Activation</div>
+        <div style="font-size:.8rem;color:var(--muted)" data-i18n="progress.target">Sasaran: 100 Website Activation</div>
       </div>
       <div class="progress-track">
         <div class="progress-fill" id="progress-fill"></div>
       </div>
-      <div class="progress-label">Setiap website yang diaktifkan memperkukuhkan ekonomi digital Sarawak.</div>
+      <div class="progress-label" data-i18n="progress.sub">Setiap website yang diaktifkan memperkukuhkan ekonomi digital Sarawak.</div>
     </div>
   </div>
 </section>
@@ -331,24 +299,29 @@
 <section class="section section-pad" id="pakej">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px">
-      <div class="sec-label">Digital Presence Initiative · 100 Perniagaan Pertama</div>
-      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;line-height:1.2" class="reveal">
+      <div class="sec-label" data-i18n="price.label">Digital Presence Initiative · 100 Perniagaan Pertama</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;line-height:1.2" class="reveal"
+          data-i18n-html="price.h2">
         Aktifkan website anda untuk<br/><span style="color:var(--gold)">RM500</span>
       </h2>
     </div>
 
     <div class="price-band reveal">
-      <div class="price-eyebrow">✦ Digital Presence Initiative · 100 Perniagaan Pertama</div>
+      <div class="price-eyebrow" data-i18n="price.band.eyebrow">✦ Digital Presence Initiative · 100 Perniagaan Pertama</div>
       <div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:8px">
         <div class="price-main">RM500</div>
-        <div class="price-original">Biasa RM1,380</div>
-        <div class="price-save">Jimat 64%</div>
+        <div class="price-original" data-i18n="price.band.original">Biasa RM1,380</div>
+        <div class="price-save" data-i18n="price.band.save">Jimat 64%</div>
       </div>
-      <p style="color:var(--muted);max-width:480px;margin-bottom:28px;line-height:1.7">
+      <p style="color:var(--muted);max-width:480px;margin-bottom:28px;line-height:1.7" data-i18n="price.band.sub">
         Pengaktifan tidak perlu mahal. Harga ini membolehkan lebih ramai usahawan lokal memiliki platform digital sendiri.
       </p>
-      <a href="activate.html" class="btn btn-primary btn-lg">Tuntut Pengaktifan Anda →</a>
-      <div style="margin-top:16px;font-size:.82rem;color:var(--muted)">✓ Bayaran sekali sahaja &nbsp;·&nbsp; ✓ Tiada yuran bulanan &nbsp;·&nbsp; ✓ Domain & Hosting 1 Tahun Termasuk</div>
+      <a href="activate.html" class="btn btn-primary btn-lg" data-i18n="price.band.cta">Tuntut Pengaktifan Anda →</a>
+      <div style="margin-top:16px;font-size:.82rem;color:var(--muted)">
+        <span data-i18n="price.note1">✓ Bayaran sekali sahaja</span> &nbsp;·&nbsp;
+        <span data-i18n="price.note2">✓ Tiada yuran bulanan</span> &nbsp;·&nbsp;
+        <span data-i18n="price.note3">✓ Domain &amp; Hosting 1 Tahun Termasuk</span>
+      </div>
     </div>
   </div>
 </section>
@@ -357,11 +330,12 @@
 <section class="section section-pad" style="padding-top:0">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px">
-      <div class="sec-label">Apa Yang Anda Dapat</div>
-      <h2 style="font-family:var(--font-head);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800" class="reveal">
+      <div class="sec-label" data-i18n="features.label">Apa Yang Anda Dapat</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800" class="reveal"
+          data-i18n="features.h2">
         Satu pakej lengkap. Standard kami untuk setiap website.
       </h2>
-      <p style="color:var(--muted);margin-top:10px;font-size:.9rem" class="reveal">
+      <p style="color:var(--muted);margin-top:10px;font-size:.9rem" class="reveal" data-i18n="features.sub">
         Ini penanda aras kami — anda boleh nilai kualiti kerja kami sebelum mempercayai kami dengan perniagaan anda.
       </p>
     </div>
@@ -370,106 +344,106 @@
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Website Perniagaan Profesional</strong>
-          <span>Dibina khusus mengikut matlamat perniagaan anda.</span>
+          <strong data-i18n="feat.1.name">Website Perniagaan Profesional</strong>
+          <span data-i18n="feat.1.desc">Dibina khusus mengikut matlamat perniagaan anda.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Reka Bentuk Mobile Responsive</strong>
-          <span>Kelihatan menarik di setiap peranti.</span>
+          <strong data-i18n="feat.2.name">Reka Bentuk Mobile Responsive</strong>
+          <span data-i18n="feat.2.desc">Kelihatan menarik di setiap peranti.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Butang WhatsApp Click-to-Chat</strong>
-          <span>Pelanggan terus hubungi anda dengan satu klik.</span>
+          <strong data-i18n="feat.3.name">Butang WhatsApp Click-to-Chat</strong>
+          <span data-i18n="feat.3.desc">Pelanggan terus hubungi anda dengan satu klik.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Borang Kenalan &amp; Pertanyaan</strong>
-          <span>Leads terus masuk ke inbox anda.</span>
+          <strong data-i18n="feat.4.name">Borang Kenalan &amp; Pertanyaan</strong>
+          <span data-i18n="feat.4.desc">Leads terus masuk ke inbox anda.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Integrasi Google Map</strong>
-          <span>Lokasi perniagaan anda dipaparkan di website.</span>
+          <strong data-i18n="feat.5.name">Integrasi Google Map</strong>
+          <span data-i18n="feat.5.desc">Lokasi perniagaan anda dipaparkan di website.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Nama Domain (1 Tahun)</strong>
-          <span>Alamat .com atau .my anda sendiri.</span>
+          <strong data-i18n="feat.6.name">Nama Domain (1 Tahun)</strong>
+          <span data-i18n="feat.6.desc">Alamat .com atau .my anda sendiri.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Hosting (1 Tahun)</strong>
-          <span>Selamat dan boleh dipercayai, kami uruskan.</span>
+          <strong data-i18n="feat.7.name">Hosting (1 Tahun)</strong>
+          <span data-i18n="feat.7.desc">Selamat dan boleh dipercayai, kami uruskan.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Keselamatan SSL</strong>
-          <span>Padlock https:// yang dipercayai pelanggan.</span>
+          <strong data-i18n="feat.8.name">Keselamatan SSL</strong>
+          <span data-i18n="feat.8.desc">Padlock https:// yang dipercayai pelanggan.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Persediaan SEO Asas</strong>
-          <span>Diindeks Google, bersedia untuk ditemui.</span>
+          <strong data-i18n="feat.9.name">Persediaan SEO Asas</strong>
+          <span data-i18n="feat.9.desc">Diindeks Google, bersedia untuk ditemui.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Halaman Cepat Memuatkan</strong>
-          <span>Pengalaman lebih baik, hasil lebih baik.</span>
+          <strong data-i18n="feat.10.name">Halaman Cepat Memuatkan</strong>
+          <span data-i18n="feat.10.desc">Pengalaman lebih baik, hasil lebih baik.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Sokongan 4 Bahasa</strong>
-          <span>BM · EN · 中文 · Iban</span>
+          <strong data-i18n="feat.11.name">Sokongan 4 Bahasa</strong>
+          <span data-i18n="feat.11.desc">BM · EN · 中文 · Iban</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Penulisan Salinan Profesional</strong>
-          <span>Jelas, persuasif, fokus kepada perniagaan.</span>
+          <strong data-i18n="feat.12.name">Penulisan Salinan Profesional</strong>
+          <span data-i18n="feat.12.desc">Jelas, persuasif, fokus kepada perniagaan.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Dashboard Admin Mudah <span class="feature-new">BARU</span></strong>
-          <span>Edit kandungan sendiri, tanpa kod.</span>
+          <strong><span data-i18n="feat.13.name">Dashboard Admin Mudah</span> <span class="feature-new">BARU</span></strong>
+          <span data-i18n="feat.13.desc">Edit kandungan sendiri, tanpa kod.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Modul Galeri Foto <span class="feature-new">BARU</span></strong>
-          <span>Pamerkan produk dan perkhidmatan anda.</span>
+          <strong><span data-i18n="feat.14.name">Modul Galeri Foto</span> <span class="feature-new">BARU</span></strong>
+          <span data-i18n="feat.14.desc">Pamerkan produk dan perkhidmatan anda.</span>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-check">✓</div>
         <div class="feature-text">
-          <strong>Modul Promosi <span class="feature-new">BARU</span></strong>
-          <span>Tonjolkan tawaran dan promosi terkini anda.</span>
+          <strong><span data-i18n="feat.15.name">Modul Promosi</span> <span class="feature-new">BARU</span></strong>
+          <span data-i18n="feat.15.desc">Tonjolkan tawaran dan promosi terkini anda.</span>
         </div>
       </div>
     </div>
@@ -480,8 +454,9 @@
 <section class="section section-pad" id="cara-kerja" style="background:rgba(139,92,246,.03);border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border)">
   <div class="container">
     <div style="text-align:center;margin-bottom:48px">
-      <div class="sec-label">Cara Kerja</div>
-      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800" class="reveal">
+      <div class="sec-label" data-i18n="how.label">Cara Kerja</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800" class="reveal"
+          data-i18n-html="how.h2">
         Tiga langkah dari pendaftaran<br/>ke website yang anda kawal.
       </h2>
     </div>
@@ -489,18 +464,18 @@
     <div class="steps-grid">
       <div class="step-card reveal">
         <div class="step-num-circle">1</div>
-        <div class="step-title">Daftar dalam minit</div>
-        <p class="step-desc">Beritahu kami tentang perniagaan anda, masukkan link anda, hantar fail anda. AI kami akan membaca perniagaan anda dan merangka ringkasan seketika.</p>
+        <div class="step-title" data-i18n="how.1.title">Daftar dalam minit</div>
+        <p class="step-desc" data-i18n="how.1.desc">Beritahu kami tentang perniagaan anda, masukkan link anda, hantar fail anda. AI kami akan membaca perniagaan anda dan merangka ringkasan seketika.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-num-circle">2</div>
-        <div class="step-title">Kami bina dengan AI + kemahiran manusia</div>
-        <p class="step-desc">Profil anda memandu pipeline pembinaan hibrid kami. Kami tulis salinan, reka bentuk halaman, dan sediakan website anda untuk semakan.</p>
+        <div class="step-title" data-i18n="how.2.title">Kami bina dengan AI + kemahiran manusia</div>
+        <p class="step-desc" data-i18n="how.2.desc">Profil anda memandu pipeline pembinaan hibrid kami. Kami tulis salinan, reka bentuk halaman, dan sediakan website anda untuk semakan.</p>
       </div>
       <div class="step-card reveal">
         <div class="step-num-circle">3</div>
-        <div class="step-title">Go live, dalam kawalan anda</div>
-        <p class="step-desc">Pratonton, luluskan, dan terbit. Anda mendapat dashboard untuk edit kandungan dan buat kemaskini sendiri, bila-bila masa.</p>
+        <div class="step-title" data-i18n="how.3.title">Go live, dalam kawalan anda</div>
+        <p class="step-desc" data-i18n="how.3.desc">Pratonton, luluskan, dan terbit. Anda mendapat dashboard untuk edit kandungan dan buat kemaskini sendiri, bila-bila masa.</p>
       </div>
     </div>
   </div>
@@ -510,54 +485,56 @@
 <section class="section section-pad" id="portfolio">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px">
-      <div class="sec-label">Portfolio Website</div>
-      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800" class="reveal">
+      <div class="sec-label" data-i18n="portfolio.label">Portfolio Website</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800" class="reveal"
+          data-i18n="portfolio.h2">
         Website yang telah diaktifkan
       </h2>
-      <p style="color:var(--muted);margin-top:10px" class="reveal">Contoh website yang dibina untuk pelbagai kategori perniagaan.</p>
+      <p style="color:var(--muted);margin-top:10px" class="reveal" data-i18n="portfolio.sub">Contoh website yang dibina untuk pelbagai kategori perniagaan.</p>
     </div>
 
     <div class="portfolio-grid reveal">
       <div class="portfolio-card">
         <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(6,182,212,.1))">🍧</div>
         <div class="portfolio-info">
-          <div class="portfolio-cat">Makanan &amp; Minuman</div>
+          <div class="portfolio-cat" data-i18n="portfolio.cat.fnb">Makanan &amp; Minuman</div>
           <div class="portfolio-name">Snow Buko Desserts</div>
         </div>
       </div>
       <div class="portfolio-card">
         <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(239,68,68,.08))">✂️</div>
         <div class="portfolio-info">
-          <div class="portfolio-cat">Perkhidmatan</div>
+          <div class="portfolio-cat" data-i18n="portfolio.cat.service">Perkhidmatan</div>
           <div class="portfolio-name">Hit Barber Astana</div>
         </div>
       </div>
       <div class="portfolio-card">
         <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(6,182,212,.12),rgba(139,92,246,.1))">🚗</div>
         <div class="portfolio-info">
-          <div class="portfolio-cat">Automotif</div>
+          <div class="portfolio-cat" data-i18n="portfolio.cat.auto">Automotif</div>
           <div class="portfolio-name">Kam Motorworld</div>
         </div>
       </div>
       <div class="portfolio-card">
         <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(236,72,153,.12),rgba(139,92,246,.1))">🌸</div>
         <div class="portfolio-info">
-          <div class="portfolio-cat">Kecantikan &amp; Wellness</div>
+          <div class="portfolio-cat" data-i18n="portfolio.cat.beauty">Kecantikan &amp; Wellness</div>
           <div class="portfolio-name">Clik Fragrance</div>
         </div>
       </div>
       <div class="portfolio-card">
         <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(6,182,212,.1))">🌾</div>
         <div class="portfolio-info">
-          <div class="portfolio-cat">Pertanian &amp; Agro</div>
+          <div class="portfolio-cat" data-i18n="portfolio.cat.agro">Pertanian &amp; Agro</div>
           <div class="portfolio-name">SJF Farm</div>
         </div>
       </div>
       <div class="portfolio-card" style="background:rgba(139,92,246,.06);border-style:dashed;display:flex;align-items:center;justify-content:center;min-height:190px">
         <div style="text-align:center;padding:20px">
           <div style="font-size:2rem;margin-bottom:8px">+</div>
-          <div style="font-size:.88rem;color:var(--muted)">Perniagaan anda boleh<br/>jadi seterusnya</div>
-          <a href="activate.html" style="display:inline-block;margin-top:12px;font-size:.8rem;color:var(--p6);font-weight:600">Aktifkan sekarang →</a>
+          <div style="font-size:.88rem;color:var(--muted);white-space:pre-line" data-i18n="portfolio.add.text">Perniagaan anda boleh
+jadi seterusnya</div>
+          <a href="activate.html" style="display:inline-block;margin-top:12px;font-size:.8rem;color:var(--p6);font-weight:600" data-i18n="portfolio.add.cta">Aktifkan sekarang →</a>
         </div>
       </div>
     </div>
@@ -572,29 +549,30 @@
         <div class="about-photo-card reveal">
           <div class="about-avatar-big">SH</div>
           <div style="font-family:var(--font-head);font-size:1.25rem;font-weight:800;margin-bottom:4px">Shahlan</div>
-          <div style="font-size:.82rem;color:var(--gold);font-weight:600;letter-spacing:.04em;text-transform:uppercase">SDC 2026 Candidate</div>
+          <div style="font-size:.82rem;color:var(--gold);font-weight:600;letter-spacing:.04em;text-transform:uppercase" data-i18n="about.card.title">SDC 2026 Candidate</div>
           <div class="about-tags-wrap" style="justify-content:center">
-            <span class="tag-pill">⚡ Transformasi Digital</span>
-            <span class="tag-pill">🌍 Sarawak</span>
-            <span class="tag-pill">🤝 100 Aktivasi</span>
+            <span class="tag-pill" data-i18n="about.tag1">⚡ Transformasi Digital</span>
+            <span class="tag-pill" data-i18n="about.tag2">🌍 Sarawak</span>
+            <span class="tag-pill" data-i18n="about.tag3">🤝 100 Aktivasi</span>
           </div>
         </div>
       </div>
       <div class="reveal">
-        <div class="sec-label">Mengenai Shahlan</div>
-        <h2 style="font-family:var(--font-head);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:20px">
+        <div class="sec-label" data-i18n="about.label">Mengenai Shahlan</div>
+        <h2 style="font-family:var(--font-head);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:20px"
+            data-i18n="about.h2">
           Seorang penggiat transformasi digital yang percaya teknologi harus membantu lebih ramai.
         </h2>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:16px">
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:16px" data-i18n="about.p1">
           Shahlan merupakan Sarawak Digital Champion 2026 Candidate — seorang individu yang aktif dalam inisiatif digitalisasi perniagaan tempatan di Sarawak.
         </p>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:16px">
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:16px" data-i18n="about.p2">
           Melalui misi ini, beliau membantu usahawan, koperasi, NGO dan organisasi komuniti mengaktifkan kehadiran digital yang lebih profesional melalui website perniagaan — mengurangkan kebergantungan kepada media sosial semata-mata.
         </p>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:28px">
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:28px" data-i18n="about.p3">
           Beliau percaya bahawa setiap perniagaan berhak ditemui oleh pelanggan yang mencari mereka.
         </p>
-        <a href="activate.html" class="btn btn-primary">Aktifkan Website Perniagaan Anda →</a>
+        <a href="activate.html" class="btn btn-primary" data-i18n="about.cta">Aktifkan Website Perniagaan Anda →</a>
       </div>
     </div>
   </div>
@@ -606,11 +584,11 @@
     <div class="sdc-badge-section reveal">
       <div class="sdc-icon">🏆</div>
       <div style="flex:1">
-        <h3 style="font-family:var(--font-head);font-weight:800;font-size:1.15rem;margin-bottom:6px">Sarawak Digital Champion 2026</h3>
-        <p>Shahlan merupakan salah seorang calon bagi program Sarawak Digital Champion 2026 — satu program yang memperkasa individu untuk mendorong transformasi digital dalam komuniti mereka.</p>
+        <h3 style="font-family:var(--font-head);font-weight:800;font-size:1.15rem;margin-bottom:6px" data-i18n="sdc.title">Sarawak Digital Champion 2026</h3>
+        <p data-i18n="sdc.desc">Shahlan merupakan salah seorang calon bagi program Sarawak Digital Champion 2026 — satu program yang memperkasa individu untuk mendorong transformasi digital dalam komuniti mereka.</p>
       </div>
       <div style="flex-shrink:0">
-        <a href="#" class="btn btn-secondary" style="font-size:.85rem">Laman Rasmi SDC 2026 →</a>
+        <a href="#" class="btn btn-secondary" style="font-size:.85rem" data-i18n="sdc.cta">Laman Rasmi SDC 2026 →</a>
       </div>
     </div>
   </div>
@@ -622,21 +600,21 @@
     <div class="quote-support">
       <div class="reveal">
         <div style="font-size:3rem;color:var(--p5);line-height:1;margin-bottom:16px">"</div>
-        <div class="big-quote">
+        <div class="big-quote" data-i18n-html="quote.text">
           "Saya telah bertemu ramai pemilik perniagaan dengan produk dan kisah yang luar biasa. Mereka tidak memerlukan perniagaan yang lebih baik. Mereka hanya perlu <em style="color:var(--p6)">ditemui</em>."
         </div>
-        <div class="quote-attr">— Shahlan, Sarawak Digital Champion 2026 Candidate</div>
+        <div class="quote-attr" data-i18n="quote.attr">— Shahlan, Sarawak Digital Champion 2026 Candidate</div>
       </div>
       <div class="reveal">
-        <h3 style="font-family:var(--font-head);font-size:1.3rem;font-weight:800;margin-bottom:10px">Sokong Perjalanan Ini</h3>
-        <p style="color:var(--muted);line-height:1.7;margin-bottom:24px">
+        <h3 style="font-family:var(--font-head);font-size:1.3rem;font-weight:800;margin-bottom:10px" data-i18n="support.title">Sokong Perjalanan Ini</h3>
+        <p style="color:var(--muted);line-height:1.7;margin-bottom:24px" data-i18n="support.sub">
           Setiap website yang diaktifkan mengukuhkan ekonomi digital Sarawak. Jika anda percaya usahawan tempatan berhak ditemui, ikuti bersama kami.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a href="activate.html" class="btn btn-primary">Aktifkan Perniagaan Saya</a>
-          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary">Kongsi Misi Ini</a>
+          <a href="activate.html" class="btn btn-primary" data-i18n="support.cta1">Aktifkan Perniagaan Saya</a>
+          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary" data-i18n="support.cta2">Kongsi Misi Ini</a>
         </div>
-        <div style="margin-top:16px;font-size:.8rem;color:var(--muted2)">
+        <div style="margin-top:16px;font-size:.8rem;color:var(--muted2)" data-i18n="support.hashtags">
           #SarawakDigitalChampion &nbsp;·&nbsp; #KamekDigital &nbsp;·&nbsp; #Sarawak100Web
         </div>
       </div>
@@ -647,11 +625,11 @@
 <!-- Final CTA -->
 <section class="cta-dark">
   <div class="container">
-    <h2 class="reveal">
+    <h2 class="reveal" data-i18n-html="cta.h2">
       Masa depan anda,<br/><span class="grad-text">berdaya digital.</span>
     </h2>
-    <p class="reveal">Jangan biarkan pelanggan mencari anda tetapi tidak dapat menemui anda. Pengaktifan mengambil masa beberapa minit untuk bermula.</p>
-    <a href="activate.html" class="btn btn-primary btn-lg reveal">Aktifkan Website Saya Sekarang →</a>
+    <p class="reveal" data-i18n="cta.sub">Jangan biarkan pelanggan mencari anda tetapi tidak dapat menemui anda. Pengaktifan mengambil masa beberapa minit untuk bermula.</p>
+    <a href="activate.html" class="btn btn-primary btn-lg reveal" data-i18n="cta.btn">Aktifkan Website Saya Sekarang →</a>
   </div>
 </section>
 
@@ -659,11 +637,12 @@
 <footer>
   <div class="container">
     <div class="footer-logo">◆ Shahlan <span style="color:var(--p6)">SDC</span></div>
-    <p>Sarawak Digital Champion 2026 Candidate · Membantu 100 Perniagaan Go Digital</p>
-    <p style="margin-top:8px;font-size:.8rem;color:var(--muted2)">© 2026 Shahlan · <a href="https://wa.me/60187874797" style="color:var(--p6)">WhatsApp</a> · <a href="activate.html" style="color:var(--p6)">Aktifkan Website</a></p>
+    <p data-i18n="footer.sub">Sarawak Digital Champion 2026 Candidate · Membantu 100 Perniagaan Go Digital</p>
+    <p style="margin-top:8px;font-size:.8rem;color:var(--muted2)">© 2026 Shahlan · <a href="https://wa.me/60187874797" style="color:var(--p6)" data-i18n="footer.wa">WhatsApp</a> · <a href="activate.html" style="color:var(--p6)" data-i18n="footer.activate">Aktifkan Website</a></p>
   </div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
   // Scroll reveal
   const obs = new IntersectionObserver(
@@ -671,52 +650,6 @@
     { threshold: 0.1 }
   );
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // ── i18n ──
-  const LANG = {
-    BM: {
-      'nav.mission':'Misi','nav.offer':'Pakej','nav.how':'Cara Kerja','nav.portfolio':'Portfolio','nav.support':'Sokongan','nav.cta':'Aktifkan Website Saya →',
-      'hero.eyebrow':'Sarawak Digital Champion 2026 Candidate',
-      'hero.h1':'Saya membantu<br/><span class="highlight">100 perniagaan</span><br/>Sarawak go digital.',
-      'hero.sub':'Nama saya Shahlan. Sebagai Sarawak Digital Champion 2026 Candidate, misi saya mudah: aktifkan 100 website perniagaan baru dan bantu usahawan tempatan ditemui, dipercayai, dan berkembang secara digital.',
-      'hero.cta1':'Aktifkan Website Saya →','hero.cta2':'Lihat Pakej',
-    },
-    EN: {
-      'nav.mission':'Mission','nav.offer':'The Offer','nav.how':'How it works','nav.portfolio':'Portfolio','nav.support':'Support','nav.cta':'Activate My Business →',
-      'hero.eyebrow':'Sarawak Digital Champion 2026 Candidate',
-      'hero.h1':"I'm helping<br/><span class='highlight'>100 businesses</span><br/>in Sarawak go digital.",
-      'hero.sub':"My name is Shahlan. As a Sarawak Digital Champion 2026 Candidate, my mission is simple: activate 100 new business websites and help local entrepreneurs get found, trusted, and grow online.",
-      'hero.cta1':'Activate My Business →','hero.cta2':'View Package',
-    },
-    ZH: {
-      'nav.mission':'使命','nav.offer':'配套','nav.how':'运作方式','nav.portfolio':'作品集','nav.support':'支持','nav.cta':'激活我的网站 →',
-      'hero.eyebrow':'砂拉越数字冠军 2026 候选人',
-      'hero.h1':'我正在帮助<br/><span class="highlight">100家企业</span><br/>走向数字化。',
-      'hero.sub':'我叫 Shahlan。作为砂拉越数字冠军 2026 候选人，我的使命很简单：激活 100 个新企业网站，帮助本地企业家被发现、被信任并在网上成长。',
-      'hero.cta1':'激活我的网站 →','hero.cta2':'查看配套',
-    },
-    IB: {
-      'nav.mission':'Perintah','nav.offer':'Tawaran','nav.how':'Pengudah','nav.portfolio':'Portfolio','nav.support':'Suport','nav.cta':'Aktifkan Website Aku →',
-      'hero.eyebrow':'Sarawak Digital Champion 2026 Candidate',
-      'hero.h1':'Aku ngebantu<br/><span class="highlight">100 bisnis</span><br/>Sarawak go digital.',
-      'hero.sub':'Nama aku Shahlan. Selaku Sarawak Digital Champion 2026 Candidate, misi aku senang: aktifkan 100 website bisnis baru enggau ngebantu usahawan lokal ditemu, dipercaya, enggau berkembang secara digital.',
-      'hero.cta1':'Aktifkan Website Aku →','hero.cta2':'Agi Pakej',
-    },
-  };
-
-  function setLang(lang) {
-    const t = LANG[lang] || LANG.BM;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      if (t[el.dataset.i18n]) el.textContent = t[el.dataset.i18n];
-    });
-    document.querySelectorAll('[data-i18n-html]').forEach(el => {
-      if (t[el.dataset.i18nHtml]) el.innerHTML = t[el.dataset.i18nHtml];
-    });
-    document.querySelectorAll('.lang-btn').forEach(b => {
-      b.classList.toggle('active', b.textContent.trim() === lang || (lang === 'ZH' && b.textContent.trim() === '中'));
-    });
-    document.documentElement.lang = { BM:'ms', EN:'en', ZH:'zh', IB:'iba' }[lang] || 'ms';
-  }
 
   // Animated progress counter
   const ACTIVATED = 13;
@@ -737,6 +670,9 @@
     });
   }, { threshold: 0.3 });
   progObs.observe(document.querySelector('.progress-wrap'));
+
+  // Init language on load
+  initLang();
 </script>
 </body>
 </html>
