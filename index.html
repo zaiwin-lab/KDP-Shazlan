@@ -18,6 +18,11 @@
     /* ── Nav overrides ── */
     .nav { top: 0; position: sticky; z-index: 100; }
 
+    /* ── Language toggle ── */
+    .lang-toggle { display: flex; gap: 2px; background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: 8px; padding: 3px; }
+    .lang-btn { background: transparent; border: none; color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .04em; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: all .18s; line-height: 1; }
+    .lang-btn.active { background: rgba(139,92,246,.25); color: var(--white); border: 1px solid rgba(139,92,246,.4); }
+
     /* ── Hero ── */
     .hero-label { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 99px; background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.3); font-size: .8rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--p7); margin-bottom: 28px; }
     .hero-h1 { font-family: var(--font-head); font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
@@ -168,13 +173,19 @@
     <span>Shahlan <span style="color:var(--p6)">SDC</span></span>
   </div>
   <ul class="nav-links">
-    <li><a href="#misi">Misi</a></li>
-    <li><a href="#pakej">Pakej</a></li>
-    <li><a href="#cara-kerja">Cara Kerja</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#sokongan">Sokongan</a></li>
+    <li><a href="#misi" data-i18n="nav.mission">Misi</a></li>
+    <li><a href="#pakej" data-i18n="nav.offer">Pakej</a></li>
+    <li><a href="#cara-kerja" data-i18n="nav.how">Cara Kerja</a></li>
+    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+    <li><a href="#sokongan" data-i18n="nav.support">Sokongan</a></li>
   </ul>
-  <a href="activate.html" class="nav-cta">Aktifkan Website Saya →</a>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('BM')">BM</button>
+    <button class="lang-btn" onclick="setLang('EN')">EN</button>
+    <button class="lang-btn" onclick="setLang('ZH')">中</button>
+    <button class="lang-btn" onclick="setLang('IB')">IB</button>
+  </div>
+  <a href="activate.html" class="nav-cta" data-i18n="nav.cta">Aktifkan Website Saya →</a>
 </nav>
 
 <!-- Hero -->
@@ -184,19 +195,19 @@
 
       <div class="hero-content">
         <div class="hero-label">
-          <span>◆</span> Sarawak Digital Champion 2026 Candidate
+          <span>◆</span> <span data-i18n="hero.eyebrow">Sarawak Digital Champion 2026 Candidate</span>
         </div>
-        <h1 class="hero-h1">
+        <h1 class="hero-h1" data-i18n-html="hero.h1">
           Saya membantu<br/>
           <span class="highlight">100 perniagaan</span><br/>
           Sarawak go digital.
         </h1>
-        <p class="hero-sub">
+        <p class="hero-sub" data-i18n="hero.sub">
           Nama saya Shahlan. Sebagai Sarawak Digital Champion 2026 Candidate, misi saya mudah: aktifkan 100 website perniagaan baru dan bantu usahawan tempatan ditemui, dipercayai, dan berkembang secara digital.
         </p>
         <div class="hero-btns">
-          <a href="activate.html" class="btn btn-primary btn-lg">Aktifkan Website Saya →</a>
-          <a href="#pakej" class="btn btn-secondary btn-lg">Lihat Pakej</a>
+          <a href="activate.html" class="btn btn-primary btn-lg" data-i18n="hero.cta1">Aktifkan Website Saya →</a>
+          <a href="#pakej" class="btn btn-secondary btn-lg" data-i18n="hero.cta2">Lihat Pakej</a>
         </div>
       </div>
 
@@ -660,6 +671,52 @@
     { threshold: 0.1 }
   );
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── i18n ──
+  const LANG = {
+    BM: {
+      'nav.mission':'Misi','nav.offer':'Pakej','nav.how':'Cara Kerja','nav.portfolio':'Portfolio','nav.support':'Sokongan','nav.cta':'Aktifkan Website Saya →',
+      'hero.eyebrow':'Sarawak Digital Champion 2026 Candidate',
+      'hero.h1':'Saya membantu<br/><span class="highlight">100 perniagaan</span><br/>Sarawak go digital.',
+      'hero.sub':'Nama saya Shahlan. Sebagai Sarawak Digital Champion 2026 Candidate, misi saya mudah: aktifkan 100 website perniagaan baru dan bantu usahawan tempatan ditemui, dipercayai, dan berkembang secara digital.',
+      'hero.cta1':'Aktifkan Website Saya →','hero.cta2':'Lihat Pakej',
+    },
+    EN: {
+      'nav.mission':'Mission','nav.offer':'The Offer','nav.how':'How it works','nav.portfolio':'Portfolio','nav.support':'Support','nav.cta':'Activate My Business →',
+      'hero.eyebrow':'Sarawak Digital Champion 2026 Candidate',
+      'hero.h1':"I'm helping<br/><span class='highlight'>100 businesses</span><br/>in Sarawak go digital.",
+      'hero.sub':"My name is Shahlan. As a Sarawak Digital Champion 2026 Candidate, my mission is simple: activate 100 new business websites and help local entrepreneurs get found, trusted, and grow online.",
+      'hero.cta1':'Activate My Business →','hero.cta2':'View Package',
+    },
+    ZH: {
+      'nav.mission':'使命','nav.offer':'配套','nav.how':'运作方式','nav.portfolio':'作品集','nav.support':'支持','nav.cta':'激活我的网站 →',
+      'hero.eyebrow':'砂拉越数字冠军 2026 候选人',
+      'hero.h1':'我正在帮助<br/><span class="highlight">100家企业</span><br/>走向数字化。',
+      'hero.sub':'我叫 Shahlan。作为砂拉越数字冠军 2026 候选人，我的使命很简单：激活 100 个新企业网站，帮助本地企业家被发现、被信任并在网上成长。',
+      'hero.cta1':'激活我的网站 →','hero.cta2':'查看配套',
+    },
+    IB: {
+      'nav.mission':'Perintah','nav.offer':'Tawaran','nav.how':'Pengudah','nav.portfolio':'Portfolio','nav.support':'Suport','nav.cta':'Aktifkan Website Aku →',
+      'hero.eyebrow':'Sarawak Digital Champion 2026 Candidate',
+      'hero.h1':'Aku ngebantu<br/><span class="highlight">100 bisnis</span><br/>Sarawak go digital.',
+      'hero.sub':'Nama aku Shahlan. Selaku Sarawak Digital Champion 2026 Candidate, misi aku senang: aktifkan 100 website bisnis baru enggau ngebantu usahawan lokal ditemu, dipercaya, enggau berkembang secara digital.',
+      'hero.cta1':'Aktifkan Website Aku →','hero.cta2':'Agi Pakej',
+    },
+  };
+
+  function setLang(lang) {
+    const t = LANG[lang] || LANG.BM;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      if (t[el.dataset.i18n]) el.textContent = t[el.dataset.i18n];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      if (t[el.dataset.i18nHtml]) el.innerHTML = t[el.dataset.i18nHtml];
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.textContent.trim() === lang || (lang === 'ZH' && b.textContent.trim() === '中'));
+    });
+    document.documentElement.lang = { BM:'ms', EN:'en', ZH:'zh', IB:'iba' }[lang] || 'ms';
+  }
 
   // Animated progress counter
   const ACTIVATED = 13;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pembayaran — Syahlan SDC</title>
+  <title>Pembayaran Website Activation — Shahlan SDC</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -12,8 +12,8 @@
 
 <nav class="nav">
   <div class="nav-logo">
-    <span class="bolt">⚡</span>
-    <a href="index.html">Syahlan <span style="color:var(--p6)">SDC</span></a>
+    <span class="bolt">◆</span>
+    <a href="index.html">Shahlan <span style="color:var(--p6)">SDC</span></a>
   </div>
 </nav>
 
@@ -24,8 +24,15 @@
     <div class="form-card" id="checkout-view">
       <div class="form-header">
         <div style="font-size:2.2rem;margin-bottom:10px">💳</div>
-        <h1 style="font-size:1.6rem">Pembayaran <span class="grad-text-purple">Program SDC</span></h1>
-        <p>Semak butiran dan pilih tambahan sebelum bayar</p>
+        <h1 style="font-size:1.6rem">Bayaran <span class="grad-text-purple">Website Activation</span></h1>
+        <p>Semak butiran perniagaan anda dan selesaikan bayaran</p>
+
+        <!-- Price highlight -->
+        <div style="display:inline-flex;align-items:baseline;gap:10px;background:linear-gradient(135deg,rgba(76,29,149,.2),rgba(6,182,212,.1));border:1px solid rgba(139,92,246,.3);border-radius:14px;padding:14px 24px;margin:16px 0">
+          <span style="font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--gold)">RM500</span>
+          <span style="font-size:.85rem;color:var(--muted);text-decoration:line-through">RM1,380</span>
+          <span style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:99px;padding:2px 8px;font-size:.72rem;font-weight:700;color:#fca5a5">Jimat 64%</span>
+        </div>
       </div>
 
       <!-- Customer info (auto-filled) -->
@@ -39,40 +46,41 @@
         </div>
       </div>
 
-      <!-- Package -->
-      <div class="form-group">
-        <label class="form-label">Pakej Program</label>
-        <select class="form-select" id="pkg-select">
-          <option value="300">🌱 Asas Digital — RM 300</option>
-          <option value="600">🚀 Pro Digital — RM 600</option>
-          <option value="1000" selected>⚡ Premium — RM 1,000</option>
-          <option value="2000">🏆 Enterprise — RM 2,000</option>
-        </select>
+      <!-- What's included -->
+      <div style="background:rgba(6,182,212,.05);border:1px solid rgba(6,182,212,.2);border-radius:var(--r-md);padding:16px;margin-bottom:20px">
+        <div style="font-size:.75rem;font-weight:700;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">✓ Termasuk Dalam Pakej RM500</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:.82rem;color:var(--muted)">
+          <span>✓ Website Profesional</span><span>✓ Mobile Responsive</span>
+          <span>✓ Domain 1 Tahun</span><span>✓ Hosting 1 Tahun</span>
+          <span>✓ SSL + SEO Asas</span><span>✓ WhatsApp Button</span>
+          <span>✓ Google Map</span><span>✓ Dashboard Admin</span>
+          <span>✓ Galeri Foto</span><span>✓ 4 Bahasa</span>
+        </div>
       </div>
 
       <!-- Add-ons -->
       <div class="form-group">
-        <label class="form-label">Tambahan (opsional)</label>
+        <label class="form-label">Tambahan Opsional</label>
         <div style="display:flex;flex-direction:column;gap:10px">
           <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
             <input type="checkbox" class="addon" data-price="200" style="accent-color:var(--p5);width:16px;height:16px"/>
             <div>
-              <div style="font-weight:600;font-size:.88rem">🌐 Laman Web Profesional <span style="color:var(--p6)">+RM200</span></div>
-              <div style="font-size:.76rem;color:var(--muted)">Reka bentuk laman web perniagaan anda</div>
+              <div style="font-weight:600;font-size:.88rem">📱 Setup Media Sosial <span style="color:var(--p6)">+RM200</span></div>
+              <div style="font-size:.76rem;color:var(--muted)">Optimasi profil FB, IG, Google Business</div>
             </div>
           </label>
           <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
             <input type="checkbox" class="addon" data-price="150" style="accent-color:var(--p5);width:16px;height:16px"/>
             <div>
-              <div style="font-weight:600;font-size:.88rem">📱 Pengurusan Media Sosial <span style="color:var(--p6)">+RM150</span></div>
-              <div style="font-size:.76rem;color:var(--muted)">Setup & optimasi profil FB, IG, TikTok</div>
+              <div style="font-weight:600;font-size:.88rem">✍️ Penulisan Kandungan Tambahan <span style="color:var(--p6)">+RM150</span></div>
+              <div style="font-size:.76rem;color:var(--muted)">Blog awal, biodata lengkap, halaman tambahan</div>
             </div>
           </label>
           <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
             <input type="checkbox" class="addon" data-price="100" style="accent-color:var(--p5);width:16px;height:16px"/>
             <div>
-              <div style="font-weight:600;font-size:.88rem">📊 Latihan Digital Intensif <span style="color:var(--p6)">+RM100</span></div>
-              <div style="font-size:.76rem;color:var(--muted)">Sesi latihan 1-on-1 selama 3 jam</div>
+              <div style="font-weight:600;font-size:.88rem">🎓 Sesi Latihan Dashboard <span style="color:var(--p6)">+RM100</span></div>
+              <div style="font-size:.76rem;color:var(--muted)">1 jam sesi 1-on-1 cara guna dashboard anda</div>
             </div>
           </label>
         </div>
@@ -81,13 +89,13 @@
       <!-- Order summary -->
       <div class="order-summary" id="summary">
         <div class="order-row">
-          <span id="pkg-label">⚡ Premium</span>
-          <span id="pkg-price">RM 1,000</span>
+          <span>🌐 Website Activation Package</span>
+          <span id="pkg-price">RM 500</span>
         </div>
         <div id="addon-rows"></div>
         <div class="order-row total">
           <span>Jumlah Keseluruhan</span>
-          <span class="price" id="total-price">RM 1,000</span>
+          <span class="price" id="total-price">RM 500</span>
         </div>
       </div>
 
@@ -118,10 +126,10 @@
       <div class="result-screen active" id="res-fail" style="display:none">
         <div class="result-icon">❌</div>
         <h2 style="color:#f87171">Pembayaran Gagal</h2>
-        <p>Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Syahlan untuk bantuan.</p>
+        <p>Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Shahlan untuk bantuan.</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
           <button class="btn btn-primary" onclick="showCheckout()">Cuba Semula</button>
-          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary">💬 Hubungi Syahlan</a>
+          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary">💬 Hubungi Shahlan</a>
         </div>
       </div>
     </div>
@@ -130,6 +138,7 @@
 </div>
 
 <script>
+  const BASE_PRICE = 500;
   const params = new URLSearchParams(location.search);
   const bid  = params.get('b')    || '';
   const bname= params.get('name') || '';
@@ -161,16 +170,11 @@
     document.getElementById('disp-phone').textContent = '—';
   }
 
-  // Pricing
-  const pkgNames = { '300':'🌱 Asas Digital','600':'🚀 Pro Digital','1000':'⚡ Premium','2000':'🏆 Enterprise' };
-
   function updateSummary() {
-    const pkg   = Number(document.getElementById('pkg-select').value);
     const addons= [...document.querySelectorAll('.addon:checked')].map(c => Number(c.dataset.price));
-    const total = pkg + addons.reduce((a,b)=>a+b,0);
+    const total = BASE_PRICE + addons.reduce((a,b)=>a+b,0);
 
-    document.getElementById('pkg-label').textContent  = pkgNames[pkg] || 'Pakej';
-    document.getElementById('pkg-price').textContent  = `RM ${pkg.toLocaleString()}`;
+    document.getElementById('pkg-price').textContent  = `RM ${BASE_PRICE.toLocaleString()}`;
     document.getElementById('total-price').textContent= `RM ${total.toLocaleString()}`;
 
     const addonRows = document.getElementById('addon-rows');
@@ -188,7 +192,8 @@
   updateSummary();
 
   async function startPayment() {
-    const { total } = updateSummary();
+    const addons= [...document.querySelectorAll('.addon:checked')].map(c => Number(c.dataset.price));
+    const total = BASE_PRICE + addons.reduce((a,b)=>a+b,0);
     const btn = document.getElementById('pay-btn');
     const msg = document.getElementById('pay-msg');
 

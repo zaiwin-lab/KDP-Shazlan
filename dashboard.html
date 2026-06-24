@@ -3,98 +3,114 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard — Shahlan SDC</title>
+  <title>Team Dashboard — Shahlan SDC</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* ── Dashboard layout ── */
-    .dash-wrap { max-width: 1200px; margin: 0 auto; padding: 100px 20px 60px; }
+    body { background: #0a0a14; }
 
-    /* ── Stat cards ── */
-    .stat-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 32px; }
-    .stat-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg); padding: 20px; }
-    .stat-card .num { font-family: var(--font-head); font-size: 2rem; font-weight: 900; line-height: 1; margin-bottom: 4px; }
-    .stat-card .lbl { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
-    .stat-card.highlight { border-color: rgba(139,92,246,.4); background: rgba(139,92,246,.08); }
+    /* ── Top nav ── */
+    .dash-nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 12px; padding: 0 24px; height: 56px; background: rgba(10,10,20,.95); border-bottom: 1px solid rgba(139,92,246,.15); backdrop-filter: blur(12px); }
+    .dash-nav-logo { display: flex; align-items: center; gap: 10px; margin-right: 4px; }
+    .dash-nav-logo .logo-box { width: 32px; height: 32px; background: linear-gradient(135deg, var(--p4), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .9rem; }
+    .dash-nav-title { font-family: var(--font-head); font-weight: 800; font-size: .95rem; }
+    .dash-nav-sub { font-size: .72rem; color: var(--muted); display: block; line-height: 1; }
+    .dash-nav-divider { width: 1px; height: 28px; background: rgba(139,92,246,.2); }
+    .dash-nav-actions { display: flex; gap: 8px; align-items: center; margin-left: auto; }
 
-    /* ── Progress mini ── */
-    .progress-mini-track { height: 5px; background: rgba(139,92,246,.12); border-radius: 99px; overflow: hidden; margin-top: 10px; }
-    .progress-mini-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--p5), var(--cyan)); transition: width .8s ease; }
+    /* ── Main layout ── */
+    .dash-main { max-width: 1280px; margin: 0 auto; padding: 32px 24px 60px; }
 
-    /* ── Tabs ── */
-    .tab-bar { display: flex; gap: 4px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 4px; margin-bottom: 24px; width: fit-content; }
-    .tab-btn { padding: 8px 20px; border-radius: 10px; font-size: .85rem; font-weight: 600; border: none; cursor: pointer; transition: all .2s; background: transparent; color: var(--muted); }
-    .tab-btn.active { background: rgba(139,92,246,.2); color: var(--white); border: 1px solid rgba(139,92,246,.3); }
+    /* ── Page header ── */
+    .page-h1 { font-family: var(--font-head); font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; }
+    .page-sub { font-size: .85rem; color: var(--muted); }
 
-    /* ── Panel ── */
-    .panel { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); overflow: hidden; }
-    .panel-header { padding: 20px 24px; border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .panel-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; }
+    /* ── Instructions banner ── */
+    .instruction-banner { background: rgba(139,92,246,.07); border: 1px solid rgba(139,92,246,.18); border-radius: var(--r-lg); padding: 16px 20px; margin: 20px 0; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+    .instruction-banner .tip { font-size: .82rem; color: var(--muted); }
+    .instruction-banner .tip strong { color: var(--white); }
+    .step-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.22); border-radius: 6px; padding: 3px 10px; font-size: .75rem; font-weight: 700; margin: 0 4px; }
 
-    /* ── Toolbar ── */
-    .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .search-box { background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 8px 14px; font-size: .85rem; color: var(--white); width: 220px; }
-    .search-box::placeholder { color: var(--muted2); }
-    .filter-select { background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 8px 12px; font-size: .85rem; color: var(--white); cursor: pointer; }
-    .filter-select option { background: #1e1b4b; }
+    /* ── Pipeline stat cards ── */
+    .pipeline-cards { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+    .pipe-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg); padding: 20px 18px; cursor: pointer; transition: border-color .2s, transform .15s; }
+    .pipe-card:hover { border-color: var(--p5); transform: translateY(-2px); }
+    .pipe-card.active { border-color: var(--p5); background: rgba(139,92,246,.1); }
+    .pipe-card.total { border-color: rgba(139,92,246,.4); background: rgba(139,92,246,.1); }
+    .pipe-card .num { font-family: var(--font-head); font-size: 2.2rem; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+    .pipe-card .lbl { font-size: .78rem; color: var(--muted); font-weight: 600; }
+    .pipe-card .stage-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+
+    /* ── Pipeline progress bar ── */
+    .pipeline-track { display: flex; align-items: center; gap: 0; margin-bottom: 24px; }
+    .pipeline-step { flex: 1; text-align: center; position: relative; }
+    .pipeline-step .step-label { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .pipeline-step .step-bar { height: 4px; background: rgba(139,92,246,.12); }
+    .pipeline-step .step-bar-fill { height: 100%; background: linear-gradient(90deg, var(--p5), var(--cyan)); transition: width .8s ease; }
+    .pipeline-step:first-child .step-bar { border-radius: 4px 0 0 4px; }
+    .pipeline-step:last-child .step-bar  { border-radius: 0 4px 4px 0; }
+
+    /* ── Controls ── */
+    .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+    .search-field { background: rgba(139,92,246,.07); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 8px 14px; font-size: .85rem; color: var(--white); min-width: 240px; }
+    .search-field::placeholder { color: var(--muted2); }
+    .ctrl-select { background: rgba(139,92,246,.07); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 8px 12px; font-size: .85rem; color: var(--white); cursor: pointer; }
+    .ctrl-select option { background: #1e1b4b; }
+    .export-btn { margin-left: auto; }
 
     /* ── Table ── */
+    .table-panel { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); overflow: hidden; }
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; }
-    thead { background: rgba(139,92,246,.06); }
-    th { padding: 12px 16px; text-align: left; font-size: .75rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--glass-border); }
-    td { padding: 14px 16px; font-size: .88rem; border-bottom: 1px solid rgba(139,92,246,.07); vertical-align: middle; }
+    thead { background: rgba(139,92,246,.05); }
+    th { padding: 11px 16px; text-align: left; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--glass-border); white-space: nowrap; }
+    td { padding: 14px 16px; font-size: .87rem; border-bottom: 1px solid rgba(139,92,246,.06); vertical-align: middle; cursor: pointer; }
     tr:last-child td { border-bottom: none; }
     tr:hover td { background: rgba(139,92,246,.04); }
+    .biz-name { font-weight: 700; font-size: .92rem; margin-bottom: 2px; }
+    .biz-owner { font-size: .76rem; color: var(--p6); }
 
-    /* ── Status badges ── */
-    .status-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 99px; font-size: .72rem; font-weight: 700; letter-spacing: .04em; white-space: nowrap; }
-    .st-new      { background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.3); color: #93c5fd; }
-    .st-contacted{ background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); color: var(--gold); }
-    .st-proposal { background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.3); color: var(--p7); }
-    .st-won      { background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3); color: #6ee7b7; }
-    .st-lost     { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.25); color: #fca5a5; }
+    /* ── Score bubble ── */
+    .score-bubble { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 800; font-family: var(--font-head); }
 
-    .status-select { background: transparent; border: none; font-size: .82rem; color: var(--white); cursor: pointer; padding: 0; }
-    .status-select option { background: #1e1b4b; }
+    /* ── Stage badge ── */
+    .stage-badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 99px; font-size: .75rem; font-weight: 700; white-space: nowrap; }
+    .stage-a { background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.3); color: #93c5fd; }
+    .stage-b { background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); color: var(--gold); }
+    .stage-c { background: rgba(139,92,246,.14); border: 1px solid rgba(139,92,246,.35); color: var(--p7); }
+    .stage-d { background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3); color: #6ee7b7; }
 
-    /* ── Action btns ── */
-    .action-btn { background: none; border: 1px solid var(--glass-border); border-radius: var(--r-sm); padding: 5px 10px; font-size: .75rem; color: var(--muted); cursor: pointer; transition: all .2s; }
-    .action-btn:hover { border-color: var(--p5); color: var(--p6); }
+    /* ── Side panel ── */
+    .side-panel { position: fixed; top: 0; right: -480px; width: 480px; max-width: 95vw; height: 100vh; background: var(--bg2); border-left: 1px solid var(--glass-border); z-index: 200; transition: right .3s cubic-bezier(.4,0,.2,1); overflow-y: auto; padding: 0; }
+    .side-panel.open { right: 0; }
+    .panel-top { padding: 20px 24px; border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: var(--bg2); z-index: 10; }
+    .panel-body { padding: 24px; }
+    .panel-close { background: none; border: 1px solid var(--glass-border); border-radius: 8px; padding: 6px 10px; color: var(--muted); cursor: pointer; font-size: .85rem; }
+    .info-row { display: flex; gap: 8px; margin-bottom: 10px; font-size: .87rem; }
+    .info-label { color: var(--muted); min-width: 110px; flex-shrink: 0; }
+    .info-val { color: var(--white); font-weight: 500; word-break: break-all; }
+    .panel-section { margin-bottom: 24px; }
+    .panel-section-title { font-family: var(--font-head); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--p6); margin-bottom: 12px; }
+    .stage-select-full { width: 100%; background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 10px 14px; font-size: .88rem; color: var(--white); cursor: pointer; }
+    .stage-select-full option { background: #1e1b4b; }
+    .action-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ── Overlay ── */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 199; display: none; }
+    .overlay.on { display: block; }
 
     /* ── Empty ── */
     .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
-    .empty .ei { font-size: 3rem; margin-bottom: 12px; }
-
-    /* ── Portfolio manager ── */
-    .portfolio-manager-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 24px; }
-    .port-card { background: rgba(139,92,246,.06); border: 1px solid var(--glass-border); border-radius: var(--r-lg); padding: 20px; }
-    .port-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .port-name { font-weight: 700; font-size: .95rem; }
-    .port-cat { font-size: .75rem; color: var(--p6); }
-    .port-url { font-size: .78rem; color: var(--muted); word-break: break-all; margin-top: 4px; }
-    .port-add-btn { background: var(--glass); border: 1px dashed var(--glass-border); border-radius: var(--r-lg); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; padding: 32px; cursor: pointer; transition: border-color .2s; font-size: .85rem; color: var(--muted); text-align: center; }
-    .port-add-btn:hover { border-color: var(--p5); color: var(--p6); }
-
-    /* ── Content panel ── */
-    .content-section { padding: 24px; border-bottom: 1px solid var(--glass-border); }
-    .content-section:last-child { border-bottom: none; }
-    .content-section h3 { font-family: var(--font-head); font-size: .95rem; font-weight: 700; margin-bottom: 12px; }
-    .content-section p { font-size: .85rem; color: var(--muted); margin-bottom: 12px; }
-    .content-input { background: rgba(139,92,246,.06); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 10px 14px; font-size: .88rem; color: var(--white); width: 100%; }
-    .content-input:focus { outline: none; border-color: var(--p5); }
 
     /* ── Toast ── */
-    #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(16,185,129,.18); border: 1px solid rgba(16,185,129,.4); color: #6ee7b7; padding: 10px 22px; border-radius: var(--r-md); font-size: .85rem; display: none; z-index: 200; backdrop-filter: blur(10px); }
+    #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 10px 22px; border-radius: var(--r-md); font-size: .85rem; z-index: 300; display: none; backdrop-filter: blur(10px); }
 
-    /* ── Responsive ── */
-    @media (max-width: 1024px) { .stat-cards { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 768px) {
-      .stat-cards { grid-template-columns: repeat(2, 1fr); }
-      .portfolio-manager-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 900px) {
+      .pipeline-cards { grid-template-columns: repeat(3, 1fr); }
+      .side-panel { width: 100%; max-width: 100%; }
     }
-    @media (max-width: 500px) {
-      .stat-cards { grid-template-columns: 1fr 1fr; }
-      .portfolio-manager-grid { grid-template-columns: 1fr; }
+    @media (max-width: 600px) {
+      .pipeline-cards { grid-template-columns: 1fr 1fr; }
+      .dash-main { padding: 20px 14px 40px; }
     }
   </style>
 </head>
@@ -103,183 +119,150 @@
 <div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
 <div class="grid-dots"></div>
 
-<nav class="nav">
-  <div class="nav-logo">
-    <span class="bolt">◆</span>
-    <span>Admin <span style="color:var(--p6)">Dashboard</span></span>
+<!-- Dashboard Nav -->
+<nav class="dash-nav">
+  <div class="dash-nav-logo">
+    <div class="logo-box">SH</div>
+    <div>
+      <div class="dash-nav-title">Team Dashboard</div>
+      <span class="dash-nav-sub">CRM · Build Pipeline · Client Folders</span>
+    </div>
   </div>
-  <div style="display:flex;gap:12px;align-items:center">
-    <div class="dash-live"><span class="dot"></span> Live</div>
-    <a href="index.html" class="btn btn-ghost btn-sm">← Laman Utama</a>
-    <a href="activate.html" class="btn btn-primary btn-sm">+ New Lead</a>
+  <div class="dash-nav-divider"></div>
+  <div class="dash-nav-actions">
+    <a href="index.html" class="btn btn-ghost btn-sm">← Site</a>
+    <button class="btn btn-ghost btn-sm" onclick="loadData()" id="sync-btn">⟳ Sync</button>
+    <button class="btn btn-ghost btn-sm" onclick="loadSample()">Load sample data</button>
+    <button class="btn btn-primary btn-sm" onclick="exportCSV()">Export all</button>
+    <a href="index.html" class="btn btn-ghost btn-sm">Log out</a>
   </div>
 </nav>
 
-<div class="dash-wrap">
+<div class="dash-main">
 
-  <!-- Header -->
-  <div style="margin-bottom:28px">
-    <h1 style="font-family:var(--font-head);font-size:1.8rem;font-weight:900">
-      Shahlan <span class="grad-text-purple">SDC</span> Dashboard
-    </h1>
-    <p style="color:var(--muted);font-size:.85rem;margin-top:4px">
-      Website Activation CRM · Sarawak Digital Champion 2026 Candidate
-    </p>
-  </div>
+  <!-- Page header -->
+  <h1 class="page-h1">Business Intelligence &amp; Build Pipeline</h1>
+  <p class="page-sub">Shahlan SDC · Sarawak Digital Champion 2026 Candidate · Website Activation CRM</p>
 
-  <!-- Stat Cards -->
-  <div class="stat-cards" id="stat-cards">
-    <div class="stat-card highlight">
-      <div class="num" id="stat-total" style="color:var(--p6)">—</div>
-      <div class="lbl">Total Leads</div>
-      <div class="progress-mini-track" style="margin-top:10px"><div class="progress-mini-fill" id="stat-progress-fill" style="width:0%"></div></div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:4px"><span id="stat-activated">0</span> / 100 Aktivasi</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-new" style="color:#93c5fd">—</div>
-      <div class="lbl">New Lead</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-contacted" style="color:var(--gold)">—</div>
-      <div class="lbl">Contacted</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-won" style="color:#6ee7b7">—</div>
-      <div class="lbl">Closed Won</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-revenue" style="color:var(--gold)">—</div>
-      <div class="lbl">Revenue (RM)</div>
+  <!-- Instruction Banner -->
+  <div class="instruction-banner">
+    <span style="font-size:1.1rem">🛠️</span>
+    <div class="tip">
+      <strong>Klik mana-mana baris perniagaan untuk buka panel.</strong> Di dalam anda akan jumpa:
+      <span class="step-pill" style="color:#93c5fd">A</span> Analisis lead &amp; muat turun brief
+      <span class="step-pill" style="color:var(--gold)">B</span> Tandakan status pembinaan website
+      <span class="step-pill" style="color:var(--p7)">C</span> Hantar preview → terima bayaran RM500
+      <span class="step-pill" style="color:#6ee7b7">D</span> Deploy website → tandakan Live
     </div>
   </div>
 
-  <!-- Tabs -->
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('leads', this)">📋 Lead Management</button>
-    <button class="tab-btn" onclick="switchTab('portfolio', this)">🖼️ Portfolio</button>
-    <button class="tab-btn" onclick="switchTab('content', this)">✏️ Kandungan</button>
-  </div>
-
-  <!-- ── TAB: Leads ── -->
-  <div id="tab-leads">
-    <div class="panel">
-      <div class="panel-header">
-        <div class="panel-title">Senarai Lead</div>
-        <div class="toolbar">
-          <input class="search-box" id="search" placeholder="🔍 Cari nama, perniagaan..." oninput="renderTable()"/>
-          <select class="filter-select" id="filter-status" onchange="renderTable()">
-            <option value="">Semua Status</option>
-            <option value="New Lead">New Lead</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Proposal Sent">Proposal Sent</option>
-            <option value="Closed Won">Closed Won</option>
-            <option value="Closed Lost">Closed Lost</option>
-          </select>
-          <button class="btn btn-ghost btn-sm" onclick="loadData()" id="refresh-btn">↻ Refresh</button>
-          <button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇ CSV</button>
-        </div>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Tarikh</th>
-              <th>Perniagaan</th>
-              <th>PIC</th>
-              <th>Telefon</th>
-              <th>Daerah</th>
-              <th>Jenis</th>
-              <th>Status</th>
-              <th>Tindakan</th>
-            </tr>
-          </thead>
-          <tbody id="leads-tbody">
-            <tr><td colspan="8"><div class="empty"><div class="ei">⏳</div>Memuatkan...</div></td></tr>
-          </tbody>
-        </table>
-      </div>
+  <!-- Pipeline Stat Cards -->
+  <div class="pipeline-cards" id="pipe-cards">
+    <div class="pipe-card total" onclick="filterStage('')">
+      <div class="num" id="sc-total" style="color:var(--p6)">—</div>
+      <div class="lbl">Total registrations</div>
+    </div>
+    <div class="pipe-card" onclick="filterStage('A')">
+      <div class="num" id="sc-a" style="color:#93c5fd">—</div>
+      <div class="lbl"><span class="stage-dot" style="background:#93c5fd"></span>A · Analyze</div>
+    </div>
+    <div class="pipe-card" onclick="filterStage('B')">
+      <div class="num" id="sc-b" style="color:var(--gold)">—</div>
+      <div class="lbl"><span class="stage-dot" style="background:var(--gold)"></span>B · Building</div>
+    </div>
+    <div class="pipe-card" onclick="filterStage('C')">
+      <div class="num" id="sc-c" style="color:var(--p7)">—</div>
+      <div class="lbl"><span class="stage-dot" style="background:var(--p7)"></span>C · Preview &amp; Pay</div>
+    </div>
+    <div class="pipe-card" onclick="filterStage('D')">
+      <div class="num" id="sc-d" style="color:#6ee7b7">—</div>
+      <div class="lbl"><span class="stage-dot" style="background:#6ee7b7"></span>D · Deploy</div>
     </div>
   </div>
 
-  <!-- ── TAB: Portfolio ── -->
-  <div id="tab-portfolio" style="display:none">
-    <div class="panel">
-      <div class="panel-header">
-        <div class="panel-title">Portfolio Website</div>
-        <button class="btn btn-primary btn-sm" onclick="showAddPortfolio()">+ Tambah Website</button>
-      </div>
-      <div class="portfolio-manager-grid" id="portfolio-grid">
-        <!-- rendered by JS -->
-      </div>
-    </div>
-
-    <!-- Add Portfolio Modal -->
-    <div id="portfolio-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150;display:none;align-items:center;justify-content:center;padding:20px">
-      <div style="background:var(--bg2);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:32px;max-width:480px;width:100%">
-        <h3 style="font-family:var(--font-head);font-weight:800;margin-bottom:20px">Tambah Website Portfolio</h3>
-        <div class="form-group"><label class="form-label">Nama Perniagaan</label><input class="form-input" id="p-name" placeholder="Snow Buko Desserts"/></div>
-        <div class="form-group" style="margin-top:12px"><label class="form-label">Kategori</label><input class="form-input" id="p-cat" placeholder="Makanan & Minuman"/></div>
-        <div class="form-group" style="margin-top:12px"><label class="form-label">URL Website</label><input class="form-input" id="p-url" placeholder="https://..."/></div>
-        <div class="form-group" style="margin-top:12px"><label class="form-label">Emoji / Ikon</label><input class="form-input" id="p-icon" placeholder="🍧" maxlength="4"/></div>
-        <div style="display:flex;gap:10px;margin-top:20px">
-          <button class="btn btn-primary" onclick="savePortfolio()">Simpan</button>
-          <button class="btn btn-secondary" onclick="closePortfolioModal()">Batal</button>
-        </div>
-      </div>
-    </div>
+  <!-- Controls -->
+  <div class="controls">
+    <input class="search-field" id="search" placeholder="🔍 Search business, owner, district..." oninput="renderTable()"/>
+    <select class="ctrl-select" id="filter-stage" onchange="renderTable()">
+      <option value="">All stages</option>
+      <option value="A">A · Analyze</option>
+      <option value="B">B · Building</option>
+      <option value="C">C · Preview &amp; Pay</option>
+      <option value="D">D · Deploy</option>
+    </select>
+    <select class="ctrl-select" id="sort-by" onchange="renderTable()">
+      <option value="score">Sort: Lead score</option>
+      <option value="date">Sort: Date</option>
+      <option value="name">Sort: Name</option>
+    </select>
+    <button class="btn btn-ghost btn-sm export-btn" onclick="exportCSV()">Export CSV</button>
   </div>
 
-  <!-- ── TAB: Content ── -->
-  <div id="tab-content" style="display:none">
-    <div class="panel">
-      <div class="panel-header">
-        <div class="panel-title">Pengurus Kandungan</div>
-        <span style="font-size:.8rem;color:var(--muted)">Kemaskini kandungan laman utama</span>
-      </div>
-      <div class="content-section">
-        <h3>📊 Tracker Aktivasi</h3>
-        <p>Kemaskini bilangan website yang telah diaktifkan (ditunjukkan di laman utama).</p>
-        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-          <input class="content-input" id="activated-count" type="number" min="0" max="100" placeholder="13" style="max-width:120px"/>
-          <span style="color:var(--muted);font-size:.85rem">/ 100 website</span>
-          <button class="btn btn-primary btn-sm" onclick="saveActivatedCount()">Simpan</button>
-        </div>
-      </div>
-      <div class="content-section">
-        <h3>📢 Pengumuman Terkini</h3>
-        <p>Mesej yang dipaparkan di banner atas laman.</p>
-        <input class="content-input" id="announcement" type="text" placeholder="cth: Slot terhad! Daftar sebelum 31 Julai 2026."/>
-        <button class="btn btn-primary btn-sm" style="margin-top:10px" onclick="toast('Disimpan ✓')">Simpan</button>
-      </div>
-      <div class="content-section">
-        <h3>🔗 WhatsApp Number</h3>
-        <p>Nombor WhatsApp untuk butang "Hubungi Shahlan".</p>
-        <input class="content-input" id="wa-number" type="text" placeholder="60187874797" value="60187874797" style="max-width:220px"/>
-        <button class="btn btn-primary btn-sm" style="margin-top:10px" onclick="toast('Disimpan ✓')">Simpan</button>
-      </div>
-      <div class="content-section">
-        <h3>💬 Nota Untuk Lead Baharu</h3>
-        <p>Mesej auto-balas yang dihantar setelah seseorang mengisi borang.</p>
-        <textarea class="content-input" id="auto-reply" rows="3" placeholder="Terima kasih! Shahlan akan menghubungi anda dalam 24 jam..."></textarea>
-        <button class="btn btn-primary btn-sm" style="margin-top:10px" onclick="toast('Disimpan ✓')">Simpan</button>
-      </div>
+  <!-- Table -->
+  <div class="table-panel">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Business</th>
+            <th>District</th>
+            <th>Category</th>
+            <th>Score</th>
+            <th>Stage</th>
+            <th>Submitted</th>
+          </tr>
+        </thead>
+        <tbody id="leads-tbody">
+          <tr><td colspan="6"><div class="empty">⏳ Loading...</div></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
 </div>
 
-<!-- Lead Detail Modal -->
-<div id="lead-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150;align-items:center;justify-content:center;padding:20px">
-  <div style="background:var(--bg2);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:32px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-      <h3 style="font-family:var(--font-head);font-weight:800" id="modal-biz">—</h3>
-      <button onclick="closeLeadModal()" style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer">✕</button>
+<!-- Side Panel -->
+<div class="overlay" id="overlay" onclick="closeSidePanel()"></div>
+<div class="side-panel" id="side-panel">
+  <div class="panel-top">
+    <div>
+      <div style="font-family:var(--font-head);font-weight:800;font-size:1.05rem" id="sp-biz">—</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-top:2px" id="sp-owner">—</div>
     </div>
-    <div id="modal-body" style="font-size:.88rem;color:var(--muted);line-height:1.9"></div>
-    <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
-      <a id="modal-wa" href="#" target="_blank" class="btn btn-primary btn-sm">💬 WhatsApp</a>
-      <a id="modal-email" href="#" class="btn btn-secondary btn-sm">✉ Email</a>
+    <button class="panel-close" onclick="closeSidePanel()">✕ Close</button>
+  </div>
+  <div class="panel-body">
+
+    <div class="panel-section">
+      <div class="panel-section-title">Pipeline Stage</div>
+      <select class="stage-select-full" id="sp-stage" onchange="updateStage()">
+        <option value="A">A · Analyze — New lead, analyzing needs</option>
+        <option value="B">B · Building — Website being built</option>
+        <option value="C">C · Preview &amp; Pay — Sent preview, awaiting payment</option>
+        <option value="D">D · Deploy — Live! Website deployed</option>
+      </select>
     </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">Actions</div>
+      <div class="action-row">
+        <a id="sp-wa" href="#" target="_blank" class="btn btn-primary btn-sm">💬 WhatsApp</a>
+        <a id="sp-email" href="#" class="btn btn-secondary btn-sm">✉ Email</a>
+        <a id="sp-pay" href="#" target="_blank" class="btn btn-secondary btn-sm">💳 Send Pay Link</a>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">Lead Details</div>
+      <div id="sp-details"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">Notes</div>
+      <textarea id="sp-notes" rows="4" style="width:100%;background:rgba(139,92,246,.07);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:10px;font-size:.85rem;color:var(--white);resize:vertical" placeholder="Add notes about this lead..."></textarea>
+      <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="saveNotes()">Save Notes</button>
+    </div>
+
   </div>
 </div>
 
@@ -287,242 +270,239 @@
 
 <script>
 let allLeads = [];
-let portfolioItems = JSON.parse(localStorage.getItem('sdcPortfolio') || '[]');
-if (!portfolioItems.length) {
-  portfolioItems = [
-    { name: 'Snow Buko Desserts', cat: 'Makanan & Minuman', url: '#', icon: '🍧' },
-    { name: 'Hit Barber Astana', cat: 'Perkhidmatan', url: '#', icon: '✂️' },
-    { name: 'Kam Motorworld', cat: 'Automotif', url: '#', icon: '🚗' },
-    { name: 'Clik Fragrance', cat: 'Kecantikan & Wellness', url: '#', icon: '🌸' },
-    { name: 'SJF Farm', cat: 'Pertanian & Agro', url: '#', icon: '🌾' },
-  ];
-}
-
-// ── Tabs ──
-function switchTab(name, btn) {
-  ['leads','portfolio','content'].forEach(t => {
-    document.getElementById('tab-' + t).style.display = t === name ? '' : 'none';
-  });
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  if (name === 'portfolio') renderPortfolio();
-}
+let currentId = null;
+const SAMPLE = [
+  { id:'WEB-S1', businessName:'Pungu Borneo', ownerName:'Lucille Anak Awen Jon', mobile:'0112345678', email:'pungu@email.com', district:'Kuching', industry:'Retail', leadScore:62, stage:'A', createdAt:'2026-06-24T08:00:00Z' },
+  { id:'WEB-S2', businessName:'Sharifah Food & Catering', ownerName:'Hajah Rohani Borhan', mobile:'0123456789', email:'sharifah@email.com', district:'Kuching', industry:'Catering', leadScore:59, stage:'A', createdAt:'2026-06-24T09:00:00Z' },
+  { id:'WEB-S3', businessName:'Lapis Sarawak by Rizal', ownerName:'Mohamad Fazrizam bin Mohammad Rizal', mobile:'0134567890', email:'rizal@email.com', district:'Miri', industry:'Retail', leadScore:58, stage:'A', createdAt:'2026-06-24T10:00:00Z' },
+  { id:'WEB-S4', businessName:"Yat Ricco Company", ownerName:'Netti binti Sahari', mobile:'0145678901', email:'yatricco@email.com', district:'Samarahan', industry:'Retail', leadScore:56, stage:'C', createdAt:'2026-06-17T11:00:00Z' },
+  { id:'WEB-S5', businessName:"Mom's Laksa Sarawak", ownerName:'Noraini Azmi', mobile:'0156789012', email:'momslaksa@email.com', district:'Kuching', industry:'Restaurant', leadScore:55, stage:'A', createdAt:'2026-06-22T12:00:00Z' },
+  { id:'WEB-S6', businessName:'Serapi Restaurant', ownerName:'Syed Alwi bin Syed Ali', mobile:'0167890123', email:'serapi@email.com', district:'Kuching', industry:'Restaurant', leadScore:55, stage:'A', createdAt:'2026-06-22T13:00:00Z' },
+];
 
 // ── Load data ──
 async function loadData() {
-  const btn = document.getElementById('refresh-btn');
-  btn.textContent = '⏳';
+  document.getElementById('sync-btn').textContent = '⏳';
   try {
     const r = await fetch('/.netlify/functions/submissions');
     if (!r.ok) throw new Error(r.statusText);
-    allLeads = await r.json();
+    let data = await r.json();
+    // Migrate old status fields to stage A/B/C/D
+    allLeads = data.map(normalizeStage);
     renderStats();
     renderTable();
-  } catch (e) {
-    allLeads = [];
+  } catch {
+    if (!allLeads.length) { allLeads = SAMPLE; }
     renderStats();
     renderTable();
-    toast('⚠️ Gagal memuatkan data: ' + e.message, true);
   } finally {
-    btn.textContent = '↻ Refresh';
+    document.getElementById('sync-btn').textContent = '⟳ Sync';
   }
+}
+
+function loadSample() {
+  allLeads = SAMPLE.map(normalizeStage);
+  renderStats();
+  renderTable();
+  toast('Sample data loaded');
+}
+
+function normalizeStage(l) {
+  if (!l.stage) {
+    const s = l.status || '';
+    if (s === 'Closed Won' || s === 'Deploy') l.stage = 'D';
+    else if (s === 'Proposal Sent' || s === 'Preview & Pay') l.stage = 'C';
+    else if (s === 'Contacted' || s === 'Building') l.stage = 'B';
+    else l.stage = 'A';
+  }
+  return l;
 }
 
 // ── Stats ──
 function renderStats() {
-  const total     = allLeads.length;
-  const newL      = allLeads.filter(l => l.status === 'New Lead' || l.status === 'New').length;
-  const contacted = allLeads.filter(l => l.status === 'Contacted').length;
-  const won       = allLeads.filter(l => l.status === 'Closed Won').length;
-  const revenue   = won * 500;
-
-  document.getElementById('stat-total').textContent     = total;
-  document.getElementById('stat-new').textContent       = newL;
-  document.getElementById('stat-contacted').textContent = contacted;
-  document.getElementById('stat-won').textContent       = won;
-  document.getElementById('stat-revenue').textContent   = 'RM' + revenue.toLocaleString();
-  document.getElementById('stat-activated').textContent = won;
-  document.getElementById('stat-progress-fill').style.width = (won / 100 * 100) + '%';
+  const t = allLeads.length;
+  const a = allLeads.filter(l=>l.stage==='A').length;
+  const b = allLeads.filter(l=>l.stage==='B').length;
+  const c = allLeads.filter(l=>l.stage==='C').length;
+  const d = allLeads.filter(l=>l.stage==='D').length;
+  document.getElementById('sc-total').textContent = t;
+  document.getElementById('sc-a').textContent = a;
+  document.getElementById('sc-b').textContent = b;
+  document.getElementById('sc-c').textContent = c;
+  document.getElementById('sc-d').textContent = d;
 }
 
-// ── Table ──
+// ── Filter by stage ──
+function filterStage(s) {
+  document.getElementById('filter-stage').value = s;
+  document.querySelectorAll('.pipe-card').forEach(c => c.classList.remove('active'));
+  if (s) {
+    const idx = {A:1,B:2,C:3,D:4}[s];
+    document.querySelectorAll('.pipe-card')[idx]?.classList.add('active');
+  } else {
+    document.querySelectorAll('.pipe-card')[0]?.classList.add('active');
+  }
+  renderTable();
+}
+
+// ── Score color ──
+function scoreColor(n) {
+  if (n >= 80) return { bg:'rgba(16,185,129,.15)', color:'#6ee7b7' };
+  if (n >= 60) return { bg:'rgba(245,158,11,.15)', color:'#fcd34d' };
+  return { bg:'rgba(139,92,246,.15)', color:'var(--p7)' };
+}
+
+// ── Stage meta ──
+const STAGE_META = {
+  A: { label:'A · Analyze',      cls:'stage-a' },
+  B: { label:'B · Building',     cls:'stage-b' },
+  C: { label:'C · Preview & Pay',cls:'stage-c' },
+  D: { label:'D · Deploy',       cls:'stage-d' },
+};
+
+// ── Render table ──
 function renderTable() {
   const q   = (document.getElementById('search').value || '').toLowerCase();
-  const st  = document.getElementById('filter-status').value;
-  let rows  = allLeads.filter(l => {
-    const match = (l.businessName + l.ownerName + l.district).toLowerCase().includes(q);
-    const stOk  = !st || l.status === st || (st === 'New Lead' && l.status === 'New');
-    return match && stOk;
+  const sf  = document.getElementById('filter-stage').value;
+  const sort= document.getElementById('sort-by').value;
+
+  let rows = allLeads.filter(l => {
+    const txt = (l.businessName + l.ownerName + l.district + l.industry).toLowerCase();
+    return txt.includes(q) && (!sf || l.stage === sf);
+  });
+
+  rows.sort((a,b) => {
+    if (sort === 'score') return (b.leadScore||0) - (a.leadScore||0);
+    if (sort === 'date')  return new Date(b.createdAt||0) - new Date(a.createdAt||0);
+    return (a.businessName||'').localeCompare(b.businessName||'');
   });
 
   const tbody = document.getElementById('leads-tbody');
   if (!rows.length) {
-    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="ei">📭</div>Tiada lead ditemui.</div></td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6"><div class="empty">📭 No leads found.</div></td></tr>`;
     return;
   }
 
   tbody.innerHTML = rows.map(l => {
-    const st  = l.status === 'New' ? 'New Lead' : (l.status || 'New Lead');
-    const cls = { 'New Lead':'st-new','Contacted':'st-contacted','Proposal Sent':'st-proposal','Closed Won':'st-won','Closed Lost':'st-lost' }[st] || 'st-new';
-    const dt  = l.createdAt ? new Date(l.createdAt).toLocaleDateString('ms-MY') : '—';
-    return `<tr>
-      <td style="color:var(--muted);font-size:.8rem">${dt}</td>
-      <td><strong>${esc(l.businessName || '—')}</strong><br/><span style="font-size:.75rem;color:var(--muted)">${esc(l.orgType || l.bizType || '')}</span></td>
-      <td>${esc(l.ownerName || '—')}</td>
+    const sc  = l.leadScore || 50;
+    const sc2 = scoreColor(sc);
+    const sm  = STAGE_META[l.stage] || STAGE_META.A;
+    const dt  = l.createdAt ? new Date(l.createdAt).toLocaleDateString('en-MY',{year:'numeric',month:'short',day:'numeric'}) : '—';
+    return `<tr onclick="openPanel('${esc(l.id)}')">
       <td>
-        <a href="tel:${esc(l.mobile)}" style="color:var(--p6)">${esc(l.mobile || '—')}</a>
-        <button class="action-btn" title="Salin" onclick="copyText('${esc(l.mobile)}')">⎘</button>
+        <div class="biz-name">${esc(l.businessName||'—')}</div>
+        <div class="biz-owner">${esc(l.ownerName||'—')}</div>
       </td>
-      <td style="font-size:.82rem">${esc(l.district || '—')}</td>
-      <td style="font-size:.78rem;color:var(--muted)">${esc(l.industry || l.bizType || '—')}</td>
+      <td style="font-size:.82rem">${esc(l.district||'—')}</td>
+      <td style="font-size:.82rem">${esc(l.industry||l.bizType||l.orgType||'—')}</td>
       <td>
-        <select class="status-select" data-id="${l.id}" onchange="updateStatus(this)">
-          ${['New Lead','Contacted','Proposal Sent','Closed Won','Closed Lost'].map(s => `<option value="${s}" ${st===s?'selected':''}>${s}</option>`).join('')}
-        </select>
-        <span class="status-badge ${cls}" style="margin-top:4px;display:inline-flex">${st}</span>
+        <div class="score-bubble" style="background:${sc2.bg};color:${sc2.color}">${sc}</div>
       </td>
-      <td>
-        <button class="action-btn" onclick="showLeadDetail('${l.id}')">👁 Lihat</button>
-        <a href="https://wa.me/${(l.mobile||'').replace(/\D/g,'')}" target="_blank" class="action-btn">💬</a>
-      </td>
+      <td><span class="stage-badge ${sm.cls}">${sm.label}</span></td>
+      <td style="font-size:.8rem;color:var(--muted)">${dt}</td>
     </tr>`;
   }).join('');
 }
 
-function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+// ── Side panel ──
+function openPanel(id) {
+  const l = allLeads.find(l => l.id === id);
+  if (!l) return;
+  currentId = id;
+  document.getElementById('sp-biz').textContent   = l.businessName || '—';
+  document.getElementById('sp-owner').textContent = l.ownerName    || '—';
+  document.getElementById('sp-stage').value        = l.stage || 'A';
+  const phone = (l.mobile||'').replace(/\D/g,'');
+  document.getElementById('sp-wa').href    = `https://wa.me/${phone}`;
+  document.getElementById('sp-email').href = `mailto:${l.email||''}`;
+  document.getElementById('sp-pay').href   = `pay.html?b=${encodeURIComponent(l.businessName||'')}&name=${encodeURIComponent(l.ownerName||'')}&id=${encodeURIComponent(l.id)}`;
+  document.getElementById('sp-notes').value = l.notes || '';
 
-// ── Status update ──
-async function updateStatus(sel) {
-  const id     = sel.dataset.id;
-  const status = sel.value;
-  const lead   = allLeads.find(l => l.id === id);
-  if (!lead) return;
-  lead.status  = status;
+  const sc2 = scoreColor(l.leadScore||50);
+  document.getElementById('sp-details').innerHTML = `
+    <div class="info-row"><span class="info-label">Emel</span><span class="info-val">${esc(l.email||'—')}</span></div>
+    <div class="info-row"><span class="info-label">Telefon</span><span class="info-val">${esc(l.mobile||'—')}</span></div>
+    <div class="info-row"><span class="info-label">Daerah</span><span class="info-val">${esc(l.district||'—')}</span></div>
+    <div class="info-row"><span class="info-label">Jenis</span><span class="info-val">${esc(l.orgType||l.bizType||'—')}</span></div>
+    <div class="info-row"><span class="info-label">Industri</span><span class="info-val">${esc(l.industry||'—')}</span></div>
+    <div class="info-row"><span class="info-label">Bahasa</span><span class="info-val">${esc((l.languages||[]).join(', ')||'—')}</span></div>
+    <div class="info-row"><span class="info-label">Lead Score</span><span class="info-val" style="color:${sc2.color};font-weight:700">${l.leadScore||'—'}</span></div>
+    <div class="info-row"><span class="info-label">Pakej</span><span class="info-val">${esc(l.package||'RM500 Website Activation')}</span></div>
+    <div class="info-row"><span class="info-label">Ref ID</span><span class="info-val" style="font-family:monospace;font-size:.78rem">${esc(l.id)}</span></div>
+    ${l.bizDesc?`<div style="margin-top:12px;padding:10px;background:rgba(139,92,246,.07);border-radius:8px;font-size:.82rem;color:var(--muted);line-height:1.6">${esc(l.bizDesc)}</div>`:''}
+  `;
+
+  document.getElementById('side-panel').classList.add('open');
+  document.getElementById('overlay').classList.add('on');
+}
+
+function closeSidePanel() {
+  document.getElementById('side-panel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('on');
+  currentId = null;
+}
+
+async function updateStage() {
+  if (!currentId) return;
+  const stage = document.getElementById('sp-stage').value;
+  const lead = allLeads.find(l => l.id === currentId);
+  if (lead) lead.stage = stage;
   try {
     await fetch('/.netlify/functions/submissions', {
       method: 'PATCH',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ id, status }),
+      body: JSON.stringify({ id: currentId, stage, status: { A:'New Lead',B:'Contacted',C:'Proposal Sent',D:'Closed Won' }[stage] }),
     });
-    renderTable();
-    renderStats();
-    toast('Status dikemaskini: ' + status);
-  } catch { toast('❌ Gagal kemaskini', true); }
+  } catch {}
+  renderStats();
+  renderTable();
+  toast('Stage updated: ' + stage);
 }
 
-// ── Lead detail modal ──
-function showLeadDetail(id) {
-  const l = allLeads.find(l => l.id === id);
-  if (!l) return;
-  document.getElementById('modal-biz').textContent = l.businessName || '—';
-  document.getElementById('modal-body').innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px">
-      <div><strong>Pemilik:</strong></div><div>${esc(l.ownerName || '—')}</div>
-      <div><strong>Emel:</strong></div><div>${esc(l.email || '—')}</div>
-      <div><strong>Telefon:</strong></div><div>${esc(l.mobile || '—')}</div>
-      <div><strong>Daerah:</strong></div><div>${esc(l.district || '—')}</div>
-      <div><strong>Jenis:</strong></div><div>${esc(l.orgType || l.bizType || '—')}</div>
-      <div><strong>Industri:</strong></div><div>${esc(l.industry || '—')}</div>
-      <div><strong>Pakej:</strong></div><div>${esc(l.package || 'RM500 Website Activation')}</div>
-      <div><strong>Status:</strong></div><div>${esc(l.status || '—')}</div>
-      <div><strong>Bahasa:</strong></div><div>${esc((l.languages||[]).join(', ') || '—')}</div>
-      <div><strong>Daftar:</strong></div><div>${l.createdAt ? new Date(l.createdAt).toLocaleString('ms-MY') : '—'}</div>
-    </div>
-    ${l.bizDesc ? `<div style="margin-top:14px;padding:12px;background:rgba(139,92,246,.07);border-radius:10px;font-size:.84rem"><strong>Perihal:</strong><br/>${esc(l.bizDesc)}</div>` : ''}
-    ${l.existing ? `<div style="margin-top:8px;font-size:.82rem"><strong>Link sedia ada:</strong> <a href="${esc(l.existing)}" target="_blank" style="color:var(--p6)">${esc(l.existing)}</a></div>` : ''}
-    <div style="margin-top:10px;font-size:.75rem;color:var(--muted2)">ID: ${esc(l.id)}</div>
-  `;
-  document.getElementById('modal-wa').href    = `https://wa.me/${(l.mobile||'').replace(/\D/g,'')}`;
-  document.getElementById('modal-email').href = `mailto:${l.email}`;
-  document.getElementById('lead-modal').style.display = 'flex';
-}
-function closeLeadModal() { document.getElementById('lead-modal').style.display = 'none'; }
-
-// ── Portfolio ──
-function renderPortfolio() {
-  const grid = document.getElementById('portfolio-grid');
-  grid.innerHTML = portfolioItems.map((p, i) => `
-    <div class="port-card">
-      <div class="port-card-header">
-        <span style="font-size:2rem">${p.icon || '🌐'}</span>
-        <button class="action-btn" onclick="removePortfolio(${i})">✕</button>
-      </div>
-      <div class="port-name">${esc(p.name)}</div>
-      <div class="port-cat">${esc(p.cat)}</div>
-      ${p.url && p.url !== '#' ? `<div class="port-url"><a href="${esc(p.url)}" target="_blank" style="color:var(--p6)">${esc(p.url)}</a></div>` : ''}
-    </div>
-  `).join('') + `
-    <div class="port-add-btn" onclick="showAddPortfolio()">
-      <span style="font-size:2rem">+</span>
-      <span>Tambah Website Baharu</span>
-    </div>
-  `;
-}
-function showAddPortfolio() {
-  document.getElementById('portfolio-modal').style.display = 'flex';
-}
-function closePortfolioModal() {
-  document.getElementById('portfolio-modal').style.display = 'none';
-}
-function savePortfolio() {
-  const name = document.getElementById('p-name').value.trim();
-  const cat  = document.getElementById('p-cat').value.trim();
-  const url  = document.getElementById('p-url').value.trim();
-  const icon = document.getElementById('p-icon').value.trim() || '🌐';
-  if (!name) return;
-  portfolioItems.push({ name, cat, url, icon });
-  localStorage.setItem('sdcPortfolio', JSON.stringify(portfolioItems));
-  closePortfolioModal();
-  renderPortfolio();
-  toast('Portfolio ditambah ✓');
-}
-function removePortfolio(i) {
-  portfolioItems.splice(i, 1);
-  localStorage.setItem('sdcPortfolio', JSON.stringify(portfolioItems));
-  renderPortfolio();
-  toast('Dibuang');
-}
-
-// ── Content: activated count ──
-function saveActivatedCount() {
-  const val = document.getElementById('activated-count').value;
-  localStorage.setItem('sdcActivated', val);
-  toast('Dikemaskini: ' + val + ' aktivasi ✓');
+async function saveNotes() {
+  if (!currentId) return;
+  const notes = document.getElementById('sp-notes').value;
+  const lead  = allLeads.find(l => l.id === currentId);
+  if (lead) lead.notes = notes;
+  try {
+    await fetch('/.netlify/functions/submissions', {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id: currentId, notes }),
+    });
+  } catch {}
+  toast('Notes saved ✓');
 }
 
 // ── CSV export ──
 function exportCSV() {
-  const headers = ['ID','Tarikh','Perniagaan','Pemilik','Emel','Telefon','Daerah','Jenis','Industri','Status','Pakej'];
+  const h = ['ID','Date','Business','Owner','Email','Phone','District','Category','Score','Stage','Package'];
   const rows = allLeads.map(l => [
     l.id, l.createdAt ? new Date(l.createdAt).toLocaleDateString() : '',
     l.businessName, l.ownerName, l.email, l.mobile, l.district,
-    l.orgType || l.bizType, l.industry, l.status, l.package || 'RM500'
+    l.industry||l.bizType||l.orgType, l.leadScore, l.stage, l.package||'RM500'
   ].map(v => '"' + String(v||'').replace(/"/g,'""') + '"'));
-  const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+  const csv = [h, ...rows].map(r => r.join(',')).join('\n');
   const a = document.createElement('a');
   a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = 'shahlan-sdc-leads-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.download = 'shahlan-sdc-' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
 }
 
-// ── Copy ──
-function copyText(t) { navigator.clipboard.writeText(t).then(() => toast('Disalin ✓')); }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-// ── Toast ──
 function toast(msg, err) {
   const el = document.getElementById('toast');
   el.textContent = msg;
-  el.style.background = err ? 'rgba(239,68,68,.18)' : 'rgba(16,185,129,.18)';
-  el.style.borderColor = err ? 'rgba(239,68,68,.35)' : 'rgba(16,185,129,.4)';
-  el.style.color = err ? '#fca5a5' : '#6ee7b7';
-  el.style.display = 'block';
-  setTimeout(() => { el.style.display = 'none'; }, 3000);
+  el.style.background  = err ? 'rgba(239,68,68,.18)' : 'rgba(16,185,129,.18)';
+  el.style.border      = `1px solid ${err ? 'rgba(239,68,68,.35)' : 'rgba(16,185,129,.4)'}`;
+  el.style.color       = err ? '#fca5a5' : '#6ee7b7';
+  el.style.display     = 'block';
+  setTimeout(() => el.style.display = 'none', 3000);
 }
 
-// ── Init ──
 loadData();
 setInterval(loadData, 30000);
-renderPortfolio();
 </script>
 </body>
 </html>
