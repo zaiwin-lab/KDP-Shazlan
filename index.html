@@ -22,9 +22,11 @@
     .hero-h1 .highlight { color: var(--gold); }
     .hero-sub { color: var(--muted); font-size: 1.05rem; line-height: 1.75; max-width: 520px; margin-bottom: 36px; }
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-    .person-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 32px 28px; text-align: center; position: relative; backdrop-filter: blur(12px); box-shadow: var(--glow-md); min-width: 260px; }
-    .person-card::before { content: ''; position: absolute; inset: 0; border-radius: var(--r-xl); background: linear-gradient(135deg, rgba(139,92,246,.1), rgba(6,182,212,.06)); pointer-events: none; }
-    .person-avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--p3), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 2.8rem; font-weight: 800; font-family: var(--font-head); color: white; margin: 0 auto 16px; box-shadow: var(--glow-md); }
+    .person-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 0; text-align: center; position: relative; backdrop-filter: blur(12px); box-shadow: var(--glow-md); min-width: 260px; width: 280px; overflow: hidden; }
+    .person-card::before { content: ''; position: absolute; inset: 0; border-radius: var(--r-xl); background: linear-gradient(135deg, rgba(139,92,246,.1), rgba(6,182,212,.06)); pointer-events: none; z-index: 1; }
+    .person-avatar { width: 100%; height: 340px; background: linear-gradient(135deg, var(--p3), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 2.8rem; font-weight: 800; font-family: var(--font-head); color: white; overflow: hidden; border-radius: var(--r-xl) var(--r-xl) 0 0; }
+    .person-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .person-card-body { padding: 18px 20px 22px; position: relative; z-index: 2; }
     .person-name { font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
     .person-title { font-size: .82rem; color: var(--gold); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 16px; }
     .person-verified { display: inline-flex; align-items: center; gap: 6px; background: rgba(6,182,212,.12); border: 1px solid rgba(6,182,212,.3); border-radius: 99px; padding: 5px 12px; font-size: .78rem; font-weight: 600; color: var(--cyan); }
@@ -78,8 +80,10 @@
     .step-title { font-family: var(--font-head); font-weight: 700; margin-bottom: 8px; }
     .step-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
     .about-grid-new { display: grid; grid-template-columns: 1fr 1.6fr; gap: 60px; align-items: center; }
-    .about-photo-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 40px 32px; text-align: center; box-shadow: var(--glow-md); }
-    .about-avatar-big { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, var(--p3), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 3.2rem; font-weight: 800; font-family: var(--font-head); margin: 0 auto 16px; box-shadow: 0 0 40px rgba(139,92,246,.4); }
+    .about-photo-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); text-align: center; box-shadow: var(--glow-md); overflow: hidden; }
+    .about-avatar-big { width: 100%; height: 380px; background: linear-gradient(135deg, var(--p3), var(--cyan)); display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
+    .about-avatar-big img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .about-card-footer { padding: 20px 24px 24px; }
     .about-tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
     .tag-pill { padding: 5px 12px; background: rgba(139,92,246,.1); border: 1px solid rgba(139,92,246,.25); border-radius: 99px; font-size: .78rem; color: var(--p7); }
     .quote-support { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
@@ -179,10 +183,12 @@
       <!-- Person Card -->
       <div style="position:relative;flex-shrink:0">
         <div class="person-card reveal">
-          <div class="person-avatar">SH</div>
-          <div class="person-name">Shahlan</div>
-          <div class="person-title" data-i18n="hero.card.title">Sarawak Digital Champion · 2026 Candidate</div>
-          <div class="person-verified" data-i18n="hero.card.verified">✦ SDC Verified Candidate</div>
+          <div class="person-avatar"><img src="shahlan.png" alt="Shahlan"/></div>
+          <div class="person-card-body">
+            <div class="person-name">Shahlan</div>
+            <div class="person-title" data-i18n="hero.card.title">Sarawak Digital Champion · 2026 Candidate</div>
+            <div class="person-verified" data-i18n="hero.card.verified">✦ SDC Verified Candidate</div>
+          </div>
         </div>
         <div class="hero-float hero-float-tl">
           <span style="font-size:1.1rem">🏆</span>
@@ -547,13 +553,15 @@ jadi seterusnya</div>
     <div class="about-grid-new">
       <div>
         <div class="about-photo-card reveal">
-          <div class="about-avatar-big">SH</div>
-          <div style="font-family:var(--font-head);font-size:1.25rem;font-weight:800;margin-bottom:4px">Shahlan</div>
-          <div style="font-size:.82rem;color:var(--gold);font-weight:600;letter-spacing:.04em;text-transform:uppercase" data-i18n="about.card.title">SDC 2026 Candidate</div>
-          <div class="about-tags-wrap" style="justify-content:center">
-            <span class="tag-pill" data-i18n="about.tag1">⚡ Transformasi Digital</span>
-            <span class="tag-pill" data-i18n="about.tag2">🌍 Sarawak</span>
-            <span class="tag-pill" data-i18n="about.tag3">🤝 100 Aktivasi</span>
+          <div class="about-avatar-big"><img src="shahlan.png" alt="Shahlan"/></div>
+          <div class="about-card-footer">
+            <div style="font-family:var(--font-head);font-size:1.25rem;font-weight:800;margin-bottom:4px">Shahlan</div>
+            <div style="font-size:.82rem;color:var(--gold);font-weight:600;letter-spacing:.04em;text-transform:uppercase" data-i18n="about.card.title">SDC 2026 Candidate</div>
+            <div class="about-tags-wrap" style="justify-content:center">
+              <span class="tag-pill" data-i18n="about.tag1">⚡ Transformasi Digital</span>
+              <span class="tag-pill" data-i18n="about.tag2">🌍 Sarawak</span>
+              <span class="tag-pill" data-i18n="about.tag3">🤝 100 Aktivasi</span>
+            </div>
           </div>
         </div>
       </div>
