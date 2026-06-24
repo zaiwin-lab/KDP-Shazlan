@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — Syahlan SDC</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .score-bar {
+      height: 6px; border-radius: 3px; background: rgba(139,92,246,.15); overflow: hidden; min-width: 60px;
+    }
+    .score-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--p4), var(--cyan));
+      box-shadow: 0 0 6px rgba(139,92,246,.5);
+    }
+    .empty-state {
+      text-align: center; padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+    .copy-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: .85rem; padding: 2px 6px;
+      border-radius: 4px; transition: color .15s;
+    }
+    .copy-btn:hover { color: var(--p6); }
+    #toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: rgba(16,185,129,.2); border: 1px solid rgba(16,185,129,.4);
+      color: #6ee7b7; padding: 10px 20px; border-radius: 8px;
+      font-size: .85rem; display: none; z-index: 200; backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body>
+<div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
+<div class="grid-dots"></div>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="bolt">⚡</span>
+    <span>Dashboard <span style="color:var(--p6)">SDC</span></span>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center">
+    <div class="dash-live"><span class="dot"></span> Live</div>
+    <a href="index.html" class="btn btn-ghost btn-sm">← Laman Utama</a>
+  </div>
+</nav>
+
+<div class="dash-wrapper">
+  <div class="container">
+    <div class="dash-header">
+      <div>
+        <h1>Lead <span class="grad-text-purple">Dashboard</span></h1>
+        <p style="color:var(--muted);font-size:.85rem;margin-top:4px">Syahlan bin Jasmi — Kabong & Spaoh · Auto-refresh setiap 30s</p>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="loadData()" id="refresh-btn">↻ Refresh</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="stats-row">
+      <div class="stat-card"><div class="num" id="s-total">—</div><div class="lbl">Jumlah Lead</div></div>
+      <div class="stat-card"><div class="num" id="s-paid">—</div><div class="lbl">Telah Bayar</div></div>
+      <div class="stat-card"><div class="num" id="s-new">—</div><div class="lbl">Baru (Belum Bayar)</div></div>
+      <div class="stat-card"><div class="num" id="s-avg">—</div><div class="lbl">Skor Purata</div></div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Perniagaan</th>
+            <th>Pemilik</th>
+            <th>Daerah</th>
+            <th>Emel / Tel</th>
+            <th>Skor</th>
+            <th>Status</th>
+            <th>Tarikh</th>
+            <th>Tindakan</th>
+          </tr>
+        </thead>
+        <tbody id="tbl-body">
+          <tr><td colspan="8" style="text-align:center;padding:40px;color:var(--muted)">Memuatkan data…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="toast">✓ Disalin!</div>
+
+<script>
+  const BASE = '/.netlify/functions/submissions';
+  let allData = [];
+
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    return new Date(iso).toLocaleDateString('ms-MY', { day:'2-digit', month:'short', year:'numeric' });
+  }
+
+  function payUrl(rec) {
+    const p = new URLSearchParams({
+      b: rec.businessName || '', name: rec.ownerName || '', id: rec.id || ''
+    });
+    return `${location.origin}/pay.html?${p}`;
+  }
+
+  function copy(text) {
+    navigator.clipboard.writeText(text);
+    const t = document.getElementById('toast');
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 1800);
+  }
+
+  function renderStats(data) {
+    const paid = data.filter(r => r.paid).length;
+    const scores = data.map(r => r.leadScore || 0).filter(Boolean);
+    const avg = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
+    document.getElementById('s-total').textContent = data.length;
+    document.getElementById('s-paid').textContent  = paid;
+    document.getElementById('s-new').textContent   = data.length - paid;
+    document.getElementById('s-avg').textContent   = avg || '—';
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('tbl-body');
+    if (!data.length) {
+      tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><div class="icon">📭</div><p>Belum ada lead. Kongsi link pendaftaran untuk mula!</p></div></td></tr>`;
+      return;
+    }
+    // sort newest first
+    const sorted = [...data].sort((a,b) => new Date(b.createdAt||0) - new Date(a.createdAt||0));
+    tbody.innerHTML = sorted.map(rec => {
+      const status = rec.paid ? 'paid' : 'new';
+      const statusLabel = rec.paid ? '✅ Bayar' : '🔵 Baru';
+      const score = rec.leadScore || 0;
+      const pUrl = payUrl(rec);
+      return `
+        <tr>
+          <td><strong>${escHtml(rec.businessName||'—')}</strong><br/><span style="font-size:.72rem;color:var(--muted)">${escHtml(rec.bizType||'')}</span></td>
+          <td>${escHtml(rec.ownerName||'—')}</td>
+          <td>${escHtml(rec.district||'—')}</td>
+          <td>
+            <div style="font-size:.8rem">${escHtml(rec.email||'—')}</div>
+            <div style="font-size:.8rem;color:var(--muted)">${escHtml(rec.mobile||'—')}</div>
+          </td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="score-bar"><div class="score-fill" style="width:${score}%"></div></div>
+              <span style="font-size:.78rem;color:var(--p7)">${score}</span>
+            </div>
+          </td>
+          <td><span class="badge badge-${status}">${statusLabel}</span></td>
+          <td style="font-size:.78rem;color:var(--muted)">${fmtDate(rec.createdAt)}</td>
+          <td>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              ${!rec.paid ? `<button class="action-btn action-pay" onclick="copy('${pUrl}')">💳 Salin Link Bayar</button>` : ''}
+              <button class="action-btn action-del" onclick="deleteLead('${escHtml(rec.id||'')}')">🗑</button>
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  function escHtml(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  async function loadData() {
+    const btn = document.getElementById('refresh-btn');
+    btn.textContent = '…';
+    try {
+      const r = await fetch(BASE);
+      allData = await r.json();
+      renderStats(allData);
+      renderTable(allData);
+    } catch (e) {
+      document.getElementById('tbl-body').innerHTML = `<tr><td colspan="8" style="color:#f87171;text-align:center;padding:30px">Ralat memuatkan data: ${e.message}</td></tr>`;
+    }
+    btn.textContent = '↻ Refresh';
+  }
+
+  async function deleteLead(id) {
+    if (!id || !confirm('Padam lead ini?')) return;
+    await fetch(`${BASE}?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+    await loadData();
+  }
+
+  loadData();
+  setInterval(loadData, 30000);
+</script>
+</body>
+</html>

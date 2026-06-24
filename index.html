@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Syahlan bin Jasmi — Wakil Digital Champion Sarawak</title>
+  <meta name="description" content="Daftarkan perniagaan anda dengan Syahlan bin Jasmi, Wakil Sarawak Digital Champion untuk kawasan Kabong & Spaoh."/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* page-specific overrides */
+    .marquee-wrap { overflow: hidden; padding: 20px 0; mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent); }
+    .marquee { display: flex; gap: 40px; animation: marqueeSlide 30s linear infinite; width: max-content; }
+    .marquee-item { display: flex; align-items: center; gap: 10px; white-space: nowrap; font-size: .85rem; color: var(--muted); }
+    .marquee-item .icon { font-size: 1.1rem; }
+    @keyframes marqueeSlide { to { transform: translateX(-50%); } }
+
+    .lightning-bolt {
+      position: absolute; opacity: .12; color: var(--p5);
+      font-size: 8rem; font-weight: 900; line-height: 1;
+      user-select: none; pointer-events: none;
+    }
+
+    .program-card {
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(76,29,149,.15), rgba(6,182,212,.08));
+      border: 1px solid rgba(139,92,246,.2);
+      border-radius: var(--r-lg);
+      position: relative; overflow: hidden;
+    }
+    .program-card::before {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,.15), transparent);
+      transform: translate(50%,-50%);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Aurora -->
+<div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
+<div class="grid-dots"></div>
+
+<!-- Navbar -->
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="bolt">⚡</span>
+    <span>Syahlan <span style="color:var(--p6)">SDC</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#program">Program</a></li>
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#cara">Cara Daftar</a></li>
+  </ul>
+  <a href="activate.html" class="nav-cta">Daftar Sekarang →</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero section">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="lightning">⚡</span>
+          Sarawak Digital Champion 2025
+        </div>
+        <h1 class="hero-h1">
+          Tingkatkan<br/>
+          <span class="grad-text">Perniagaan Anda</span><br/>
+          ke Tahap Digital
+        </h1>
+        <p class="hero-sub">
+          Program eksklusif kerajaan Sarawak untuk membantu PKS tempatan menjadi lebih berdaya saing melalui transformasi digital — dipimpin oleh <strong style="color:var(--white)">Syahlan bin Jasmi</strong>, Wakil untuk kawasan <strong style="color:var(--p7)">Kabong & Spaoh</strong>.
+        </p>
+        <div class="hero-actions">
+          <a href="activate.html" class="btn btn-primary btn-lg">
+            ⚡ Daftar Percuma Sekarang
+          </a>
+          <a href="#program" class="btn btn-secondary btn-lg">
+            Ketahui Lebih Lanjut
+          </a>
+        </div>
+        <div class="hero-trust">
+          <div class="avatars">
+            <div class="avatar">RH</div>
+            <div class="avatar">AS</div>
+            <div class="avatar">NB</div>
+            <div class="avatar">KL</div>
+          </div>
+          <span>Lebih <strong style="color:var(--white)">200+ perniagaan</strong> telah didaftarkan</span>
+        </div>
+      </div>
+
+      <!-- Hero Visual -->
+      <div class="hero-visual" style="position:relative">
+        <div class="hero-card-main">
+          <div class="card-image">🧑‍💼</div>
+          <div class="card-overlay">
+            <h3>Syahlan bin Jasmi</h3>
+            <p>⚡ Wakil Digital Champion — Kabong & Spaoh</p>
+          </div>
+        </div>
+        <div class="hero-badge badge-tl">
+          <span class="badge-icon">🏆</span>
+          <div class="badge-text">
+            <strong>Program Rasmi</strong>
+            <span>Kerajaan Sarawak</span>
+          </div>
+        </div>
+        <div class="hero-badge badge-br">
+          <span class="badge-icon">✅</span>
+          <div class="badge-text">
+            <strong>Percuma Daftar</strong>
+            <span>Mulai hari ini</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="section" style="position:relative;z-index:1;background:rgba(139,92,246,.04);border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);">
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <div class="marquee-item"><span class="icon">🏪</span> Perniagaan Runcit</div>
+      <div class="marquee-item"><span class="icon">🍽️</span> Industri Makanan</div>
+      <div class="marquee-item"><span class="icon">👗</span> Fesyen & Tekstil</div>
+      <div class="marquee-item"><span class="icon">🔧</span> Perkhidmatan Teknikal</div>
+      <div class="marquee-item"><span class="icon">📱</span> Teknologi & IT</div>
+      <div class="marquee-item"><span class="icon">🌿</span> Pertanian & Agroteknologi</div>
+      <div class="marquee-item"><span class="icon">🚗</span> Automotif</div>
+      <div class="marquee-item"><span class="icon">💄</span> Kecantikan & Wellness</div>
+      <div class="marquee-item"><span class="icon">🏗️</span> Pembinaan & Hartanah</div>
+      <div class="marquee-item"><span class="icon">📚</span> Pendidikan & Latihan</div>
+      <!-- duplicate for infinite scroll -->
+      <div class="marquee-item"><span class="icon">🏪</span> Perniagaan Runcit</div>
+      <div class="marquee-item"><span class="icon">🍽️</span> Industri Makanan</div>
+      <div class="marquee-item"><span class="icon">👗</span> Fesyen & Tekstil</div>
+      <div class="marquee-item"><span class="icon">🔧</span> Perkhidmatan Teknikal</div>
+      <div class="marquee-item"><span class="icon">📱</span> Teknologi & IT</div>
+      <div class="marquee-item"><span class="icon">🌿</span> Pertanian & Agroteknologi</div>
+      <div class="marquee-item"><span class="icon">🚗</span> Automotif</div>
+      <div class="marquee-item"><span class="icon">💄</span> Kecantikan & Wellness</div>
+      <div class="marquee-item"><span class="icon">🏗️</span> Pembinaan & Hartanah</div>
+      <div class="marquee-item"><span class="icon">📚</span> Pendidikan & Latihan</div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats -->
+<section class="section section-pad-sm" id="program">
+  <div class="container">
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Perniagaan Disasarkan</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Kawasan Fokus</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Program Percuma</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2025</div>
+        <div class="stat-label">Tahun Program</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Program benefits -->
+<section class="section section-pad">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px">
+      <div class="section-label"><span class="dot"></span> Manfaat Program</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;line-height:1.2" class="reveal">
+        Kenapa Sertai Program<br/><span class="grad-text-purple">Sarawak Digital Champion?</span>
+      </h2>
+    </div>
+    <div class="feature-grid">
+      <div class="card feature-card reveal">
+        <div class="feature-icon">🚀</div>
+        <h3>Transformasi Digital Percuma</h3>
+        <p>Akses kepada modul latihan digital, tools perniagaan, dan bimbingan eksklusif tanpa sebarang kos kepada anda.</p>
+      </div>
+      <div class="card feature-card reveal">
+        <div class="feature-icon">🤝</div>
+        <h3>Pendampingan Langsung</h3>
+        <p>Mendapat bimbingan terus daripada Syahlan bin Jasmi dan pasukan Digital Champion yang berpengalaman.</p>
+      </div>
+      <div class="card feature-card reveal">
+        <div class="feature-icon">📊</div>
+        <h3>Laporan & Analitik</h3>
+        <p>Fahami prestasi perniagaan anda dengan laporan digital yang jelas — bantu buat keputusan lebih bijak.</p>
+      </div>
+      <div class="card feature-card reveal">
+        <div class="feature-icon">🌐</div>
+        <h3>Kehadiran Online</h3>
+        <p>Kami bantu perniagaan anda hadir secara digital — laman web, media sosial, marketplace dan lebih.</p>
+      </div>
+      <div class="card feature-card reveal">
+        <div class="feature-icon">💳</div>
+        <h3>Pembayaran Digital</h3>
+        <p>Bimbing untuk terima bayaran online (FPX, DuitNow, kad) — tingkatkan jualan tanpa batasan geografi.</p>
+      </div>
+      <div class="card feature-card reveal">
+        <div class="feature-icon">🏅</div>
+        <h3>Sijil & Pengiktirafan</h3>
+        <p>Dapatkan sijil rasmi Digital Champion Sarawak yang meningkatkan kredibiliti perniagaan anda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider container"></div>
+
+<!-- About Syahlan -->
+<section class="section section-pad" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="about-photo">🧑‍💼</div>
+      </div>
+      <div class="about-content reveal">
+        <div class="section-label"><span class="dot"></span> Wakil Anda</div>
+        <h2>
+          Syahlan bin Jasmi<br/>
+          <span class="grad-text">Digital Champion</span><br/>
+          Kabong & Spaoh
+        </h2>
+        <p>
+          Syahlan bin Jasmi merupakan Wakil Sarawak Digital Champion (SDC) yang dilantik secara rasmi oleh kerajaan negeri Sarawak untuk memimpin transformasi digital di kawasan <strong style="color:var(--p7)">Kabong & Spaoh</strong>.
+        </p>
+        <p>
+          Dengan semangat tinggi untuk membantu usahawan tempatan, Syahlan berkomitmen penuh untuk memastikan setiap perniagaan di kawasannya mendapat akses kepada peluang digital yang selama ini hanya tersedia untuk syarikat besar.
+        </p>
+        <p>
+          Bersama Syahlan, perjalanan digital anda bermula hari ini — mudah, terstruktur, dan disokong sepenuhnya.
+        </p>
+        <div class="about-tags">
+          <span class="tag">📍 Kabong</span>
+          <span class="tag">📍 Spaoh</span>
+          <span class="tag">⚡ Transformasi Digital</span>
+          <span class="tag">🏅 SDC 2025</span>
+          <span class="tag">🤝 PKS Sarawak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section section-pad" id="cara">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px">
+      <div class="section-label"><span class="dot"></span> Proses Mudah</div>
+      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800" class="reveal">
+        3 Langkah Sahaja untuk<br/><span class="grad-text">Mulakan Perjalanan Digital</span>
+      </h2>
+    </div>
+    <div class="steps">
+      <div class="step card reveal">
+        <div class="step-num">01</div>
+        <h3>Daftar Online</h3>
+        <p>Isi borang pendaftaran mudah dalam masa kurang dari 5 minit. Percuma sepenuhnya.</p>
+      </div>
+      <div class="step card reveal">
+        <div class="step-num">02</div>
+        <h3>Sesi Penilaian</h3>
+        <p>Syahlan atau pasukan SDC akan menghubungi anda untuk sesi temu bual & penilaian perniagaan.</p>
+      </div>
+      <div class="step card reveal">
+        <div class="step-num">03</div>
+        <h3>Go Digital!</h3>
+        <p>Jalani program transformasi digital dan mula kembangkan perniagaan anda ke peringkat baharu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section-pad">
+  <div class="container">
+    <div class="cta-band reveal">
+      <span style="font-size:3rem;display:block;margin-bottom:16px">⚡</span>
+      <h2>Jangan Ketinggalan Peluang Ini</h2>
+      <p>Slot terhad untuk kawasan Kabong & Spaoh. Daftar sekarang sebelum kehabisan tempat.</p>
+      <div class="actions">
+        <a href="activate.html" class="btn btn-primary btn-lg">
+          Daftar Percuma Sekarang →
+        </a>
+        <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary btn-lg">
+          💬 Hubungi Syahlan
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">⚡ Syahlan <span style="color:var(--p6)">SDC</span></div>
+    <p>Wakil Sarawak Digital Champion — Kawasan Kabong & Spaoh</p>
+    <p style="margin-top:8px">© 2025 KOBIS · Koperasi Pro Belia Inovatif Sarawak Bhd</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

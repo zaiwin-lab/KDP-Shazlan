@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daftar Program SDC — Syahlan bin Jasmi</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
+<div class="grid-dots"></div>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="bolt">⚡</span>
+    <a href="index.html">Syahlan <span style="color:var(--p6)">SDC</span></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">← Kembali</a></li>
+  </ul>
+</nav>
+
+<div class="form-wrapper">
+  <div class="form-card" id="form-view">
+    <div class="form-header">
+      <div style="font-size:2.5rem;margin-bottom:12px">⚡</div>
+      <h1>Daftar Program <span class="grad-text-purple">SDC</span></h1>
+      <p>Isi borang di bawah. Syahlan akan menghubungi anda tidak lama lagi.</p>
+    </div>
+
+    <form id="reg-form" novalidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="businessName">Nama Perniagaan *</label>
+          <input class="form-input" id="businessName" type="text" placeholder="contoh: Kedai Runcit ABC" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ownerName">Nama Pemilik *</label>
+          <input class="form-input" id="ownerName" type="text" placeholder="Nama penuh anda" required/>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="email">Emel *</label>
+          <input class="form-input" id="email" type="email" placeholder="email@contoh.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="mobile">No. Telefon *</label>
+          <input class="form-input" id="mobile" type="tel" placeholder="012-345 6789" required/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="district">Daerah / Kawasan *</label>
+        <select class="form-select" id="district" required>
+          <option value="" disabled selected>-- Pilih daerah anda --</option>
+          <optgroup label="Kawasan Utama (Kabong & Spaoh)">
+            <option value="Kabong">Kabong</option>
+            <option value="Spaoh">Spaoh</option>
+          </optgroup>
+          <optgroup label="Kawasan Lain Sarawak">
+            <option value="Kuching">Kuching</option>
+            <option value="Sibu">Sibu</option>
+            <option value="Miri">Miri</option>
+            <option value="Bintulu">Bintulu</option>
+            <option value="Sri Aman">Sri Aman</option>
+            <option value="Sarikei">Sarikei</option>
+            <option value="Kapit">Kapit</option>
+            <option value="Mukah">Mukah</option>
+            <option value="Limbang">Limbang</option>
+            <option value="Betong">Betong</option>
+            <option value="Saratok">Saratok</option>
+            <option value="Lain-lain">Lain-lain</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Jenis Perniagaan</label>
+        <select class="form-select" id="bizType">
+          <option value="" disabled selected>-- Pilih kategori --</option>
+          <option value="Runcit">Perniagaan Runcit</option>
+          <option value="F&B">Makanan & Minuman (F&B)</option>
+          <option value="Perkhidmatan">Perkhidmatan</option>
+          <option value="Teknologi">Teknologi & IT</option>
+          <option value="Pertanian">Pertanian & Agro</option>
+          <option value="Fesyen">Fesyen & Tekstil</option>
+          <option value="Automotif">Automotif</option>
+          <option value="Kesihatan">Kesihatan & Wellness</option>
+          <option value="Pendidikan">Pendidikan & Latihan</option>
+          <option value="Pembinaan">Pembinaan & Hartanah</option>
+          <option value="Lain-lain">Lain-lain</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Pakej Program *</label>
+        <div class="pkg-grid">
+          <label class="pkg-card" id="pkg-basic">
+            <input type="radio" name="package" value="60" style="display:none"/>
+            <div class="pkg-name">🌱 Asas Digital</div>
+            <div class="pkg-desc">Bermula dengan asas — media sosial, WhatsApp Business, Google Maps</div>
+            <div class="pkg-score">Skor Lead: 60</div>
+          </label>
+          <label class="pkg-card" id="pkg-pro">
+            <input type="radio" name="package" value="80" style="display:none"/>
+            <div class="pkg-name">🚀 Pro Digital</div>
+            <div class="pkg-desc">Website + marketplace + sistem tempahan & pembayaran online</div>
+            <div class="pkg-score">Skor Lead: 80</div>
+          </label>
+          <label class="pkg-card" id="pkg-premium">
+            <input type="radio" name="package" value="90" style="display:none"/>
+            <div class="pkg-name">⚡ Premium</div>
+            <div class="pkg-desc">Penyelesaian lengkap termasuk automasi, CRM & e-dagang</div>
+            <div class="pkg-score">Skor Lead: 90</div>
+          </label>
+          <label class="pkg-card" id="pkg-enterprise">
+            <input type="radio" name="package" value="95" style="display:none"/>
+            <div class="pkg-name">🏆 Enterprise</div>
+            <div class="pkg-desc">Transformasi menyeluruh — reka bentuk semula operasi digital anda</div>
+            <div class="pkg-score">Skor Lead: 95</div>
+          </label>
+        </div>
+      </div>
+
+      <div id="form-msg"></div>
+
+      <button type="submit" class="btn btn-primary btn-full" id="submit-btn" style="margin-top:8px">
+        ⚡ Hantar Pendaftaran
+      </button>
+    </form>
+
+    <!-- Success state -->
+    <div id="success-view" style="display:none;text-align:center;padding:20px 0">
+      <div style="font-size:3.5rem;margin-bottom:16px">🎉</div>
+      <h2 style="font-family:var(--font-head);font-size:1.6rem;font-weight:800;margin-bottom:10px">
+        Pendaftaran Berjaya!
+      </h2>
+      <p style="color:var(--muted);margin-bottom:24px;line-height:1.7">
+        Terima kasih! Syahlan atau pasukan SDC akan menghubungi anda dalam masa <strong style="color:var(--p7)">24–48 jam</strong>.
+        Selamat datang ke perjalanan digital anda! ⚡
+      </p>
+      <a href="index.html" class="btn btn-secondary">← Kembali ke Laman Utama</a>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  // Package selection
+  document.querySelectorAll('.pkg-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      card.querySelector('input[type=radio]').checked = true;
+    });
+  });
+
+  const form = document.getElementById('reg-form');
+  const btn  = document.getElementById('submit-btn');
+  const msg  = document.getElementById('form-msg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const bizName  = document.getElementById('businessName').value.trim();
+    const owner    = document.getElementById('ownerName').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const mobile   = document.getElementById('mobile').value.trim();
+    const district = document.getElementById('district').value;
+    const bizType  = document.getElementById('bizType').value;
+    const pkgRadio = document.querySelector('input[name=package]:checked');
+
+    if (!bizName || !owner || !email || !mobile || !district) {
+      msg.className = 'form-msg error';
+      msg.textContent = '⚠️ Sila lengkapkan semua medan yang bertanda *.';
+      return;
+    }
+    if (!pkgRadio) {
+      msg.className = 'form-msg error';
+      msg.textContent = '⚠️ Sila pilih pakej program.';
+      return;
+    }
+
+    btn.classList.add('btn-loading');
+    btn.textContent = '';
+    msg.textContent = '';
+
+    const id = `SDC-${Date.now()}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;
+    const data = {
+      id, businessName: bizName, ownerName: owner,
+      email, mobile, district, bizType,
+      leadScore: Number(pkgRadio.value),
+      status: 'New', paid: false,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const r = await fetch('/.netlify/functions/submissions', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!r.ok) throw new Error(await r.text());
+
+      document.getElementById('reg-form').style.display = 'none';
+      document.getElementById('success-view').style.display = 'block';
+    } catch (err) {
+      msg.className = 'form-msg error';
+      msg.textContent = '❌ Ralat: ' + err.message + '. Sila cuba lagi.';
+      btn.classList.remove('btn-loading');
+      btn.textContent = '⚡ Hantar Pendaftaran';
+    }
+  });
+</script>
+</body>
+</html>

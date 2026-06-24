@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pembayaran — Syahlan SDC</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
+<div class="grid-dots"></div>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="bolt">⚡</span>
+    <a href="index.html">Syahlan <span style="color:var(--p6)">SDC</span></a>
+  </div>
+</nav>
+
+<div class="pay-wrapper">
+  <div class="pay-card">
+
+    <!-- Checkout form -->
+    <div class="form-card" id="checkout-view">
+      <div class="form-header">
+        <div style="font-size:2.2rem;margin-bottom:10px">💳</div>
+        <h1 style="font-size:1.6rem">Pembayaran <span class="grad-text-purple">Program SDC</span></h1>
+        <p>Semak butiran dan pilih tambahan sebelum bayar</p>
+      </div>
+
+      <!-- Customer info (auto-filled) -->
+      <div style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:var(--r-md);padding:16px;margin-bottom:20px">
+        <div style="font-size:.75rem;font-weight:600;color:var(--p7);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Maklumat Pelanggan</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:.87rem">
+          <div><span style="color:var(--muted)">Perniagaan:</span> <strong id="disp-biz">—</strong></div>
+          <div><span style="color:var(--muted)">Pemilik:</span> <strong id="disp-name">—</strong></div>
+          <div><span style="color:var(--muted)">Emel:</span> <span id="disp-email" style="color:var(--p7)">Memuatkan…</span></div>
+          <div><span style="color:var(--muted)">Tel:</span> <span id="disp-phone" style="color:var(--p7)">Memuatkan…</span></div>
+        </div>
+      </div>
+
+      <!-- Package -->
+      <div class="form-group">
+        <label class="form-label">Pakej Program</label>
+        <select class="form-select" id="pkg-select">
+          <option value="300">🌱 Asas Digital — RM 300</option>
+          <option value="600">🚀 Pro Digital — RM 600</option>
+          <option value="1000" selected>⚡ Premium — RM 1,000</option>
+          <option value="2000">🏆 Enterprise — RM 2,000</option>
+        </select>
+      </div>
+
+      <!-- Add-ons -->
+      <div class="form-group">
+        <label class="form-label">Tambahan (opsional)</label>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
+            <input type="checkbox" class="addon" data-price="200" style="accent-color:var(--p5);width:16px;height:16px"/>
+            <div>
+              <div style="font-weight:600;font-size:.88rem">🌐 Laman Web Profesional <span style="color:var(--p6)">+RM200</span></div>
+              <div style="font-size:.76rem;color:var(--muted)">Reka bentuk laman web perniagaan anda</div>
+            </div>
+          </label>
+          <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
+            <input type="checkbox" class="addon" data-price="150" style="accent-color:var(--p5);width:16px;height:16px"/>
+            <div>
+              <div style="font-weight:600;font-size:.88rem">📱 Pengurusan Media Sosial <span style="color:var(--p6)">+RM150</span></div>
+              <div style="font-size:.76rem;color:var(--muted)">Setup & optimasi profil FB, IG, TikTok</div>
+            </div>
+          </label>
+          <label style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px;border-radius:var(--r-sm);border:1px solid rgba(139,92,246,.15);transition:border-color .2s" onmouseover="this.style.borderColor='rgba(139,92,246,.35)'" onmouseout="this.style.borderColor='rgba(139,92,246,.15)'">
+            <input type="checkbox" class="addon" data-price="100" style="accent-color:var(--p5);width:16px;height:16px"/>
+            <div>
+              <div style="font-weight:600;font-size:.88rem">📊 Latihan Digital Intensif <span style="color:var(--p6)">+RM100</span></div>
+              <div style="font-size:.76rem;color:var(--muted)">Sesi latihan 1-on-1 selama 3 jam</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Order summary -->
+      <div class="order-summary" id="summary">
+        <div class="order-row">
+          <span id="pkg-label">⚡ Premium</span>
+          <span id="pkg-price">RM 1,000</span>
+        </div>
+        <div id="addon-rows"></div>
+        <div class="order-row total">
+          <span>Jumlah Keseluruhan</span>
+          <span class="price" id="total-price">RM 1,000</span>
+        </div>
+      </div>
+
+      <div id="pay-msg"></div>
+
+      <button class="btn btn-primary btn-full btn-lg" id="pay-btn" onclick="startPayment()">
+        ⚡ Bayar Sekarang
+      </button>
+      <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:12px">
+        🔒 Pembayaran selamat melalui ToyyibPay · FPX / DuitNow
+      </p>
+    </div>
+
+    <!-- Result screens -->
+    <div class="form-card" id="result-view" style="display:none">
+      <div class="result-screen active" id="res-success" style="display:none">
+        <div class="result-icon">🎉</div>
+        <h2 style="color:#6ee7b7">Pembayaran Berjaya!</h2>
+        <p>Terima kasih! Rekod anda telah dikemaskini. Pasukan SDC akan menghubungi anda tidak lama lagi.</p>
+        <a href="index.html" class="btn btn-secondary">← Kembali ke Laman Utama</a>
+      </div>
+      <div class="result-screen active" id="res-pending" style="display:none">
+        <div class="result-icon">⏳</div>
+        <h2 style="color:#fcd34d">Pembayaran Dalam Proses</h2>
+        <p>Pembayaran anda sedang diproses. Kami akan maklumkan apabila selesai. Terima kasih atas kesabaran anda.</p>
+        <a href="index.html" class="btn btn-secondary">← Kembali ke Laman Utama</a>
+      </div>
+      <div class="result-screen active" id="res-fail" style="display:none">
+        <div class="result-icon">❌</div>
+        <h2 style="color:#f87171">Pembayaran Gagal</h2>
+        <p>Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Syahlan untuk bantuan.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="showCheckout()">Cuba Semula</button>
+          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary">💬 Hubungi Syahlan</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const bid  = params.get('b')    || '';
+  const bname= params.get('name') || '';
+  const recId= params.get('id')   || '';
+
+  document.getElementById('disp-biz').textContent  = bid   || '—';
+  document.getElementById('disp-name').textContent = bname || '—';
+
+  // result screens from ToyyibPay redirect
+  const status = params.get('status_id');
+  if (status === '1') { showResult('success'); }
+  else if (status === '3') { showResult('pending'); }
+  else if (status === '2' || status === '0') { showResult('fail'); }
+
+  // Auto-fill email/phone from record
+  if (recId) {
+    fetch(`/.netlify/functions/submissions?id=${encodeURIComponent(recId)}`)
+      .then(r => r.json())
+      .then(rec => {
+        document.getElementById('disp-email').textContent = rec.email  || '—';
+        document.getElementById('disp-phone').textContent = rec.mobile || '—';
+      })
+      .catch(() => {
+        document.getElementById('disp-email').textContent = '—';
+        document.getElementById('disp-phone').textContent = '—';
+      });
+  } else {
+    document.getElementById('disp-email').textContent = '—';
+    document.getElementById('disp-phone').textContent = '—';
+  }
+
+  // Pricing
+  const pkgNames = { '300':'🌱 Asas Digital','600':'🚀 Pro Digital','1000':'⚡ Premium','2000':'🏆 Enterprise' };
+
+  function updateSummary() {
+    const pkg   = Number(document.getElementById('pkg-select').value);
+    const addons= [...document.querySelectorAll('.addon:checked')].map(c => Number(c.dataset.price));
+    const total = pkg + addons.reduce((a,b)=>a+b,0);
+
+    document.getElementById('pkg-label').textContent  = pkgNames[pkg] || 'Pakej';
+    document.getElementById('pkg-price').textContent  = `RM ${pkg.toLocaleString()}`;
+    document.getElementById('total-price').textContent= `RM ${total.toLocaleString()}`;
+
+    const addonRows = document.getElementById('addon-rows');
+    addonRows.innerHTML = addons.map((p,i) => {
+      const el = [...document.querySelectorAll('.addon:checked')][i];
+      const label = el.closest('label').querySelector('div > div:first-child').textContent.split('+')[0].trim();
+      return `<div class="order-row"><span>${label}</span><span>+RM ${p.toLocaleString()}</span></div>`;
+    }).join('');
+
+    return { pkg, addons, total };
+  }
+
+  document.getElementById('pkg-select').addEventListener('change', updateSummary);
+  document.querySelectorAll('.addon').forEach(c => c.addEventListener('change', updateSummary));
+  updateSummary();
+
+  async function startPayment() {
+    const { total } = updateSummary();
+    const btn = document.getElementById('pay-btn');
+    const msg = document.getElementById('pay-msg');
+
+    btn.classList.add('btn-loading');
+    btn.textContent = '';
+    msg.textContent = '';
+
+    try {
+      const r = await fetch('/.netlify/functions/create-bill', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          amount: total, business: bid, owner: bname, id: recId,
+          addons: [...document.querySelectorAll('.addon:checked')].map(c => ({
+            label: c.closest('label').querySelector('div>div').textContent.split('+')[0].trim(),
+            price: Number(c.dataset.price)
+          }))
+        })
+      });
+      const json = await r.json();
+      if (!json.ok || !json.payUrl) throw new Error(json.error || 'Gagal menjana bil');
+      location.href = json.payUrl;
+    } catch (err) {
+      msg.innerHTML = `<div class="form-msg error">❌ ${err.message}</div>`;
+      btn.classList.remove('btn-loading');
+      btn.textContent = '⚡ Bayar Sekarang';
+    }
+  }
+
+  function showResult(type) {
+    document.getElementById('checkout-view').style.display = 'none';
+    document.getElementById('result-view').style.display = 'block';
+    document.getElementById(`res-${type}`).style.display = 'block';
+  }
+
+  function showCheckout() {
+    document.getElementById('checkout-view').style.display = 'block';
+    document.getElementById('result-view').style.display = 'none';
+    document.querySelectorAll('.result-screen').forEach(s => s.style.display = 'none');
+  }
+</script>
+</body>
+</html>
