@@ -1,4 +1,4 @@
-/* ── Shahlan SDC — Full 4-Language i18n ─────────────────────────────────────
+/* ── Syahlan SDC — Full 4-Language i18n ─────────────────────────────────────
    Languages: BM (Bahasa Melayu) · EN (English) · ZH (中文) · IB (Iban)
    Usage:
      <span data-i18n="key">fallback</span>
@@ -14,7 +14,7 @@ const T = {
 BM: {
   /* Banner */
   'banner.1': 'Membantu 100 Kehadiran Digital Baru Di Sarawak',
-  'banner.2': 'Website Profesional Dari RM500 Sahaja',
+  'banner.2': 'Website Profesional Dari RM599 Sahaja',
   'banner.3': 'Domain · Hosting · Dashboard Admin Termasuk',
   'banner.4': '4 Bahasa: BM · EN · 中文 · Iban',
 
@@ -26,12 +26,12 @@ BM: {
   'nav.support': 'Sokongan',
   'nav.cta': 'Aktifkan Website Saya →',
   'nav.back': '← Kembali',
-  'nav.contact': '💬 Hubungi Shahlan',
+  'nav.contact': '💬 Hubungi Syahlan',
 
   /* Hero */
   'hero.eyebrow': 'Sarawak Digital Champion 2026 Candidate',
   'hero.h1': 'Saya membantu<br/><span class="highlight">100 perniagaan</span><br/>Sarawak go digital.',
-  'hero.sub': 'Nama saya Shahlan. Sebagai Sarawak Digital Champion 2026 Candidate, misi saya mudah: aktifkan 100 website perniagaan baru dan bantu usahawan tempatan ditemui, dipercayai, dan berkembang secara digital.',
+  'hero.sub': 'Nama saya Syahlan. Sebagai Sarawak Digital Champion 2026 Candidate, misi saya mudah: aktifkan 100 website perniagaan baru dan bantu usahawan tempatan ditemui, dipercayai, dan berkembang secara digital.',
   'hero.cta1': 'Aktifkan Website Saya →',
   'hero.cta2': 'Lihat Pakej',
   'hero.card.title': 'Sarawak Digital Champion · 2026 Candidate',
@@ -58,7 +58,7 @@ BM: {
   'why.after.5': 'Buka 24 jam, 7 hari seminggu',
 
   /* Mission */
-  'mission.label': 'Misi Shahlan',
+  'mission.label': 'Misi Syahlan',
   'mission.h2': 'Memperkasa Sarawak.<br/><span class="grad-text">Secara Digital. Bersama-sama.</span>',
   'mission.sub': 'Satu gerakan untuk membina masa depan digital yang lebih kuat — menginspirasi komuniti, memperkasa usahawan, dan mengaktifkan perniagaan di seluruh Sarawak.',
   'mission.p1.title': 'Inspirasi',
@@ -75,10 +75,10 @@ BM: {
 
   /* Pricing */
   'price.label': 'Digital Presence Initiative · 100 Perniagaan Pertama',
-  'price.h2': 'Aktifkan website anda untuk<br/><span style="color:var(--gold)">RM500</span>',
+  'price.h2': 'Aktifkan website anda untuk<br/><span style="color:var(--gold)">RM599</span>',
   'price.band.eyebrow': '✦ Digital Presence Initiative · 100 Perniagaan Pertama',
   'price.band.original': 'Biasa RM1,380',
-  'price.band.save': 'Jimat 64%',
+  'price.band.save': 'Jimat 57%',
   'price.band.sub': 'Pengaktifan tidak perlu mahal. Harga ini membolehkan lebih ramai usahawan lokal memiliki platform digital sendiri.',
   'price.band.cta': 'Tuntut Pengaktifan Anda →',
   'price.note1': '✓ Bayaran sekali sahaja',
@@ -143,9 +143,9 @@ BM: {
   'portfolio.cat.agro': 'Pertanian & Agro',
 
   /* About */
-  'about.label': 'Mengenai Shahlan',
+  'about.label': 'Mengenai Syahlan',
   'about.h2': 'Seorang penggiat transformasi digital yang percaya teknologi harus membantu lebih ramai.',
-  'about.p1': 'Shahlan merupakan Sarawak Digital Champion 2026 Candidate — seorang individu yang aktif dalam inisiatif digitalisasi perniagaan tempatan di Sarawak.',
+  'about.p1': 'Syahlan merupakan Sarawak Digital Champion 2026 Candidate — seorang individu yang aktif dalam inisiatif digitalisasi perniagaan tempatan di Sarawak.',
   'about.p2': 'Melalui misi ini, beliau membantu usahawan, koperasi, NGO dan organisasi komuniti mengaktifkan kehadiran digital yang lebih profesional melalui website perniagaan — mengurangkan kebergantungan kepada media sosial semata-mata.',
   'about.p3': 'Beliau percaya bahawa setiap perniagaan berhak ditemui oleh pelanggan yang mencari mereka.',
   'about.cta': 'Aktifkan Website Perniagaan Anda →',
@@ -156,12 +156,12 @@ BM: {
 
   /* SDC badge */
   'sdc.title': 'Sarawak Digital Champion 2026',
-  'sdc.desc': 'Shahlan merupakan salah seorang calon bagi program Sarawak Digital Champion 2026 — satu program yang memperkasa individu untuk mendorong transformasi digital dalam komuniti mereka.',
+  'sdc.desc': 'Syahlan merupakan salah seorang calon bagi program Sarawak Digital Champion 2026 — satu program yang memperkasa individu untuk mendorong transformasi digital dalam komuniti mereka.',
   'sdc.cta': 'Laman Rasmi SDC 2026 →',
 
   /* Quote + Support */
   'quote.text': '"Saya telah bertemu ramai pemilik perniagaan dengan produk dan kisah yang luar biasa. Mereka tidak memerlukan perniagaan yang lebih baik. Mereka hanya perlu <em style="color:var(--p6)">ditemui</em>."',
-  'quote.attr': '— Shahlan, Sarawak Digital Champion 2026 Candidate',
+  'quote.attr': '— Syahlan, Sarawak Digital Champion 2026 Candidate',
   'support.title': 'Sokong Perjalanan Ini',
   'support.sub': 'Setiap website yang diaktifkan mengukuhkan ekonomi digital Sarawak. Jika anda percaya usahawan tempatan berhak ditemui, ikuti bersama kami.',
   'support.cta1': 'Aktifkan Perniagaan Saya',
@@ -181,7 +181,7 @@ BM: {
   /* ── ACTIVATE PAGE ── */
   'act.badge': '✦ Digital Presence Initiative · 100 Perniagaan Pertama',
   'act.h1': 'Aktifkan <span class="grad-text">Website</span><br/>Perniagaan Anda',
-  'act.sub': 'Isi borang di bawah. Shahlan akan menghubungi anda dalam masa 24 jam untuk mengesahkan tempahan dan meneruskan proses pembinaan website anda.',
+  'act.sub': 'Isi borang di bawah. Syahlan akan menghubungi anda dalam masa 24 jam untuk mengesahkan tempahan dan meneruskan proses pembinaan website anda.',
   'act.price.includes': '✓ Termasuk Dalam Pakej',
   'act.price.inc1': '✓ Website Profesional + Mobile Responsive',
   'act.price.inc2': '✓ Domain & Hosting 1 Tahun',
@@ -215,17 +215,17 @@ BM: {
   'act.lbl.desc': 'Terangkan perniagaan / organisasi anda secara ringkas',
   'act.ph.desc': 'Apa yang anda jual / tawarkan? Siapa pelanggan anda? Apa yang membuatkan anda unik?',
   'act.submit': '✦ Hantar Permohonan Aktivasi',
-  'act.disclaimer': 'Dengan menghantar borang ini, anda bersetuju untuk dihubungi oleh Shahlan berkaitan pakej website anda. Tiada komitmen sehingga anda mengesahkan tempahan.',
+  'act.disclaimer': 'Dengan menghantar borang ini, anda bersetuju untuk dihubungi oleh Syahlan berkaitan pakej website anda. Tiada komitmen sehingga anda mengesahkan tempahan.',
   'act.success.h2': 'Permohonan Berjaya Dihantar!',
-  'act.success.sub': 'Terima kasih! Shahlan akan menghubungi anda melalui WhatsApp dalam masa <strong style="color:var(--p7)">24 jam</strong> untuk mengesahkan tempahan dan membincangkan keperluan website anda.',
+  'act.success.sub': 'Terima kasih! Syahlan akan menghubungi anda melalui WhatsApp dalam masa <strong style="color:var(--p7)">24 jam</strong> untuk mengesahkan tempahan dan membincangkan keperluan website anda.',
   'act.success.back': '← Kembali ke Laman Utama',
-  'act.success.wa': '💬 WhatsApp Shahlan Sekarang',
+  'act.success.wa': '💬 WhatsApp Syahlan Sekarang',
 
   /* ── PAY PAGE ── */
   'pay.h1': 'Bayaran <span class="grad-text-purple">Website Activation</span>',
   'pay.sub': 'Semak butiran perniagaan anda dan selesaikan bayaran',
-  'pay.save': 'Jimat 64%',
-  'pay.included.title': '✓ Termasuk Dalam Pakej RM500',
+  'pay.save': 'Jimat 57%',
+  'pay.included.title': '✓ Termasuk Dalam Pakej RM599',
   'pay.inc.1': '✓ Website Profesional',
   'pay.inc.2': '✓ Mobile Responsive',
   'pay.inc.3': '✓ Domain 1 Tahun',
@@ -257,15 +257,15 @@ BM: {
   'pay.pending.h2': 'Pembayaran Dalam Proses',
   'pay.pending.sub': 'Pembayaran anda sedang diproses. Kami akan maklumkan apabila selesai.',
   'pay.fail.h2': 'Pembayaran Gagal',
-  'pay.fail.sub': 'Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Shahlan untuk bantuan.',
+  'pay.fail.sub': 'Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Syahlan untuk bantuan.',
   'pay.fail.retry': 'Cuba Semula',
-  'pay.fail.wa': '💬 Hubungi Shahlan',
+  'pay.fail.wa': '💬 Hubungi Syahlan',
   'pay.back': '← Kembali ke Laman Utama',
 
   /* ── Error messages ── */
   'act.err.required': 'Sila lengkapkan semua medan yang bertanda *.',
   'act.err.orgtype':  'Sila pilih jenis organisasi anda.',
-  'act.err.retry':    'Sila cuba lagi atau hubungi Shahlan terus.',
+  'act.err.retry':    'Sila cuba lagi atau hubungi Syahlan terus.',
   'pay.err.gen':      'Gagal menjana bil. Sila cuba semula.',
 },
 
@@ -274,7 +274,7 @@ BM: {
 ══════════════════════════════════════════════════════════════════════════ */
 EN: {
   'banner.1': 'Empowering 100 New Digital Presences Across Sarawak',
-  'banner.2': 'Professional Website From RM500 Only',
+  'banner.2': 'Professional Website From RM599 Only',
   'banner.3': 'Domain · Hosting · Admin Dashboard Included',
   'banner.4': '4 Languages: BM · EN · 中文 · Iban',
 
@@ -285,11 +285,11 @@ EN: {
   'nav.support': 'Support',
   'nav.cta': 'Activate My Business →',
   'nav.back': '← Back',
-  'nav.contact': '💬 Contact Shahlan',
+  'nav.contact': '💬 Contact Syahlan',
 
   'hero.eyebrow': 'Sarawak Digital Champion 2026 Candidate',
   'hero.h1': "I'm helping<br/><span class='highlight'>100 businesses</span><br/>in Sarawak go digital.",
-  'hero.sub': "My name is Shahlan. As a Sarawak Digital Champion 2026 Candidate, my mission is simple: activate 100 new business websites and help local entrepreneurs get found, trusted, and grow online.",
+  'hero.sub': "My name is Syahlan. As a Sarawak Digital Champion 2026 Candidate, my mission is simple: activate 100 new business websites and help local entrepreneurs get found, trusted, and grow online.",
   'hero.cta1': 'Activate My Business →',
   'hero.cta2': 'View Package',
   'hero.card.title': 'Sarawak Digital Champion · 2026 Candidate',
@@ -314,7 +314,7 @@ EN: {
   'why.after.4': 'Update content anytime you want',
   'why.after.5': 'Open 24 hours, 7 days a week',
 
-  'mission.label': "Shahlan's Mission",
+  'mission.label': "Syahlan's Mission",
   'mission.h2': 'Empowering Sarawak.<br/><span class="grad-text">Digitally. Together.</span>',
   'mission.sub': 'A movement to build a stronger digital future — inspiring communities, empowering entrepreneurs, and activating businesses across all of Sarawak.',
   'mission.p1.title': 'Inspire',
@@ -330,10 +330,10 @@ EN: {
   'progress.sub': 'Every website activated strengthens the digital economy of Sarawak.',
 
   'price.label': 'Digital Presence Initiative · First 100 Businesses',
-  'price.h2': 'Activate your website for<br/><span style="color:var(--gold)">RM500</span>',
+  'price.h2': 'Activate your website for<br/><span style="color:var(--gold)">RM599</span>',
   'price.band.eyebrow': '✦ Digital Presence Initiative · First 100 Businesses',
   'price.band.original': 'Usual RM1,380',
-  'price.band.save': 'Save 64%',
+  'price.band.save': 'Save 57%',
   'price.band.sub': 'Activation doesn\'t need to be expensive. This price enables more local entrepreneurs to own their own digital platform.',
   'price.band.cta': 'Claim Your Activation →',
   'price.note1': '✓ One-time payment',
@@ -394,9 +394,9 @@ EN: {
   'portfolio.cat.beauty': 'Beauty & Wellness',
   'portfolio.cat.agro': 'Agriculture & Agro',
 
-  'about.label': 'About Shahlan',
+  'about.label': 'About Syahlan',
   'about.h2': 'A digital transformation advocate who believes technology should help more people.',
-  'about.p1': 'Shahlan is a Sarawak Digital Champion 2026 Candidate — an individual actively involved in digital transformation initiatives for local businesses in Sarawak.',
+  'about.p1': 'Syahlan is a Sarawak Digital Champion 2026 Candidate — an individual actively involved in digital transformation initiatives for local businesses in Sarawak.',
   'about.p2': 'Through this mission, he helps entrepreneurs, cooperatives, NGOs and community organisations activate a more professional digital presence through business websites — reducing dependence on social media alone.',
   'about.p3': 'He believes every business deserves to be found by customers who are searching for them.',
   'about.cta': 'Activate Your Business Website →',
@@ -406,11 +406,11 @@ EN: {
   'about.card.title': 'SDC 2026 Candidate',
 
   'sdc.title': 'Sarawak Digital Champion 2026',
-  'sdc.desc': 'Shahlan is one of the candidates for the Sarawak Digital Champion 2026 programme — an initiative that empowers individuals to drive digital transformation in their communities.',
+  'sdc.desc': 'Syahlan is one of the candidates for the Sarawak Digital Champion 2026 programme — an initiative that empowers individuals to drive digital transformation in their communities.',
   'sdc.cta': 'Official SDC 2026 Website →',
 
   'quote.text': '"I have met many business owners with amazing products and stories. They didn\'t need a better business. They simply needed to be <em style="color:var(--p6)">found</em>."',
-  'quote.attr': '— Shahlan, Sarawak Digital Champion 2026 Candidate',
+  'quote.attr': '— Syahlan, Sarawak Digital Champion 2026 Candidate',
   'support.title': 'Support the Journey',
   'support.sub': 'Every website activated strengthens the digital economy of Sarawak. If you believe local entrepreneurs deserve to be found, walk with us.',
   'support.cta1': 'Activate My Business',
@@ -427,7 +427,7 @@ EN: {
 
   'act.badge': '✦ Digital Presence Initiative · First 100 Businesses',
   'act.h1': 'Activate Your<br/><span class="grad-text">Business Website</span>',
-  'act.sub': 'Fill in the form below. Shahlan will contact you within 24 hours to confirm your order and continue the website build process.',
+  'act.sub': 'Fill in the form below. Syahlan will contact you within 24 hours to confirm your order and continue the website build process.',
   'act.price.includes': '✓ Included In The Package',
   'act.price.inc1': '✓ Professional Website + Mobile Responsive',
   'act.price.inc2': '✓ Domain & Hosting 1 Year',
@@ -461,16 +461,16 @@ EN: {
   'act.lbl.desc': 'Briefly describe your business / organisation',
   'act.ph.desc': 'What do you sell / offer? Who are your customers? What makes you unique?',
   'act.submit': '✦ Submit Activation Request',
-  'act.disclaimer': 'By submitting this form, you agree to be contacted by Shahlan regarding your website package. No commitment until you confirm your order.',
+  'act.disclaimer': 'By submitting this form, you agree to be contacted by Syahlan regarding your website package. No commitment until you confirm your order.',
   'act.success.h2': 'Request Successfully Submitted!',
-  'act.success.sub': 'Thank you! Shahlan will contact you via WhatsApp within <strong style="color:var(--p7)">24 hours</strong> to confirm your order and discuss your website needs.',
+  'act.success.sub': 'Thank you! Syahlan will contact you via WhatsApp within <strong style="color:var(--p7)">24 hours</strong> to confirm your order and discuss your website needs.',
   'act.success.back': '← Back to Home',
-  'act.success.wa': '💬 WhatsApp Shahlan Now',
+  'act.success.wa': '💬 WhatsApp Syahlan Now',
 
   'pay.h1': 'Payment for <span class="grad-text-purple">Website Activation</span>',
   'pay.sub': 'Review your business details and complete payment',
-  'pay.save': 'Save 64%',
-  'pay.included.title': '✓ Included In The RM500 Package',
+  'pay.save': 'Save 57%',
+  'pay.included.title': '✓ Included In The RM599 Package',
   'pay.inc.1': '✓ Professional Website',
   'pay.inc.2': '✓ Mobile Responsive',
   'pay.inc.3': '✓ Domain 1 Year',
@@ -502,15 +502,15 @@ EN: {
   'pay.pending.h2': 'Payment Being Processed',
   'pay.pending.sub': 'Your payment is being processed. We will notify you once complete.',
   'pay.fail.h2': 'Payment Failed',
-  'pay.fail.sub': 'Sorry, the payment was unsuccessful. Please try again or contact Shahlan for assistance.',
+  'pay.fail.sub': 'Sorry, the payment was unsuccessful. Please try again or contact Syahlan for assistance.',
   'pay.fail.retry': 'Try Again',
-  'pay.fail.wa': '💬 Contact Shahlan',
+  'pay.fail.wa': '💬 Contact Syahlan',
   'pay.back': '← Back to Home',
 
   /* ── Error messages ── */
   'act.err.required': 'Please complete all fields marked with *.',
   'act.err.orgtype':  'Please select your organisation type.',
-  'act.err.retry':    'Please try again or contact Shahlan directly.',
+  'act.err.retry':    'Please try again or contact Syahlan directly.',
   'pay.err.gen':      'Failed to generate bill. Please try again.',
 },
 
@@ -519,7 +519,7 @@ EN: {
 ══════════════════════════════════════════════════════════════════════════ */
 ZH: {
   'banner.1': '赋予砂拉越100个全新数字影响力',
-  'banner.2': '专业网站，仅需RM500起',
+  'banner.2': '专业网站，仅需RM599起',
   'banner.3': '包含域名 · 主机 · 管理员控制台',
   'banner.4': '四种语言：马来文 · 英文 · 中文 · 伊班文',
 
@@ -530,11 +530,11 @@ ZH: {
   'nav.support': '支持',
   'nav.cta': '激活我的网站 →',
   'nav.back': '← 返回',
-  'nav.contact': '💬 联系 Shahlan',
+  'nav.contact': '💬 联系 Syahlan',
 
   'hero.eyebrow': '砂拉越数字冠军 2026 候选人',
   'hero.h1': '我正在帮助<br/><span class="highlight">100家企业</span><br/>走向数字化。',
-  'hero.sub': '我叫 Shahlan。作为砂拉越数字冠军 2026 候选人，我的使命很简单：激活100个新企业网站，帮助本地企业家被发现、被信任并在网上成长。',
+  'hero.sub': '我叫 Syahlan。作为砂拉越数字冠军 2026 候选人，我的使命很简单：激活100个新企业网站，帮助本地企业家被发现、被信任并在网上成长。',
   'hero.cta1': '激活我的网站 →',
   'hero.cta2': '查看配套',
   'hero.card.title': '砂拉越数字冠军 · 2026 候选人',
@@ -559,7 +559,7 @@ ZH: {
   'why.after.4': '随时更新内容',
   'why.after.5': '全天24小时，每周7天开放',
 
-  'mission.label': 'Shahlan 的使命',
+  'mission.label': 'Syahlan 的使命',
   'mission.h2': '赋能砂拉越。<br/><span class="grad-text">数字化。一起。</span>',
   'mission.sub': '一个建设更强数字未来的运动——激励社区，赋能企业家，在砂拉越各地激活企业。',
   'mission.p1.title': '启发',
@@ -575,10 +575,10 @@ ZH: {
   'progress.sub': '每个激活的网站都加强了砂拉越的数字经济。',
 
   'price.label': '数字存在计划 · 首100家企业',
-  'price.h2': '仅需<span style="color:var(--gold)">RM500</span>激活您的网站',
+  'price.h2': '仅需<span style="color:var(--gold)">RM599</span>激活您的网站',
   'price.band.eyebrow': '✦ 数字存在计划 · 首100家企业',
   'price.band.original': '原价 RM1,380',
-  'price.band.save': '节省 64%',
+  'price.band.save': '节省 57%',
   'price.band.sub': '激活不需要昂贵。这个价格让更多本地企业家拥有自己的数字平台。',
   'price.band.cta': '立即申请激活 →',
   'price.note1': '✓ 一次性付款',
@@ -639,9 +639,9 @@ ZH: {
   'portfolio.cat.beauty': '美容 & 健康',
   'portfolio.cat.agro': '农业 & 农业科技',
 
-  'about.label': '关于 Shahlan',
+  'about.label': '关于 Syahlan',
   'about.h2': '一位数字转型倡导者，相信科技应该帮助更多人。',
-  'about.p1': 'Shahlan 是砂拉越数字冠军 2026 候选人——一位积极参与砂拉越本地企业数字化转型计划的人士。',
+  'about.p1': 'Syahlan 是砂拉越数字冠军 2026 候选人——一位积极参与砂拉越本地企业数字化转型计划的人士。',
   'about.p2': '通过这一使命，他帮助企业家、合作社、非政府组织和社区组织通过企业网站激活更专业的数字存在——减少对单一社交媒体的依赖。',
   'about.p3': '他相信每个企业都有权被正在寻找他们的顾客发现。',
   'about.cta': '激活您的企业网站 →',
@@ -651,11 +651,11 @@ ZH: {
   'about.card.title': 'SDC 2026 候选人',
 
   'sdc.title': '砂拉越数字冠军 2026',
-  'sdc.desc': 'Shahlan 是砂拉越数字冠军 2026 计划的候选人之一——该计划赋能个人在社区中推动数字转型。',
+  'sdc.desc': 'Syahlan 是砂拉越数字冠军 2026 计划的候选人之一——该计划赋能个人在社区中推动数字转型。',
   'sdc.cta': 'SDC 2026 官方网站 →',
 
   'quote.text': '"我遇到过许多拥有出色产品和故事的企业主。他们不需要更好的生意。他们只是需要被<em style="color:var(--p6)">发现</em>。"',
-  'quote.attr': '— Shahlan，砂拉越数字冠军 2026 候选人',
+  'quote.attr': '— Syahlan，砂拉越数字冠军 2026 候选人',
   'support.title': '支持这段旅程',
   'support.sub': '每个激活的网站都加强了砂拉越的数字经济。如果您相信本地企业家值得被发现，请与我们同行。',
   'support.cta1': '激活我的企业',
@@ -672,7 +672,7 @@ ZH: {
 
   'act.badge': '✦ 数字存在计划 · 首100家企业',
   'act.h1': '激活您的<br/><span class="grad-text">企业网站</span>',
-  'act.sub': '请填写以下表格。Shahlan 将在24小时内通过 WhatsApp 联系您，确认订单并推进网站建设流程。',
+  'act.sub': '请填写以下表格。Syahlan 将在24小时内通过 WhatsApp 联系您，确认订单并推进网站建设流程。',
   'act.price.includes': '✓ 配套内容',
   'act.price.inc1': '✓ 专业网站 + 手机响应式',
   'act.price.inc2': '✓ 域名及主机 1 年',
@@ -706,16 +706,16 @@ ZH: {
   'act.lbl.desc': '简要描述您的企业 / 组织',
   'act.ph.desc': '您销售 / 提供什么？您的顾客是谁？是什么让您与众不同？',
   'act.submit': '✦ 提交激活申请',
-  'act.disclaimer': '提交此表格即表示您同意 Shahlan 就您的网站配套与您联系。确认订单前无需任何承诺。',
+  'act.disclaimer': '提交此表格即表示您同意 Syahlan 就您的网站配套与您联系。确认订单前无需任何承诺。',
   'act.success.h2': '申请提交成功！',
-  'act.success.sub': '感谢您！Shahlan 将在 <strong style="color:var(--p7)">24小时</strong> 内通过 WhatsApp 联系您，确认订单并讨论您的网站需求。',
+  'act.success.sub': '感谢您！Syahlan 将在 <strong style="color:var(--p7)">24小时</strong> 内通过 WhatsApp 联系您，确认订单并讨论您的网站需求。',
   'act.success.back': '← 返回首页',
-  'act.success.wa': '💬 立即 WhatsApp Shahlan',
+  'act.success.wa': '💬 立即 WhatsApp Syahlan',
 
   'pay.h1': '支付<span class="grad-text-purple">网站激活费用</span>',
   'pay.sub': '确认您的企业信息并完成付款',
-  'pay.save': '节省64%',
-  'pay.included.title': '✓ RM500 配套内容',
+  'pay.save': '节省57%',
+  'pay.included.title': '✓ RM599 配套内容',
   'pay.inc.1': '✓ 专业网站',
   'pay.inc.2': '✓ 手机响应式',
   'pay.inc.3': '✓ 域名 1 年',
@@ -747,15 +747,15 @@ ZH: {
   'pay.pending.h2': '付款处理中',
   'pay.pending.sub': '您的付款正在处理中。完成后我们将通知您。',
   'pay.fail.h2': '付款失败',
-  'pay.fail.sub': '抱歉，付款未成功。请重试或联系 Shahlan 寻求帮助。',
+  'pay.fail.sub': '抱歉，付款未成功。请重试或联系 Syahlan 寻求帮助。',
   'pay.fail.retry': '重试',
-  'pay.fail.wa': '💬 联系 Shahlan',
+  'pay.fail.wa': '💬 联系 Syahlan',
   'pay.back': '← 返回首页',
 
   /* ── Error messages ── */
   'act.err.required': '请填写所有带 * 的必填项。',
   'act.err.orgtype':  '请选择您的组织类型。',
-  'act.err.retry':    '请重试或直接联系 Shahlan。',
+  'act.err.retry':    '请重试或直接联系 Syahlan。',
   'pay.err.gen':      '生成账单失败，请重试。',
 },
 
@@ -764,7 +764,7 @@ ZH: {
 ══════════════════════════════════════════════════════════════════════════ */
 IB: {
   'banner.1': 'Ngebantu 100 Urang Niaga Sarawak Go Digital',
-  'banner.2': 'Website Profesional Ari RM500 Aja',
+  'banner.2': 'Website Profesional Ari RM599 Aja',
   'banner.3': 'Domain · Hosting · Dashboard Admin Disempulai',
   'banner.4': '4 Basa: BM · EN · 中文 · Iban',
 
@@ -775,11 +775,11 @@ IB: {
   'nav.support': 'Suport',
   'nav.cta': 'Aktifkan Website Aku →',
   'nav.back': '← Balik',
-  'nav.contact': '💬 Hubungi Shahlan',
+  'nav.contact': '💬 Hubungi Syahlan',
 
   'hero.eyebrow': 'Sarawak Digital Champion 2026 Candidate',
   'hero.h1': 'Aku ngebantu<br/><span class="highlight">100 niaga</span><br/>Sarawak go digital.',
-  'hero.sub': 'Nama aku Shahlan. Selaku Sarawak Digital Champion 2026 Candidate, misi aku senang: aktifkan 100 website niaga baru enggau ngebantu urang niaga lokal ditemu, dipercaya, enggau berkembang secara digital.',
+  'hero.sub': 'Nama aku Syahlan. Selaku Sarawak Digital Champion 2026 Candidate, misi aku senang: aktifkan 100 website niaga baru enggau ngebantu urang niaga lokal ditemu, dipercaya, enggau berkembang secara digital.',
   'hero.cta1': 'Aktifkan Website Aku →',
   'hero.cta2': 'Agi Pakej',
   'hero.card.title': 'Sarawak Digital Champion · 2026 Candidate',
@@ -804,7 +804,7 @@ IB: {
   'why.after.4': 'Ulih kemaskini kandungan bila-bila masa',
   'why.after.5': 'Tebuka 24 jam, 7 hari seminggu',
 
-  'mission.label': 'Perintah Shahlan',
+  'mission.label': 'Perintah Syahlan',
   'mission.h2': 'Memperkasa Sarawak.<br/><span class="grad-text">Secara Digital. Bersama-sama.</span>',
   'mission.sub': 'Siti gerakan untuk ngembilik masa depan digital ti lebih kuat — nginspirasi komuniti, memperkasa urang niaga, enggau ngaktifkan niaga di seluruh Sarawak.',
   'mission.p1.title': 'Inspirasi',
@@ -820,10 +820,10 @@ IB: {
   'progress.sub': 'Tiap-tiap website ti diaktifkan nguatkan ekonomi digital Sarawak.',
 
   'price.label': 'Digital Presence Initiative · 100 Niaga Awal',
-  'price.h2': 'Aktifkan website ikau ngagai<br/><span style="color:var(--gold)">RM500</span>',
+  'price.h2': 'Aktifkan website ikau ngagai<br/><span style="color:var(--gold)">RM599</span>',
   'price.band.eyebrow': '✦ Digital Presence Initiative · 100 Niaga Awal',
   'price.band.original': 'Biasa RM1,380',
-  'price.band.save': 'Jimat 64%',
+  'price.band.save': 'Jimat 57%',
   'price.band.sub': 'Pengaktifan enda perlu mahal. Rega tu ngembilik lebih matak urang niaga lokal miliki platform digital endiri.',
   'price.band.cta': 'Tuntut Pengaktifan Ikau →',
   'price.note1': '✓ Bayar sekali aja',
@@ -884,9 +884,9 @@ IB: {
   'portfolio.cat.beauty': 'Kecantikan & Wellness',
   'portfolio.cat.agro': 'Pertanian & Agro',
 
-  'about.label': 'Pasal Shahlan',
+  'about.label': 'Pasal Syahlan',
   'about.h2': 'Urang ti aktif dalam transformasi digital, percaya teknologi patut ngebantu lebih matak urang.',
-  'about.p1': 'Shahlan nya Sarawak Digital Champion 2026 Candidate — urang ti aktif dalam inisiatif digitalisasi niaga lokal di Sarawak.',
+  'about.p1': 'Syahlan nya Sarawak Digital Champion 2026 Candidate — urang ti aktif dalam inisiatif digitalisasi niaga lokal di Sarawak.',
   'about.p2': 'Ngelalui misi tu, iya ngebantu urang niaga, koperasi, NGO enggau organisasi komuniti mengaktifkan kehadiran digital ti lebih profesional ngelalui website niaga — ngurangkan kebergantungan ba media sosial aja.',
   'about.p3': 'Iya percaya tiap-tiap niaga berhak ditemu oleh pelanggan ti nyari sida.',
   'about.cta': 'Aktifkan Website Niaga Ikau →',
@@ -896,11 +896,11 @@ IB: {
   'about.card.title': 'SDC 2026 Candidate',
 
   'sdc.title': 'Sarawak Digital Champion 2026',
-  'sdc.desc': 'Shahlan nya salah seorang calon ngagai program Sarawak Digital Champion 2026 — siti program ti memperkasa individu untuk ngerintah transformasi digital dalam komuniti sida.',
+  'sdc.desc': 'Syahlan nya salah seorang calon ngagai program Sarawak Digital Champion 2026 — siti program ti memperkasa individu untuk ngerintah transformasi digital dalam komuniti sida.',
   'sdc.cta': 'Laman Rasmi SDC 2026 →',
 
   'quote.text': '"Aku udah betemu matak pemilik niaga enggau produk enggau cerita ti luar biasa. Sida enda perlu niaga ti lebih manah. Sida enda perlu aja ditemu orang <em style="color:var(--p6)">ngena</em>."',
-  'quote.attr': '— Shahlan, Sarawak Digital Champion 2026 Candidate',
+  'quote.attr': '— Syahlan, Sarawak Digital Champion 2026 Candidate',
   'support.title': 'Ngempu Penjalai Tu',
   'support.sub': 'Tiap-tiap website ti diaktifkan nguatkan ekonomi digital Sarawak. Enti ikau percaya urang niaga lokal patut ditemu, jalai bersama kami.',
   'support.cta1': 'Aktifkan Niaga Aku',
@@ -917,7 +917,7 @@ IB: {
 
   'act.badge': '✦ Digital Presence Initiative · 100 Niaga Awal',
   'act.h1': 'Aktifkan <span class="grad-text">Website</span><br/>Niaga Ikau',
-  'act.sub': 'Isi borang ba baruh. Shahlan makai hubungi ikau dalam masa 24 jam untuk ngesahkan tempahan enggau neruskan proses pembinaan website ikau.',
+  'act.sub': 'Isi borang ba baruh. Syahlan makai hubungi ikau dalam masa 24 jam untuk ngesahkan tempahan enggau neruskan proses pembinaan website ikau.',
   'act.price.includes': '✓ Disempulai Dalam Pakej',
   'act.price.inc1': '✓ Website Profesional + Mobile Responsive',
   'act.price.inc2': '✓ Domain & Hosting 1 Taun',
@@ -951,16 +951,16 @@ IB: {
   'act.lbl.desc': 'Cerita pasal niaga / organisasi ikau dengan ringkas',
   'act.ph.desc': 'Nama ti ikau jual / tawaran? Sapa pelanggan ikau? Nama ti ngejadikan ikau unik?',
   'act.submit': '✦ Hantar Permohonan Aktivasi',
-  'act.disclaimer': 'Enggau nghantar borang tu, ikau bersetuju untuk dihubungi oleh Shahlan pasal pakej website ikau. Enda bepegai sehingga ikau ngesahkan tempahan.',
+  'act.disclaimer': 'Enggau nghantar borang tu, ikau bersetuju untuk dihubungi oleh Syahlan pasal pakej website ikau. Enda bepegai sehingga ikau ngesahkan tempahan.',
   'act.success.h2': 'Permohonan Berjaya Dihantar!',
-  'act.success.sub': 'Terima kasih! Shahlan makai hubungi ikau ngelalui WhatsApp dalam masa <strong style="color:var(--p7)">24 jam</strong> untuk ngesahkan tempahan enggau ngebiakka keperluan website ikau.',
+  'act.success.sub': 'Terima kasih! Syahlan makai hubungi ikau ngelalui WhatsApp dalam masa <strong style="color:var(--p7)">24 jam</strong> untuk ngesahkan tempahan enggau ngebiakka keperluan website ikau.',
   'act.success.back': '← Balik ke Laman Utama',
-  'act.success.wa': '💬 WhatsApp Shahlan Tu',
+  'act.success.wa': '💬 WhatsApp Syahlan Tu',
 
   'pay.h1': 'Bayaran <span class="grad-text-purple">Website Activation</span>',
   'pay.sub': 'Semak penemu niaga ikau enggau selesaikan bayaran',
-  'pay.save': 'Jimat 64%',
-  'pay.included.title': '✓ Disempulai Dalam Pakej RM500',
+  'pay.save': 'Jimat 57%',
+  'pay.included.title': '✓ Disempulai Dalam Pakej RM599',
   'pay.inc.1': '✓ Website Profesional',
   'pay.inc.2': '✓ Mobile Responsive',
   'pay.inc.3': '✓ Domain 1 Taun',
@@ -992,15 +992,15 @@ IB: {
   'pay.pending.h2': 'Bayaran Dalam Proses',
   'pay.pending.sub': 'Bayaran ikau sedang diproses. Kami makai maklum apabila selesai.',
   'pay.fail.h2': 'Bayaran Gagal',
-  'pay.fail.sub': 'Maaf, bayaran enda berjaya. Sila cuba semula atau hubungi Shahlan ngagai bantuan.',
+  'pay.fail.sub': 'Maaf, bayaran enda berjaya. Sila cuba semula atau hubungi Syahlan ngagai bantuan.',
   'pay.fail.retry': 'Cuba Semula',
-  'pay.fail.wa': '💬 Hubungi Shahlan',
+  'pay.fail.wa': '💬 Hubungi Syahlan',
   'pay.back': '← Balik ke Laman Utama',
 
   /* ── Error messages ── */
   'act.err.required': 'Sila lengkapkan semua medan ti bertanda *.',
   'act.err.orgtype':  'Sila pilih jenis organisasi ikau.',
-  'act.err.retry':    'Sila cuba semula atau hubungi Shahlan terus.',
+  'act.err.retry':    'Sila cuba semula atau hubungi Syahlan terus.',
   'pay.err.gen':      'Gagal ngembilik bil. Sila cuba semula.',
 },
 }; /* end T */

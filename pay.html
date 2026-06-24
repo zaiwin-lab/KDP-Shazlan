@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pembayaran Website Activation — Shahlan SDC</title>
+  <title>Pembayaran Website Activation — Syahlan SDC</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
     .lang-toggle { display: flex; gap: 2px; background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: 8px; padding: 3px; }
@@ -18,7 +18,7 @@
 <nav class="nav">
   <div class="nav-logo">
     <span class="bolt">◆</span>
-    <a href="index.html">Shahlan <span style="color:var(--p6)">SDC</span></a>
+    <a href="index.html">Syahlan <span style="color:var(--p6)">SDC</span></a>
   </div>
   <div class="lang-toggle">
     <button class="lang-btn active" data-lang="BM" onclick="setLang('BM')">BM</button>
@@ -40,9 +40,9 @@
 
         <!-- Price highlight -->
         <div style="display:inline-flex;align-items:baseline;gap:10px;background:linear-gradient(135deg,rgba(76,29,149,.2),rgba(6,182,212,.1));border:1px solid rgba(139,92,246,.3);border-radius:14px;padding:14px 24px;margin:16px 0">
-          <span style="font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--gold)">RM500</span>
+          <span style="font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--gold)">RM599</span>
           <span style="font-size:.85rem;color:var(--muted);text-decoration:line-through">RM1,380</span>
-          <span style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:99px;padding:2px 8px;font-size:.72rem;font-weight:700;color:#fca5a5" data-i18n="pay.save">Jimat 64%</span>
+          <span style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:99px;padding:2px 8px;font-size:.72rem;font-weight:700;color:#fca5a5" data-i18n="pay.save">Jimat 57%</span>
         </div>
       </div>
 
@@ -59,7 +59,7 @@
 
       <!-- What's included -->
       <div style="background:rgba(6,182,212,.05);border:1px solid rgba(6,182,212,.2);border-radius:var(--r-md);padding:16px;margin-bottom:20px">
-        <div style="font-size:.75rem;font-weight:700;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px" data-i18n="pay.included.title">✓ Termasuk Dalam Pakej RM500</div>
+        <div style="font-size:.75rem;font-weight:700;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px" data-i18n="pay.included.title">✓ Termasuk Dalam Pakej RM599</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:.82rem;color:var(--muted)">
           <span data-i18n="pay.inc.1">✓ Website Profesional</span><span data-i18n="pay.inc.2">✓ Mobile Responsive</span>
           <span data-i18n="pay.inc.3">✓ Domain 1 Tahun</span><span data-i18n="pay.inc.4">✓ Hosting 1 Tahun</span>
@@ -101,12 +101,12 @@
       <div class="order-summary" id="summary">
         <div class="order-row">
           <span data-i18n="pay.order.base">🌐 Website Activation Package</span>
-          <span id="pkg-price">RM 500</span>
+          <span id="pkg-price">RM 599</span>
         </div>
         <div id="addon-rows"></div>
         <div class="order-row total">
           <span data-i18n="pay.order.total">Jumlah Keseluruhan</span>
-          <span class="price" id="total-price">RM 500</span>
+          <span class="price" id="total-price">RM 599</span>
         </div>
       </div>
 
@@ -137,10 +137,10 @@
       <div class="result-screen active" id="res-fail" style="display:none">
         <div class="result-icon">❌</div>
         <h2 style="color:#f87171" data-i18n="pay.fail.h2">Pembayaran Gagal</h2>
-        <p data-i18n="pay.fail.sub">Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Shahlan untuk bantuan.</p>
+        <p data-i18n="pay.fail.sub">Maaf, pembayaran tidak berjaya. Sila cuba semula atau hubungi Syahlan untuk bantuan.</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
           <button class="btn btn-primary" onclick="showCheckout()" data-i18n="pay.fail.retry">Cuba Semula</button>
-          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary" data-i18n="pay.fail.wa">💬 Hubungi Shahlan</a>
+          <a href="https://wa.me/60187874797" target="_blank" class="btn btn-secondary" data-i18n="pay.fail.wa">💬 Hubungi Syahlan</a>
         </div>
       </div>
     </div>
@@ -150,7 +150,7 @@
 
 <script src="i18n.js"></script>
 <script>
-  const BASE_PRICE = 500;
+  const BASE_PRICE = 599;
   const params = new URLSearchParams(location.search);
   const bid  = params.get('b')    || '';
   const bname= params.get('name') || '';
