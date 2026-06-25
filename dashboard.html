@@ -21,6 +21,8 @@
     .pin-btn { width: 100%; margin-top: 14px; padding: 13px; background: linear-gradient(135deg, var(--p4), var(--p6)); border: none; border-radius: 10px; color: #fff; font-weight: 700; font-size: .95rem; cursor: pointer; transition: opacity .2s; }
     .pin-btn:hover { opacity: .85; }
     .pin-error { color: #f87171; font-size: .8rem; margin-top: 10px; min-height: 18px; }
+    .pin-input-wrap { position: relative; }
+    .pin-eye { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; padding: 0; line-height: 1; }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
 
     /* ── Top nav ── */
@@ -137,7 +139,10 @@
     <div class="pin-logo">SH</div>
     <div class="pin-title">Team Dashboard</div>
     <p class="pin-sub">Enter your access PIN to continue</p>
-    <input id="pin-input" class="pin-input" type="password" placeholder="••••••••" maxlength="12" autocomplete="off"/>
+    <div class="pin-input-wrap">
+      <input id="pin-input" class="pin-input" type="password" placeholder="••••••••" maxlength="12" autocomplete="off" style="padding-right:44px"/>
+      <button class="pin-eye" onclick="toggleEye()" id="eye-btn" title="Show/hide">👁</button>
+    </div>
     <button class="pin-btn" onclick="checkPin()">Unlock →</button>
     <div id="pin-error" class="pin-error"></div>
   </div>
@@ -298,7 +303,7 @@
 
 <script>
 // ── PIN Auth ──
-const PIN_HASH = '6ed0c0f2fdd83e65a1fa3e3568f24f95ad79bb77c8a186e3d5b5c52e94f3a8e9'; // SDC2026
+const PIN_HASH = 'ac04d49fd2f3466f008df7d598828c7cff33cbf1f84a00c0f93b4a592b204b14'; // SDC2026
 async function sha256(msg) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
@@ -315,6 +320,10 @@ async function checkPin() {
     document.getElementById('pin-error').textContent = 'Incorrect PIN. Try again.';
     setTimeout(() => inp.classList.remove('shake'), 350);
   }
+}
+function toggleEye() {
+  const inp = document.getElementById('pin-input');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
 }
 function logout() {
   sessionStorage.removeItem('dash_auth');
