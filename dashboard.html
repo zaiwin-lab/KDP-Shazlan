@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Team Dashboard — Shahlan SDC</title>
+  <title>Team Dashboard — Syahlan SDC</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
     body { background: #0a0a14; }
+
+    /* ── PIN lock screen ── */
+    #pin-screen { position: fixed; inset: 0; background: #0a0a14; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+    #pin-screen.hidden { display: none; }
+    .pin-box { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 48px 40px; text-align: center; max-width: 360px; width: 90%; }
+    .pin-logo { width: 48px; height: 48px; background: linear-gradient(135deg, var(--p4), var(--cyan)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; margin: 0 auto 20px; }
+    .pin-title { font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
+    .pin-sub { font-size: .83rem; color: var(--muted); margin-bottom: 28px; }
+    .pin-input { width: 100%; background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: 10px; padding: 14px 16px; font-size: 1.1rem; color: var(--white); text-align: center; letter-spacing: .2em; outline: none; transition: border-color .2s; box-sizing: border-box; }
+    .pin-input:focus { border-color: var(--p5); }
+    .pin-input.shake { animation: shake .3s; }
+    .pin-btn { width: 100%; margin-top: 14px; padding: 13px; background: linear-gradient(135deg, var(--p4), var(--p6)); border: none; border-radius: 10px; color: #fff; font-weight: 700; font-size: .95rem; cursor: pointer; transition: opacity .2s; }
+    .pin-btn:hover { opacity: .85; }
+    .pin-error { color: #f87171; font-size: .8rem; margin-top: 10px; min-height: 18px; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
 
     /* ── Top nav ── */
     .dash-nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 12px; padding: 0 24px; height: 56px; background: rgba(10,10,20,.95); border-bottom: 1px solid rgba(139,92,246,.15); backdrop-filter: blur(12px); }
@@ -116,6 +131,19 @@
 </head>
 <body>
 
+<!-- PIN Lock Screen -->
+<div id="pin-screen">
+  <div class="pin-box">
+    <div class="pin-logo">SH</div>
+    <div class="pin-title">Team Dashboard</div>
+    <p class="pin-sub">Enter your access PIN to continue</p>
+    <input id="pin-input" class="pin-input" type="password" placeholder="••••••••" maxlength="12" autocomplete="off"/>
+    <button class="pin-btn" onclick="checkPin()">Unlock →</button>
+    <div id="pin-error" class="pin-error"></div>
+  </div>
+</div>
+
+
 <div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
 <div class="grid-dots"></div>
 
@@ -134,7 +162,7 @@
     <button class="btn btn-ghost btn-sm" onclick="loadData()" id="sync-btn">⟳ Sync</button>
     <button class="btn btn-ghost btn-sm" onclick="loadSample()">Load sample data</button>
     <button class="btn btn-primary btn-sm" onclick="exportCSV()">Export all</button>
-    <a href="index.html" class="btn btn-ghost btn-sm">Log out</a>
+    <a href="#" class="btn btn-ghost btn-sm" onclick="logout()">Log out</a>
   </div>
 </nav>
 
@@ -269,6 +297,37 @@
 <div id="toast"></div>
 
 <script>
+// ── PIN Auth ──
+const PIN_HASH = '6ed0c0f2fdd83e65a1fa3e3568f24f95ad79bb77c8a186e3d5b5c52e94f3a8e9'; // SDC2026
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+async function checkPin() {
+  const val = document.getElementById('pin-input').value.trim();
+  const hash = await sha256(val);
+  if (hash === PIN_HASH) {
+    sessionStorage.setItem('dash_auth', '1');
+    document.getElementById('pin-screen').classList.add('hidden');
+  } else {
+    const inp = document.getElementById('pin-input');
+    inp.classList.add('shake');
+    document.getElementById('pin-error').textContent = 'Incorrect PIN. Try again.';
+    setTimeout(() => inp.classList.remove('shake'), 350);
+  }
+}
+function logout() {
+  sessionStorage.removeItem('dash_auth');
+  location.reload();
+}
+document.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('dash_auth') === '1') {
+    document.getElementById('pin-screen').classList.add('hidden');
+  }
+  const inp = document.getElementById('pin-input');
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
+});
+
 let allLeads = [];
 let currentId = null;
 const SAMPLE = [
