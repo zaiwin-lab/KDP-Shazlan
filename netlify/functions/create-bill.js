@@ -21,7 +21,7 @@ exports.handler = async (event) => {
     let resolvedEmail = email;
     let resolvedPhone = phone;
     if (id && (!email || !phone)) {
-      const store = getStore({ name: 'submissions', consistency: 'strong' });
+      const store = getStore({ name: 'submissions', consistency: 'strong', siteID: process.env.NETLIFY_SITE_ID, token: process.env.NETLIFY_TOKEN });
       const rec = await store.get(id, { type: 'json' });
       if (rec) {
         resolvedEmail = resolvedEmail || rec.email;
