@@ -33,10 +33,17 @@ async function notifyNewLead(data) {
   } catch (_) {}
 }
 
+function blobsConfig() {
+  return {
+    siteID: process.env.NETLIFY_SITE_ID,
+    token: process.env.NETLIFY_TOKEN,
+  };
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
 
-  const store = getStore({ name: 'submissions', consistency: 'strong' });
+  const store = getStore({ name: 'submissions', consistency: 'strong', ...blobsConfig() });
 
   try {
     if (event.httpMethod === 'GET') {
@@ -47,7 +54,7 @@ exports.handler = async (event) => {
         return { statusCode: 200, headers: cors, body: JSON.stringify(rec) };
       }
       // list all — eventual is fine for dashboard poll
-      const listStore = getStore({ name: 'submissions' });
+      const listStore = getStore({ name: 'submissions', ...blobsConfig() });
       const { blobs } = await listStore.list();
       const records = await Promise.all(blobs.map((b) => store.get(b.key, { type: 'json' })));
       return { statusCode: 200, headers: cors, body: JSON.stringify(records.filter(Boolean)) };

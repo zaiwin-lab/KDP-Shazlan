@@ -11,7 +11,7 @@ exports.handler = async (event) => {
     console.log('payment-callback', { status, refNo, billCode });
 
     if (status === '1' && refNo) {
-      const store = getStore({ name: 'submissions', consistency: 'strong' });
+      const store = getStore({ name: 'submissions', consistency: 'strong', siteID: process.env.NETLIFY_SITE_ID, token: process.env.NETLIFY_TOKEN });
       const rec = await store.get(refNo, { type: 'json' });
       if (rec) {
         await store.setJSON(refNo, {
