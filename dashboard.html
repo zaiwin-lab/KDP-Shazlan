@@ -118,6 +118,18 @@
     /* ── Empty ── */
     .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
 
+    /* ── Action buttons in table ── */
+    .row-btn { background: none; border-radius: 6px; padding: 5px 8px; cursor: pointer; font-size: .82rem; line-height: 1; transition: background .15s; }
+    .row-btn-edit  { border: 1px solid rgba(139,92,246,.3); color: var(--p6); }
+    .row-btn-edit:hover  { background: rgba(139,92,246,.15); }
+    .row-btn-del   { border: 1px solid rgba(239,68,68,.3); color: #f87171; }
+    .row-btn-del:hover   { background: rgba(239,68,68,.12); }
+
+    /* ── Edit fields in side panel ── */
+    .edit-field { width: 100%; background: rgba(139,92,246,.07); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 9px 12px; font-size: .87rem; color: var(--white); box-sizing: border-box; outline: none; transition: border-color .2s; }
+    .edit-field:focus { border-color: var(--p5); }
+    .edit-label { font-size: .75rem; color: var(--muted); display: block; margin-bottom: 4px; }
+
     /* ── Toast ── */
     #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 10px 22px; border-radius: var(--r-md); font-size: .85rem; z-index: 300; display: none; backdrop-filter: blur(10px); }
 
@@ -243,10 +255,11 @@
             <th>Score</th>
             <th>Stage</th>
             <th>Submitted</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="leads-tbody">
-          <tr><td colspan="6"><div class="empty">⏳ Loading...</div></td></tr>
+          <tr><td colspan="7"><div class="empty">⏳ Loading...</div></td></tr>
         </tbody>
       </table>
     </div>
@@ -285,9 +298,26 @@
       </div>
     </div>
 
-    <div class="panel-section">
+    <div class="panel-section" id="sp-details-section">
       <div class="panel-section-title">Lead Details</div>
       <div id="sp-details"></div>
+    </div>
+
+    <!-- Edit form — hidden until editLead() called -->
+    <div class="panel-section" id="sp-edit-section" style="display:none">
+      <div class="panel-section-title">Edit Details</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div><label class="edit-label">Business Name</label><input id="edit-biz"      class="edit-field" type="text"/></div>
+        <div><label class="edit-label">Owner Name</label>   <input id="edit-owner"    class="edit-field" type="text"/></div>
+        <div><label class="edit-label">Mobile</label>       <input id="edit-mobile"   class="edit-field" type="text"/></div>
+        <div><label class="edit-label">Email</label>        <input id="edit-email"    class="edit-field" type="email"/></div>
+        <div><label class="edit-label">District</label>     <input id="edit-district" class="edit-field" type="text"/></div>
+        <div><label class="edit-label">Industry / Category</label><input id="edit-industry" class="edit-field" type="text"/></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <button class="btn btn-primary btn-sm" onclick="saveEdit()">Save Changes</button>
+        <button class="btn btn-ghost btn-sm"   onclick="cancelEdit()">Cancel</button>
+      </div>
     </div>
 
     <div class="panel-section">
@@ -447,7 +477,7 @@ function renderTable() {
 
   const tbody = document.getElementById('leads-tbody');
   if (!rows.length) {
-    tbody.innerHTML = `<tr><td colspan="6"><div class="empty">📭 No leads found.</div></td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7"><div class="empty">📭 No leads found.</div></td></tr>`;
     return;
   }
 
@@ -468,6 +498,10 @@ function renderTable() {
       </td>
       <td><span class="stage-badge ${sm.cls}">${sm.label}</span></td>
       <td style="font-size:.8rem;color:var(--muted)">${dt}</td>
+      <td onclick="event.stopPropagation()" style="white-space:nowrap">
+        <button class="row-btn row-btn-edit" onclick="editLead('${esc(l.id)}')" title="Edit">✏</button>
+        <button class="row-btn row-btn-del"  onclick="deleteLead('${esc(l.id)}')" title="Delete">🗑</button>
+      </td>
     </tr>`;
   }).join('');
 }
@@ -507,6 +541,8 @@ function openPanel(id) {
 function closeSidePanel() {
   document.getElementById('side-panel').classList.remove('open');
   document.getElementById('overlay').classList.remove('on');
+  document.getElementById('sp-edit-section').style.display    = 'none';
+  document.getElementById('sp-details-section').style.display = 'block';
   currentId = null;
 }
 
@@ -555,6 +591,65 @@ function exportCSV() {
   a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
   a.download = 'shahlan-sdc-' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
+}
+
+// ── Delete lead ──
+async function deleteLead(id) {
+  const lead = allLeads.find(l => l.id === id);
+  if (!lead) return;
+  if (!confirm(`Delete "${lead.businessName}"?\nThis cannot be undone.`)) return;
+  try {
+    await fetch(`/.netlify/functions/submissions?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+  } catch {}
+  allLeads = allLeads.filter(l => l.id !== id);
+  if (currentId === id) closeSidePanel();
+  renderStats();
+  renderTable();
+  toast(`Deleted: ${lead.businessName}`);
+}
+
+// ── Edit lead ──
+function editLead(id) {
+  openPanel(id);
+  const lead = allLeads.find(l => l.id === id);
+  if (!lead) return;
+  document.getElementById('edit-biz').value      = lead.businessName || '';
+  document.getElementById('edit-owner').value    = lead.ownerName    || '';
+  document.getElementById('edit-mobile').value   = lead.mobile       || '';
+  document.getElementById('edit-email').value    = lead.email        || '';
+  document.getElementById('edit-district').value = lead.district     || '';
+  document.getElementById('edit-industry').value = lead.industry || lead.bizType || lead.orgType || '';
+  document.getElementById('sp-details-section').style.display = 'none';
+  document.getElementById('sp-edit-section').style.display    = 'block';
+}
+
+function cancelEdit() {
+  document.getElementById('sp-edit-section').style.display    = 'none';
+  document.getElementById('sp-details-section').style.display = 'block';
+}
+
+async function saveEdit() {
+  if (!currentId) return;
+  const lead = allLeads.find(l => l.id === currentId);
+  if (!lead) return;
+  lead.businessName = document.getElementById('edit-biz').value.trim();
+  lead.ownerName    = document.getElementById('edit-owner').value.trim();
+  lead.mobile       = document.getElementById('edit-mobile').value.trim();
+  lead.email        = document.getElementById('edit-email').value.trim();
+  lead.district     = document.getElementById('edit-district').value.trim();
+  lead.industry     = document.getElementById('edit-industry').value.trim();
+  try {
+    await fetch('/.netlify/functions/submissions', {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id: currentId, businessName: lead.businessName, ownerName: lead.ownerName, mobile: lead.mobile, email: lead.email, district: lead.district, industry: lead.industry }),
+    });
+  } catch {}
+  cancelEdit();
+  openPanel(currentId);
+  renderStats();
+  renderTable();
+  toast('Changes saved ✓');
 }
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
