@@ -86,8 +86,22 @@
     .biz-name { font-weight: 700; font-size: .92rem; margin-bottom: 2px; }
     .biz-owner { font-size: .76rem; color: var(--p6); }
 
-    /* ── Score bubble ── */
-    .score-bubble { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 800; font-family: var(--font-head); }
+    /* ── Score widget ── */
+    .score-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 56px; }
+    .score-num  { font-family: var(--font-head); font-size: 1.1rem; font-weight: 900; line-height: 1; }
+    .score-bar-mini { width: 46px; height: 3px; background: rgba(139,92,246,.1); border-radius: 2px; overflow: hidden; }
+    .score-bar-mini div { height: 100%; border-radius: 2px; }
+    .score-lbl  { font-size: .6rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    /* breakdown in panel */
+    .score-hero { display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: rgba(139,92,246,.06); border: 1px solid var(--glass-border); border-radius: var(--r-md); margin-bottom: 12px; }
+    .score-big  { font-family: var(--font-head); font-size: 2.4rem; font-weight: 900; line-height: 1; }
+    .score-bar-full { height: 5px; background: rgba(139,92,246,.1); border-radius: 3px; overflow: hidden; margin-bottom: 12px; }
+    .score-bar-full div { height: 100%; border-radius: 3px; transition: width .8s ease; }
+    .bd-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; font-size: .78rem; }
+    .bd-label { color: var(--muted); min-width: 120px; flex-shrink: 0; }
+    .bd-track { flex: 1; height: 4px; background: rgba(139,92,246,.08); border-radius: 2px; overflow: hidden; }
+    .bd-fill  { height: 100%; border-radius: 2px; }
+    .bd-pts   { color: var(--muted); min-width: 34px; text-align: right; font-size: .73rem; font-family: var(--font-head); font-weight: 700; }
 
     /* ── Stage badge ── */
     .stage-badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 99px; font-size: .75rem; font-weight: 700; white-space: nowrap; }
@@ -370,12 +384,12 @@ document.addEventListener('DOMContentLoaded', () => {
 let allLeads = [];
 let currentId = null;
 const SAMPLE = [
-  { id:'WEB-S1', businessName:'Pungu Borneo', ownerName:'Lucille Anak Awen Jon', mobile:'0112345678', email:'pungu@email.com', district:'Kuching', industry:'Retail', leadScore:62, stage:'A', createdAt:'2026-06-24T08:00:00Z' },
-  { id:'WEB-S2', businessName:'Sharifah Food & Catering', ownerName:'Hajah Rohani Borhan', mobile:'0123456789', email:'sharifah@email.com', district:'Kuching', industry:'Catering', leadScore:59, stage:'A', createdAt:'2026-06-24T09:00:00Z' },
-  { id:'WEB-S3', businessName:'Lapis Sarawak by Rizal', ownerName:'Mohamad Fazrizam bin Mohammad Rizal', mobile:'0134567890', email:'rizal@email.com', district:'Miri', industry:'Retail', leadScore:58, stage:'A', createdAt:'2026-06-24T10:00:00Z' },
-  { id:'WEB-S4', businessName:"Yat Ricco Company", ownerName:'Netti binti Sahari', mobile:'0145678901', email:'yatricco@email.com', district:'Samarahan', industry:'Retail', leadScore:56, stage:'C', createdAt:'2026-06-17T11:00:00Z' },
-  { id:'WEB-S5', businessName:"Mom's Laksa Sarawak", ownerName:'Noraini Azmi', mobile:'0156789012', email:'momslaksa@email.com', district:'Kuching', industry:'Restaurant', leadScore:55, stage:'A', createdAt:'2026-06-22T12:00:00Z' },
-  { id:'WEB-S6', businessName:'Serapi Restaurant', ownerName:'Syed Alwi bin Syed Ali', mobile:'0167890123', email:'serapi@email.com', district:'Kuching', industry:'Restaurant', leadScore:55, stage:'A', createdAt:'2026-06-22T13:00:00Z' },
+  { id:'WEB-S1', businessName:'Pungu Borneo', ownerName:'Lucille Anak Awen Jon', mobile:'0112345678', email:'info@punguborneo.com', district:'Kuching', industry:'Perniagaan Runcit', orgType:'SME', languages:['BM','EN','ZH'], bizDesc:'Kedai kraf tangan tradisional Dayak, menjual ukiran, kain tenun dan produk kraftangan Sarawak asli.', existing:'https://fb.com/punguborneo', stage:'A', createdAt:'2026-06-24T08:00:00Z' },
+  { id:'WEB-S2', businessName:'Sharifah Food & Catering', ownerName:'Hajah Rohani Borhan', mobile:'0123456789', email:'sharifah@gmail.com', district:'Kuching', industry:'Makanan & Minuman (F&B)', orgType:'SME', languages:['BM'], bizDesc:'Katering majlis perkahwinan dan korporat. Pakar masakan Melayu Sarawak sejak 2010.', stage:'A', createdAt:'2026-06-24T09:00:00Z' },
+  { id:'WEB-S3', businessName:'Lapis Sarawak by Rizal', ownerName:'Mohamad Fazrizam Rizal', mobile:'0134567890', email:'rizal@gmail.com', district:'Miri', industry:'Makanan & Minuman (F&B)', orgType:'SME', languages:['BM','EN'], bizDesc:'Pengeluar kek lapis Sarawak premium dengan lebih 30 jenis rasa. Penghantaran seluruh Malaysia.', stage:'A', createdAt:'2026-06-24T10:00:00Z' },
+  { id:'WEB-S4', businessName:'Yat Ricco Company', ownerName:'Netti binti Sahari', mobile:'0145678901', email:'yatricco@gmail.com', district:'Sibu', industry:'Perniagaan Runcit', orgType:'Koperasi', languages:['BM','ZH'], stage:'C', createdAt:'2026-06-17T11:00:00Z' },
+  { id:'WEB-S5', businessName:"Mom's Laksa Sarawak", ownerName:'Noraini Azmi', mobile:'0156789012', email:'momslaksa@gmail.com', district:'Kuching', industry:'Makanan & Minuman (F&B)', orgType:'SME', languages:['BM','EN'], bizDesc:'Gerai laksa Sarawak popular di Kuchng sejak 1995. Terkenal dengan kuah yang pekat dan segar.', stage:'A', createdAt:'2026-06-22T12:00:00Z' },
+  { id:'WEB-S6', businessName:'Serapi Restaurant', ownerName:'Syed Alwi bin Syed Ali', mobile:'0167890123', email:'serapi@gmail.com', district:'Kuching', industry:'Makanan & Minuman (F&B)', orgType:'SME', languages:['BM','EN','ZH'], bizDesc:'Restoran keluarga yang menyediakan masakan tempatan dan antarabangsa. Kapasiti 200 orang.', existing:'https://instagram.com/serapirestaurant', stage:'A', createdAt:'2026-06-22T13:00:00Z' },
 ];
 
 // ── Load data ──
@@ -443,11 +457,52 @@ function filterStage(s) {
   renderTable();
 }
 
-// ── Score color ──
-function scoreColor(n) {
-  if (n >= 80) return { bg:'rgba(16,185,129,.15)', color:'#6ee7b7' };
-  if (n >= 60) return { bg:'rgba(245,158,11,.15)', color:'#fcd34d' };
-  return { bg:'rgba(139,92,246,.15)', color:'var(--p7)' };
+// ── Scoring engine (same algorithm as activate.html) ──
+function calcScore(l) {
+  let s = 0;
+  if (l.email)  s += 8;
+  if (l.mobile) s += 8;
+  const dom = (l.email || '').split('@')[1] || '';
+  if (dom && !['gmail.com','yahoo.com','hotmail.com','outlook.com','live.com','icloud.com','ymail.com'].includes(dom.toLowerCase())) s += 4;
+  if (l.businessName)              s += 4;
+  if (l.ownerName)                 s += 4;
+  if (l.bizDesc)                   s += 4;
+  if ((l.bizDesc||'').length > 80) s += 4;
+  if (l.existing)                  s += 4;
+  const dMap = {Kuching:15,Miri:12,Sibu:10,Bintulu:8,Mukah:7,'Sri Aman':6,Sarikei:6,Limbang:5,Kapit:5,Betong:5,Saratok:5,Kabong:5,Spaoh:5};
+  s += dMap[l.district] || 4;
+  const iMap = {'Makanan & Minuman (F&B)':20,'Perniagaan Runcit':18,'Kecantikan & Wellness':17,'Perkhidmatan Profesional':16,'Teknologi & IT':15,'Kesihatan':14,'Pendidikan & Latihan':13,'Pembinaan & Hartanah':12,'Pertanian & Agro':10,'Automotif':10};
+  s += iMap[l.industry] || 8;
+  const lc = (l.languages||[]).length;
+  s += lc >= 4 ? 10 : lc === 3 ? 8 : lc === 2 ? 6 : lc >= 1 ? 3 : 0;
+  const oMap = {SME:15,Konsultan:13,Koperasi:11,NGO:9,Komuniti:7};
+  s += oMap[l.orgType] || 5;
+  const computed = Math.min(100, Math.max(0, s));
+  // fall back to stored score only if no contact data to compute from
+  return (l.email || l.mobile) ? computed : (l.leadScore || computed);
+}
+
+function scoreBreakdownPts(l) {
+  const dom = (l.email||'').split('@')[1]||'';
+  const free = ['gmail.com','yahoo.com','hotmail.com','outlook.com','live.com','icloud.com','ymail.com'];
+  const contact = (l.email?8:0)+(l.mobile?8:0)+(dom&&!free.includes(dom.toLowerCase())&&l.email?.includes('@')?4:0);
+  const profile  = (l.businessName?4:0)+(l.ownerName?4:0)+(l.bizDesc?4:0)+((l.bizDesc||'').length>80?4:0)+(l.existing?4:0);
+  const dMap     = {Kuching:15,Miri:12,Sibu:10,Bintulu:8,Mukah:7,'Sri Aman':6,Sarikei:6,Limbang:5,Kapit:5,Betong:5,Saratok:5,Kabong:5,Spaoh:5};
+  const location = dMap[l.district]||4;
+  const iMap     = {'Makanan & Minuman (F&B)':20,'Perniagaan Runcit':18,'Kecantikan & Wellness':17,'Perkhidmatan Profesional':16,'Teknologi & IT':15,'Kesihatan':14,'Pendidikan & Latihan':13,'Pembinaan & Hartanah':12,'Pertanian & Agro':10,'Automotif':10};
+  const industry = iMap[l.industry]||8;
+  const lc       = (l.languages||[]).length;
+  const langs    = lc>=4?10:lc===3?8:lc===2?6:lc>=1?3:0;
+  const oMap     = {SME:15,Konsultan:13,Koperasi:11,NGO:9,Komuniti:7};
+  const org      = oMap[l.orgType]||5;
+  return {contact, profile, location, industry, langs, org};
+}
+
+function scoreMeta(sc) {
+  if (sc >= 85) return { color:'#fb923c', bg:'rgba(251,146,60,.14)',  label:'HOT',    grad:'#fb923c,#f97316' };
+  if (sc >= 70) return { color:'#6ee7b7', bg:'rgba(16,185,129,.14)', label:'STRONG', grad:'#34d399,#6ee7b7' };
+  if (sc >= 55) return { color:'#fcd34d', bg:'rgba(245,158,11,.14)', label:'WARM',   grad:'#fbbf24,#fcd34d' };
+  return               { color:'#93c5fd', bg:'rgba(59,130,246,.12)', label:'COOL',   grad:'#60a5fa,#93c5fd' };
 }
 
 // ── Stage meta ──
@@ -482,8 +537,8 @@ function renderTable() {
   }
 
   tbody.innerHTML = rows.map(l => {
-    const sc  = l.leadScore || 50;
-    const sc2 = scoreColor(sc);
+    const sc  = calcScore(l);
+    const sm2 = scoreMeta(sc);
     const sm  = STAGE_META[l.stage] || STAGE_META.A;
     const dt  = l.createdAt ? new Date(l.createdAt).toLocaleDateString('en-MY',{year:'numeric',month:'short',day:'numeric'}) : '—';
     return `<tr onclick="openPanel('${esc(l.id)}')">
@@ -494,7 +549,11 @@ function renderTable() {
       <td style="font-size:.82rem">${esc(l.district||'—')}</td>
       <td style="font-size:.82rem">${esc(l.industry||l.bizType||l.orgType||'—')}</td>
       <td>
-        <div class="score-bubble" style="background:${sc2.bg};color:${sc2.color}">${sc}</div>
+        <div class="score-wrap">
+          <div class="score-num" style="color:${sm2.color}">${sc}</div>
+          <div class="score-bar-mini"><div style="width:${sc}%;background:linear-gradient(90deg,${sm2.grad})"></div></div>
+          <div class="score-lbl" style="color:${sm2.color}">${sm2.label}</div>
+        </div>
       </td>
       <td><span class="stage-badge ${sm.cls}">${sm.label}</span></td>
       <td style="font-size:.8rem;color:var(--muted)">${dt}</td>
@@ -520,7 +579,13 @@ function openPanel(id) {
   document.getElementById('sp-pay').href   = `pay.html?b=${encodeURIComponent(l.businessName||'')}&name=${encodeURIComponent(l.ownerName||'')}&id=${encodeURIComponent(l.id)}`;
   document.getElementById('sp-notes').value = l.notes || '';
 
-  const sc2 = scoreColor(l.leadScore||50);
+  const sc  = calcScore(l);
+  const sm2 = scoreMeta(sc);
+  const bd  = scoreBreakdownPts(l);
+  function bdRow(label, pts, max) {
+    const pct = Math.round(pts / max * 100);
+    return `<div class="bd-row"><span class="bd-label">${label}</span><div class="bd-track"><div class="bd-fill" style="width:${pct}%;background:linear-gradient(90deg,${sm2.grad})"></div></div><span class="bd-pts">${pts}/${max}</span></div>`;
+  }
   document.getElementById('sp-details').innerHTML = `
     <div class="info-row"><span class="info-label">Emel</span><span class="info-val">${esc(l.email||'—')}</span></div>
     <div class="info-row"><span class="info-label">Telefon</span><span class="info-val">${esc(l.mobile||'—')}</span></div>
@@ -528,10 +593,29 @@ function openPanel(id) {
     <div class="info-row"><span class="info-label">Jenis</span><span class="info-val">${esc(l.orgType||l.bizType||'—')}</span></div>
     <div class="info-row"><span class="info-label">Industri</span><span class="info-val">${esc(l.industry||'—')}</span></div>
     <div class="info-row"><span class="info-label">Bahasa</span><span class="info-val">${esc((l.languages||[]).join(', ')||'—')}</span></div>
-    <div class="info-row"><span class="info-label">Lead Score</span><span class="info-val" style="color:${sc2.color};font-weight:700">${l.leadScore||'—'}</span></div>
-    <div class="info-row"><span class="info-label">Pakej</span><span class="info-val">${esc(l.package||'RM500 Website Activation')}</span></div>
+    <div class="info-row"><span class="info-label">Pakej</span><span class="info-val">${esc(l.package||'RM599 Website Activation')}</span></div>
     <div class="info-row"><span class="info-label">Ref ID</span><span class="info-val" style="font-family:monospace;font-size:.78rem">${esc(l.id)}</span></div>
     ${l.bizDesc?`<div style="margin-top:12px;padding:10px;background:rgba(139,92,246,.07);border-radius:8px;font-size:.82rem;color:var(--muted);line-height:1.6">${esc(l.bizDesc)}</div>`:''}
+    <div style="margin-top:16px;padding:14px;background:rgba(139,92,246,.06);border:1px solid var(--glass-border);border-radius:var(--r-md)">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+        <div class="score-big" style="color:${sm2.color}">${sc}</div>
+        <div>
+          <div style="font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:${sm2.color}">${sm2.label}</div>
+          <div style="font-size:.75rem;color:var(--muted);margin-top:2px">Lead Score / 100</div>
+        </div>
+        <div style="margin-left:auto">
+          <div class="score-bar-full" style="width:80px;margin-bottom:0"><div style="width:${sc}%;background:linear-gradient(90deg,${sm2.grad})"></div></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--glass-border);padding-top:10px">
+        ${bdRow('Contact quality', bd.contact, 20)}
+        ${bdRow('Profile completeness', bd.profile, 20)}
+        ${bdRow('Location priority', bd.location, 15)}
+        ${bdRow('Industry demand', bd.industry, 20)}
+        ${bdRow('Language breadth', bd.langs, 10)}
+        ${bdRow('Org type', bd.org, 15)}
+      </div>
+    </div>
   `;
 
   document.getElementById('side-panel').classList.add('open');
