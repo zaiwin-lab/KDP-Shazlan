@@ -160,8 +160,23 @@
     .success p { color: var(--sub); line-height: 1.7; max-width: 440px; margin: 0 auto 26px; }
     .success .wa-btn { display: inline-block; background: #25d366; color: #fff; border-radius: 99px; padding: 14px 28px; font-weight: 700; text-decoration: none; font-size: .95rem; }
 
-    footer { border-top: 1px solid var(--line); background: #fbfbfd; text-align: center; padding: 22px 16px; font-size: .8rem; color: var(--sub); }
-    footer b { color: var(--ink); }
+    /* ── Footer (matches homepage) ── */
+    footer { background: #0a0a12; color: #b6b8c7; padding: 0; text-align: left; }
+    .ft-grid { max-width: 940px; margin: 0 auto; padding: 52px 24px 40px; display: grid; grid-template-columns: 1.6fr 1fr 1.4fr; gap: 48px; align-items: start; }
+    .ft-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .ft-logo { background: var(--acc); border-radius: 8px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: .85rem; color: #fff; }
+    .ft-brand-name { font-weight: 800; font-size: 1.05rem; color: #fff; }
+    .ft-desc { color: #9a9cad; font-size: .85rem; line-height: 1.7; max-width: 300px; margin: 0; }
+    .ft-col-title { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #71738a; margin-bottom: 16px; }
+    .ft-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .ft-links a { color: #b6b8c7; font-size: .88rem; text-decoration: none; transition: color .2s; }
+    .ft-links a:hover { color: var(--acc2); }
+    .ft-program { color: #9a9cad; font-size: .85rem; line-height: 1.7; margin: 0; }
+    .ft-strip { border-top: 1px solid rgba(255,255,255,.08); padding: 16px 24px; }
+    .ft-strip-inner { max-width: 940px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .ft-strip p { font-size: .78rem; color: #71738a; margin: 0; }
+    .ft-strip a { color: #71738a; text-decoration: none; }
+    .ft-strip a.hl { color: var(--acc2); }
 
     @media (max-width: 640px) {
       .grid2 { grid-template-columns: 1fr; }
@@ -171,6 +186,8 @@
       .decision { grid-template-columns: 1fr; }
       .pkg-feats { grid-template-columns: 1fr; }
       .ai-box { padding: 22px 18px; }
+      .ft-grid { grid-template-columns: 1fr; gap: 32px; padding: 40px 22px 32px; }
+      .ft-strip-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -380,8 +397,33 @@
 </div>
 
 <footer>
-  <div data-t="foot">© 2026 Sarawak Digital Champion. Maklumat anda digunakan untuk tujuan pemerkasaan digital sahaja.</div>
-  <div style="margin-top:6px" data-t="foot2">Diinovasi oleh <b>Syahlan</b> · Syahlan SDC Team</div>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-brand-row">
+        <div class="ft-logo">SDC</div>
+        <span class="ft-brand-name" data-t="ft.brand">Sarawak Digital Champion</span>
+      </div>
+      <p class="ft-desc" data-t="ft.desc"></p>
+    </div>
+    <div>
+      <div class="ft-col-title" data-t="ft.col1">INITIATIVE</div>
+      <ul class="ft-links">
+        <li><a href="activate.html" data-t="ft.link1">Activate My Business</a></li>
+        <li><a href="index.html#misi" data-t="ft.link2">The Mission</a></li>
+        <li><a href="index.html#pakej" data-t="ft.link3">The Offer</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-title" data-t="ft.col2">THE PROGRAM</div>
+      <p class="ft-program" data-t="ft.program"></p>
+    </div>
+  </div>
+  <div class="ft-strip">
+    <div class="ft-strip-inner">
+      <p><span data-t="ft.copy">© 2026 Syahlan's Mission on SDC</span> · <a href="privacy.html" data-t="ft.privacy">Privacy Notice</a> · <a href="dashboard.html" data-t="ft.team">🔒 Team Login</a></p>
+      <p><span data-t="ft.innov">Innovated by Syahlan &amp;</span> <a class="hl" href="https://www.kobisberhad.com" target="_blank" rel="noopener">KOBIS AI Prodigy Team</a></p>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -449,6 +491,12 @@ const I18N = {
     'cm.3': 'Saya faham bahawa Pakej Aktivasi Website Perniagaan Profesional biasanya berharga RM1,380. Saya menghargai peluang untuk menerima kadar aktivasi istimewa RM599. Sekiranya pratonton website menepati keperluan perniagaan yang saya hantar dan memenuhi jangkaan saya, saya bersedia untuk meneruskan dengan yuran aktivasi RM599 untuk mengaktif dan menerbitkan website saya.',
     'cm.err': 'Sila tanda ketiga-tiga kotak untuk meneruskan.',
     's4.start': '✦ Mula Aktivasi Website Saya',
+    'ft.brand': 'Sarawak Digital Champion',
+    'ft.desc': 'Syahlan, mewakili Sarawak. Mengaktifkan 100 kehadiran digital perniagaan baru merentasi 45 daerah di Sarawak.',
+    'ft.col1': 'INISIATIF', 'ft.link1': 'Aktifkan Perniagaan Saya', 'ft.link2': 'Misi Kami', 'ft.link3': 'Tawaran Kami',
+    'ft.col2': 'PROGRAM SDC',
+    'ft.program': 'Sarawak Digital Champion (SDC) adalah program pemerkasaan digital yang dianjurkan oleh SDEC, AZAM Sarawak, Kamek Digital dan Sarawak Digital. Laman ini adalah inisiatif bebas oleh Calon SDC.',
+    'ft.copy': "© 2026 Syahlan's Mission on SDC", 'ft.privacy': 'Privacy Notice', 'ft.team': '🔒 Log Masuk Pasukan', 'ft.innov': 'Diinovasi oleh Syahlan &',
   },
   EN: {
     ticker: '✦ Empowering 100 New Digital Presences Across Sarawak',
@@ -512,6 +560,12 @@ const I18N = {
     'cm.3': 'I understand that the Professional Business Website Activation Package is normally priced at RM1,380. I appreciate the opportunity to receive the special activation rate of RM599. If the website preview reflects my submitted business requirements and meets my expectations, I am ready to proceed with the RM599 activation fee to activate and publish my website.',
     'cm.err': 'Please tick all three boxes to continue.',
     's4.start': '✦ Start My Website Activation',
+    'ft.brand': 'Sarawak Digital Champion',
+    'ft.desc': 'Syahlan, representing Sarawak. Activating 100 new business digital presences across all 45 districts of Sarawak.',
+    'ft.col1': 'INITIATIVE', 'ft.link1': 'Activate My Business', 'ft.link2': 'The Mission', 'ft.link3': 'The Offer',
+    'ft.col2': 'THE PROGRAM',
+    'ft.program': 'Sarawak Digital Champion (SDC) is a digital-empowerment program organized by SDEC, AZAM Sarawak, Kamek Digital and Sarawak Digital. This website is an independent initiative by an SDC Candidate.',
+    'ft.copy': "© 2026 Syahlan's Mission on SDC", 'ft.privacy': 'Privacy Notice', 'ft.team': '🔒 Team Login', 'ft.innov': 'Innovated by Syahlan &',
   },
   ZH: {
     ticker: '✦ 助力砂拉越100家企业实现数字化',
@@ -575,6 +629,12 @@ const I18N = {
     'cm.3': '我明白专业企业网站激活配套原价为 RM1,380。我感谢能获得 RM599 的特别激活价。如果网站预览符合我提交的业务需求并达到我的期望，我愿意支付 RM599 激活费以激活并发布我的网站。',
     'cm.err': '请勾选全部三项以继续。',
     's4.start': '✦ 开始激活我的网站',
+    'ft.brand': '砂拉越数字冠军',
+    'ft.desc': 'Syahlan，代表砂拉越。在砂拉越全部45个县激活100个新企业数字存在。',
+    'ft.col1': '计划', 'ft.link1': '激活我的企业', 'ft.link2': '使命', 'ft.link3': '套餐',
+    'ft.col2': 'SDC 计划',
+    'ft.program': '砂拉越数字冠军（SDC）是由SDEC、AZAM砂拉越、Kamek Digital和砂拉越数字主办的数字赋能计划。本网站是SDC候选人的独立举措。',
+    'ft.copy': "© 2026 Syahlan's Mission on SDC", 'ft.privacy': '隐私声明', 'ft.team': '🔒 团队登录', 'ft.innov': 'Innovated by Syahlan &',
   },
   IB: {
     ticker: '✦ Ngemansangka 100 Presence Digital Baru Di Serata Sarawak',
@@ -638,6 +698,12 @@ const I18N = {
     'cm.3': 'Aku meretika Pakej Aktivasi Website Dagang Profesional biasa berega RM1,380. Aku ngargaka peluang nerima kadar aktivasi espesyal RM599. Enti pratonton website nepan enggau pengarap dagang ti dianjung aku sereta nepan enggau adat aku, aku sedia nerus enggau bayar aktivasi RM599 kena ngaktifka sereta nerbitka website aku.',
     'cm.err': 'Tanda ketiga kotak kena nerus.',
     's4.start': '✦ Berengkah Aktivasi Website Aku',
+    'ft.brand': 'Sarawak Digital Champion',
+    'ft.desc': 'Syahlan, mewakili Sarawak. Ngaktifkan 100 kehadiran digital niaga baru di semua 45 daerah Sarawak.',
+    'ft.col1': 'INISIATIF', 'ft.link1': 'Aktifkan Niaga Aku', 'ft.link2': 'Misi Kitai', 'ft.link3': 'Tawaran Kitai',
+    'ft.col2': 'PROGRAM SDC',
+    'ft.program': 'Sarawak Digital Champion (SDC) adalah program pemerkasaan digital dianjur oleh SDEC, AZAM Sarawak, Kamek Digital enggau Sarawak Digital. Website tu inisiatif bebas Calon SDC.',
+    'ft.copy': "© 2026 Syahlan's Mission on SDC", 'ft.privacy': 'Privacy Notice', 'ft.team': '🔒 Log Masuk Pasukan', 'ft.innov': 'Diinovasi ulih Syahlan &',
   },
 };
 
