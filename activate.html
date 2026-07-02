@@ -4,404 +4,602 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aktifkan Website Perniagaan Anda — Syahlan SDC</title>
-  <meta name="description" content="Isi borang aktivasi website perniagaan anda. Pakej lengkap RM599 termasuk domain, hosting, dashboard admin dan lebih."/>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="description" content="Borang aktivasi website 4 langkah mudah. Syahlan SDC — Sarawak Digital Champion 2026."/>
   <style>
-    .lang-toggle { display: flex; gap: 2px; background: rgba(139,92,246,.08); border: 1px solid var(--glass-border); border-radius: 8px; padding: 3px; }
-    .lang-btn { background: transparent; border: none; color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .04em; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: all .18s; line-height: 1; }
-    .lang-btn.active { background: rgba(139,92,246,.25); color: var(--white); border: 1px solid rgba(139,92,246,.4); }
+    :root {
+      --acc: #7c3aed;
+      --acc2: #a855f7;
+      --ink: #1a1d26;
+      --sub: #5b6172;
+      --line: #e5e7ee;
+      --bg: #f5f6fa;
+      --card: #ffffff;
+      --ok: #10b981;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
 
-    .activate-wrap { max-width: 760px; margin: 0 auto; padding: 100px 20px 60px; }
-    .activate-header { text-align: center; margin-bottom: 40px; }
-    .activate-header .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 99px; background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); font-size: .8rem; font-weight: 700; color: var(--gold); letter-spacing: .05em; text-transform: uppercase; margin-bottom: 20px; }
-    .activate-header h1 { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.15; margin-bottom: 12px; }
-    .activate-header p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 520px; margin: 0 auto; }
+    /* ── Ticker ── */
+    .ticker { background: #12101f; color: #e9e6f7; overflow: hidden; white-space: nowrap; padding: 9px 0; font-size: .82rem; font-weight: 600; }
+    .ticker-inner { display: inline-block; animation: tick 30s linear infinite; }
+    .ticker-inner span { margin: 0 28px; }
+    .ticker-inner .dia { color: var(--acc2); }
+    @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    .price-summary { display: flex; align-items: center; justify-content: center; gap: 16px; background: linear-gradient(135deg, rgba(76,29,149,.2), rgba(6,182,212,.1)); border: 1px solid rgba(139,92,246,.3); border-radius: var(--r-lg); padding: 20px 28px; margin-bottom: 36px; flex-wrap: wrap; text-align: center; }
-    .price-summary .big { font-family: var(--font-head); font-size: 2.6rem; font-weight: 900; color: var(--gold); line-height: 1; }
-    .price-summary .old { font-size: .9rem; color: var(--muted); text-decoration: line-through; }
-    .price-summary .save { background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.25); border-radius: 99px; padding: 3px 10px; font-size: .75rem; font-weight: 700; color: #fca5a5; }
-    .price-summary .includes { font-size: .82rem; color: var(--muted); text-align: left; }
-    .price-summary .includes li { margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    /* ── Header ── */
+    header { background: #fbfbfd; border-bottom: 1px solid var(--line); padding: 14px 24px; display: flex; align-items: center; gap: 14px; position: sticky; top: 0; z-index: 50; }
+    .logo-box { width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: .85rem; letter-spacing: .02em; }
+    .brand a { color: var(--ink); font-weight: 800; font-size: 1.05rem; text-decoration: underline; text-underline-offset: 3px; }
+    .brand .tag { display: block; font-size: .74rem; color: var(--sub); text-decoration: underline; text-underline-offset: 2px; margin-top: 1px; }
+    .head-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .lang-row { display: flex; gap: 4px; }
+    .lang-pill { border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 5px 10px; font-size: .78rem; font-weight: 700; color: var(--sub); cursor: pointer; }
+    .lang-pill.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .back-btn { border: 1px solid var(--line); background: #f0f1f5; border-radius: 99px; padding: 9px 18px; font-size: .85rem; font-weight: 600; color: var(--ink); text-decoration: none; }
 
-    .form-card-new { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 40px; backdrop-filter: blur(12px); }
-    .section-divider { font-family: var(--font-head); font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--p6); margin: 28px 0 18px; display: flex; align-items: center; gap: 12px; }
-    .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
+    /* ── Wizard shell ── */
+    .shell { flex: 1; width: 100%; max-width: 860px; margin: 0 auto; padding: 34px 20px 70px; }
+    .progress-track { height: 7px; background: #e3e4ec; border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 25%; background: linear-gradient(90deg, var(--acc), var(--acc2)); border-radius: 99px; transition: width .45s cubic-bezier(.4,0,.2,1); }
+    .progress-meta { display: flex; justify-content: space-between; margin-top: 8px; font-size: .82rem; color: var(--sub); }
+    .progress-meta b { color: var(--ink); }
 
-    .org-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .org-type-card { border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 14px 12px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; }
-    .org-type-card:hover { border-color: var(--p5); background: var(--glass-hover); }
-    .org-type-card.selected { border-color: var(--p5); background: rgba(139,92,246,.12); }
-    .org-type-card input { display: none; }
-    .org-type-card .icon { font-size: 1.6rem; margin-bottom: 6px; }
-    .org-type-card .label { font-size: .8rem; font-weight: 600; }
+    /* ── Card ── */
+    .card { background: var(--card); border-radius: 18px; box-shadow: 0 10px 34px rgba(20,20,45,.07); padding: 42px 46px; margin-top: 26px; }
+    .card h2 { font-size: 1.65rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 8px; }
+    .card .lede { color: var(--sub); font-size: .95rem; line-height: 1.6; margin-bottom: 30px; }
 
-    .lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-    .lang-card { border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 12px 8px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; }
-    .lang-card:hover { border-color: var(--p5); background: var(--glass-hover); }
-    .lang-card.selected { border-color: var(--cyan); background: rgba(6,182,212,.1); }
-    .lang-card input { display: none; }
-    .lang-card .flag { font-size: 1.4rem; margin-bottom: 4px; }
-    .lang-card .lname { font-size: .78rem; font-weight: 600; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+    .fg label { display: block; font-size: .87rem; font-weight: 700; margin-bottom: 7px; }
+    .fg label .req { color: #ef4444; }
+    .fg input, .fg select, .fg textarea { width: 100%; border: 1px solid #d7d9e3; border-radius: 10px; padding: 12px 14px; font-size: .93rem; color: var(--ink); background: #fff; outline: none; transition: border-color .15s, box-shadow .15s; font-family: inherit; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--acc); box-shadow: 0 0 0 3px rgba(124,58,237,.12); }
+    .fg textarea { resize: vertical; line-height: 1.6; }
+    .hint { font-size: .8rem; color: var(--acc); margin-top: 10px; }
 
-    .success-card { text-align: center; padding: 40px 20px; }
-    .success-icon { font-size: 4rem; margin-bottom: 16px; }
-    .success-card h2 { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
-    .success-card p { color: var(--muted); line-height: 1.7; max-width: 420px; margin: 0 auto 28px; }
-    .success-ref { font-family: monospace; font-size: .9rem; background: rgba(139,92,246,.1); border: 1px solid rgba(139,92,246,.25); border-radius: var(--r-sm); padding: 8px 16px; display: inline-block; margin-bottom: 28px; color: var(--p6); }
+    /* ── Buttons ── */
+    .btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 34px; }
+    .btn-next { margin-left: auto; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border: none; border-radius: 99px; padding: 14px 30px; font-size: .95rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(124,58,237,.3); transition: transform .12s, box-shadow .12s; }
+    .btn-next:hover { transform: translateY(-1px); box-shadow: 0 9px 24px rgba(124,58,237,.38); }
+    .btn-back { background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 13px 26px; font-size: .92rem; font-weight: 600; color: var(--ink); cursor: pointer; }
+    .err-msg { color: #dc2626; font-size: .84rem; margin-top: 14px; min-height: 20px; }
+
+    /* ── Dropzone ── */
+    .dropzone { border: 2px dashed #c9cbdb; border-radius: 14px; padding: 52px 24px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; }
+    .dropzone:hover, .dropzone.drag { border-color: var(--acc); background: rgba(124,58,237,.04); }
+    .dropzone .clip { font-size: 2rem; margin-bottom: 10px; }
+    .dropzone .dz-title { font-weight: 800; font-size: 1.02rem; margin-bottom: 4px; }
+    .dropzone .dz-sub { font-size: .84rem; color: var(--sub); }
+    .file-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .file-chip { display: flex; align-items: center; gap: 10px; background: #f3f4f9; border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; font-size: .85rem; }
+    .file-chip .fx { margin-left: auto; cursor: pointer; color: #9aa0b4; font-weight: 700; }
+
+    /* ── Chips (needs) ── */
+    .chip-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .need-chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #d7d9e3; background: #fff; border-radius: 12px; padding: 11px 16px; font-size: .88rem; font-weight: 600; cursor: pointer; user-select: none; transition: all .15s; }
+    .need-chip input { accent-color: var(--acc); width: 15px; height: 15px; }
+    .need-chip.on { border-color: var(--acc); background: rgba(124,58,237,.07); color: var(--acc); }
+
+    /* ── Optional details ── */
+    details.more { border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-top: 26px; background: #fafafd; }
+    details.more summary { font-size: .92rem; font-weight: 700; cursor: pointer; color: var(--ink); list-style: none; }
+    details.more summary::-webkit-details-marker { display: none; }
+    details.more .fg { margin-top: 16px; }
+
+    /* ── AI box ── */
+    .ai-btn { width: 100%; margin-top: 30px; background: #12101f; color: #fff; border: none; border-radius: 99px; padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity .15s; }
+    .ai-btn:hover { opacity: .9; }
+    .ai-box { display: none; margin-top: 26px; border: 1px solid rgba(124,58,237,.35); background: linear-gradient(135deg, rgba(124,58,237,.05), rgba(168,85,247,.03)); border-radius: 16px; padding: 26px 28px; }
+    .ai-box.show { display: block; animation: fadeUp .4s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .ai-head { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1rem; margin-bottom: 14px; color: var(--acc); }
+    .ai-body { font-size: .92rem; line-height: 1.75; color: var(--ink); }
+    .ai-body ul { padding-left: 20px; margin: 8px 0; }
+    .ai-body li { margin-bottom: 4px; }
+    .ai-thinking { display: none; align-items: center; gap: 10px; margin-top: 24px; color: var(--sub); font-size: .9rem; }
+    .ai-thinking.show { display: flex; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); animation: blink 1.2s infinite; }
+    .dot:nth-child(2) { animation-delay: .2s; } .dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+    .submit-btn { width: 100%; margin-top: 18px; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border: none; border-radius: 99px; padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(124,58,237,.3); }
+
+    /* ── Success ── */
+    .success { text-align: center; padding: 20px 10px; }
+    .success .big-ico { font-size: 3.4rem; margin-bottom: 14px; }
+    .success h2 { margin-bottom: 10px; }
+    .success .ref { display: inline-block; font-family: monospace; background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.25); color: var(--acc); border-radius: 8px; padding: 8px 18px; font-size: .9rem; margin: 6px 0 22px; }
+    .success p { color: var(--sub); line-height: 1.7; max-width: 440px; margin: 0 auto 26px; }
+    .success .wa-btn { display: inline-block; background: #25d366; color: #fff; border-radius: 99px; padding: 14px 28px; font-weight: 700; text-decoration: none; font-size: .95rem; }
+
+    footer { border-top: 1px solid var(--line); background: #fbfbfd; text-align: center; padding: 22px 16px; font-size: .8rem; color: var(--sub); }
+    footer b { color: var(--ink); }
 
     @media (max-width: 640px) {
-      .org-type-grid { grid-template-columns: repeat(2, 1fr); }
-      .lang-grid { grid-template-columns: repeat(2, 1fr); }
-      .form-card-new { padding: 24px 18px; }
-      .price-summary { flex-direction: column; }
+      .grid2 { grid-template-columns: 1fr; }
+      .card { padding: 28px 20px; }
+      header { flex-wrap: wrap; }
+      .head-right { width: 100%; justify-content: space-between; margin-left: 0; }
     }
   </style>
 </head>
 <body>
 
-<div class="aurora-bg"><div class="orb3"></div><div class="noise"></div></div>
-<div class="grid-dots"></div>
+<!-- Ticker -->
+<div class="ticker"><div class="ticker-inner" id="ticker"></div></div>
 
-<nav class="nav">
-  <div class="nav-logo">
-    <span class="bolt">◆</span>
-    <a href="index.html">Syahlan <span style="color:var(--p6)">SDC</span></a>
+<!-- Header -->
+<header>
+  <div class="logo-box">SDC</div>
+  <div class="brand">
+    <a href="index.html">Syahlan's Mission</a>
+    <a href="index.html" class="tag">Sarawak Digital Champion</a>
   </div>
-  <ul class="nav-links">
-    <li><a href="index.html" data-i18n="nav.back">← Kembali</a></li>
-  </ul>
-  <div class="lang-toggle">
-    <button class="lang-btn active" data-lang="BM" onclick="setLang('BM')">BM</button>
-    <button class="lang-btn" data-lang="EN" onclick="setLang('EN')">EN</button>
-    <button class="lang-btn" data-lang="ZH" onclick="setLang('ZH')">中</button>
-    <button class="lang-btn" data-lang="IB" onclick="setLang('IB')">IB</button>
-  </div>
-  <a href="https://wa.me/60187874797" class="nav-cta" target="_blank" data-i18n="nav.contact">💬 Hubungi Syahlan</a>
-</nav>
-
-<div class="activate-wrap">
-
-  <div class="activate-header">
-    <div class="badge" data-i18n="act.badge">✦ Digital Presence Initiative · 100 Perniagaan Pertama</div>
-    <h1 data-i18n-html="act.h1">Aktifkan <span class="grad-text">Website</span><br/>Perniagaan Anda</h1>
-    <p data-i18n="act.sub">Isi borang di bawah. Syahlan akan menghubungi anda dalam masa 24 jam untuk mengesahkan tempahan dan meneruskan proses pembinaan website anda.</p>
-  </div>
-
-  <!-- Price Summary -->
-  <div class="price-summary">
-    <div>
-      <div class="big">RM599</div>
-      <div class="old">Biasa RM1,380</div>
-      <div class="save" style="margin-top:4px" data-i18n="pay.save">Jimat 57%</div>
+  <div class="head-right">
+    <div class="lang-row">
+      <button class="lang-pill" data-l="BM" onclick="setL('BM')">BM</button>
+      <button class="lang-pill" data-l="EN" onclick="setL('EN')">EN</button>
+      <button class="lang-pill" data-l="ZH" onclick="setL('ZH')">中</button>
+      <button class="lang-pill" data-l="IB" onclick="setL('IB')">IB</button>
     </div>
-    <div style="width:1px;height:60px;background:var(--glass-border)"></div>
-    <ul class="includes">
-      <li><span style="color:var(--cyan)">✓</span> <span data-i18n="act.price.inc1">Website Profesional + Mobile Responsive</span></li>
-      <li><span style="color:var(--cyan)">✓</span> <span data-i18n="act.price.inc2">Domain &amp; Hosting 1 Tahun</span></li>
-      <li><span style="color:var(--cyan)">✓</span> <span data-i18n="act.price.inc3">Dashboard Admin + Galeri + Promosi</span></li>
-      <li><span style="color:var(--cyan)">✓</span> <span data-i18n="act.price.inc4">WhatsApp, Google Map, SSL, SEO Asas</span></li>
-    </ul>
+    <a href="index.html" class="back-btn" data-t="back">← Kembali</a>
   </div>
+</header>
 
-  <!-- Form -->
-  <div class="form-card-new" id="form-view">
+<div class="shell">
 
-    <form id="activate-form" novalidate>
-
-      <div class="section-divider" data-i18n="act.sec1">Maklumat Perniagaan</div>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label" for="bizName" data-i18n="act.lbl.biz">Nama Perniagaan / Organisasi *</label>
-          <input class="form-input" id="bizName" type="text" data-i18n-ph="act.ph.biz" placeholder="cth: Syarikat ABC Sdn Bhd" required/>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="ownerName" data-i18n="act.lbl.owner">Nama Pemilik / PIC *</label>
-          <input class="form-input" id="ownerName" type="text" data-i18n-ph="act.ph.owner" placeholder="Nama penuh anda" required/>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top:16px">
-        <label class="form-label" data-i18n="act.lbl.orgtype">Jenis Organisasi *</label>
-        <div class="org-type-grid">
-          <label class="org-type-card" onclick="selectOrgType(this)">
-            <input type="radio" name="orgType" value="SME"/>
-            <div class="icon">🏪</div>
-            <div class="label" data-i18n="act.org.sme">PKS / SME</div>
-          </label>
-          <label class="org-type-card" onclick="selectOrgType(this)">
-            <input type="radio" name="orgType" value="Koperasi"/>
-            <div class="icon">🤝</div>
-            <div class="label" data-i18n="act.org.kop">Koperasi</div>
-          </label>
-          <label class="org-type-card" onclick="selectOrgType(this)">
-            <input type="radio" name="orgType" value="NGO"/>
-            <div class="icon">🌱</div>
-            <div class="label" data-i18n="act.org.ngo">NGO</div>
-          </label>
-          <label class="org-type-card" onclick="selectOrgType(this)">
-            <input type="radio" name="orgType" value="Konsultan"/>
-            <div class="icon">💼</div>
-            <div class="label" data-i18n="act.org.konsultan">Konsultan</div>
-          </label>
-          <label class="org-type-card" onclick="selectOrgType(this)">
-            <input type="radio" name="orgType" value="Komuniti"/>
-            <div class="icon">🏘️</div>
-            <div class="label" data-i18n="act.org.komuniti">Komuniti</div>
-          </label>
-          <label class="org-type-card" onclick="selectOrgType(this)">
-            <input type="radio" name="orgType" value="Lain-lain"/>
-            <div class="icon">✦</div>
-            <div class="label" data-i18n="act.org.lain">Lain-lain</div>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-grid" style="margin-top:16px">
-        <div class="form-group">
-          <label class="form-label" for="industry" data-i18n="act.lbl.industry">Industri / Kategori</label>
-          <select class="form-select" id="industry">
-            <option value="" disabled selected>-- Pilih kategori --</option>
-            <option>Makanan &amp; Minuman (F&amp;B)</option>
-            <option>Perniagaan Runcit</option>
-            <option>Perkhidmatan Profesional</option>
-            <option>Teknologi &amp; IT</option>
-            <option>Kecantikan &amp; Wellness</option>
-            <option>Pendidikan &amp; Latihan</option>
-            <option>Pertanian &amp; Agro</option>
-            <option>Automotif</option>
-            <option>Pembinaan &amp; Hartanah</option>
-            <option>Kesihatan</option>
-            <option>Lain-lain</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="district" data-i18n="act.lbl.district">Daerah / Kawasan *</label>
-          <select class="form-select" id="district" required>
-            <option value="" disabled selected data-i18n-ph="act.ph.district">-- Pilih daerah --</option>
-            <option>Kuching</option>
-            <option>Sibu</option>
-            <option>Miri</option>
-            <option>Bintulu</option>
-            <option>Sri Aman</option>
-            <option>Sarikei</option>
-            <option>Kapit</option>
-            <option>Mukah</option>
-            <option>Limbang</option>
-            <option>Betong</option>
-            <option>Saratok</option>
-            <option>Kabong</option>
-            <option>Spaoh</option>
-            <option>Lain-lain</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="section-divider" data-i18n="act.sec2">Maklumat Hubungan</div>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label" for="email" data-i18n="act.lbl.email">Emel *</label>
-          <input class="form-input" id="email" type="email" data-i18n-ph="act.ph.email" placeholder="email@contoh.com" required/>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="mobile" data-i18n="act.lbl.mobile">No. WhatsApp *</label>
-          <input class="form-input" id="mobile" type="tel" data-i18n-ph="act.ph.mobile" placeholder="012-345 6789" required/>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top:16px">
-        <label class="form-label" for="existing" data-i18n="act.lbl.existing">Link Media Sosial / Website Sedia Ada (jika ada)</label>
-        <input class="form-input" id="existing" type="url" data-i18n-ph="act.ph.existing" placeholder="https://facebook.com/perniagaananda atau website lama"/>
-      </div>
-
-      <div class="section-divider" data-i18n="act.sec3">Bahasa Website</div>
-
-      <div class="form-group">
-        <label class="form-label" data-i18n="act.lbl.lang">Pilih bahasa untuk website anda (boleh lebih dari satu)</label>
-        <div class="lang-grid">
-          <label class="lang-card selected" onclick="toggleLang(this)">
-            <input type="checkbox" name="lang" value="BM" checked/>
-            <div class="flag">🇲🇾</div>
-            <div class="lname">Bahasa Melayu</div>
-          </label>
-          <label class="lang-card" onclick="toggleLang(this)">
-            <input type="checkbox" name="lang" value="EN"/>
-            <div class="flag">🇬🇧</div>
-            <div class="lname">English</div>
-          </label>
-          <label class="lang-card" onclick="toggleLang(this)">
-            <input type="checkbox" name="lang" value="ZH"/>
-            <div class="flag">🇨🇳</div>
-            <div class="lname">中文</div>
-          </label>
-          <label class="lang-card" onclick="toggleLang(this)">
-            <input type="checkbox" name="lang" value="IB"/>
-            <div class="flag">🦅</div>
-            <div class="lname">Iban</div>
-          </label>
-        </div>
-      </div>
-
-      <div class="section-divider" data-i18n="act.sec4">Maklumat Tambahan</div>
-
-      <div class="form-group">
-        <label class="form-label" for="bizDesc" data-i18n="act.lbl.desc">Terangkan perniagaan / organisasi anda secara ringkas</label>
-        <textarea class="form-input" id="bizDesc" rows="3" data-i18n-ph="act.ph.desc" placeholder="Apa yang anda jual / tawarkan? Siapa pelanggan anda? Apa yang membuatkan anda unik?" style="resize:vertical"></textarea>
-      </div>
-
-      <div id="form-msg" style="margin-top:16px"></div>
-
-      <div style="margin-top:24px">
-        <button type="submit" class="btn btn-primary btn-full" id="submit-btn" data-i18n="act.submit">
-          ✦ Hantar Permohonan Aktivasi
-        </button>
-        <p style="text-align:center;margin-top:12px;font-size:.8rem;color:var(--muted)" data-i18n="act.disclaimer">
-          Dengan menghantar borang ini, anda bersetuju untuk dihubungi oleh Syahlan berkaitan pakej website anda. Tiada komitmen sehingga anda mengesahkan tempahan.
-        </p>
-      </div>
-    </form>
-  </div>
-
-  <!-- Success State -->
-  <div class="form-card-new success-card" id="success-view" style="display:none">
-    <div class="success-icon">🎉</div>
-    <h2 data-i18n="act.success.h2">Permohonan Berjaya Dihantar!</h2>
-    <div class="success-ref" id="ref-num">REF: —</div>
-    <p data-i18n-html="act.success.sub">
-      Terima kasih! Syahlan akan menghubungi anda melalui WhatsApp dalam masa <strong style="color:var(--p7)">24 jam</strong> untuk mengesahkan tempahan dan membincangkan keperluan website anda.
-    </p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="index.html" class="btn btn-secondary" data-i18n="act.success.back">← Kembali ke Laman Utama</a>
-      <a href="https://wa.me/60187874797" target="_blank" class="btn btn-primary" data-i18n="act.success.wa">💬 WhatsApp Syahlan Sekarang</a>
+  <!-- Progress -->
+  <div id="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
+    <div class="progress-meta">
+      <span><span data-t="step">Langkah</span> <b id="pstep">1</b> <span data-t="of">daripada</span> <b>4</b></span>
+      <span id="plabel"></span>
     </div>
+  </div>
+
+  <!-- STEP 1 · Essentials -->
+  <div class="card" id="step1">
+    <h2 data-t="s1.h2">Mula dengan asas</h2>
+    <p class="lede" data-t="s1.lede">Cukup sekadar untuk kami hubungi anda. Tiada yang lain.</p>
+    <div class="grid2">
+      <div class="fg">
+        <label data-t="s1.biz">Nama perniagaan <span class="req">*</span></label>
+        <input id="f-biz" type="text"/>
+      </div>
+      <div class="fg">
+        <label data-t="s1.name">Nama anda <span class="req">*</span></label>
+        <input id="f-owner" type="text"/>
+      </div>
+      <div class="fg">
+        <label data-t="s1.wa">Nombor WhatsApp <span class="req">*</span></label>
+        <input id="f-mobile" type="tel" placeholder="+6012-345 6789"/>
+      </div>
+      <div class="fg">
+        <label data-t="s1.email">Emel <span class="req">*</span></label>
+        <input id="f-email" type="email" placeholder="email@contoh.com"/>
+      </div>
+      <div class="fg">
+        <label data-t="s1.kind">Jenis perniagaan? <span class="req">*</span></label>
+        <select id="f-industry">
+          <option value="" disabled selected>—</option>
+          <option>Makanan &amp; Minuman (F&amp;B)</option>
+          <option>Perniagaan Runcit</option>
+          <option>Perkhidmatan Profesional</option>
+          <option>Teknologi &amp; IT</option>
+          <option>Kecantikan &amp; Wellness</option>
+          <option>Pendidikan &amp; Latihan</option>
+          <option>Pertanian &amp; Agro</option>
+          <option>Automotif</option>
+          <option>Pembinaan &amp; Hartanah</option>
+          <option>Kesihatan</option>
+          <option>Lain-lain</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label data-t="s1.district">Daerah <span class="req">*</span></label>
+        <select id="f-district">
+          <option value="" disabled selected>—</option>
+          <option>Kuching</option><option>Sibu</option><option>Miri</option><option>Bintulu</option>
+          <option>Sri Aman</option><option>Sarikei</option><option>Kapit</option><option>Mukah</option>
+          <option>Limbang</option><option>Betong</option><option>Saratok</option><option>Kabong</option>
+          <option>Spaoh</option><option>Pusa</option><option>Lain-lain</option>
+        </select>
+      </div>
+    </div>
+    <div class="err-msg" id="err1"></div>
+    <div class="btn-row">
+      <button class="btn-next" onclick="goStep(2)" data-t="continue">Teruskan →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 · Links -->
+  <div class="card" id="step2" style="display:none">
+    <h2 data-t="s2.h2">Letak semua link anda di sini</h2>
+    <p class="lede" data-t="s2.lede">Website, Facebook, Instagram, TikTok, Shopee, Google Maps — apa sahaja. Tampal semuanya sekali gus, dalam apa jua susunan. AI kami akan susun dan labelkannya.</p>
+    <div class="fg">
+      <textarea id="f-links" rows="6" placeholder="https://facebook.com/mybiz&#10;https://instagram.com/mybiz&#10;shopee.com.my/mybiz&#10;https://mybiz.com"></textarea>
+    </div>
+    <div class="hint" data-t="s2.skip">Tiada link lagi? Tiada masalah, anda boleh langkau bahagian ini.</div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goStep(1)" data-t="back2">← Kembali</button>
+      <button class="btn-next" onclick="goStep(3)" data-t="continue">Teruskan →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 · Files -->
+  <div class="card" id="step3" style="display:none">
+    <h2 data-t="s3.h2">Letak fail anda di satu tempat</h2>
+    <p class="lede" data-t="s3.lede">Logo, profil perniagaan, gambar produk, sijil, PDF. Letakkan semuanya bersama. AI kami akan susun setiap satu ke kategori yang betul.</p>
+    <div class="dropzone" id="dropzone" onclick="document.getElementById('f-files').click()">
+      <div class="clip">📎</div>
+      <div class="dz-title" data-t="s3.drag">Seret &amp; lepas semuanya di sini</div>
+      <div class="dz-sub"><span data-t="s3.browse">atau klik untuk pilih fail</span> · PDF · DOC · PPT · JPG · PNG · WEBP · ZIP</div>
+    </div>
+    <input type="file" id="f-files" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.webp,.zip" style="display:none" onchange="addFiles(this.files)"/>
+    <div class="file-list" id="file-list"></div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goStep(2)" data-t="back2">← Kembali</button>
+      <button class="btn-next" onclick="goStep(4)" data-t="continue">Teruskan →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 · Story + AI -->
+  <div class="card" id="step4" style="display:none">
+    <h2 data-t="s4.h2">Ceritakan kisah anda</h2>
+    <p class="lede" data-t="s4.lede">Beberapa baris sudah cukup. Lebih banyak anda kongsi, lebih bijak kami bina — tapi hanya apa yang anda selesa.</p>
+    <div class="fg" style="margin-bottom:20px">
+      <label data-t="s4.what">Apa yang perniagaan anda buat?</label>
+      <textarea id="f-desc" rows="3" data-tp="s4.what.ph" placeholder="Perkenalkan seperti anda bercakap dengan pelanggan baru..."></textarea>
+    </div>
+    <div class="fg" style="margin-bottom:24px">
+      <label data-t="s4.who">Siapa pelanggan ideal anda?</label>
+      <textarea id="f-customers" rows="3"></textarea>
+    </div>
+    <div class="fg">
+      <label data-t="s4.help" style="margin-bottom:12px">Apa yang anda perlukan?</label>
+      <div class="chip-grid" id="needs">
+        <label class="need-chip"><input type="checkbox" value="Website"/> Website</label>
+        <label class="need-chip"><input type="checkbox" value="Sales Page"/> Sales Page</label>
+        <label class="need-chip"><input type="checkbox" value="AI Chatbot"/> AI Chatbot</label>
+        <label class="need-chip"><input type="checkbox" value="Booking System"/> Booking System</label>
+        <label class="need-chip"><input type="checkbox" value="E-Commerce"/> E-Commerce</label>
+        <label class="need-chip"><input type="checkbox" value="CRM"/> CRM</label>
+        <label class="need-chip"><input type="checkbox" value="SEO"/> SEO</label>
+        <label class="need-chip"><input type="checkbox" value="Social Media"/> Social Media</label>
+        <label class="need-chip"><input type="checkbox" value="Branding"/> Branding</label>
+        <label class="need-chip"><input type="checkbox" value="Logo"/> Logo</label>
+        <label class="need-chip"><input type="checkbox" value="Business Email"/> Business Email</label>
+        <label class="need-chip"><input type="checkbox" value="Hosting"/> Hosting</label>
+        <label class="need-chip"><input type="checkbox" value="Domain Name"/> Domain Name</label>
+        <label class="need-chip"><input type="checkbox" value="Google Business Profile"/> Google Business Profile</label>
+      </div>
+    </div>
+    <details class="more">
+      <summary data-t="s4.more">▸ Mahu hasil lebih tajam? Tambah sedikit lagi (pilihan)</summary>
+      <div class="fg">
+        <label data-t="s4.extra">Apa-apa lagi? Promosi, anugerah, pencapaian, keunikan anda...</label>
+        <textarea id="f-extra" rows="3"></textarea>
+      </div>
+    </details>
+
+    <button class="ai-btn" id="ai-gen" onclick="generateAI()"><span>✨</span> <span data-t="s4.gen">Jana Ringkasan Perniagaan AI Saya</span></button>
+    <div class="ai-thinking" id="ai-thinking"><div class="dot"></div><div class="dot"></div><div class="dot"></div> <span data-t="s4.thinking">AI sedang menganalisis perniagaan anda...</span></div>
+
+    <div class="ai-box" id="ai-box">
+      <div class="ai-head">✨ <span data-t="s4.aihead">Ringkasan Perniagaan AI</span></div>
+      <div class="ai-body" id="ai-body"></div>
+      <button class="submit-btn" id="submit-btn" onclick="submitAll()" data-t="s4.submit">✦ Hantar Permohonan Aktivasi</button>
+      <div class="err-msg" id="err4"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-back" onclick="goStep(3)" data-t="back2">← Kembali</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="card success" id="step5" style="display:none">
+    <div class="big-ico">🎉</div>
+    <h2 data-t="s5.h2">Permohonan Berjaya Dihantar!</h2>
+    <div class="ref" id="ref-num">REF: —</div>
+    <p data-t="s5.sub">Terima kasih! Syahlan akan menghubungi anda melalui WhatsApp dalam masa 24 jam untuk mengesahkan tempahan dan membincangkan keperluan website anda.</p>
+    <a class="wa-btn" href="https://wa.me/60187874797" target="_blank" data-t="s5.wa">💬 WhatsApp Syahlan Sekarang</a>
   </div>
 
 </div>
 
-<footer style="margin-top:0">
-  <div class="container">
-    <div class="footer-logo">◆ Syahlan <span style="color:var(--p6)">SDC</span></div>
-    <p data-i18n="footer.sub">Sarawak Digital Champion 2026 Candidate · Website Activation Package RM599</p>
-  </div>
+<footer>
+  <div data-t="foot">© 2026 Sarawak Digital Champion. Maklumat anda digunakan untuk tujuan pemerkasaan digital sahaja.</div>
+  <div style="margin-top:6px" data-t="foot2">Diinovasi oleh <b>Syahlan</b> · Syahlan SDC Team</div>
 </footer>
 
-<script src="i18n.js"></script>
 <script>
-  function selectOrgType(card) {
-    document.querySelectorAll('.org-type-card').forEach(c => c.classList.remove('selected'));
-    card.classList.add('selected');
-    card.querySelector('input').checked = true;
+// ── i18n ──
+const I18N = {
+  BM: {
+    ticker: '✦ Memperkasakan 100 Kehadiran Digital Baharu Di Seluruh Sarawak',
+    back: '← Kembali', back2: '← Kembali', continue: 'Teruskan →', step: 'Langkah', of: 'daripada',
+    'pl.1': 'Tentang anda', 'pl.2': 'Link anda', 'pl.3': 'Fail anda', 'pl.4': 'Kisah anda',
+    's1.h2': 'Mula dengan asas', 's1.lede': 'Cukup sekadar untuk kami hubungi anda. Tiada yang lain.',
+    's1.biz': 'Nama perniagaan *', 's1.name': 'Nama anda *', 's1.wa': 'Nombor WhatsApp *', 's1.email': 'Emel *', 's1.kind': 'Jenis perniagaan? *', 's1.district': 'Daerah *',
+    's1.err': 'Sila lengkapkan semua medan yang bertanda *',
+    's2.h2': 'Letak semua link anda di sini',
+    's2.lede': 'Website, Facebook, Instagram, TikTok, Shopee, Google Maps — apa sahaja. Tampal semuanya sekali gus. AI kami akan susun dan labelkannya.',
+    's2.skip': 'Tiada link lagi? Tiada masalah, anda boleh langkau bahagian ini.',
+    's3.h2': 'Letak fail anda di satu tempat',
+    's3.lede': 'Logo, profil perniagaan, gambar produk, sijil, PDF. Letakkan semuanya bersama. AI kami akan susun setiap satu ke kategori yang betul.',
+    's3.drag': 'Seret & lepas semuanya di sini', 's3.browse': 'atau klik untuk pilih fail',
+    's4.h2': 'Ceritakan kisah anda',
+    's4.lede': 'Beberapa baris sudah cukup. Lebih banyak anda kongsi, lebih bijak kami bina — tapi hanya apa yang anda selesa.',
+    's4.what': 'Apa yang perniagaan anda buat?', 's4.what.ph': 'Perkenalkan seperti anda bercakap dengan pelanggan baru...',
+    's4.who': 'Siapa pelanggan ideal anda?', 's4.help': 'Apa yang anda perlukan?',
+    's4.more': '▸ Mahu hasil lebih tajam? Tambah sedikit lagi (pilihan)',
+    's4.extra': 'Apa-apa lagi? Promosi, anugerah, pencapaian, keunikan anda...',
+    's4.gen': 'Jana Ringkasan Perniagaan AI Saya', 's4.thinking': 'AI sedang menganalisis perniagaan anda...',
+    's4.aihead': 'Ringkasan Perniagaan AI', 's4.submit': '✦ Hantar Permohonan Aktivasi',
+    's5.h2': 'Permohonan Berjaya Dihantar!',
+    's5.sub': 'Terima kasih! Syahlan akan menghubungi anda melalui WhatsApp dalam masa 24 jam untuk mengesahkan tempahan dan membincangkan keperluan website anda.',
+    's5.wa': '💬 WhatsApp Syahlan Sekarang',
+    foot: '© 2026 Sarawak Digital Champion. Maklumat anda digunakan untuk tujuan pemerkasaan digital sahaja.',
+    foot2: 'Diinovasi oleh Syahlan · Syahlan SDC Team',
+    'ai.intro': 'Berikut analisis pantas perniagaan anda:',
+    'ai.biz': 'Perniagaan', 'ai.industry': 'Industri', 'ai.district': 'Daerah', 'ai.links': 'Link diterima', 'ai.files': 'Fail diterima', 'ai.needs': 'Keperluan dikenal pasti',
+    'ai.reco': 'Cadangan', 'ai.reco.txt': 'Pakej Website Activation RM599 sesuai untuk anda — termasuk website profesional, domain & hosting 1 tahun, dashboard admin, WhatsApp, Google Map, SSL & SEO asas.',
+    'ai.check': 'Semak ringkasan di atas, kemudian tekan hantar. Syahlan akan hubungi anda dalam 24 jam.',
+    'err.send': 'Gagal menghantar. Sila cuba lagi.',
+  },
+  EN: {
+    ticker: '✦ Empowering 100 New Digital Presences Across Sarawak',
+    back: '← Back', back2: '← Back', continue: 'Continue →', step: 'Step', of: 'of',
+    'pl.1': 'About you', 'pl.2': 'Your links', 'pl.3': 'Your files', 'pl.4': 'Your story',
+    's1.h2': 'First, the essentials', 's1.lede': 'Just enough to reach you and get started. Nothing more.',
+    's1.biz': 'Business name *', 's1.name': 'Your name *', 's1.wa': 'WhatsApp number *', 's1.email': 'Email *', 's1.kind': 'What kind of business? *', 's1.district': 'District *',
+    's1.err': 'Please complete all fields marked *',
+    's2.h2': 'Drop all your links here',
+    's2.lede': 'Website, Facebook, Instagram, TikTok, Shopee, Google Maps, anything. Paste them all in one go, any order. Our AI sorts and labels each one.',
+    's2.skip': 'No links yet? No problem, you can skip this.',
+    's3.h2': 'Drop your files in one place',
+    's3.lede': 'Logo, business profile, product photos, certificates, PDFs. Drop everything together. Our AI sorts each one into the right category.',
+    's3.drag': 'Drag & drop everything here', 's3.browse': 'or tap to browse',
+    's4.h2': 'Tell us your story',
+    's4.lede': "A couple of lines is plenty. The more you share, the smarter we build, but only what you're comfortable with.",
+    's4.what': 'What does your business do?', 's4.what.ph': 'Introduce it like you would to a new customer...',
+    's4.who': 'Who are your ideal customers?', 's4.help': 'What do you need help with?',
+    's4.more': '▸ Want sharper results? Add a little more (optional)',
+    's4.extra': 'Anything else? Promotions, awards, achievements, what makes you unique...',
+    's4.gen': 'Generate my AI Business Summary', 's4.thinking': 'AI is analysing your business...',
+    's4.aihead': 'AI Business Summary', 's4.submit': '✦ Submit Activation Request',
+    's5.h2': 'Request Submitted Successfully!',
+    's5.sub': 'Thank you! Syahlan will contact you via WhatsApp within 24 hours to confirm your order and discuss your website needs.',
+    's5.wa': '💬 WhatsApp Syahlan Now',
+    foot: '© 2026 Sarawak Digital Champion. Your details are used only for digital empowerment purposes.',
+    foot2: 'Innovated by Syahlan · Syahlan SDC Team',
+    'ai.intro': "Here's a quick analysis of your business:",
+    'ai.biz': 'Business', 'ai.industry': 'Industry', 'ai.district': 'District', 'ai.links': 'Links received', 'ai.files': 'Files received', 'ai.needs': 'Needs identified',
+    'ai.reco': 'Recommendation', 'ai.reco.txt': 'The RM599 Website Activation package fits you well — professional website, 1-year domain & hosting, admin dashboard, WhatsApp, Google Map, SSL & basic SEO included.',
+    'ai.check': 'Review the summary above, then hit submit. Syahlan will contact you within 24 hours.',
+    'err.send': 'Failed to send. Please try again.',
+  },
+  ZH: {
+    ticker: '✦ 助力砂拉越100家企业实现数字化',
+    back: '← 返回', back2: '← 返回', continue: '继续 →', step: '步骤', of: '/',
+    'pl.1': '关于您', 'pl.2': '您的链接', 'pl.3': '您的文件', 'pl.4': '您的故事',
+    's1.h2': '先从基本信息开始', 's1.lede': '只需足够联系您的信息，仅此而已。',
+    's1.biz': '企业名称 *', 's1.name': '您的姓名 *', 's1.wa': 'WhatsApp 号码 *', 's1.email': '电子邮件 *', 's1.kind': '业务类型？*', 's1.district': '地区 *',
+    's1.err': '请填写所有标 * 的栏目',
+    's2.h2': '把所有链接放在这里',
+    's2.lede': '网站、Facebook、Instagram、TikTok、Shopee、Google 地图，任何链接。一次性全部粘贴，AI 会自动分类标注。',
+    's2.skip': '还没有链接？没问题，可以跳过。',
+    's3.h2': '把文件放在一个地方',
+    's3.lede': '标志、企业简介、产品照片、证书、PDF。全部放在一起，AI 会自动分类。',
+    's3.drag': '拖放到这里', 's3.browse': '或点击选择文件',
+    's4.h2': '讲讲您的故事',
+    's4.lede': '几句话就够了。分享越多，我们做得越好 — 但只需您愿意分享的。',
+    's4.what': '您的企业做什么？', 's4.what.ph': '像向新客户介绍一样...',
+    's4.who': '您的理想客户是谁？', 's4.help': '您需要什么帮助？',
+    's4.more': '▸ 想要更好的结果？再补充一点（可选）',
+    's4.extra': '还有什么？促销、奖项、成就、您的独特之处...',
+    's4.gen': '生成我的 AI 业务摘要', 's4.thinking': 'AI 正在分析您的业务...',
+    's4.aihead': 'AI 业务摘要', 's4.submit': '✦ 提交激活申请',
+    's5.h2': '申请提交成功！',
+    's5.sub': '谢谢！Syahlan 将在24小时内通过 WhatsApp 联系您确认订单。',
+    's5.wa': '💬 立即 WhatsApp 联系 Syahlan',
+    foot: '© 2026 Sarawak Digital Champion。您的信息仅用于数字化赋能目的。',
+    foot2: '由 Syahlan · Syahlan SDC 团队创新打造',
+    'ai.intro': '以下是您企业的快速分析：',
+    'ai.biz': '企业', 'ai.industry': '行业', 'ai.district': '地区', 'ai.links': '已收到链接', 'ai.files': '已收到文件', 'ai.needs': '已识别需求',
+    'ai.reco': '推荐', 'ai.reco.txt': 'RM599 网站激活配套适合您 — 包括专业网站、一年域名和托管、管理后台、WhatsApp、Google 地图、SSL 和基础 SEO。',
+    'ai.check': '请核对以上摘要，然后提交。Syahlan 将在24小时内联系您。',
+    'err.send': '发送失败，请重试。',
+  },
+  IB: {
+    ticker: '✦ Ngemansangka 100 Presence Digital Baru Di Serata Sarawak',
+    back: '← Pulai', back2: '← Pulai', continue: 'Terus →', step: 'Langkah', of: 'ari',
+    'pl.1': 'Pasal nuan', 'pl.2': 'Link nuan', 'pl.3': 'Fail nuan', 'pl.4': 'Cerita nuan',
+    's1.h2': 'Berengkah enggau asas', 's1.lede': 'Cukup semina kena kami betemu enggau nuan. Nadai utai bukai.',
+    's1.biz': 'Nama dagang *', 's1.name': 'Nama nuan *', 's1.wa': 'Nombor WhatsApp *', 's1.email': 'Emel *', 's1.kind': 'Bansa dagang? *', 's1.district': 'Menua *',
+    's1.err': 'Isi semua ruang ke bisi tanda *',
+    's2.h2': 'Engkah semua link nuan ditu',
+    's2.lede': 'Website, Facebook, Instagram, TikTok, Shopee, Google Maps — sebarang utai. Tampal semua sekali. AI kami deka nyusun sereta ngelabel.',
+    's2.skip': 'Nadai link agi? Nadai ngawa, ulih dilangkau.',
+    's3.h2': 'Engkah fail nuan ba siti endur',
+    's3.lede': 'Logo, profil dagang, gambar produk, sijil, PDF. Engkah semua begulai. AI kami deka nyusun.',
+    's3.drag': 'Seret & lepas semua ditu', 's3.browse': 'tauka klik milih fail',
+    's4.h2': 'Padahka cerita nuan',
+    's4.lede': 'Dua tiga leka jaku udah cukup. Agi mayuh dikongsi, agi manah digaga kami.',
+    's4.what': 'Nama utai digaga dagang nuan?', 's4.what.ph': 'Perkenal baka nuan bejaku enggau pelanggan baru...',
+    's4.who': 'Sapa pelanggan ideal nuan?', 's4.help': 'Nama utai diperlu nuan?',
+    's4.more': '▸ Deka hasil agi manah? Tambah mimit agi (pilihan)',
+    's4.extra': 'Utai bukai? Promosi, anugerah, pencapaian...',
+    's4.gen': 'Gaga Ringkasan Dagang AI Aku', 's4.thinking': 'AI benung nganalisa dagang nuan...',
+    's4.aihead': 'Ringkasan Dagang AI', 's4.submit': '✦ Anjung Pemohon Aktivasi',
+    's5.h2': 'Pemohon Udah Dianjung!',
+    's5.sub': 'Terima kasih! Syahlan deka betemu enggau nuan ba WhatsApp dalam 24 jam.',
+    's5.wa': '💬 WhatsApp Syahlan Diatu',
+    foot: '© 2026 Sarawak Digital Champion. Penemu nuan semina dikena ke tuju pemansang digital.',
+    foot2: 'Diinovasi ulih Syahlan · Syahlan SDC Team',
+    'ai.intro': 'Tu analisa jampat dagang nuan:',
+    'ai.biz': 'Dagang', 'ai.industry': 'Industri', 'ai.district': 'Menua', 'ai.links': 'Link diterima', 'ai.files': 'Fail diterima', 'ai.needs': 'Pengarap dikelala',
+    'ai.reco': 'Saran', 'ai.reco.txt': 'Pakej Website Activation RM599 ngena ke nuan — website profesional, domain & hosting setaun, dashboard admin, WhatsApp, Google Map, SSL & SEO asas.',
+    'ai.check': 'Pereksa ringkasan ba atas, lalu anjung. Syahlan deka betemu enggau nuan dalam 24 jam.',
+    'err.send': 'Enda ulih dianjung. Uji baru.',
+  },
+};
+
+let LANG = localStorage.getItem('sdcLang') || 'BM';
+function t(k) { return (I18N[LANG] && I18N[LANG][k]) || I18N.BM[k] || k; }
+function setL(l) {
+  LANG = l; localStorage.setItem('sdcLang', l);
+  document.querySelectorAll('.lang-pill').forEach(b => b.classList.toggle('active', b.dataset.l === l));
+  document.querySelectorAll('[data-t]').forEach(el => { el.innerHTML = t(el.dataset.t); });
+  document.querySelectorAll('[data-tp]').forEach(el => { el.placeholder = t(el.dataset.tp); });
+  document.getElementById('ticker').innerHTML = Array(6).fill(`<span><span class="dia">✦</span> ${t('ticker').replace('✦ ','')}</span>`).join('');
+  document.getElementById('plabel').textContent = t('pl.' + curStep);
+}
+
+// ── Wizard ──
+let curStep = 1;
+function goStep(n) {
+  if (n === 2 && !validate1()) return;
+  document.getElementById('step' + curStep).style.display = 'none';
+  curStep = n;
+  document.getElementById('step' + n).style.display = 'block';
+  document.getElementById('pfill').style.width = (n * 25) + '%';
+  document.getElementById('pstep').textContent = n;
+  document.getElementById('plabel').textContent = t('pl.' + n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function validate1() {
+  const ok = ['f-biz','f-owner','f-mobile','f-email','f-industry','f-district'].every(id => document.getElementById(id).value.trim());
+  document.getElementById('err1').textContent = ok ? '' : '⚠️ ' + t('s1.err');
+  return ok;
+}
+
+// ── Files ──
+let files = [];
+function addFiles(list) {
+  for (const f of list) { if (!files.some(x => x.name === f.name)) files.push(f); }
+  renderFiles();
+}
+function removeFile(i) { files.splice(i, 1); renderFiles(); }
+function renderFiles() {
+  document.getElementById('file-list').innerHTML = files.map((f, i) =>
+    `<div class="file-chip">📄 ${f.name} <span style="color:#9aa0b4">(${(f.size/1024).toFixed(0)} KB)</span><span class="fx" onclick="removeFile(${i})">✕</span></div>`
+  ).join('');
+}
+const dz = document.getElementById('dropzone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag'); addFiles(e.dataTransfer.files); });
+
+// ── Chips ──
+document.querySelectorAll('.need-chip input').forEach(cb =>
+  cb.addEventListener('change', () => cb.closest('.need-chip').classList.toggle('on', cb.checked))
+);
+
+// ── Lead score (same algorithm as dashboard) ──
+function calcLeadScore(d) {
+  let s = 0;
+  if (d.email) s += 8; if (d.mobile) s += 8;
+  const dom = (d.email||'').split('@')[1]||'';
+  if (dom && !['gmail.com','yahoo.com','hotmail.com','outlook.com','live.com','icloud.com','ymail.com'].includes(dom.toLowerCase())) s += 4;
+  if (d.businessName) s += 4; if (d.ownerName) s += 4; if (d.bizDesc) s += 4;
+  if ((d.bizDesc||'').length > 80) s += 4; if (d.existing) s += 4;
+  const dM = {Kuching:15,Miri:12,Sibu:10,Bintulu:8,Mukah:7,'Sri Aman':6,Sarikei:6,Limbang:5,Kapit:5,Betong:5,Saratok:5,Kabong:5,Spaoh:5};
+  s += dM[d.district] || 4;
+  const iM = {'Makanan & Minuman (F&B)':20,'Perniagaan Runcit':18,'Kecantikan & Wellness':17,'Perkhidmatan Profesional':16,'Teknologi & IT':15,'Kesihatan':14,'Pendidikan & Latihan':13,'Pembinaan & Hartanah':12,'Pertanian & Agro':10,'Automotif':10};
+  s += iM[d.industry] || 8;
+  const lc = (d.languages||[]).length;
+  s += lc>=4?10:lc===3?8:lc===2?6:lc>=1?3:0;
+  s += ({SME:15,Konsultan:13,Koperasi:11,NGO:9,Komuniti:7})[d.orgType] || 5;
+  return Math.min(100, Math.max(0, s));
+}
+
+// ── AI summary ──
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function collect() {
+  const links = document.getElementById('f-links').value.trim().split(/\s+/).filter(Boolean);
+  const needs = [...document.querySelectorAll('.need-chip input:checked')].map(c => c.value);
+  return {
+    businessName: document.getElementById('f-biz').value.trim(),
+    ownerName: document.getElementById('f-owner').value.trim(),
+    mobile: document.getElementById('f-mobile').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    industry: document.getElementById('f-industry').value,
+    district: document.getElementById('f-district').value,
+    links, needs,
+    bizDesc: document.getElementById('f-desc').value.trim(),
+    customers: document.getElementById('f-customers').value.trim(),
+    extra: document.getElementById('f-extra').value.trim(),
+  };
+}
+function generateAI() {
+  const d = collect();
+  document.getElementById('ai-box').classList.remove('show');
+  document.getElementById('ai-thinking').classList.add('show');
+  document.getElementById('ai-gen').disabled = true;
+  setTimeout(() => {
+    document.getElementById('ai-thinking').classList.remove('show');
+    document.getElementById('ai-gen').disabled = false;
+    const rows = [
+      [t('ai.biz'), `${esc(d.businessName)} — ${esc(d.ownerName)}`],
+      [t('ai.industry'), esc(d.industry)],
+      [t('ai.district'), esc(d.district)],
+      [t('ai.links'), d.links.length ? d.links.length + ' ✓' : '0'],
+      [t('ai.files'), files.length ? files.length + ' ✓' : '0'],
+      [t('ai.needs'), d.needs.length ? esc(d.needs.join(', ')) : '—'],
+    ];
+    let html = `<p>${t('ai.intro')}</p><ul>` +
+      rows.map(([k,v]) => `<li><b>${k}:</b> ${v}</li>`).join('') + `</ul>`;
+    if (d.bizDesc) html += `<p style="margin-top:8px"><b>“</b>${esc(d.bizDesc)}<b>”</b></p>`;
+    html += `<p style="margin-top:10px"><b>💡 ${t('ai.reco')}:</b> ${t('ai.reco.txt')}</p>`;
+    html += `<p style="margin-top:10px;color:#5b6172;font-size:.85rem">${t('ai.check')}</p>`;
+    document.getElementById('ai-body').innerHTML = html;
+    document.getElementById('ai-box').classList.add('show');
+    document.getElementById('ai-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 1600);
+}
+
+// ── Submit ──
+async function submitAll() {
+  const d = collect();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = '⏳ ...';
+  const id = `WEB-${Date.now()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+  const record = {
+    id,
+    businessName: d.businessName, ownerName: d.ownerName,
+    email: d.email, mobile: d.mobile,
+    district: d.district, industry: d.industry,
+    orgType: 'SME',
+    existing: d.links[0] || '',
+    links: d.links,
+    bizDesc: [d.bizDesc, d.customers && ('Pelanggan: ' + d.customers), d.extra].filter(Boolean).join('\n'),
+    needs: d.needs,
+    fileNames: files.map(f => f.name),
+    languages: [LANG],
+    status: 'New Lead', paid: false,
+    package: 'RM599 Website Activation',
+    createdAt: new Date().toISOString(),
+  };
+  record.leadScore = calcLeadScore(record);
+  try {
+    const r = await fetch('/.netlify/functions/submissions', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(record),
+    });
+    if (!r.ok) throw new Error(await r.text());
+    document.getElementById('ref-num').textContent = 'REF: ' + id;
+    document.getElementById('step4').style.display = 'none';
+    document.getElementById('progress-wrap').style.display = 'none';
+    document.getElementById('step5').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (e) {
+    document.getElementById('err4').textContent = '❌ ' + t('err.send');
+    btn.disabled = false; btn.textContent = t('s4.submit');
   }
+}
 
-  function toggleLang(card) {
-    card.classList.toggle('selected');
-    card.querySelector('input').checked = card.classList.contains('selected');
-  }
-
-  const form  = document.getElementById('activate-form');
-  const btn   = document.getElementById('submit-btn');
-  const msgEl = document.getElementById('form-msg');
-
-  function calcLeadScore(data) {
-    let s = 0;
-    // Contact quality (20 pts)
-    if (data.email)  s += 8;
-    if (data.mobile) s += 8;
-    const dom = (data.email || '').split('@')[1] || '';
-    const freeEmails = ['gmail.com','yahoo.com','hotmail.com','outlook.com','live.com','icloud.com','ymail.com'];
-    if (dom && !freeEmails.includes(dom.toLowerCase())) s += 4;
-    // Profile completeness (20 pts)
-    if (data.businessName)               s += 4;
-    if (data.ownerName)                  s += 4;
-    if (data.bizDesc)                    s += 4;
-    if ((data.bizDesc || '').length > 80) s += 4;
-    if (data.existing)                   s += 4;
-    // District priority (15 pts)
-    const dMap = {Kuching:15,Miri:12,Sibu:10,Bintulu:8,Mukah:7,'Sri Aman':6,Sarikei:6,Limbang:5,Kapit:5,Betong:5,Saratok:5,Kabong:5,Spaoh:5};
-    s += dMap[data.district] || 4;
-    // Industry demand fit (20 pts)
-    const iMap = {'Makanan & Minuman (F&B)':20,'Perniagaan Runcit':18,'Kecantikan & Wellness':17,'Perkhidmatan Profesional':16,'Teknologi & IT':15,'Kesihatan':14,'Pendidikan & Latihan':13,'Pembinaan & Hartanah':12,'Pertanian & Agro':10,'Automotif':10};
-    s += iMap[data.industry] || 8;
-    // Language breadth (10 pts)
-    const lc = (data.languages || []).length;
-    s += lc >= 4 ? 10 : lc === 3 ? 8 : lc === 2 ? 6 : lc >= 1 ? 3 : 0;
-    // Org type (15 pts)
-    const oMap = {SME:15,Konsultan:13,Koperasi:11,NGO:9,Komuniti:7};
-    s += oMap[data.orgType] || 5;
-    return Math.min(100, Math.max(0, s));
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const bizName  = document.getElementById('bizName').value.trim();
-    const owner    = document.getElementById('ownerName').value.trim();
-    const email    = document.getElementById('email').value.trim();
-    const mobile   = document.getElementById('mobile').value.trim();
-    const district = document.getElementById('district').value;
-    const orgRadio = document.querySelector('input[name=orgType]:checked');
-
-    if (!bizName || !owner || !email || !mobile || !district) {
-      msgEl.className = 'form-msg error';
-      msgEl.textContent = '⚠️ ' + t('act.err.required');
-      return;
-    }
-    if (!orgRadio) {
-      msgEl.className = 'form-msg error';
-      msgEl.textContent = '⚠️ ' + t('act.err.orgtype');
-      return;
-    }
-
-    btn.classList.add('btn-loading');
-    btn.textContent = '';
-    msgEl.textContent = '';
-
-    const langs = [...document.querySelectorAll('input[name=lang]:checked')].map(i => i.value);
-    const id    = `WEB-${Date.now()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
-
-    const data = {
-      id,
-      businessName: bizName,
-      ownerName: owner,
-      email,
-      mobile,
-      district,
-      orgType: orgRadio.value,
-      industry: document.getElementById('industry').value,
-      existing: document.getElementById('existing').value.trim(),
-      bizDesc: document.getElementById('bizDesc').value.trim(),
-      languages: langs,
-      status: 'New Lead',
-      paid: false,
-      package: 'RM599 Website Activation',
-      leadScore: calcLeadScore({ businessName: bizName, ownerName: owner, email, mobile, district, orgType: orgRadio.value, industry: document.getElementById('industry').value, existing: document.getElementById('existing').value.trim(), bizDesc: document.getElementById('bizDesc').value.trim(), languages: langs }),
-      createdAt: new Date().toISOString(),
-    };
-
-    try {
-      const r = await fetch('/.netlify/functions/submissions', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (!r.ok) throw new Error(await r.text());
-
-      document.getElementById('ref-num').textContent = 'REF: ' + id;
-      document.getElementById('form-view').style.display = 'none';
-      document.getElementById('success-view').style.display = 'block';
-      // Re-apply translations to newly visible success view
-      setLang(localStorage.getItem('sdcLang') || 'BM');
-    } catch (err) {
-      msgEl.className = 'form-msg error';
-      msgEl.textContent = '❌ ' + err.message + '. ' + t('act.err.retry');
-      btn.classList.remove('btn-loading');
-      btn.textContent = t('act.submit');
-    }
-  });
-
-  initLang();
+setL(LANG);
 </script>
 </body>
 </html>
