@@ -93,7 +93,7 @@
     .ai-box.show { display: block; animation: fadeUp .4s ease; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
     .ai-head { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1rem; margin-bottom: 14px; color: var(--acc); }
-    .ai-body { font-size: .92rem; line-height: 1.75; color: var(--ink); }
+    .ai-body { font-size: .92rem; line-height: 1.75; color: var(--ink); overflow-wrap: break-word; word-break: break-word; }
     .ai-body ul { padding-left: 20px; margin: 8px 0; }
     .ai-body li { margin-bottom: 4px; }
     .ai-thinking { display: none; align-items: center; gap: 10px; margin-top: 24px; color: var(--sub); font-size: .9rem; }
@@ -101,7 +101,56 @@
     .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); animation: blink 1.2s infinite; }
     .dot:nth-child(2) { animation-delay: .2s; } .dot:nth-child(3) { animation-delay: .4s; }
     @keyframes blink { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
-    .submit-btn { width: 100%; margin-top: 18px; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border: none; border-radius: 99px; padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(124,58,237,.3); }
+    .submit-btn { width: 100%; margin-top: 4px; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border: none; border-radius: 99px; padding: 16px; font-size: 1rem; font-weight: 800; cursor: pointer; box-shadow: 0 8px 22px rgba(124,58,237,.35); transition: transform .12s, box-shadow .12s; }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 11px 28px rgba(124,58,237,.42); }
+    .submit-btn:disabled { opacity: .6; cursor: default; transform: none; }
+
+    /* ── Digital readiness ── */
+    .readiness { margin: 18px 0; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; background: #fff; }
+    .rd-head { font-size: .74rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--sub); margin-bottom: 10px; }
+    .rd-row { display: flex; align-items: flex-start; gap: 12px; }
+    .rd-dot { font-size: 1.15rem; line-height: 1.4; }
+    .rd-band { font-weight: 800; font-size: 1.02rem; margin-bottom: 3px; }
+    .rd-range { font-size: .76rem; font-weight: 700; color: var(--sub); margin-left: 8px; }
+    .rd-txt { font-size: .86rem; color: #5b6172; line-height: 1.6; }
+
+    /* ── Package card ── */
+    .pkg { margin: 22px 0; border: 2px solid var(--acc); border-radius: 18px; padding: 22px; background: linear-gradient(135deg, rgba(124,58,237,.06), rgba(168,85,247,.03)); box-shadow: 0 10px 30px rgba(124,58,237,.12); position: relative; overflow: hidden; }
+    .pkg::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--acc), var(--acc2)); }
+    .pkg-tag { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--acc); background: rgba(124,58,237,.1); border-radius: 99px; padding: 5px 12px; margin-bottom: 12px; }
+    .pkg-name { font-size: 1.18rem; font-weight: 800; line-height: 1.35; margin-bottom: 14px; }
+    .pkg-price { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+    .pkg-old { color: var(--sub); }
+    .pkg-old .lbl { font-size: .74rem; display: block; margin-bottom: 2px; }
+    .pkg-old .amt { font-size: 1.15rem; font-weight: 700; text-decoration: line-through; text-decoration-color: #c0392b99; }
+    .pkg-new .lbl { font-size: .74rem; display: block; margin-bottom: 2px; color: var(--acc); font-weight: 700; }
+    .pkg-new .amt { font-size: 2.1rem; font-weight: 900; color: var(--acc); line-height: 1; }
+    .pkg-save { display: inline-block; font-size: .74rem; font-weight: 800; color: #059669; background: rgba(16,185,129,.12); border-radius: 99px; padding: 4px 11px; margin-bottom: 16px; }
+    .pkg-feats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+    .pkg-feats div { font-size: .86rem; display: flex; align-items: center; gap: 8px; }
+    .pkg-feats .tick { color: #059669; font-weight: 900; }
+
+    /* ── Decision buttons ── */
+    .decision { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+    .di-btn { text-align: left; border-radius: 16px; padding: 18px 20px; cursor: pointer; transition: transform .12s, box-shadow .12s, border-color .12s; display: flex; flex-direction: column; gap: 6px; font-family: inherit; }
+    .di-btn:hover { transform: translateY(-2px); }
+    .di-title { font-size: 1rem; font-weight: 800; }
+    .di-sub { font-size: .82rem; line-height: 1.5; opacity: .85; }
+    .di-improve { background: #fff; border: 1.5px solid var(--acc); color: var(--acc); }
+    .di-improve:hover { box-shadow: 0 8px 20px rgba(124,58,237,.15); background: rgba(124,58,237,.03); }
+    .di-proceed { background: linear-gradient(135deg, var(--acc), var(--acc2)); border: none; color: #fff; box-shadow: 0 8px 22px rgba(124,58,237,.32); }
+    .di-proceed:hover { box-shadow: 0 12px 30px rgba(124,58,237,.42); }
+    .di-proceed .di-sub { opacity: .92; }
+    .decision.locked .di-proceed { outline: 2px solid rgba(124,58,237,.35); outline-offset: 3px; }
+
+    /* ── Commitment ── */
+    .commit { margin-top: 24px; border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: #fbfbfd; animation: fadeUp .35s ease; }
+    .commit-title { font-weight: 800; font-size: 1.02rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .commit-check { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; margin-bottom: 12px; cursor: pointer; transition: border-color .15s, background .15s; }
+    .commit-check:hover { border-color: var(--acc); }
+    .commit-check.on { border-color: var(--acc); background: rgba(124,58,237,.04); }
+    .commit-check input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--acc); flex-shrink: 0; cursor: pointer; }
+    .commit-check span { font-size: .87rem; line-height: 1.6; color: var(--ink); }
 
     /* ── Success ── */
     .success { text-align: center; padding: 20px 10px; }
@@ -119,6 +168,9 @@
       .card { padding: 28px 20px; }
       header { flex-wrap: wrap; }
       .head-right { width: 100%; justify-content: space-between; margin-left: 0; }
+      .decision { grid-template-columns: 1fr; }
+      .pkg-feats { grid-template-columns: 1fr; }
+      .ai-box { padding: 22px 18px; }
     }
   </style>
 </head>
@@ -287,8 +339,28 @@
     <div class="ai-box" id="ai-box">
       <div class="ai-head">✨ <span data-t="s4.aihead">Ringkasan Perniagaan AI</span></div>
       <div class="ai-body" id="ai-body"></div>
-      <button class="submit-btn" id="submit-btn" onclick="submitAll()" data-t="s4.submit">✦ Hantar Permohonan Aktivasi</button>
-      <div class="err-msg" id="err4"></div>
+
+      <!-- Two clear choices -->
+      <div class="decision" id="decision-row">
+        <button class="di-btn di-improve" onclick="improveSubmission()">
+          <span class="di-title" data-t="op.improve">✎ Tambah Baik Maklumat Saya</span>
+          <span class="di-sub" data-t="op.improve.sub"></span>
+        </button>
+        <button class="di-btn di-proceed" onclick="chooseProceed()">
+          <span class="di-title" data-t="op.proceed">✦ Teruskan Aktivasi Website</span>
+          <span class="di-sub" data-t="op.proceed.sub"></span>
+        </button>
+      </div>
+
+      <!-- Commitment (revealed only after Proceed) -->
+      <div class="commit" id="commit-box" style="display:none">
+        <div class="commit-title">🤝 <span data-t="cm.title">Sebelum kita mula</span></div>
+        <label class="commit-check"><input type="checkbox" id="ck1" onchange="syncCommit(this)"/><span data-t="cm.1"></span></label>
+        <label class="commit-check"><input type="checkbox" id="ck2" onchange="syncCommit(this)"/><span data-t="cm.2"></span></label>
+        <label class="commit-check"><input type="checkbox" id="ck3" onchange="syncCommit(this)"/><span data-t="cm.3"></span></label>
+        <button class="submit-btn" id="submit-btn" onclick="submitAll()" data-t="s4.start">✦ Mula Aktivasi Website Saya</button>
+        <div class="err-msg" id="err4"></div>
+      </div>
     </div>
 
     <div class="btn-row">
@@ -357,6 +429,26 @@ const I18N = {
     'tip.customers': 'Terangkan siapa pelanggan ideal anda (Langkah 4)',
     'tip.email': 'Guna emel domain perniagaan jika ada (cth: info@bisnes.com)',
     'tip.files': 'Muat naik logo / gambar produk anda (Langkah 3)',
+    'rd.label': 'Kesediaan Digital',
+    'rd.exc': 'Cemerlang', 'rd.good': 'Baik', 'rd.fair': 'Sederhana', 'rd.ltd': 'Terhad',
+    'rd.exc.txt': 'Profil perniagaan anda lengkap dan memberi pasukan kami segala yang diperlukan untuk menghasilkan website berkualiti tinggi.',
+    'rd.good.txt': 'Maklumat anda sudah mencukupi, namun menambah butiran lanjut boleh meningkatkan lagi hasil akhir.',
+    'rd.fair.txt': 'Website anda masih boleh dibina, tetapi memberikan maklumat tambahan akan membantu kami mempamerkan perniagaan anda dengan lebih berkesan.',
+    'rd.ltd.txt': 'Kami amat menyarankan anda menambah baik profil anda sebelum meneruskan bagi mencapai website terbaik.',
+    'pk.reco': 'Pakej Disyorkan', 'pk.name': 'Aktivasi Website Perniagaan Profesional',
+    'pk.normal': 'Harga Biasa', 'pk.special': 'Kadar Aktivasi Istimewa', 'pk.include': 'Termasuk',
+    'pk.f1': 'Website Profesional', 'pk.f2': 'Domain 1 Tahun', 'pk.f3': 'Hosting 1 Tahun', 'pk.f4': 'Emel Perniagaan',
+    'pk.f5': 'Integrasi WhatsApp', 'pk.f6': 'Google Maps', 'pk.f7': 'Keselamatan SSL', 'pk.f8': 'Responsif Mudah Alih', 'pk.f9': 'Persediaan SEO Asas',
+    'op.improve': '✎ Tambah Baik Maklumat Saya',
+    'op.improve.sub': 'Saya ingin memberikan lebih banyak maklumat untuk meningkatkan Skor Profil dan membantu menghasilkan website yang lebih baik.',
+    'op.proceed': '✦ Teruskan Aktivasi Website',
+    'op.proceed.sub': 'Saya berpuas hati dengan maklumat saya dan mahu pasukan mula menyediakan website saya.',
+    'cm.title': 'Sebelum kita mula',
+    'cm.1': 'Saya mengesahkan bahawa maklumat dan bahan yang saya hantar adalah tepat dan boleh digunakan oleh Syahlan dan pasukan KOBIS Berhad untuk menyediakan website saya.',
+    'cm.2': 'Saya faham bahawa kualiti website saya bergantung pada maklumat yang saya berikan. Saya boleh kembali untuk menambah baik maklumat saya sebelum meneruskan sekiranya saya mahu hasil yang lebih baik.',
+    'cm.3': 'Saya faham bahawa Pakej Aktivasi Website Perniagaan Profesional biasanya berharga RM1,380. Saya menghargai peluang untuk menerima kadar aktivasi istimewa RM599. Sekiranya pratonton website menepati keperluan perniagaan yang saya hantar dan memenuhi jangkaan saya, saya bersedia untuk meneruskan dengan yuran aktivasi RM599 untuk mengaktif dan menerbitkan website saya.',
+    'cm.err': 'Sila tanda ketiga-tiga kotak untuk meneruskan.',
+    's4.start': '✦ Mula Aktivasi Website Saya',
   },
   EN: {
     ticker: '✦ Empowering 100 New Digital Presences Across Sarawak',
@@ -400,6 +492,26 @@ const I18N = {
     'tip.customers': 'Describe your ideal customers (Step 4)',
     'tip.email': 'Use a business-domain email if you have one (e.g. info@mybiz.com)',
     'tip.files': 'Upload your logo / product photos (Step 3)',
+    'rd.label': 'Digital Readiness',
+    'rd.exc': 'Excellent', 'rd.good': 'Good', 'rd.fair': 'Fair', 'rd.ltd': 'Limited',
+    'rd.exc.txt': 'Your business profile is comprehensive and gives our team everything needed to produce a high-quality website.',
+    'rd.good.txt': 'Your information is sufficient, although adding more details could further improve the final outcome.',
+    'rd.fair.txt': 'Your website can still be developed, but providing additional information will help us showcase your business more effectively.',
+    'rd.ltd.txt': 'We strongly recommend improving your profile before proceeding to achieve the best possible website.',
+    'pk.reco': 'Recommended Package', 'pk.name': 'Professional Business Website Activation',
+    'pk.normal': 'Normal Price', 'pk.special': 'Special Activation Rate', 'pk.include': 'Includes',
+    'pk.f1': 'Professional Website', 'pk.f2': '1-Year Domain', 'pk.f3': '1-Year Hosting', 'pk.f4': 'Business Email',
+    'pk.f5': 'WhatsApp Integration', 'pk.f6': 'Google Maps', 'pk.f7': 'SSL Security', 'pk.f8': 'Mobile Responsive', 'pk.f9': 'Basic SEO Setup',
+    'op.improve': '✎ Improve My Submission',
+    'op.improve.sub': 'I would like to provide more information to improve my Profile Score and help create a better website.',
+    'op.proceed': '✦ Proceed with Website Activation',
+    'op.proceed.sub': "I'm satisfied with my submission and would like the team to start preparing my website.",
+    'cm.title': 'Before we begin',
+    'cm.1': 'I confirm that the information and materials I submitted are accurate and may be used by Syahlan and the KOBIS Berhad team to prepare my website.',
+    'cm.2': 'I understand that the quality of my website depends on the information I provide. I may return to improve my submission before proceeding if I wish to achieve a better outcome.',
+    'cm.3': 'I understand that the Professional Business Website Activation Package is normally priced at RM1,380. I appreciate the opportunity to receive the special activation rate of RM599. If the website preview reflects my submitted business requirements and meets my expectations, I am ready to proceed with the RM599 activation fee to activate and publish my website.',
+    'cm.err': 'Please tick all three boxes to continue.',
+    's4.start': '✦ Start My Website Activation',
   },
   ZH: {
     ticker: '✦ 助力砂拉越100家企业实现数字化',
@@ -443,6 +555,26 @@ const I18N = {
     'tip.customers': '描述您的理想客户（步骤4）',
     'tip.email': '如有企业域名邮箱请使用（例如 info@mybiz.com）',
     'tip.files': '上传您的标志/产品照片（步骤3）',
+    'rd.label': '数字准备度',
+    'rd.exc': '优秀', 'rd.good': '良好', 'rd.fair': '一般', 'rd.ltd': '有限',
+    'rd.exc.txt': '您的企业资料非常完整，为我们团队提供了打造高品质网站所需的一切。',
+    'rd.good.txt': '您的信息已经足够，但补充更多细节可进一步提升最终效果。',
+    'rd.fair.txt': '您的网站仍可开发，但提供更多信息将帮助我们更有效地展示您的企业。',
+    'rd.ltd.txt': '我们强烈建议您在继续之前完善资料，以获得最佳的网站效果。',
+    'pk.reco': '推荐配套', 'pk.name': '专业企业网站激活配套',
+    'pk.normal': '原价', 'pk.special': '特别激活价', 'pk.include': '包含',
+    'pk.f1': '专业网站', 'pk.f2': '一年域名', 'pk.f3': '一年托管', 'pk.f4': '企业邮箱',
+    'pk.f5': 'WhatsApp 集成', 'pk.f6': 'Google 地图', 'pk.f7': 'SSL 安全', 'pk.f8': '移动端适配', 'pk.f9': '基础 SEO 设置',
+    'op.improve': '✎ 完善我的资料',
+    'op.improve.sub': '我想提供更多信息以提高我的资料评分，帮助打造更好的网站。',
+    'op.proceed': '✦ 继续网站激活',
+    'op.proceed.sub': '我对我的资料感到满意，希望团队开始准备我的网站。',
+    'cm.title': '开始之前',
+    'cm.1': '我确认我提交的信息和资料准确无误，Syahlan 及 KOBIS Berhad 团队可用于准备我的网站。',
+    'cm.2': '我明白网站质量取决于我提供的信息。如果我希望获得更好的效果，我可以在继续之前返回完善我的资料。',
+    'cm.3': '我明白专业企业网站激活配套原价为 RM1,380。我感谢能获得 RM599 的特别激活价。如果网站预览符合我提交的业务需求并达到我的期望，我愿意支付 RM599 激活费以激活并发布我的网站。',
+    'cm.err': '请勾选全部三项以继续。',
+    's4.start': '✦ 开始激活我的网站',
   },
   IB: {
     ticker: '✦ Ngemansangka 100 Presence Digital Baru Di Serata Sarawak',
@@ -486,6 +618,26 @@ const I18N = {
     'tip.customers': 'Terangka sapa pelanggan ideal nuan (Langkah 4)',
     'tip.email': 'Kena emel domain dagang enti bisi (chth: info@dagang.com)',
     'tip.files': 'Muat naik logo / gambar produk nuan (Langkah 3)',
+    'rd.label': 'Pengsiap Digital',
+    'rd.exc': 'Manah Amat', 'rd.good': 'Manah', 'rd.fair': 'Sederhana', 'rd.ltd': 'Terhad',
+    'rd.exc.txt': 'Profil dagang nuan lengkap sereta meri pasukan kami semua utai diperlu kena ngaga website berkualiti tinggi.',
+    'rd.good.txt': 'Penemu nuan udah cukup, tang nambah butir agi ulih ningkatka hasil penudi.',
+    'rd.fair.txt': 'Website nuan agi ulih digaga, tang meri penemu tambah deka nulong kami mandangka dagang nuan enggau agi berkesan.',
+    'rd.ltd.txt': 'Kami amat nyaran nuan nambahbaik profil nuan sedeka nerus kena ngulihka website ti pemadu manah.',
+    'pk.reco': 'Pakej Disaran', 'pk.name': 'Aktivasi Website Dagang Profesional',
+    'pk.normal': 'Rega Biasa', 'pk.special': 'Kadar Aktivasi Espesyal', 'pk.include': 'Ngundan',
+    'pk.f1': 'Website Profesional', 'pk.f2': 'Domain 1 Taun', 'pk.f3': 'Hosting 1 Taun', 'pk.f4': 'Emel Dagang',
+    'pk.f5': 'Integrasi WhatsApp', 'pk.f6': 'Google Maps', 'pk.f7': 'Keselamatan SSL', 'pk.f8': 'Responsif Mudah Alih', 'pk.f9': 'Setting SEO Asas',
+    'op.improve': '✎ Tambahbaik Penemu Aku',
+    'op.improve.sub': 'Aku deka meri penemu agi mayuh kena ningkatka Skor Profil sereta nulong ngaga website ti agi manah.',
+    'op.proceed': '✦ Terus Aktivasi Website',
+    'op.proceed.sub': 'Aku puas ati enggau penemu aku lalu deka pasukan berengkah nyendia website aku.',
+    'cm.title': 'Sedeka kitai berengkah',
+    'cm.1': 'Aku ngesahka penemu enggau bahan ti dianjung aku amat betul sereta ulih dikena Syahlan enggau pasukan KOBIS Berhad kena nyendia website aku.',
+    'cm.2': 'Aku meretika kualiti website aku begantung ba penemu ti diberi aku. Aku ulih pulai nambahbaik penemu aku sedeka nerus enti aku deka hasil ti agi manah.',
+    'cm.3': 'Aku meretika Pakej Aktivasi Website Dagang Profesional biasa berega RM1,380. Aku ngargaka peluang nerima kadar aktivasi espesyal RM599. Enti pratonton website nepan enggau pengarap dagang ti dianjung aku sereta nepan enggau adat aku, aku sedia nerus enggau bayar aktivasi RM599 kena ngaktifka sereta nerbitka website aku.',
+    'cm.err': 'Tanda ketiga kotak kena nerus.',
+    's4.start': '✦ Berengkah Aktivasi Website Aku',
   },
 };
 
@@ -616,7 +768,12 @@ function generateAI() {
       languages: [LANG],
     };
     const score = calcLeadScore(scoreInput);
-    const scol = score >= 70 ? '#10b981' : score >= 50 ? '#d97706' : '#dc2626';
+    // 4 readiness bands (aligned with the Digital Readiness section)
+    const band = score >= 80 ? {c:'#059669',dot:'🟢',k:'exc'}
+               : score >= 60 ? {c:'#65a30d',dot:'🟡',k:'good'}
+               : score >= 40 ? {c:'#d97706',dot:'🟠',k:'fair'}
+               :               {c:'#dc2626',dot:'🔴',k:'ltd'};
+    const scol = band.c;
     const smsg = score >= 70 ? t('sc.high') : score >= 50 ? t('sc.mid') : t('sc.low');
 
     // improvement tips for whatever is missing
@@ -628,6 +785,7 @@ function generateAI() {
     const dom = (d.email || '').split('@')[1] || '';
     if (['gmail.com','yahoo.com','hotmail.com','outlook.com','live.com','icloud.com','ymail.com'].includes(dom.toLowerCase())) tips.push(t('tip.email'));
 
+    // ── Profile score card ──
     let scoreHtml = `
       <div style="border:1px solid ${scol}33;background:${scol}0d;border-radius:12px;padding:16px 18px;margin-bottom:18px">
         <div style="display:flex;align-items:center;gap:14px">
@@ -642,6 +800,21 @@ function generateAI() {
         ${tips.length ? `<div style="margin-top:10px;font-size:.84rem"><b>${t('sc.tips')}</b><ul style="padding-left:20px;margin-top:6px;color:#5b6172">${tips.map(x=>`<li style="margin-bottom:3px">${x}</li>`).join('')}</ul></div>` : ''}
       </div>`;
 
+    // ── Digital readiness ──
+    const ranges = {exc:'80–100', good:'60–79', fair:'40–59', ltd:'< 40'};
+    const readinessHtml = `
+      <div class="readiness">
+        <div class="rd-head">${t('rd.label')}</div>
+        <div class="rd-row">
+          <div class="rd-dot">${band.dot}</div>
+          <div>
+            <div class="rd-band" style="color:${scol}">${t('rd.'+band.k)}<span class="rd-range">${ranges[band.k]}</span></div>
+            <div class="rd-txt">${t('rd.'+band.k+'.txt')}</div>
+          </div>
+        </div>
+      </div>`;
+
+    // ── AI analysis rows ──
     const rows = [
       [t('ai.biz'), `${esc(d.businessName)} — ${esc(d.ownerName)}`],
       [t('ai.industry'), esc(d.industry)],
@@ -650,19 +823,62 @@ function generateAI() {
       [t('ai.files'), files.length ? files.length + ' ✓' : '0'],
       [t('ai.needs'), d.needs.length ? esc(d.needs.join(', ')) : '—'],
     ];
-    let html = scoreHtml + `<p>${t('ai.intro')}</p><ul>` +
+    let summaryHtml = `<p>${t('ai.intro')}</p><ul>` +
       rows.map(([k,v]) => `<li><b>${k}:</b> ${v}</li>`).join('') + `</ul>`;
-    if (d.bizDesc) html += `<p style="margin-top:8px"><b>“</b>${esc(d.bizDesc)}<b>”</b></p>`;
-    html += `<p style="margin-top:10px"><b>💡 ${t('ai.reco')}:</b> ${t('ai.reco.txt')}</p>`;
-    html += `<p style="margin-top:10px;color:#5b6172;font-size:.85rem">${t('ai.check')}</p>`;
-    document.getElementById('ai-body').innerHTML = html;
+    if (d.bizDesc) summaryHtml += `<p style="margin-top:8px"><b>“</b>${esc(d.bizDesc)}<b>”</b></p>`;
+
+    // ── Recommended package card ──
+    const feats = ['pk.f1','pk.f2','pk.f3','pk.f4','pk.f5','pk.f6','pk.f7','pk.f8','pk.f9'];
+    const pkgHtml = `
+      <div class="pkg">
+        <div class="pkg-tag">${t('pk.reco')}</div>
+        <div class="pkg-name">${t('pk.name')}</div>
+        <div class="pkg-price">
+          <div class="pkg-old"><span class="lbl">${t('pk.normal')}</span><span class="amt">RM1,380</span></div>
+          <div class="pkg-new"><span class="lbl">${t('pk.special')}</span><span class="amt">RM599</span></div>
+        </div>
+        <div class="pkg-save">− RM781 (57%)</div>
+        <div class="pkg-feats">${feats.map(f=>`<div><span class="tick">✓</span> ${t(f)}</div>`).join('')}</div>
+      </div>`;
+
+    document.getElementById('ai-body').innerHTML = scoreHtml + readinessHtml + summaryHtml + pkgHtml;
+
+    // reset the decision / commitment state each time the summary is regenerated
+    const commit = document.getElementById('commit-box');
+    commit.style.display = 'none';
+    document.getElementById('decision-row').classList.remove('locked');
+    ['ck1','ck2','ck3'].forEach(id => { const c = document.getElementById(id); c.checked = false; c.closest('.commit-check').classList.remove('on'); });
+    document.getElementById('err4').textContent = '';
+
     document.getElementById('ai-box').classList.add('show');
-    document.getElementById('ai-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('ai-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 1600);
+}
+
+// ── Final-step decisions ──
+function improveSubmission() {
+  // all entered data is preserved (fields are never cleared) — just go back
+  goStep(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function chooseProceed() {
+  document.getElementById('decision-row').classList.add('locked');
+  const commit = document.getElementById('commit-box');
+  commit.style.display = 'block';
+  commit.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function syncCommit(cb) {
+  cb.closest('.commit-check').classList.toggle('on', cb.checked);
+  document.getElementById('err4').textContent = '';
 }
 
 // ── Submit ──
 async function submitAll() {
+  // require all three commitments
+  if (!(document.getElementById('ck1').checked && document.getElementById('ck2').checked && document.getElementById('ck3').checked)) {
+    document.getElementById('err4').textContent = '⚠️ ' + t('cm.err');
+    return;
+  }
   const d = collect();
   const btn = document.getElementById('submit-btn');
   btn.disabled = true; btn.textContent = '⏳ ...';
@@ -697,7 +913,7 @@ async function submitAll() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (e) {
     document.getElementById('err4').textContent = '❌ ' + t('err.send');
-    btn.disabled = false; btn.textContent = t('s4.submit');
+    btn.disabled = false; btn.textContent = t('s4.start');
   }
 }
 
