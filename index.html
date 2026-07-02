@@ -66,13 +66,6 @@
     .feature-text strong { display: block; font-size: .88rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
     .feature-text span { font-size: .78rem; color: var(--muted); }
     .feature-new { display: inline-block; background: linear-gradient(90deg, var(--p4), var(--cyan)); border-radius: 99px; padding: 2px 8px; font-size: .65rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: white; margin-left: 6px; vertical-align: middle; }
-    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .portfolio-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg); overflow: hidden; transition: transform .25s, border-color .25s; cursor: pointer; }
-    .portfolio-card:hover { transform: translateY(-5px); border-color: var(--p5); }
-    .portfolio-thumb { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-    .portfolio-info { padding: 16px; }
-    .portfolio-cat { font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--p6); margin-bottom: 4px; }
-    .portfolio-name { font-family: var(--font-head); font-weight: 700; font-size: .95rem; }
     .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; }
     .steps-grid::before { content: ''; position: absolute; top: 30px; left: calc(16.66% + 20px); right: calc(16.66% + 20px); height: 1px; background: linear-gradient(90deg, var(--p5), var(--cyan)); opacity: .3; }
     .step-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg); padding: 28px 24px; text-align: center; }
@@ -98,7 +91,6 @@
     @media (max-width: 900px) {
       .pillars { grid-template-columns: repeat(2, 1fr); }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: 1fr; }
       .quote-support { grid-template-columns: 1fr; }
       .about-grid-new { grid-template-columns: 1fr; }
@@ -106,7 +98,6 @@
     @media (max-width: 640px) {
       .pillars { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
-      .portfolio-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
       .steps-grid::before { display: none; }
       .price-band { padding: 28px 20px; }
@@ -145,7 +136,6 @@
     <li><a href="#misi" data-i18n="nav.mission">Misi</a></li>
     <li><a href="#pakej" data-i18n="nav.offer">Pakej</a></li>
     <li><a href="#cara-kerja" data-i18n="nav.how">Cara Kerja</a></li>
-    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
     <li><a href="#sokongan" data-i18n="nav.support">Sokongan</a></li>
   </ul>
   <div class="lang-toggle">
@@ -478,66 +468,6 @@
         <div class="step-num-circle">3</div>
         <div class="step-title" data-i18n="how.3.title">Go live, dalam kawalan anda</div>
         <p class="step-desc" data-i18n="how.3.desc">Pratonton, luluskan, dan terbit. Anda mendapat dashboard untuk edit kandungan dan buat kemaskini sendiri, bila-bila masa.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Portfolio -->
-<section class="section section-pad" id="portfolio">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:40px">
-      <div class="sec-label" data-i18n="portfolio.label">Portfolio Website</div>
-      <h2 style="font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800" class="reveal"
-          data-i18n="portfolio.h2">
-        Website yang telah diaktifkan
-      </h2>
-      <p style="color:var(--muted);margin-top:10px" class="reveal" data-i18n="portfolio.sub">Contoh website yang dibina untuk pelbagai kategori perniagaan.</p>
-    </div>
-
-    <div class="portfolio-grid reveal">
-      <div class="portfolio-card">
-        <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(6,182,212,.1))">🍧</div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat" data-i18n="portfolio.cat.fnb">Makanan &amp; Minuman</div>
-          <div class="portfolio-name">Snow Buko Desserts</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(239,68,68,.08))">✂️</div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat" data-i18n="portfolio.cat.service">Perkhidmatan</div>
-          <div class="portfolio-name">Hit Barber Astana</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(6,182,212,.12),rgba(139,92,246,.1))">🚗</div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat" data-i18n="portfolio.cat.auto">Automotif</div>
-          <div class="portfolio-name">Kam Motorworld</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(236,72,153,.12),rgba(139,92,246,.1))">🌸</div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat" data-i18n="portfolio.cat.beauty">Kecantikan &amp; Wellness</div>
-          <div class="portfolio-name">Clik Fragrance</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(6,182,212,.1))">🌾</div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat" data-i18n="portfolio.cat.agro">Pertanian &amp; Agro</div>
-          <div class="portfolio-name">SJF Farm</div>
-        </div>
-      </div>
-      <div class="portfolio-card" style="background:rgba(139,92,246,.06);border-style:dashed;display:flex;align-items:center;justify-content:center;min-height:190px">
-        <div style="text-align:center;padding:20px">
-          <div style="font-size:2rem;margin-bottom:8px">+</div>
-          <div style="font-size:.88rem;color:var(--muted);white-space:pre-line" data-i18n="portfolio.add.text">Perniagaan anda boleh
-jadi seterusnya</div>
-          <a href="activate.html" style="display:inline-block;margin-top:12px;font-size:.8rem;color:var(--p6);font-weight:600" data-i18n="portfolio.add.cta">Aktifkan sekarang →</a>
-        </div>
       </div>
     </div>
   </div>
