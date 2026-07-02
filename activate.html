@@ -346,6 +346,16 @@ const I18N = {
     'ai.reco': 'Cadangan', 'ai.reco.txt': 'Pakej Website Activation RM599 sesuai untuk anda — termasuk website profesional, domain & hosting 1 tahun, dashboard admin, WhatsApp, Google Map, SSL & SEO asas.',
     'ai.check': 'Semak ringkasan di atas, kemudian tekan hantar. Syahlan akan hubungi anda dalam 24 jam.',
     'err.send': 'Gagal menghantar. Sila cuba lagi.',
+    'sc.label': 'Skor Profil Anda',
+    'sc.high': 'Profil cemerlang! Kami ada semua yang diperlukan untuk bina website berkualiti tinggi untuk anda.',
+    'sc.mid': 'Profil yang baik. Tambah sedikit lagi maklumat untuk hasil yang lebih berkualiti.',
+    'sc.low': 'Skor anda agak rendah. Kami masih boleh teruskan — tetapi lebih banyak maklumat, lebih berkualiti website anda.',
+    'sc.remind': '💡 Ingat: semakin tinggi skor anda, semakin berkualiti hasil website yang mampu kami sampaikan.',
+    'sc.tips': 'Cara tingkatkan skor anda:',
+    'tip.desc': 'Tambah penerangan perniagaan yang lebih terperinci (Langkah 4)',
+    'tip.links': 'Tambah link media sosial / website anda (Langkah 2)',
+    'tip.customers': 'Terangkan siapa pelanggan ideal anda (Langkah 4)',
+    'tip.email': 'Guna emel domain perniagaan jika ada (cth: info@bisnes.com)',
   },
   EN: {
     ticker: '✦ Empowering 100 New Digital Presences Across Sarawak',
@@ -378,6 +388,16 @@ const I18N = {
     'ai.reco': 'Recommendation', 'ai.reco.txt': 'The RM599 Website Activation package fits you well — professional website, 1-year domain & hosting, admin dashboard, WhatsApp, Google Map, SSL & basic SEO included.',
     'ai.check': 'Review the summary above, then hit submit. Syahlan will contact you within 24 hours.',
     'err.send': 'Failed to send. Please try again.',
+    'sc.label': 'Your Profile Score',
+    'sc.high': 'Excellent profile! We have everything needed to build you a top-quality website.',
+    'sc.mid': 'Good profile. Add a little more info for an even better result.',
+    'sc.low': 'Your score is on the low side. We can still proceed — but the more you share, the better your website will be.',
+    'sc.remind': '💡 Remember: the higher your score, the higher the quality of the website we can deliver.',
+    'sc.tips': 'How to raise your score:',
+    'tip.desc': 'Add a more detailed business description (Step 4)',
+    'tip.links': 'Add your social media / website links (Step 2)',
+    'tip.customers': 'Describe your ideal customers (Step 4)',
+    'tip.email': 'Use a business-domain email if you have one (e.g. info@mybiz.com)',
   },
   ZH: {
     ticker: '✦ 助力砂拉越100家企业实现数字化',
@@ -410,6 +430,16 @@ const I18N = {
     'ai.reco': '推荐', 'ai.reco.txt': 'RM599 网站激活配套适合您 — 包括专业网站、一年域名和托管、管理后台、WhatsApp、Google 地图、SSL 和基础 SEO。',
     'ai.check': '请核对以上摘要，然后提交。Syahlan 将在24小时内联系您。',
     'err.send': '发送失败，请重试。',
+    'sc.label': '您的资料评分',
+    'sc.high': '资料非常完整！我们已具备为您打造高品质网站的一切所需。',
+    'sc.mid': '资料不错。再补充一些信息，效果会更好。',
+    'sc.low': '您的评分偏低。我们仍可继续 — 但分享越多，网站质量越高。',
+    'sc.remind': '💡 请记住：评分越高，我们能交付的网站质量就越高。',
+    'sc.tips': '如何提高评分：',
+    'tip.desc': '添加更详细的业务描述（步骤4）',
+    'tip.links': '添加您的社交媒体/网站链接（步骤2）',
+    'tip.customers': '描述您的理想客户（步骤4）',
+    'tip.email': '如有企业域名邮箱请使用（例如 info@mybiz.com）',
   },
   IB: {
     ticker: '✦ Ngemansangka 100 Presence Digital Baru Di Serata Sarawak',
@@ -442,6 +472,16 @@ const I18N = {
     'ai.reco': 'Saran', 'ai.reco.txt': 'Pakej Website Activation RM599 ngena ke nuan — website profesional, domain & hosting setaun, dashboard admin, WhatsApp, Google Map, SSL & SEO asas.',
     'ai.check': 'Pereksa ringkasan ba atas, lalu anjung. Syahlan deka betemu enggau nuan dalam 24 jam.',
     'err.send': 'Enda ulih dianjung. Uji baru.',
+    'sc.label': 'Skor Profil Nuan',
+    'sc.high': 'Profil manah amat! Kami bisi semua utai diperlu kena ngaga website berkualiti tinggi ke nuan.',
+    'sc.mid': 'Profil manah. Tambah mimit agi penemu ngambika hasil agi manah.',
+    'sc.low': 'Skor nuan baruh mimit. Kami agi ulih nerus — tang agi mayuh penemu, agi manah website nuan.',
+    'sc.remind': '💡 Kingatka: agi tinggi skor nuan, agi manah kualiti website ulih digaga kami.',
+    'sc.tips': 'Chara ningkatka skor nuan:',
+    'tip.desc': 'Tambah penerang dagang ti agi terperinchi (Langkah 4)',
+    'tip.links': 'Tambah link media sosial / website nuan (Langkah 2)',
+    'tip.customers': 'Terangka sapa pelanggan ideal nuan (Langkah 4)',
+    'tip.email': 'Kena emel domain dagang enti bisi (chth: info@dagang.com)',
   },
 };
 
@@ -540,6 +580,42 @@ function generateAI() {
   setTimeout(() => {
     document.getElementById('ai-thinking').classList.remove('show');
     document.getElementById('ai-gen').disabled = false;
+
+    // score — same shape as the record we will submit
+    const scoreInput = {
+      businessName: d.businessName, ownerName: d.ownerName,
+      email: d.email, mobile: d.mobile,
+      district: d.district, industry: d.industry,
+      orgType: 'SME', existing: d.links[0] || '',
+      bizDesc: [d.bizDesc, d.customers && ('Pelanggan: ' + d.customers), d.extra].filter(Boolean).join('\n'),
+      languages: [LANG],
+    };
+    const score = calcLeadScore(scoreInput);
+    const scol = score >= 75 ? '#10b981' : score >= 60 ? '#d97706' : '#dc2626';
+    const smsg = score >= 75 ? t('sc.high') : score >= 60 ? t('sc.mid') : t('sc.low');
+
+    // improvement tips for whatever is missing
+    const tips = [];
+    if ((scoreInput.bizDesc || '').length <= 80) tips.push(t('tip.desc'));
+    if (!d.links.length) tips.push(t('tip.links'));
+    if (!d.customers) tips.push(t('tip.customers'));
+    const dom = (d.email || '').split('@')[1] || '';
+    if (['gmail.com','yahoo.com','hotmail.com','outlook.com','live.com','icloud.com','ymail.com'].includes(dom.toLowerCase())) tips.push(t('tip.email'));
+
+    let scoreHtml = `
+      <div style="border:1px solid ${scol}33;background:${scol}0d;border-radius:12px;padding:16px 18px;margin-bottom:18px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="font-size:2.1rem;font-weight:900;color:${scol};line-height:1">${score}<span style="font-size:.85rem;font-weight:700;color:#9aa0b4">/100</span></div>
+          <div style="flex:1">
+            <div style="font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:${scol};margin-bottom:5px">${t('sc.label')}</div>
+            <div style="height:7px;background:#e7e8f0;border-radius:99px;overflow:hidden"><div style="width:${score}%;height:100%;border-radius:99px;background:${scol};transition:width .8s ease"></div></div>
+          </div>
+        </div>
+        <p style="margin-top:12px;font-size:.88rem;line-height:1.6">${score < 60 ? '⚠️ ' : ''}${smsg}</p>
+        <p style="margin-top:8px;font-size:.84rem;color:#5b6172;line-height:1.6">${t('sc.remind')}</p>
+        ${tips.length ? `<div style="margin-top:10px;font-size:.84rem"><b>${t('sc.tips')}</b><ul style="padding-left:20px;margin-top:6px;color:#5b6172">${tips.map(x=>`<li style="margin-bottom:3px">${x}</li>`).join('')}</ul></div>` : ''}
+      </div>`;
+
     const rows = [
       [t('ai.biz'), `${esc(d.businessName)} — ${esc(d.ownerName)}`],
       [t('ai.industry'), esc(d.industry)],
@@ -548,7 +624,7 @@ function generateAI() {
       [t('ai.files'), files.length ? files.length + ' ✓' : '0'],
       [t('ai.needs'), d.needs.length ? esc(d.needs.join(', ')) : '—'],
     ];
-    let html = `<p>${t('ai.intro')}</p><ul>` +
+    let html = scoreHtml + `<p>${t('ai.intro')}</p><ul>` +
       rows.map(([k,v]) => `<li><b>${k}:</b> ${v}</li>`).join('') + `</ul>`;
     if (d.bizDesc) html += `<p style="margin-top:8px"><b>“</b>${esc(d.bizDesc)}<b>”</b></p>`;
     html += `<p style="margin-top:10px"><b>💡 ${t('ai.reco')}:</b> ${t('ai.reco.txt')}</p>`;
