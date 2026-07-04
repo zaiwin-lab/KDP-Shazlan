@@ -139,6 +139,33 @@
     .row-btn-del   { border: 1px solid rgba(239,68,68,.3); color: #f87171; }
     .row-btn-del:hover   { background: rgba(239,68,68,.12); }
 
+    /* ── Build pipeline (A·B·C·D) ── */
+    .pipe-step { font-size: .72rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--p7); margin: 16px 0 8px; }
+    .pipe-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .zip-zone { border: 2px dashed var(--glass-border); border-radius: var(--r-md); padding: 22px 16px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; margin-bottom: 6px; }
+    .zip-zone:hover, .zip-zone.drag { border-color: var(--p5); background: rgba(139,92,246,.06); }
+    .zip-zone .zi { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+    .zip-zone b { display: block; font-size: .9rem; color: var(--white); }
+    .zip-zone .hint { font-size: .76rem; color: var(--muted); display: block; margin-top: 4px; line-height: 1.5; }
+    .zip-filled { display: flex; align-items: center; gap: 12px; border: 1px solid var(--glass-border); background: rgba(16,185,129,.06); border-radius: var(--r-md); padding: 12px 14px; margin-bottom: 6px; }
+    .zip-filled .zi { font-size: 1.5rem; }
+    .zip-filled .pf { display: block; font-size: .8rem; color: var(--white); }
+    .zip-filled .meta { font-size: .72rem; color: var(--muted); }
+    .zip-filled .rm { margin-left: auto; background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: pointer; line-height: 1; }
+    .preview-row { display: flex; gap: 8px; }
+    .preview-row input { flex: 1; background: rgba(139,92,246,.07); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 9px 12px; font-size: .82rem; color: var(--white); outline: none; }
+    .preview-row input:focus { border-color: var(--p5); }
+    .msg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
+    .msg-card { background: rgba(139,92,246,.05); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 10px; min-width: 0; }
+    .msg-card-head { display: flex; align-items: center; justify-content: space-between; font-size: .78rem; font-weight: 700; margin-bottom: 6px; color: var(--white); }
+    .msg-body { white-space: pre-wrap; word-break: break-word; font-size: .74rem; color: var(--muted); line-height: 1.5; max-height: 150px; overflow: auto; font-family: inherit; margin: 0; }
+    .msg-subj { font-size: .74rem; margin-bottom: 4px; color: var(--muted); }
+    .drive-note { font-size: .74rem; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+    .gen-out { display: none; white-space: pre-wrap; font-size: .72rem; background: rgba(0,0,0,.28); border: 1px solid var(--glass-border); border-radius: 8px; padding: 10px; margin-top: 8px; max-height: 180px; overflow: auto; color: var(--muted); }
+    .mini-copy { background: none; border: 1px solid var(--glass-border); color: var(--muted); font-size: .7rem; border-radius: 6px; padding: 3px 8px; cursor: pointer; }
+    .mini-copy:hover { border-color: var(--p5); color: var(--white); }
+    @media (max-width: 560px) { .msg-grid { grid-template-columns: 1fr; } }
+
     /* ── Edit fields in side panel ── */
     .edit-field { width: 100%; background: rgba(139,92,246,.07); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 9px 12px; font-size: .87rem; color: var(--white); box-sizing: border-box; outline: none; transition: border-color .2s; }
     .edit-field:focus { border-color: var(--p5); }
@@ -312,6 +339,11 @@
       </div>
     </div>
 
+    <div class="panel-section" id="sp-pipeline-section">
+      <div class="panel-section-title">🔄 Build Pipeline — A · B · C · D</div>
+      <div id="sp-pipeline"></div>
+    </div>
+
     <div class="panel-section" id="sp-details-section">
       <div class="panel-section-title">Lead Details</div>
       <div id="sp-details"></div>
@@ -345,6 +377,8 @@
 
 <div id="toast"></div>
 
+<!-- JSZip (vendored locally) for building client-folder downloads (KSA / KSB) -->
+<script src="jszip.min.js"></script>
 <script>
 // ── PIN Auth ──
 const PIN_HASH = 'ac04d49fd2f3466f008df7d598828c7cff33cbf1f84a00c0f93b4a592b204b14'; // SDC2026
@@ -574,6 +608,10 @@ function openPanel(id) {
   document.getElementById('sp-pay').href   = `pay.html?b=${encodeURIComponent(l.businessName||'')}&name=${encodeURIComponent(l.ownerName||'')}&id=${encodeURIComponent(l.id)}`;
   document.getElementById('sp-notes').value = l.notes || '';
 
+  // Build pipeline (A·B·C·D)
+  document.getElementById('sp-pipeline').innerHTML = renderPipeline(l);
+  wirePipeline(l);
+
   const sc  = calcScore(l);
   const sm2 = scoreMeta(sc);
   const bd  = scoreBreakdownPts(l);
@@ -742,6 +780,302 @@ function toast(msg, err) {
   el.style.color       = err ? '#fca5a5' : '#6ee7b7';
   el.style.display     = 'block';
   setTimeout(() => el.style.display = 'none', 3000);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  BUILD PIPELINE — A · B · C · D  (adapted from the Khaaliq board)
+// ═══════════════════════════════════════════════════════════════
+const PIPE_ATTACHED = {};   // session-held NotebookLM PDFs per lead id
+
+function safeName(s){ return String(s||'Client').replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ').trim().slice(0,60)||'Client'; }
+function waNumber(m){ let d=String(m||'').replace(/\D/g,''); if(!d)return''; if(d.startsWith('60'))return d; if(d.startsWith('0'))return'60'+d.slice(1); return'60'+d; }
+function pipeLinks(l){ return [l.existing, ...(l.links||[])].filter(x=>x&&String(x).trim()); }
+function pipeReadiness(l){ return Math.max(1, Math.min(10, Math.round(calcScore(l)/10))); }
+function pipeRecommend(l){
+  const recs=new Set(), needs=l.needs||[], ind=String(l.industry||''), lk=pipeLinks(l).join(' ');
+  if(!pipeLinks(l).length) recs.add('Business Website');
+  if(!/facebook|instagram|tiktok/i.test(lk)) recs.add('Social Media Setup');
+  if(/F&B|Makanan|Minuman|Restoran|Katering|Cafe/i.test(ind)) recs.add('Booking System');
+  if(/Runcit|Retail|Kraf|E-?Commerce/i.test(ind)||needs.includes('E-Commerce')) recs.add('E-Commerce Store');
+  (needs||[]).forEach(n=>recs.add(n));
+  if(!recs.size) recs.add('Business Website');
+  return Array.from(recs).slice(0,6);
+}
+function classifyFile(name){
+  const n=String(name||'').toLowerCase(), ext=(n.split('.').pop()||'');
+  if(/logo|icon|brandmark|favicon/.test(n))return'Logo';
+  if(/cert|ssm|licen|halal|permit|sijil/.test(n))return'Certificates';
+  if(/profil|company|about|deck|corporate/.test(n))return'Business Profile';
+  if(/proposal|cadangan|quote|quotation|invoice/.test(n))return'Proposal';
+  if(/menu|catalog|katalog|price|harga|product|produk/.test(n))return'Product Photos';
+  if(/banner|poster|flyer|ad|promo|marketing/.test(n))return'Marketing Materials';
+  if(['jpg','jpeg','png','webp','gif','heic'].includes(ext))return'Product Photos';
+  if(['pdf','doc','docx','ppt','pptx'].includes(ext))return'Business Profile';
+  return'Others';
+}
+function payUrl(l){ return `${location.origin}/pay.html?b=${encodeURIComponent(l.businessName||'')}&name=${encodeURIComponent(l.ownerName||'')}&id=${encodeURIComponent(l.id)}`; }
+function previewMessage(l){
+  const link=l.previewUrl||'(link coming)';
+  return `Hi ${l.ownerName||'there'}, your new ${l.businessName||'business'} website preview is ready! 🎉\n\n`+
+    `Preview: ${link}\n\n`+
+    `Like it? Activate your Professional Business Website for RM599 (normally RM1,380) here:\n${payUrl(l)}\n\n`+
+    `— Syahlan · Sarawak Digital Champion`;
+}
+function waHrefClient(l){ const n=waNumber(l.mobile); return `${n?'https://wa.me/'+n:'https://wa.me/'}?text=${encodeURIComponent(previewMessage(l))}`; }
+function emailSubject(l){ return `Your ${l.businessName||'business'} website preview is ready 🎉`; }
+function emailBody(l){
+  const link=l.previewUrl||'(link coming)';
+  return `Hi ${l.ownerName||'there'},\n\n`+
+    `Great news — your new ${l.businessName||'business'} website preview is ready to view:\n\n${link}\n\n`+
+    `If you love it, activate your Professional Business Website for RM599 (normally RM1,380) here:\n${payUrl(l)}\n\n`+
+    `Take a look and let me know what you think — happy to fine-tune anything.\n\nWarm regards,\nSyahlan\nSarawak Digital Champion`;
+}
+function mailtoHref(l){ return `mailto:${encodeURIComponent(l.email||'')}?subject=${encodeURIComponent(emailSubject(l))}&body=${encodeURIComponent(emailBody(l))}`; }
+
+function chatgptPrompt(l){
+  const rec=pipeRecommend(l).join(', ');
+  return `You are a senior web strategist + conversion copywriter for the Sarawak Digital
+Champion initiative, building a premium single-page business website. Produce a
+complete website plan AND ready-to-use copy.
+
+== CLIENT ==
+Business: ${l.businessName||'—'}
+Owner: ${l.ownerName||'—'}
+Industry: ${l.industry||'—'} | Org type: ${l.orgType||'—'}
+Location: ${l.district||'—'}, Sarawak
+Contact: ${l.mobile||'—'} | ${l.email||'—'}
+Languages: ${(l.languages||[]).join(', ')||'—'}
+
+== DISCOVERY ==
+About the business: ${l.bizDesc||'—'}
+Requested services / needs: ${(l.needs||[]).join(', ')||'—'}
+
+== DIGITAL FOOTPRINT ==
+${pipeLinks(l).map(u=>'- '+u).join('\n')||'- none provided'}
+
+== AI READ ==
+Readiness: ${pipeReadiness(l)}/10 | Lead score: ${calcScore(l)}/100
+Recommended build: ${rec}
+
+== DELIVER ==
+1. One-line value proposition + 3 hero headline options.
+2. Site structure (sections in order) with one line of intent each.
+3. Full section copy (About, Services/Products, Why Us, Contact CTA).
+4. 8-12 SEO keywords + meta title + meta description.
+5. Brand direction: 3-colour palette (hex) + font pairing + tone.
+6. WhatsApp + Google Maps CTA wording.
+Write in clear English, ready to paste. Keep it specific to THIS business.`;
+}
+function notebookSource(l){
+  return `# ${l.businessName||'Business'} — Profile2Website Source
+
+## Snapshot
+- Owner: ${l.ownerName||'—'}
+- Industry: ${l.industry||'—'}
+- Org type: ${l.orgType||'—'}
+- Location: ${l.district||'—'}, Sarawak
+- Contact: ${l.mobile||'—'}, ${l.email||'—'}
+- Languages: ${(l.languages||[]).join(', ')||'—'}
+
+## The Business
+${l.bizDesc||'—'}
+
+## Digital Footprint
+${pipeLinks(l).map(u=>'- '+u).join('\n')||'- none'}
+
+## Requested Services
+${(l.needs||[]).map(n=>'- '+n).join('\n')||'- —'}
+
+## Uploaded Materials
+${(l.fileNames||[]).map(f=>`- [${classifyFile(f)}] ${f}`).join('\n')||'- none'}
+
+## AI Assessment
+- Digital readiness: ${pipeReadiness(l)}/10
+- Lead score: ${calcScore(l)}/100
+- Recommended build: ${pipeRecommend(l).join(', ')}
+`;
+}
+function clientFolderFiles(l){
+  const readme=`# Client Folder — ${l.businessName||'Business'}
+
+Reference: ${l.id}
+Exported: ${new Date().toISOString()}
+Stage: ${l.stage||'A'}
+
+## Your team's next 3 steps
+1. Open 01_chatgpt-superprompt.txt → paste into ChatGPT → get the website plan + copy.
+2. Open 02_notebooklm-source.md → load into NotebookLM → generate the Profile2Website PDF.
+3. Drop that PDF back on this lead in the dashboard → downloads the complete "KSB" pack
+   (stage moves to B · Building). Hand the KSB zip to the Claude build session.
+
+## Contents
+- 00_READ_ME.md ............ this file
+- 01_chatgpt-superprompt.txt  ready-to-paste ChatGPT prompt (pre-filled)
+- 02_notebooklm-source.md ... clean source doc for NotebookLM
+- 03_business-brief.json ... full structured record
+- 04_links.txt ............. digital footprint
+- 05_files-manifest.txt .... materials the client uploaded
+`;
+  const linksTxt=pipeLinks(l).join('\n')||'No links provided.';
+  const filesTxt=(l.fileNames||[]).map(f=>`[${classifyFile(f)}] ${f}`).join('\n')||'No files uploaded.';
+  return { nameBase: safeName(l.businessName), files:[
+    {path:'00_READ_ME.md',content:readme},
+    {path:'01_chatgpt-superprompt.txt',content:chatgptPrompt(l)},
+    {path:'02_notebooklm-source.md',content:notebookSource(l)},
+    {path:'03_business-brief.json',content:JSON.stringify(l,null,2)},
+    {path:'04_links.txt',content:linksTxt},
+    {path:'05_files-manifest.txt',content:filesTxt},
+  ]};
+}
+
+function renderPipeline(l){
+  const fb=safeName(l.businessName);
+  const rec=pipeRecommend(l);
+  const pkg=l.buildPackage;
+  return `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <div class="score-big" style="color:var(--p7);font-size:1.4rem">${pipeReadiness(l)}<span style="font-size:.8rem;color:var(--muted)">/10</span></div>
+      <div style="font-size:.78rem;color:var(--muted)">Digital readiness · <b style="color:var(--white)">${esc(l.industry||'—')}</b><br>Recommended: ${rec.map(esc).join(', ')}</div>
+    </div>
+
+    <p class="pipe-step">Stage A · Download the client's input</p>
+    <div class="pipe-actions">
+      <button class="btn btn-primary btn-sm" id="dlKSA">⬇ Download "KSA - ${esc(fb)}.zip"</button>
+      <button class="btn btn-ghost btn-sm" data-copy="prompt">Copy ChatGPT prompt</button>
+      <button class="btn btn-ghost btn-sm" data-copy="notebook">Copy NotebookLM source</button>
+    </div>
+
+    <p class="pipe-step">Stage B · Upload the NotebookLM PDF → get the complete pack</p>
+    ${pkg ? `<div class="zip-filled">
+        <span class="zi">📦</span>
+        <div style="min-width:0">${(pkg.files||[]).map(f=>`<span class="pf">${esc(f.name)} <span class="meta">${f.size?(f.size/1024).toFixed(0)+' KB':''}</span></span>`).join('')}
+          <span class="meta">attached ${(pkg.at||'').slice(0,10)} · click zone to add more</span></div>
+        <button class="rm" id="zipRemove" title="Remove">×</button>
+      </div>
+      <div class="pipe-actions"><button class="btn btn-primary btn-sm" id="rebuildKSB">⬇ Re-download "KSB - ${esc(fb)}.zip"</button></div>`
+      : `<div class="zip-zone" id="zipZone">
+        <span class="zi">⬆️</span><b>Drop the NotebookLM PDF here</b>
+        <span class="hint">Builds &amp; downloads <b>KSB - ${esc(fb)}.zip</b> with the PDF embedded, and moves the stage to "B · Building".</span>
+      </div>`}
+    <input type="file" id="zipInput" accept=".pdf,.zip,.ppt,.pptx,.png,.jpg,.jpeg,.webp" multiple hidden />
+    <p class="drive-note">📁 File both in Google Drive → <b>SDC — Client Intake</b> (KSA in · KSB out)</p>
+    <div class="gen-out" id="genOut"></div>
+
+    <p class="pipe-step">Stage C · Preview, payment &amp; onboarding</p>
+    <div class="preview-row">
+      <input id="previewUrl" type="url" placeholder="Paste the website preview link (https://…)" value="${esc(l.previewUrl||'')}" />
+      <button class="btn btn-ghost btn-sm" id="savePreview">Save</button>
+    </div>
+    <div class="msg-grid">
+      <div class="msg-card">
+        <div class="msg-card-head"><span>🟢 WhatsApp</span><button class="mini-copy" id="copyWa">Copy</button></div>
+        <pre class="msg-body" id="waText"></pre>
+      </div>
+      <div class="msg-card">
+        <div class="msg-card-head"><span>✉️ Email${l.email?'':' (no email)'}</span><button class="mini-copy" id="copyEm">Copy</button></div>
+        <div class="msg-subj"><b>Subject:</b> <span id="emSubj"></span></div>
+        <pre class="msg-body" id="emText"></pre>
+      </div>
+    </div>
+    <div class="pipe-actions">
+      <a class="btn btn-primary btn-sm" id="waSend" target="_blank" rel="noopener">🟢 Send on WhatsApp</a>
+      <a class="btn btn-secondary btn-sm" id="emSend">✉️ Send Email</a>
+      <button class="btn btn-secondary btn-sm" id="sendBoth">🚀 Send both</button>
+      <a class="btn btn-ghost btn-sm" id="payOpen" href="${payUrl(l)}" target="_blank" rel="noopener">💳 Open pay page</a>
+    </div>
+    <p class="pipe-step">Set the stage</p>
+    <div class="pipe-actions">
+      <button class="btn btn-ghost btn-sm" data-set="B">B · Building</button>
+      <button class="btn btn-ghost btn-sm" data-set="C">C · Preview &amp; Pay</button>
+      <button class="btn btn-ghost btn-sm" data-set="D">D · Deploy 🚀</button>
+    </div>
+  `;
+}
+
+function wirePipeline(l){
+  const $=s=>document.getElementById(s);
+  function refresh(){
+    const wa=$('waSend'), em=$('emSend');
+    if(wa) wa.href=waHrefClient(l);
+    if(em){ if(l.email){em.href=mailtoHref(l);em.style.opacity='';} else {em.style.opacity='.5';em.removeAttribute('href');} }
+    if($('waText')) $('waText').textContent=previewMessage(l);
+    if($('emSubj')) $('emSubj').textContent=emailSubject(l);
+    if($('emText')) $('emText').textContent=emailBody(l);
+  }
+  refresh();
+
+  if($('dlKSA')) $('dlKSA').onclick=()=>downloadFolder(l,'KSA');
+  if($('rebuildKSB')) $('rebuildKSB').onclick=()=>downloadFolder(l,'KSB');
+
+  document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>{
+    const txt=b.dataset.copy==='prompt'?chatgptPrompt(l):notebookSource(l);
+    copyOut(txt,b);
+  });
+
+  const pv=$('previewUrl');
+  if(pv){ pv.oninput=()=>{ l.previewUrl=pv.value.trim(); refresh(); };
+    $('savePreview').onclick=async()=>{ l.previewUrl=pv.value.trim(); await patchLead(l.id,{previewUrl:l.previewUrl}); toast('Preview link saved ✓'); }; }
+  if($('copyWa')) $('copyWa').onclick=(e)=>copyOut(previewMessage(l),e.target);
+  if($('copyEm')) $('copyEm').onclick=(e)=>copyOut('Subject: '+emailSubject(l)+'\n\n'+emailBody(l),e.target);
+  if($('sendBoth')) $('sendBoth').onclick=()=>{ openLink(waHrefClient(l),true); if(l.email) openLink(mailtoHref(l),false); flashBtn($('sendBoth'),'Opening… ✓',2500); };
+
+  document.querySelectorAll('[data-set]').forEach(b=>b.onclick=async()=>{
+    l.stage=b.dataset.set; document.getElementById('sp-stage').value=l.stage;
+    await patchLead(l.id,{stage:l.stage,status:{A:'New Lead',B:'Contacted',C:'Proposal Sent',D:'Closed Won'}[l.stage]});
+    renderStats(); renderTable(); openPanel(l.id); toast('Stage: '+l.stage);
+  });
+
+  // NotebookLM PDF intake
+  const zone=$('zipZone'), input=$('zipInput');
+  if(input){
+    if(zone){
+      zone.onclick=()=>input.click();
+      zone.ondragover=e=>{e.preventDefault();zone.classList.add('drag');};
+      zone.ondragleave=()=>zone.classList.remove('drag');
+      zone.ondrop=e=>{e.preventDefault();zone.classList.remove('drag');handleBuildFiles(l,e.dataTransfer.files);};
+    }
+    input.onchange=()=>handleBuildFiles(l,input.files);
+  }
+  const rm=$('zipRemove');
+  if(rm) rm.onclick=async(e)=>{ e.stopPropagation(); delete l.buildPackage; delete PIPE_ATTACHED[l.id]; await patchLead(l.id,{buildPackage:null}); openPanel(l.id); };
+}
+
+async function handleBuildFiles(l,fileList){
+  const files=Array.from(fileList||[]); if(!files.length) return;
+  PIPE_ATTACHED[l.id]=(PIPE_ATTACHED[l.id]||[]).concat(files.map(f=>({name:f.name,size:f.size,blob:f})));
+  l.buildPackage={files:PIPE_ATTACHED[l.id].map(x=>({name:x.name,size:x.size})),at:new Date().toISOString()};
+  if((l.stage||'A')==='A') l.stage='B';
+  await patchLead(l.id,{buildPackage:l.buildPackage,stage:l.stage,status:'Contacted'});
+  await downloadFolder(l,'KSB');
+  renderStats(); renderTable(); openPanel(l.id);
+}
+
+async function downloadFolder(l,kind){
+  if(!window.JSZip){ toast('ZIP library not loaded',true); return; }
+  const folder=clientFolderFiles(l), top=`${kind} - ${folder.nameBase}`;
+  const zip=new JSZip(), dir=zip.folder(top);
+  folder.files.forEach(f=>dir.file(f.path,f.content));
+  if(kind==='KSB'){
+    const sub=dir.folder('06_profile2website'); const att=PIPE_ATTACHED[l.id]||[];
+    if(att.length) att.forEach(a=>sub.file(a.name,a.blob));
+    else sub.file('_DROP_THE_PDF_HERE.txt','Re-drop the NotebookLM Profile2Website PDF to embed it here.');
+  } else {
+    dir.folder('uploads').file('_README.txt','Client-uploaded files are listed in 05_files-manifest.txt.\nBinaries attach here once backend storage is enabled.');
+  }
+  const blob=await zip.generateAsync({type:'blob'});
+  saveBlob(blob,top+'.zip'); toast('Downloaded '+top+'.zip ✓');
+}
+
+async function patchLead(id,patch){
+  const lead=allLeads.find(x=>x.id===id); if(lead) Object.assign(lead,patch);
+  try{ await fetch('/.netlify/functions/submissions',{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify(Object.assign({id},patch))}); }catch(_){}
+}
+function saveBlob(blob,name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); }
+function openLink(href,newTab){ const a=document.createElement('a'); a.href=href; if(newTab){a.target='_blank';a.rel='noopener';} document.body.appendChild(a); a.click(); a.remove(); }
+function flashBtn(b,txt,ms){ if(!b)return; const o=b.dataset.lbl||b.textContent; b.dataset.lbl=o; b.textContent=txt; setTimeout(()=>b.textContent=o,ms||1400); }
+async function copyOut(text,btn){
+  try{ await navigator.clipboard.writeText(text); flashBtn(btn,'Copied ✓'); }
+  catch(_){ const o=document.getElementById('genOut'); if(o){o.style.display='block';o.textContent=text;} }
 }
 
 loadData();

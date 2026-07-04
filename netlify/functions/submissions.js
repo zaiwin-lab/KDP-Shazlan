@@ -70,11 +70,12 @@ exports.handler = async (event) => {
     }
 
     if (event.httpMethod === 'PATCH') {
-      const id = event.queryStringParameters?.id;
+      const patch = JSON.parse(event.body || '{}');
+      // id may arrive in the query string or the body (dashboard sends it in the body)
+      const id = event.queryStringParameters?.id || patch.id;
       if (!id) return { statusCode: 400, headers: cors, body: JSON.stringify({ error: 'Missing id' }) };
       const existing = await store.get(id, { type: 'json' });
       if (!existing) return { statusCode: 404, headers: cors, body: JSON.stringify({ error: 'Not found' }) };
-      const patch = JSON.parse(event.body || '{}');
       await store.setJSON(id, { ...existing, ...patch });
       return { statusCode: 200, headers: cors, body: JSON.stringify({ ok: true }) };
     }
