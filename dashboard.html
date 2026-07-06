@@ -447,13 +447,18 @@ const SAMPLE=[
   { id:'WEB-S6', businessName:'Serapi Restaurant', ownerName:'Syed Alwi bin Syed Ali', mobile:'0167890123', email:'serapi@gmail.com', district:'Kuching', industry:'Makanan & Minuman (F&B)', orgType:'SME', languages:['BM','EN','ZH'], bizDesc:'Restoran keluarga yang menyediakan masakan tempatan dan antarabangsa. Kapasiti 200 orang.', existing:'https://instagram.com/serapirestaurant', stage:'A', createdAt:'2026-06-22T13:00:00Z' },
 ];
 
-// ── Google Drive (team-configurable) ──
-function driveRoot(){ return localStorage.getItem('sdc_drive_root')||''; }
+// ── Google Drive (single master folder: "Syahlan SDC - Client Intake") ──
+// Paste the master folder's share link below to hard-wire it for the whole team.
+const MASTER_DRIVE = '';
+function driveRoot(){ return MASTER_DRIVE || localStorage.getItem('sdc_drive_root') || ''; }
 function setDriveRoot(){
-  const v=prompt('Paste your shared Google Drive folder link (the "Client Intake" folder your team uses for KSA in · KSB out):', driveRoot());
-  if(v!==null){ localStorage.setItem('sdc_drive_root', v.trim()); toast('Team Drive link saved ✓'); }
+  const v=prompt('Paste the "Syahlan SDC - Client Intake" master folder link (Share → Copy link):', driveRoot());
+  if(v!==null){ localStorage.setItem('sdc_drive_root', v.trim()); toast('Master Drive link saved ✓'); }
 }
 function openDriveRoot(){ const u=driveRoot(); if(!u){ setDriveRoot(); return; } window.open(u,'_blank','noopener'); }
+// Each client is a numbered subfolder inside the master: "001 Business", "002 …"
+function leadSeq(l){ const s=[...allLeads].sort((a,b)=>new Date(a.createdAt||0)-new Date(b.createdAt||0)); const i=s.findIndex(x=>x.id===l.id); return i>=0?String(i+1).padStart(3,'0'):'—'; }
+function driveFolderName(l){ return `${leadSeq(l)} ${l.businessName||'Client'}`; }
 
 // ── Load data ──
 async function loadData(){
@@ -776,7 +781,7 @@ function clientFolderFiles(l){
 Reference: ${l.id}
 Exported: ${new Date().toISOString()}
 Stage: ${l.stage||'A'}
-Drive folder: ${l.driveUrl||driveRoot()||'(set in the dashboard)'}
+Drive folder: ${driveFolderName(l)}  (inside the master "Syahlan SDC - Client Intake" folder)
 
 ## Team handoff
 - Web Designer (NotebookLM): use 01 + 02 → produce the Profile2Website PDF → drop it back on this lead → download the KSB pack.
@@ -808,12 +813,15 @@ function renderPipeline(l){
       <div style="font-size:.8rem;color:var(--muted)">Digital readiness · <b style="color:var(--ink)">${esc(l.industry||'—')}</b><br>Recommended: ${rec.map(esc).join(', ')}</div>
     </div>
 
-    <div class="field-row" style="margin-bottom:6px">
-      <input id="driveUrl" type="url" placeholder="Paste this client's Google Drive folder…" value="${esc(l.driveUrl||'')}"/>
-      <button class="btn btn-ghost btn-sm" id="saveDrive">Save</button>
-      <a class="btn btn-drive btn-sm" id="openDrive" href="${esc(l.driveUrl||'')}" target="_blank" rel="noopener">📁 Open</a>
+    <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:6px">
+      <div style="font-size:.74rem;color:var(--muted);margin-bottom:6px">This client's folder inside the master Drive</div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-weight:750;font-size:.95rem">📁 ${esc(driveFolderName(l))}</span>
+        <button class="mini-copy" id="copyFolder">Copy name</button>
+        <a class="btn btn-drive btn-sm" id="openMaster" href="${esc(driveRoot())}" target="_blank" rel="noopener">📂 Open master Drive</a>
+      </div>
     </div>
-    <p class="drive-note">📁 Keep this client's files in <b>Google Drive</b> — KSA in · KSB out — so both teammates share one source of truth.</p>
+    <p class="drive-note">Inside the <b>master folder</b>, create/open <b>${esc(driveFolderName(l))}</b> and keep everything there: KSA, KSB, the website HTML, invoice &amp; receipt — so both teammates work from one place.</p>
 
     <div class="role-block role-1">
       <div class="role-head"><div class="role-ic">🎨</div><div><div class="role-name">Web Designer · NotebookLM</div><div class="role-who">Stage A → B</div></div></div>
@@ -877,9 +885,8 @@ function wirePipeline(l){
   if($('rebuildKSB')) $('rebuildKSB').onclick=()=>downloadFolder(l,'KSB');
   document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyOut(b.dataset.copy==='prompt'?chatgptPrompt(l):notebookSource(l),b));
 
-  const dv=$('driveUrl');
-  if(dv){ dv.oninput=()=>{ const o=$('openDrive'); if(o) o.href=dv.value.trim(); };
-    $('saveDrive').onclick=async()=>{ l.driveUrl=dv.value.trim(); await patchLead(l.id,{driveUrl:l.driveUrl}); toast('Drive folder saved ✓'); }; }
+  if($('copyFolder')) $('copyFolder').onclick=e=>copyOut(driveFolderName(l),e.target);
+  if($('openMaster')) $('openMaster').onclick=e=>{ if(!driveRoot()){ e.preventDefault(); setDriveRoot(); } };
 
   const pv=$('previewUrl');
   if(pv){ pv.oninput=()=>{ l.previewUrl=pv.value.trim(); refresh(); };
