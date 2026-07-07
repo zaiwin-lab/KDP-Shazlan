@@ -448,8 +448,8 @@ const SAMPLE=[
 ];
 
 // ── Google Drive (single master folder: "Syahlan SDC - Client Intake") ──
-// Paste the master folder's share link below to hard-wire it for the whole team.
-const MASTER_DRIVE = '';
+// Master "Syahlan SDC - Client Intake" folder — hard-wired for the whole team.
+const MASTER_DRIVE = 'https://drive.google.com/drive/folders/10KrzaD0Wke2yI8e0fBTv4G__s36FL573';
 function driveRoot(){ return MASTER_DRIVE || localStorage.getItem('sdc_drive_root') || ''; }
 function setDriveRoot(){
   const v=prompt('Paste the "Syahlan SDC - Client Intake" master folder link (Share → Copy link):', driveRoot());
