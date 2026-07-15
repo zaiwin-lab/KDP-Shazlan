@@ -36,8 +36,8 @@ exports.handler = async (event) => {
     const billName = sanitize(`KSDC ${business}`);
     const billDesc = sanitize(`Pendaftaran Program KSDC ${owner}`);
     const totalAmount = Math.round(Number(amount) * 100);
-    const callbackUrl = `${process.env.URL || 'https://syahlansdc.netlify.app'}/.netlify/functions/payment-callback`;
-    const returnUrl = `${process.env.URL || 'https://syahlansdc.netlify.app'}/pay.html`;
+    const callbackUrl = `${process.env.URL || 'https://syahlansdc.com'}/.netlify/functions/payment-callback`;
+    const returnUrl = `${process.env.URL || 'https://syahlansdc.com'}/pay.html`;
 
     const params = new URLSearchParams({
       userSecretKey: secret,

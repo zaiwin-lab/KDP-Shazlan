@@ -127,6 +127,7 @@
     .stage-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:99px;font-size:.75rem;font-weight:750;white-space:nowrap}
     .stage-a{background:var(--a-bg);color:var(--a)} .stage-b{background:var(--b-bg);color:var(--b)}
     .stage-c{background:var(--c-bg);color:var(--c)} .stage-d{background:var(--d-bg);color:var(--d)}
+    .paid-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:.68rem;font-weight:800;letter-spacing:.03em;background:var(--d-bg);color:var(--d);margin-left:6px}
 
     .row-btn{background:var(--surface);border-radius:8px;padding:6px 9px;cursor:pointer;font-size:.82rem;line-height:1;transition:background .12s,border-color .12s;margin-left:4px}
     .row-btn-edit{border:1px solid var(--line);color:var(--acc)}
@@ -554,7 +555,7 @@ function renderTable(){
         <div class="score-bar-mini"><div style="width:${sc}%;background:linear-gradient(90deg,${sm2.grad})"></div></div>
         <div class="score-lbl" style="color:${sm2.color}">${sm2.label}</div>
       </div></td>
-      <td><span class="stage-badge ${sm.cls}">${sm.label}</span></td>
+      <td><span class="stage-badge ${sm.cls}">${sm.label}</span>${l.paid?'<span class="paid-pill">✓ PAID</span>':''}</td>
       <td style="color:var(--muted);font-size:.82rem">${dt}</td>
       <td onclick="event.stopPropagation()" style="white-space:nowrap;text-align:right">
         <button class="row-btn row-btn-edit" onclick="editLead('${esc(l.id)}')" title="Edit">✏</button>
@@ -590,6 +591,7 @@ function openPanel(id){
     <div class="info-row"><span class="info-label">Industry</span><span class="info-val">${esc(l.industry||'—')}</span></div>
     <div class="info-row"><span class="info-label">Languages</span><span class="info-val">${esc((l.languages||[]).join(', ')||'—')}</span></div>
     <div class="info-row"><span class="info-label">Package</span><span class="info-val">${esc(l.package||'RM599 Website Activation')}</span></div>
+    <div class="info-row"><span class="info-label">Payment</span><span class="info-val" style="color:${l.paid?'var(--d)':'var(--muted)'};font-weight:${l.paid?'700':'500'}">${l.paid?('✓ PAID'+(l.paidAmount?' · RM'+l.paidAmount:'')+(l.paidAt?' · '+new Date(l.paidAt).toLocaleDateString():'')):'Not yet paid'}</span></div>
     <div class="info-row"><span class="info-label">Ref ID</span><span class="info-val" style="font-family:monospace;font-size:.78rem">${esc(l.id)}</span></div>
     ${l.bizDesc?`<div style="margin-top:12px;padding:11px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;font-size:.83rem;color:var(--ink-2);line-height:1.6">${esc(l.bizDesc)}</div>`:''}
     <div style="margin-top:16px;padding:14px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px">
