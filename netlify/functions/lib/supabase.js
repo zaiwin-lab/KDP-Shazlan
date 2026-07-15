@@ -65,4 +65,14 @@ async function deleteRow(id) {
   if (!res.ok) throw new Error('supabase delete ' + res.status + ' ' + (await res.text()));
 }
 
-module.exports = { supabaseEnabled, upsertRow, deleteRow, apiOrigin };
+// Exact row count of the submissions table (via Content-Range).
+async function countRows() {
+  if (!supabaseEnabled()) return null;
+  const { url } = cfg();
+  const res = await fetch(`${url}/rest/v1/submissions?select=id`, { headers: { ...headers(), Prefer: 'count=exact', Range: '0-0' } });
+  if (!res.ok) return 'error ' + res.status + ' ' + (await res.text()).slice(0, 200);
+  const cr = res.headers.get('content-range') || '';
+  return cr.includes('/') ? cr.split('/')[1] : 'unknown';
+}
+
+module.exports = { supabaseEnabled, upsertRow, deleteRow, apiOrigin, countRows };
