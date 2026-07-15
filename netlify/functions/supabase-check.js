@@ -11,6 +11,7 @@ exports.handler = async () => {
       SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY ? 'set' : 'MISSING',
     },
   };
+  out.target = supabase.apiOrigin() + '/rest/v1/submissions';
   if (!out.supabaseEnabled) { out.verdict = 'Missing an env var above.'; return json(out); }
   try {
     await supabase.upsertRow({ id: '__healthcheck__', businessName: 'healthcheck', createdAt: new Date().toISOString() });

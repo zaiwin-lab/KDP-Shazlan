@@ -8,11 +8,14 @@
    Best-effort: if unset or a call fails, the primary flow is unaffected.
    ===================================================================== */
 function cfg() {
-  return {
-    url: (process.env.SUPABASE_URL || '').replace(/\/+$/, ''),
-    key: process.env.SUPABASE_SERVICE_KEY || '',
-  };
+  let url = (process.env.SUPABASE_URL || '').trim();
+  // tolerate a pasted dashboard URL or a full REST path — reduce to the API origin
+  const m = url.match(/https?:\/\/[a-z0-9-]+\.supabase\.co/i);
+  if (m) url = m[0];
+  url = url.replace(/\/+$/, '');
+  return { url, key: (process.env.SUPABASE_SERVICE_KEY || '').trim() };
 }
+function apiOrigin() { return cfg().url; }
 function supabaseEnabled() { const c = cfg(); return !!(c.url && c.key); }
 
 function headers() {
@@ -62,4 +65,4 @@ async function deleteRow(id) {
   if (!res.ok) throw new Error('supabase delete ' + res.status + ' ' + (await res.text()));
 }
 
-module.exports = { supabaseEnabled, upsertRow, deleteRow };
+module.exports = { supabaseEnabled, upsertRow, deleteRow, apiOrigin };
