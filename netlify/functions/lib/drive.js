@@ -14,11 +14,17 @@ const SCOPE = 'https://www.googleapis.com/auth/drive';
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 
 function cfg() {
-  return {
-    email: process.env.GOOGLE_CLIENT_EMAIL || '',
-    key: (process.env.GOOGLE_PRIVATE_KEY || '').replace(/\\n/g, '\n'),
-    master: process.env.DRIVE_MASTER_FOLDER_ID || '',
-  };
+  let email = process.env.GOOGLE_CLIENT_EMAIL || '';
+  let key = process.env.GOOGLE_PRIVATE_KEY || '';
+  // Be forgiving: accept the FULL service-account JSON pasted into GOOGLE_PRIVATE_KEY
+  // (or a dedicated GOOGLE_SERVICE_ACCOUNT var) and pull the fields out of it.
+  const rawJson = (process.env.GOOGLE_SERVICE_ACCOUNT || '').trim() || (key.trim().startsWith('{') ? key.trim() : '');
+  if (rawJson) {
+    try { const j = JSON.parse(rawJson); if (j.private_key) key = j.private_key; if (!email && j.client_email) email = j.client_email; }
+    catch (_) {}
+  }
+  key = key.replace(/\\n/g, '\n');
+  return { email, key, master: process.env.DRIVE_MASTER_FOLDER_ID || '' };
 }
 function driveEnabled() { const c = cfg(); return !!(c.email && c.key && c.master); }
 function folderUrl(id) { return `https://drive.google.com/drive/folders/${id}`; }
