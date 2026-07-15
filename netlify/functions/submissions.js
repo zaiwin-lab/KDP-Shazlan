@@ -1,5 +1,6 @@
 const { getStore } = require('@netlify/blobs');
 const drive = require('./lib/drive');
+const supabase = require('./lib/supabase');
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -84,6 +85,7 @@ exports.handler = async (event) => {
         }
       }
       await store.setJSON(data.id, data);
+      try { await supabase.upsertRow(data); } catch (e) { console.error('supabase mirror:', e.message); }
       if (!existing && data.businessName) await notifyNewLead(data);
       return { statusCode: 200, headers: cors, body: JSON.stringify({ ok: true, seq: data.seq, driveFolderId: data.driveFolderId || null, driveUrl: data.driveUrl || null }) };
     }
@@ -95,7 +97,9 @@ exports.handler = async (event) => {
       if (!id) return { statusCode: 400, headers: cors, body: JSON.stringify({ error: 'Missing id' }) };
       const existing = await store.get(id, { type: 'json' });
       if (!existing) return { statusCode: 404, headers: cors, body: JSON.stringify({ error: 'Not found' }) };
-      await store.setJSON(id, { ...existing, ...patch });
+      const merged = { ...existing, ...patch };
+      await store.setJSON(id, merged);
+      try { await supabase.upsertRow(merged); } catch (e) { console.error('supabase mirror:', e.message); }
       return { statusCode: 200, headers: cors, body: JSON.stringify({ ok: true }) };
     }
 
@@ -103,6 +107,7 @@ exports.handler = async (event) => {
       const id = event.queryStringParameters?.id;
       if (!id) return { statusCode: 400, headers: cors, body: JSON.stringify({ error: 'Missing id' }) };
       await store.delete(id);
+      try { await supabase.deleteRow(id); } catch (e) { console.error('supabase mirror:', e.message); }
       return { statusCode: 200, headers: cors, body: JSON.stringify({ ok: true }) };
     }
 
