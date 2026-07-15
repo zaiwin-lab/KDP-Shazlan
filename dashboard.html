@@ -457,7 +457,8 @@ function setDriveRoot(){
 }
 function openDriveRoot(){ const u=driveRoot(); if(!u){ setDriveRoot(); return; } window.open(u,'_blank','noopener'); }
 // Each client is a numbered subfolder inside the master: "001 Business", "002 …"
-function leadSeq(l){ const s=[...allLeads].sort((a,b)=>new Date(a.createdAt||0)-new Date(b.createdAt||0)); const i=s.findIndex(x=>x.id===l.id); return i>=0?String(i+1).padStart(3,'0'):'—'; }
+// Prefer the stable seq assigned at submission time; fall back to list position.
+function leadSeq(l){ if(l.seq) return String(l.seq).padStart(3,'0'); const s=[...allLeads].sort((a,b)=>new Date(a.createdAt||0)-new Date(b.createdAt||0)); const i=s.findIndex(x=>x.id===l.id); return i>=0?String(i+1).padStart(3,'0'):'—'; }
 function driveFolderName(l){ return `${leadSeq(l)} ${l.businessName||'Client'}`; }
 
 // ── Load data ──
@@ -818,10 +819,12 @@ function renderPipeline(l){
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <span style="font-weight:750;font-size:.95rem">📁 ${esc(driveFolderName(l))}</span>
         <button class="mini-copy" id="copyFolder">Copy name</button>
-        <a class="btn btn-drive btn-sm" id="openMaster" href="${esc(driveRoot())}" target="_blank" rel="noopener">📂 Open master Drive</a>
+        <a class="btn btn-drive btn-sm" id="openMaster" href="${esc(l.driveUrl||driveRoot())}" target="_blank" rel="noopener">📂 ${l.driveUrl?'Open this folder':'Open master Drive'}</a>
       </div>
     </div>
-    <p class="drive-note">Inside the <b>master folder</b>, create/open <b>${esc(driveFolderName(l))}</b> and keep everything there: KSA, KSB, the website HTML, invoice &amp; receipt — so both teammates work from one place.</p>
+    <p class="drive-note">${l.driveUrl
+      ? `✅ This folder was <b>created automatically</b> when the client submitted. KSA, KSB, the website HTML, invoice &amp; receipt all live here.`
+      : `Inside the <b>master folder</b>, create/open <b>${esc(driveFolderName(l))}</b> and keep everything there: KSA, KSB, the website HTML, invoice &amp; receipt.`}</p>
 
     <div class="role-block role-1">
       <div class="role-head"><div class="role-ic">🎨</div><div><div class="role-name">Web Designer · NotebookLM</div><div class="role-who">Stage A → B</div></div></div>
@@ -886,7 +889,7 @@ function wirePipeline(l){
   document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyOut(b.dataset.copy==='prompt'?chatgptPrompt(l):notebookSource(l),b));
 
   if($('copyFolder')) $('copyFolder').onclick=e=>copyOut(driveFolderName(l),e.target);
-  if($('openMaster')) $('openMaster').onclick=e=>{ if(!driveRoot()){ e.preventDefault(); setDriveRoot(); } };
+  if($('openMaster')) $('openMaster').onclick=e=>{ if(!l.driveUrl && !driveRoot()){ e.preventDefault(); setDriveRoot(); } };
 
   const pv=$('previewUrl');
   if(pv){ pv.oninput=()=>{ l.previewUrl=pv.value.trim(); refresh(); };

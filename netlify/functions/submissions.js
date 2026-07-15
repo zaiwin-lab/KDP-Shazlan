@@ -1,4 +1,5 @@
 const { getStore } = require('@netlify/blobs');
+const drive = require('./lib/drive');
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -64,9 +65,27 @@ exports.handler = async (event) => {
       const data = JSON.parse(event.body || '{}');
       if (!data.id) return { statusCode: 400, headers: cors, body: JSON.stringify({ error: 'Missing id' }) };
       const existing = await store.get(data.id, { type: 'json' });
+      if (!existing) {
+        // Stable sequence number — assigned once, never renumbers when others are deleted.
+        if (!data.seq) {
+          try { const { blobs } = await getStore({ name: 'submissions', ...blobsConfig() }).list(); data.seq = (blobs ? blobs.length : 0) + 1; }
+          catch (_) { data.seq = 1; }
+        }
+        // Google Drive: auto-create "00X Business" inside the master folder + drop a brief in it.
+        if (drive.driveEnabled()) {
+          try {
+            const token = await drive.getToken();
+            const folderName = `${String(data.seq).padStart(3, '0')} ${data.businessName || 'Client'}`;
+            const folderId = await drive.ensureCompanyFolder(token, folderName);
+            data.driveFolderId = folderId;
+            data.driveUrl = drive.folderUrl(folderId);
+            await drive.uploadText(token, folderId, '00_business-brief.json', 'application/json', JSON.stringify(data, null, 2));
+          } catch (e) { console.error('drive folder error:', e.message); }
+        }
+      }
       await store.setJSON(data.id, data);
       if (!existing && data.businessName) await notifyNewLead(data);
-      return { statusCode: 200, headers: cors, body: JSON.stringify({ ok: true }) };
+      return { statusCode: 200, headers: cors, body: JSON.stringify({ ok: true, seq: data.seq, driveFolderId: data.driveFolderId || null, driveUrl: data.driveUrl || null }) };
     }
 
     if (event.httpMethod === 'PATCH') {
