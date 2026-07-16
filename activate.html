@@ -1056,7 +1056,7 @@ async function submitAll() {
           const base64 = await fileToBase64(f);
           const ur = await fetch('/.netlify/functions/file-upload', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ leadId: id, name: f.name, mimeType: f.type, base64 }),
+            body: JSON.stringify({ leadId: id, driveFolderId: resp.driveFolderId, name: f.name, mimeType: f.type, base64 }),
           });
           const uj = await ur.json();
           if (uj.url) fileUrls.push({ name: uj.name || f.name, url: uj.url });

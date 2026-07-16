@@ -26,7 +26,21 @@ function cfg() {
   key = key.replace(/\\n/g, '\n');
   return { email, key, master: process.env.DRIVE_MASTER_FOLDER_ID || '' };
 }
-function driveEnabled() { const c = cfg(); return !!(c.email && c.key && c.master); }
+// OAuth (the user's own Google account) — the only way to upload FILES into a
+// personal Gmail Drive. When configured it takes priority over the service account.
+function oauthCfg() {
+  return {
+    clientId: (process.env.GOOGLE_OAUTH_CLIENT_ID || '').trim(),
+    clientSecret: (process.env.GOOGLE_OAUTH_CLIENT_SECRET || '').trim(),
+    refreshToken: (process.env.GOOGLE_OAUTH_REFRESH_TOKEN || '').trim(),
+  };
+}
+function oauthEnabled() { const o = oauthCfg(); return !!(o.clientId && o.clientSecret && o.refreshToken); }
+// A service account can create folders but can't upload files to a personal Drive;
+// only OAuth (acting as the user) can. This gates file uploads.
+function canUploadFiles() { return oauthEnabled(); }
+
+function driveEnabled() { const c = cfg(); return !!(c.master && (oauthEnabled() || (c.email && c.key))); }
 function folderUrl(id) { return `https://drive.google.com/drive/folders/${id}`; }
 
 function b64url(buf) {
@@ -34,6 +48,19 @@ function b64url(buf) {
 }
 
 async function getToken() {
+  // Prefer OAuth (files owned by the user, has storage quota).
+  if (oauthEnabled()) {
+    const o = oauthCfg();
+    const res = await fetch(TOKEN_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ client_id: o.clientId, client_secret: o.clientSecret, refresh_token: o.refreshToken, grant_type: 'refresh_token' }).toString(),
+    });
+    const j = await res.json();
+    if (!j.access_token) throw new Error('OAuth token failed: ' + JSON.stringify(j));
+    return j.access_token;
+  }
+  // Service-account JWT fallback (folders only; can't upload files on personal Drive).
   const { email, key } = cfg();
   const now = Math.floor(Date.now() / 1000);
   const header = b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
@@ -98,4 +125,4 @@ async function uploadText(token, folderId, name, mime, text) {
   return uploadFile(token, folderId, name, mime, Buffer.from(String(text), 'utf8'));
 }
 
-module.exports = { driveEnabled, folderUrl, getToken, findFolder, createFolder, ensureCompanyFolder, uploadFile, uploadText };
+module.exports = { driveEnabled, canUploadFiles, oauthEnabled, folderUrl, getToken, findFolder, createFolder, ensureCompanyFolder, uploadFile, uploadText };

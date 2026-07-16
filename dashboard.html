@@ -942,7 +942,17 @@ async function downloadFolder(l,kind){
   }
   const blob=await zip.generateAsync({type:'blob'});
   saveBlob(blob,top+'.zip'); toast('Downloaded '+top+'.zip ✓');
+  // also upload the zip into the client's Google Drive folder (works when OAuth is set up)
+  if(l.driveFolderId){
+    try{
+      const b64=await blobToBase64(blob);
+      const r=await fetch('/.netlify/functions/drive-upload',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({folderId:l.driveFolderId,name:top+'.zip',mimeType:'application/zip',base64:b64})});
+      const j=await r.json().catch(()=>({}));
+      if(j.ok) toast(top+'.zip saved to Drive ✓');
+    }catch(_){}
+  }
 }
+function blobToBase64(blob){ return new Promise((res,rej)=>{ const rd=new FileReader(); rd.onload=()=>res(String(rd.result).split(',')[1]||''); rd.onerror=rej; rd.readAsDataURL(blob); }); }
 async function patchLead(id,patch){
   const lead=allLeads.find(x=>x.id===id); if(lead) Object.assign(lead,patch);
   try{ await fetch('/.netlify/functions/submissions',{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify(Object.assign({id},patch))}); }catch(_){}

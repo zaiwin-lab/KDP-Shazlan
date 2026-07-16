@@ -82,6 +82,10 @@ exports.handler = async (event) => {
             const folderId = await drive.ensureCompanyFolder(token, folderName);
             data.driveFolderId = folderId;
             data.driveUrl = drive.folderUrl(folderId);
+            // With OAuth (files owned by the user) we can also drop the brief in.
+            if (drive.canUploadFiles()) {
+              try { await drive.uploadText(token, folderId, '00_business-brief.json', 'application/json', JSON.stringify(data, null, 2)); } catch (_) {}
+            }
           } catch (e) { console.error('drive folder error:', e.message); }
         }
       }

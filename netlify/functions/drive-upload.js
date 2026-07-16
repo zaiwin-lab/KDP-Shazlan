@@ -11,7 +11,7 @@ const cors = {
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
   if (event.httpMethod !== 'POST') return { statusCode: 405, headers: cors, body: JSON.stringify({ error: 'Method not allowed' }) };
-  if (!drive.driveEnabled()) return { statusCode: 200, headers: cors, body: JSON.stringify({ skipped: 'drive-not-configured' }) };
+  if (!drive.canUploadFiles()) return { statusCode: 200, headers: cors, body: JSON.stringify({ skipped: 'drive-oauth-not-configured' }) };
 
   try {
     const { folderId, name, mimeType, base64 } = JSON.parse(event.body || '{}');
