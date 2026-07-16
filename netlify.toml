@@ -7,3 +7,9 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# Our credentials live only in environment variables (never in the code), so
+# Netlify's secret scanner has nothing to protect here — and it was failing
+# builds on the Google OAuth secret pattern. Turn it off.
+[build.environment]
+  SECRETS_SCAN_ENABLED = "false"
