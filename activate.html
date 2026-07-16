@@ -105,6 +105,34 @@
     .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 11px 28px rgba(124,58,237,.42); }
     .submit-btn:disabled { opacity: .6; cursor: default; transform: none; }
 
+    /* ── Final-step conversion (NOT-submitted warning, confirm, big CTA, sticky) ── */
+    .final-warn { margin: 24px 0 16px; border: 2px solid #f59e0b; background: linear-gradient(135deg, #fff7ed, #fffbeb); border-radius: 16px; padding: 18px 20px; text-align: center; }
+    .fw-badge { display: inline-block; background: #dc2626; color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; border-radius: 99px; padding: 5px 14px; margin-bottom: 10px; }
+    .fw-title { font-size: 1.06rem; font-weight: 800; color: #b45309; margin-bottom: 6px; line-height: 1.35; }
+    .fw-text { font-size: .86rem; color: #7c5a1e; line-height: 1.6; }
+    .confirm-check { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; margin-bottom: 16px; cursor: pointer; transition: border-color .15s, background .15s; }
+    .confirm-check.on { border-color: var(--acc); background: rgba(124,58,237,.05); }
+    .confirm-check.shake { animation: shakeX .4s; }
+    .confirm-check input { margin-top: 2px; width: 20px; height: 20px; accent-color: var(--acc); flex-shrink: 0; cursor: pointer; }
+    .confirm-check span { font-size: .9rem; font-weight: 600; line-height: 1.5; }
+    @keyframes shakeX { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
+    .submit-cue { text-align: center; font-size: .9rem; font-weight: 700; color: var(--acc); margin-bottom: 10px; animation: cueBounce 1.4s ease-in-out infinite; }
+    @keyframes cueBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+    .submit-final { width: 100%; min-height: 66px; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border: none; border-radius: 16px; font-size: 1.15rem; font-weight: 800; cursor: pointer; box-shadow: 0 10px 30px rgba(124,58,237,.4); animation: ctaPulse 1.9s ease-in-out infinite; transition: transform .12s; }
+    .submit-final:hover { transform: translateY(-2px); }
+    .submit-final:disabled { opacity: .7; animation: none; cursor: default; transform: none; }
+    @keyframes ctaPulse { 0%,100%{transform:scale(1);box-shadow:0 10px 30px rgba(124,58,237,.4)} 50%{transform:scale(1.03);box-shadow:0 16px 42px rgba(124,58,237,.55)} }
+    .improve-link { display: block; margin: 16px auto 0; background: none; border: none; color: var(--sub); font-size: .85rem; text-decoration: underline; cursor: pointer; font-family: inherit; }
+    .improve-link:hover { color: var(--acc); }
+    .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-top: 1px solid var(--line); box-shadow: 0 -6px 22px rgba(20,16,45,.12); padding: 12px 16px; display: none; }
+    .sticky-cta.show { display: block; animation: slideUp .3s ease; }
+    @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+    .sticky-cta-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+    .sticky-cta-warn { font-size: .8rem; font-weight: 800; color: #b45309; white-space: nowrap; }
+    .sticky-cta-btn { flex: 1; background: linear-gradient(135deg, var(--acc), var(--acc2)); color: #fff; border: none; border-radius: 12px; padding: 14px; font-size: 1rem; font-weight: 800; cursor: pointer; box-shadow: 0 6px 18px rgba(124,58,237,.35); }
+    @media (max-width: 520px) { .sticky-cta-warn { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .submit-final, .submit-cue { animation: none !important; } }
+
     /* ── Digital readiness ── */
     .readiness { margin: 18px 0; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; background: #fff; }
     .rd-head { font-size: .74rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--sub); margin-bottom: 10px; }
@@ -357,27 +385,26 @@
       <div class="ai-head">✨ <span data-t="s4.aihead">Ringkasan Perniagaan AI</span></div>
       <div class="ai-body" id="ai-body"></div>
 
-      <!-- Two clear choices -->
-      <div class="decision" id="decision-row">
-        <button class="di-btn di-improve" onclick="improveSubmission()">
-          <span class="di-title" data-t="op.improve">✎ Tambah Baik Maklumat Saya</span>
-          <span class="di-sub" data-t="op.improve.sub"></span>
-        </button>
-        <button class="di-btn di-proceed" onclick="chooseProceed()">
-          <span class="di-title" data-t="op.proceed">✦ Teruskan Aktivasi Website</span>
-          <span class="di-sub" data-t="op.proceed.sub"></span>
-        </button>
+      <!-- NOT-submitted warning (loss aversion) -->
+      <div class="final-warn" id="final-warn">
+        <div class="fw-badge" data-t="w.oneStep">❗ ONE FINAL STEP REMAINING</div>
+        <div class="fw-title">⚠️ <span data-t="w.title">Your application has NOT been submitted yet</span></div>
+        <div class="fw-text" data-t="w.text">Tap the button below to send your information to the Syahlan SDC team.</div>
       </div>
 
-      <!-- Commitment (revealed only after Proceed) -->
-      <div class="commit" id="commit-box" style="display:none">
-        <div class="commit-title">🤝 <span data-t="cm.title">Sebelum kita mula</span></div>
-        <label class="commit-check"><input type="checkbox" id="ck1" onchange="syncCommit(this)"/><span data-t="cm.1"></span></label>
-        <label class="commit-check"><input type="checkbox" id="ck2" onchange="syncCommit(this)"/><span data-t="cm.2"></span></label>
-        <label class="commit-check"><input type="checkbox" id="ck3" onchange="syncCommit(this)"/><span data-t="cm.3"></span></label>
-        <button class="submit-btn" id="submit-btn" onclick="submitAll()" data-t="s4.start">✦ Mula Aktivasi Website Saya</button>
-        <div class="err-msg" id="err4"></div>
-      </div>
+      <!-- Confirmation -->
+      <label class="confirm-check" id="confirm-wrap">
+        <input type="checkbox" id="ck-confirm" onchange="onConfirm()"/>
+        <span data-t="w.confirm">I confirm that the information above is accurate.</span>
+      </label>
+
+      <!-- Directional cue + primary CTA -->
+      <div class="submit-cue" data-t="w.arrows">👇 One final step — tap below 👇</div>
+      <button class="submit-final" id="submit-btn" onclick="submitAll()"><span data-t="s4.start">🚀 Submit My Website Application</span></button>
+      <div class="err-msg" id="err4"></div>
+
+      <!-- Subtle secondary -->
+      <button class="improve-link" onclick="improveSubmission()" data-t="op.improve">✎ Improve my information</button>
     </div>
 
     <div class="btn-row">
@@ -394,6 +421,14 @@
     <a class="wa-btn" href="https://wa.me/60187874797" target="_blank" data-t="s5.wa">💬 WhatsApp Syahlan Sekarang</a>
   </div>
 
+</div>
+
+<!-- Sticky bottom CTA (always-accessible final action) -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-cta-inner">
+    <span class="sticky-cta-warn" data-t="w.sticky">⚠️ Not submitted yet</span>
+    <button class="sticky-cta-btn" onclick="submitAll()"><span data-t="s4.start">🚀 Submit My Website Application</span></button>
+  </div>
 </div>
 
 <footer>
@@ -490,7 +525,14 @@ const I18N = {
     'cm.2': 'Saya faham bahawa kualiti website saya bergantung pada maklumat yang saya berikan. Saya boleh kembali untuk menambah baik maklumat saya sebelum meneruskan sekiranya saya mahu hasil yang lebih baik.',
     'cm.3': 'Saya faham bahawa Pakej Aktivasi Website Perniagaan Profesional biasanya berharga RM1,380. Saya menghargai peluang untuk menerima kadar aktivasi istimewa RM599. Sekiranya pratonton website menepati keperluan perniagaan yang saya hantar dan memenuhi jangkaan saya, saya bersedia untuk meneruskan dengan yuran aktivasi RM599 untuk mengaktif dan menerbitkan website saya.',
     'cm.err': 'Sila tanda ketiga-tiga kotak untuk meneruskan.',
-    's4.start': '✦ Mula Aktivasi Website Saya',
+    's4.start': '🚀 Hantar Permohonan Website Saya',
+    'w.oneStep': '❗ TINGGAL SATU LANGKAH TERAKHIR',
+    'w.title': 'Permohonan anda BELUM dihantar lagi',
+    'w.text': 'Tekan butang di bawah untuk menghantar maklumat anda kepada pasukan Syahlan SDC. Jika anda tinggalkan halaman ini sekarang, permohonan anda TIDAK akan diterima.',
+    'w.confirm': 'Saya sahkan maklumat di atas adalah tepat.',
+    'w.confirmErr': 'Sila tanda kotak pengesahan sebelum menghantar.',
+    'w.arrows': '👇 Satu langkah terakhir — tekan di bawah 👇',
+    'w.sticky': '⚠️ Belum dihantar',
     'ft.brand': 'Sarawak Digital Champion',
     'ft.desc': 'Syahlan, mewakili Sarawak. Mengaktifkan 100 kehadiran digital perniagaan baru merentasi 45 daerah di Sarawak.',
     'ft.col1': 'INISIATIF', 'ft.link1': 'Aktifkan Perniagaan Saya', 'ft.link2': 'Misi Kami', 'ft.link3': 'Tawaran Kami',
@@ -559,7 +601,14 @@ const I18N = {
     'cm.2': 'I understand that the quality of my website depends on the information I provide. I may return to improve my submission before proceeding if I wish to achieve a better outcome.',
     'cm.3': 'I understand that the Professional Business Website Activation Package is normally priced at RM1,380. I appreciate the opportunity to receive the special activation rate of RM599. If the website preview reflects my submitted business requirements and meets my expectations, I am ready to proceed with the RM599 activation fee to activate and publish my website.',
     'cm.err': 'Please tick all three boxes to continue.',
-    's4.start': '✦ Start My Website Activation',
+    's4.start': '🚀 Submit My Website Application',
+    'w.oneStep': '❗ ONE FINAL STEP REMAINING',
+    'w.title': 'Your application has NOT been submitted yet',
+    'w.text': 'Tap the button below to send your information to the Syahlan SDC team. If you leave this page now, your submission will NOT be received.',
+    'w.confirm': 'I confirm that the information above is accurate.',
+    'w.confirmErr': 'Please tick the confirmation box before submitting.',
+    'w.arrows': '👇 One final step — tap below 👇',
+    'w.sticky': '⚠️ Not submitted yet',
     'ft.brand': 'Sarawak Digital Champion',
     'ft.desc': 'Syahlan, representing Sarawak. Activating 100 new business digital presences across all 45 districts of Sarawak.',
     'ft.col1': 'INITIATIVE', 'ft.link1': 'Activate My Business', 'ft.link2': 'The Mission', 'ft.link3': 'The Offer',
@@ -628,7 +677,14 @@ const I18N = {
     'cm.2': '我明白网站质量取决于我提供的信息。如果我希望获得更好的效果，我可以在继续之前返回完善我的资料。',
     'cm.3': '我明白专业企业网站激活配套原价为 RM1,380。我感谢能获得 RM599 的特别激活价。如果网站预览符合我提交的业务需求并达到我的期望，我愿意支付 RM599 激活费以激活并发布我的网站。',
     'cm.err': '请勾选全部三项以继续。',
-    's4.start': '✦ 开始激活我的网站',
+    's4.start': '🚀 提交我的网站申请',
+    'w.oneStep': '❗ 仅剩最后一步',
+    'w.title': '您的申请尚未提交',
+    'w.text': '点击下方按钮，将您的信息发送给 Syahlan SDC 团队。如果您现在离开此页面，您的申请将不会被接收。',
+    'w.confirm': '我确认以上信息准确无误。',
+    'w.confirmErr': '提交前请勾选确认框。',
+    'w.arrows': '👇 最后一步 — 点击下方 👇',
+    'w.sticky': '⚠️ 尚未提交',
     'ft.brand': '砂拉越数字冠军',
     'ft.desc': 'Syahlan，代表砂拉越。在砂拉越全部45个县激活100个新企业数字存在。',
     'ft.col1': '计划', 'ft.link1': '激活我的企业', 'ft.link2': '使命', 'ft.link3': '套餐',
@@ -697,7 +753,14 @@ const I18N = {
     'cm.2': 'Aku meretika kualiti website aku begantung ba penemu ti diberi aku. Aku ulih pulai nambahbaik penemu aku sedeka nerus enti aku deka hasil ti agi manah.',
     'cm.3': 'Aku meretika Pakej Aktivasi Website Dagang Profesional biasa berega RM1,380. Aku ngargaka peluang nerima kadar aktivasi espesyal RM599. Enti pratonton website nepan enggau pengarap dagang ti dianjung aku sereta nepan enggau adat aku, aku sedia nerus enggau bayar aktivasi RM599 kena ngaktifka sereta nerbitka website aku.',
     'cm.err': 'Tanda ketiga kotak kena nerus.',
-    's4.start': '✦ Berengkah Aktivasi Website Aku',
+    's4.start': '🚀 Kirum Pemohon Website Aku',
+    'w.oneStep': '❗ TINGGAL SIKU LANGKAH PENGHABIS',
+    'w.title': 'Pemohon nuan BELUM dikirum agi',
+    'w.text': 'Pit butang di baruh kena ngirum penerang nuan ngagai pasukan Syahlan SDC. Enti nuan angkat ari peteba tu diatu, pemohon nuan ENDA deka diterima.',
+    'w.confirm': 'Aku ngesahka penerang di atas amat betul.',
+    'w.confirmErr': 'Tanda kotak pengesahan sedeka ngirum.',
+    'w.arrows': '👇 Siku langkah penghabis — pit di baruh 👇',
+    'w.sticky': '⚠️ Apin dikirum',
     'ft.brand': 'Sarawak Digital Champion',
     'ft.desc': 'Syahlan, mewakili Sarawak. Ngaktifkan 100 kehadiran digital niaga baru di semua 45 daerah Sarawak.',
     'ft.col1': 'INISIATIF', 'ft.link1': 'Aktifkan Niaga Aku', 'ft.link2': 'Misi Kitai', 'ft.link3': 'Tawaran Kitai',
@@ -907,47 +970,56 @@ function generateAI() {
         <div class="pkg-feats">${feats.map(f=>`<div><span class="tick">✓</span> ${t(f)}</div>`).join('')}</div>
       </div>`;
 
-    document.getElementById('ai-body').innerHTML = scoreHtml + readinessHtml + summaryHtml + pkgHtml;
+    // Visual hierarchy: Summary → Score → Readiness → Package
+    document.getElementById('ai-body').innerHTML = summaryHtml + scoreHtml + readinessHtml + pkgHtml;
 
-    // reset the decision / commitment state each time the summary is regenerated
-    const commit = document.getElementById('commit-box');
-    commit.style.display = 'none';
-    document.getElementById('decision-row').classList.remove('locked');
-    ['ck1','ck2','ck3'].forEach(id => { const c = document.getElementById(id); c.checked = false; c.closest('.commit-check').classList.remove('on'); });
+    // reset the confirmation each time the summary is regenerated
+    document.getElementById('ck-confirm').checked = false;
+    document.getElementById('confirm-wrap').classList.remove('on');
     document.getElementById('err4').textContent = '';
 
     document.getElementById('ai-box').classList.add('show');
-    document.getElementById('ai-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('sticky-cta').classList.add('show');
+    armExitWarning();
+    // auto-scroll to the NOT-submitted warning so the final action can't be missed
+    setTimeout(() => { document.getElementById('final-warn').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 250);
   }, 1600);
 }
 
-// ── Final-step decisions ──
+// ── Final-step ──
 function improveSubmission() {
   // all entered data is preserved (fields are never cleared) — just go back
   goStep(1);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function chooseProceed() {
-  document.getElementById('decision-row').classList.add('locked');
-  const commit = document.getElementById('commit-box');
-  commit.style.display = 'block';
-  commit.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-function syncCommit(cb) {
-  cb.closest('.commit-check').classList.toggle('on', cb.checked);
+function onConfirm() {
+  const cc = document.getElementById('ck-confirm');
+  document.getElementById('confirm-wrap').classList.toggle('on', cc.checked);
   document.getElementById('err4').textContent = '';
 }
+// Exit-intent guard — warn if leaving after generating but before submitting.
+let _submitStarted = false, _submitDone = false;
+function armExitWarning() { _submitStarted = true; }
+function disarmExitWarning() { _submitDone = true; }
+window.addEventListener('beforeunload', function (e) {
+  if (_submitStarted && !_submitDone) { e.preventDefault(); e.returnValue = ''; return ''; }
+});
 
 // ── Submit ──
 async function submitAll() {
-  // require all three commitments
-  if (!(document.getElementById('ck1').checked && document.getElementById('ck2').checked && document.getElementById('ck3').checked)) {
-    document.getElementById('err4').textContent = '⚠️ ' + t('cm.err');
+  // require the accuracy confirmation
+  if (!document.getElementById('ck-confirm').checked) {
+    document.getElementById('err4').textContent = '⚠️ ' + t('w.confirmErr');
+    const wrap = document.getElementById('confirm-wrap');
+    wrap.classList.add('shake'); setTimeout(() => wrap.classList.remove('shake'), 400);
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
   const d = collect();
   const btn = document.getElementById('submit-btn');
+  const stickyBtn = document.querySelector('.sticky-cta-btn');
   btn.disabled = true; btn.textContent = '⏳ ...';
+  if (stickyBtn) stickyBtn.disabled = true;
   const id = `WEB-${Date.now()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
   const record = {
     id,
@@ -1000,6 +1072,8 @@ async function submitAll() {
       }
     }
 
+    disarmExitWarning();
+    document.getElementById('sticky-cta').classList.remove('show');
     document.getElementById('ref-num').textContent = 'REF: ' + id;
     document.getElementById('step4').style.display = 'none';
     document.getElementById('progress-wrap').style.display = 'none';
@@ -1008,6 +1082,7 @@ async function submitAll() {
   } catch (e) {
     document.getElementById('err4').textContent = '❌ ' + t('err.send');
     btn.disabled = false; btn.textContent = t('s4.start');
+    if (stickyBtn) stickyBtn.disabled = false;
   }
 }
 function fileToBase64(file) {
