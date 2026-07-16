@@ -72,7 +72,9 @@ exports.handler = async (event) => {
           try { const { blobs } = await getStore({ name: 'submissions', ...blobsConfig() }).list(); data.seq = (blobs ? blobs.length : 0) + 1; }
           catch (_) { data.seq = 1; }
         }
-        // Google Drive: auto-create "00X Business" inside the master folder + drop a brief in it.
+        // Google Drive: auto-create "00X Business" inside the master folder.
+        // (A service account can create folders but can't upload files to a
+        //  personal Drive — client files go to Supabase Storage instead.)
         if (drive.driveEnabled()) {
           try {
             const token = await drive.getToken();
@@ -80,7 +82,6 @@ exports.handler = async (event) => {
             const folderId = await drive.ensureCompanyFolder(token, folderName);
             data.driveFolderId = folderId;
             data.driveUrl = drive.folderUrl(folderId);
-            await drive.uploadText(token, folderId, '00_business-brief.json', 'application/json', JSON.stringify(data, null, 2));
           } catch (e) { console.error('drive folder error:', e.message); }
         }
       }

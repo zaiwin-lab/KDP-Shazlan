@@ -55,6 +55,30 @@ async function upsertRow(record) {
   if (!res.ok) throw new Error('supabase upsert ' + res.status + ' ' + (await res.text()));
 }
 
+// ── Storage (client file uploads) ─────────────────────────────────
+const BUCKET = 'client-files';
+// Create the public bucket if it doesn't exist yet (idempotent).
+async function ensureBucket() {
+  if (!supabaseEnabled()) return;
+  const { url } = cfg();
+  await fetch(`${url}/storage/v1/bucket`, {
+    method: 'POST', headers: headers(),
+    body: JSON.stringify({ id: BUCKET, name: BUCKET, public: true }),
+  }).catch(() => {}); // 400 = already exists, that's fine
+}
+// Upload a file buffer; returns its public URL.
+async function uploadToStorage(pathKey, buffer, contentType) {
+  if (!supabaseEnabled()) return null;
+  const { url, key } = cfg();
+  const res = await fetch(`${url}/storage/v1/object/${BUCKET}/${pathKey}`, {
+    method: 'POST',
+    headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': contentType || 'application/octet-stream', 'x-upsert': 'true' },
+    body: buffer,
+  });
+  if (!res.ok) throw new Error('storage upload ' + res.status + ' ' + (await res.text()).slice(0, 200));
+  return `${url}/storage/v1/object/public/${BUCKET}/${pathKey}`;
+}
+
 async function deleteRow(id) {
   if (!supabaseEnabled() || !id) return;
   const { url } = cfg();
@@ -75,4 +99,4 @@ async function countRows() {
   return cr.includes('/') ? cr.split('/')[1] : 'unknown';
 }
 
-module.exports = { supabaseEnabled, upsertRow, deleteRow, apiOrigin, countRows };
+module.exports = { supabaseEnabled, upsertRow, deleteRow, apiOrigin, countRows, ensureBucket, uploadToStorage };

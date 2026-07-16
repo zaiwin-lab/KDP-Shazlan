@@ -974,16 +974,27 @@ async function submitAll() {
     if (!r.ok) throw new Error(await r.text());
     const resp = await r.json().catch(() => ({}));
 
-    // Upload the client's actual files into their Google Drive company folder.
-    if (resp.driveFolderId && files.length) {
+    // Upload the client's actual files into Supabase Storage, then save the URLs.
+    if (files.length) {
       btn.textContent = '📤 Uploading files…';
+      const fileUrls = [];
       for (const f of files) {
-        if (f.size > 8 * 1024 * 1024) continue; // skip very large files
+        if (f.size > 4.5 * 1024 * 1024) continue; // function payload limit — skip very large files
         try {
           const base64 = await fileToBase64(f);
-          await fetch('/.netlify/functions/drive-upload', {
+          const ur = await fetch('/.netlify/functions/file-upload', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ folderId: resp.driveFolderId, name: f.name, mimeType: f.type, base64 }),
+            body: JSON.stringify({ leadId: id, name: f.name, mimeType: f.type, base64 }),
+          });
+          const uj = await ur.json();
+          if (uj.url) fileUrls.push({ name: uj.name || f.name, url: uj.url });
+        } catch (_) {}
+      }
+      if (fileUrls.length) {
+        try {
+          await fetch('/.netlify/functions/submissions', {
+            method: 'PATCH', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ id, fileUrls }),
           });
         } catch (_) {}
       }

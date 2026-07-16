@@ -825,8 +825,12 @@ function renderPipeline(l){
       </div>
     </div>
     <p class="drive-note">${l.driveUrl
-      ? `✅ This folder was <b>created automatically</b> when the client submitted. KSA, KSB, the website HTML, invoice &amp; receipt all live here.`
-      : `Inside the <b>master folder</b>, create/open <b>${esc(driveFolderName(l))}</b> and keep everything there: KSA, KSB, the website HTML, invoice &amp; receipt.`}</p>
+      ? `✅ Folder <b>created automatically</b>. Keep KSA, KSB, the website HTML, invoice &amp; receipt here.`
+      : `Create/open <b>${esc(driveFolderName(l))}</b> in the master folder for KSA, KSB, HTML, invoice &amp; receipt.`}</p>
+    ${(l.fileUrls && l.fileUrls.length) ? `<div style="margin-top:10px;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px">
+      <div style="font-size:.74rem;color:var(--muted);margin-bottom:8px">📎 Client's uploaded files (${l.fileUrls.length})</div>
+      <div style="display:flex;flex-direction:column;gap:6px">${l.fileUrls.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener" style="font-size:.83rem;color:var(--acc-ink);text-decoration:none;word-break:break-all">📄 ${esc(f.name || 'file')}</a>`).join('')}</div>
+    </div>` : ((l.fileNames && l.fileNames.length) ? `<p class="drive-note" style="margin-top:6px">📎 ${l.fileNames.length} file(s) named by the client (uploaded before file storage was enabled).</p>` : '')}
 
     <div class="role-block role-1">
       <div class="role-head"><div class="role-ic">🎨</div><div><div class="role-name">Web Designer · NotebookLM</div><div class="role-who">Stage A → B</div></div></div>
